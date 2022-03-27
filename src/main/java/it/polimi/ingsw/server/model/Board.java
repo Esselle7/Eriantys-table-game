@@ -1,6 +1,7 @@
-package main.java.it.polimi.ingsw.model;
+package it.polimi.ingsw.server.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A board of the game.
@@ -10,9 +11,9 @@ import java.util.*;
  *
  */
 
-public class Board {
-    private final Map<Colour,Integer> entranceRoom;
-    private Map<Colour,Integer> diningRoom;
+class Board {
+    private final List<Integer> entranceRoom;
+    private List<Integer> diningRoom;
     private int towerYard;
     private TColour towerColour;
     private final int maxStudent;
@@ -24,34 +25,43 @@ public class Board {
      * @param towerYard represents the number of tower that are on the board
      * @param towerColour represents the tower colour choosen by the player
      */
-    public Board(Map<Colour, Integer> entranceRoom, int towerYard, TColour towerColour) {
+    public Board(List<Integer> entranceRoom, int towerYard, TColour towerColour) {
         this.entranceRoom = entranceRoom;
         this.towerYard = towerYard;
         this.towerColour = towerColour;
         maxStudent = 10;
+        diningRoom = new ArrayList<>();
 
     }
 
-    public Map<Colour, Integer> getEntranceRoom() {
+    public List<Integer> getEntranceRoom() {
+
         return entranceRoom;
     }
+
     /**
      * update the entranceRoom with new
      * students from CloudTile
      * @param newStudents new students
      */
-    public void addStudentEntrance(Map<Colour, Integer> newStudents) {
-        for(Colour c : Colour.values()) // da aggiungere controllo numero studenti
+    public void addStudentEntrance(List<Integer> newStudents) {
+        for(int c = Colour.RED; c < Colour.colourCount; c++ )
         {
-            entranceRoom.put(c,entranceRoom.get(c)+ newStudents.get(c));
+            entranceRoom.set(c,entranceRoom.get(c) + newStudents.get(c));
         }
+
     }
 
-    public Map<Colour, Integer> getDiningRoom() {
+    public void removeStudentEntrance(int studentColour)
+    {
+        entranceRoom.set(studentColour,entranceRoom.get(studentColour) - 1);
+    }
+
+    public List<Integer> getDiningRoom() {
         return diningRoom;
     }
 
-    public void setDiningRoom(Map<Colour, Integer> diningRoom) {
+    public void setDiningRoom(List<Integer> diningRoom) {
         this.diningRoom = diningRoom;
     }
 
@@ -61,21 +71,22 @@ public class Board {
      * @param studentColour colour of the students to count
      * @return number of student of colour studentColour
      */
-    public int getNumberOfStudent(Colour studentColour)
-    {
+    public int getNumberOfStudent(int studentColour) {
+
         return diningRoom.get(studentColour);
     }
+
     /**
      * increase the current number of students
      * by the colour sit down in the diningRoom
      * @param studentColour colour of the students to increase the count
      */
-    public void increaseNumberOfStudent(Colour studentColour) throws ArrayIndexOutOfBoundsException
+    public void increaseNumberOfStudent(int studentColour) throws ArrayIndexOutOfBoundsException
     {
         if(diningRoom.size() == maxStudent )
             throw new ArrayIndexOutOfBoundsException();
         else
-            diningRoom.put(studentColour, diningRoom.get(studentColour) + 1);
+            diningRoom.add(studentColour, diningRoom.get(studentColour) + 1);
     }
 
     public int getTowerYard() {
@@ -85,24 +96,25 @@ public class Board {
     public void setTowerYard(int towerYard) {
         this.towerYard = towerYard;
     }
+
     /**
      * increase the number of tower by one, it means
      * that a tower return from
      * an island to the towerYard
      *
      */
-    public void increaseTowerYard()
-    {
+    public void increaseTowerYard() {
+
         towerYard++;
     }
+
     /**
      * decrease the number of tower by one, it means
      * that a tower go from
      * the towerYard to an island
      *
      */
-    public void decreaseTowerYard()
-    {
+    public void decreaseTowerYard() {
         towerYard--;
     }
 
@@ -113,5 +125,6 @@ public class Board {
     public void setTowerColour(TColour towerColour) {
         this.towerColour = towerColour;
     }
+
 
 }
