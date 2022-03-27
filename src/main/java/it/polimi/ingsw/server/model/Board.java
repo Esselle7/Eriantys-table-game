@@ -11,8 +11,8 @@ import java.util.List;
  *
  */
 
-class Board {
-    private final List<Integer> entranceRoom;
+class Board extends ManagerStudent {
+    private List<Integer> entranceRoom;
     private List<Integer> diningRoom;
     private int towerYard;
     private TColour towerColour;
@@ -34,28 +34,9 @@ class Board {
 
     }
 
-    public List<Integer> getEntranceRoom() {
+    public List<Integer> getEntranceRoom() { return entranceRoom; }
 
-        return entranceRoom;
-    }
-
-    /**
-     * update the entranceRoom with new
-     * students from CloudTile
-     * @param newStudents new students
-     */
-    public void addStudentEntrance(List<Integer> newStudents) {
-        for(int c = Colour.RED; c < Colour.colourCount; c++ )
-        {
-            entranceRoom.set(c,entranceRoom.get(c) + newStudents.get(c));
-        }
-
-    }
-
-    public void removeStudentEntrance(int studentColour)
-    {
-        entranceRoom.set(studentColour,entranceRoom.get(studentColour) - 1);
-    }
+    public void setEntranceRoom(List<Integer> entranceRoom) { this.entranceRoom = entranceRoom; }
 
     public List<Integer> getDiningRoom() {
         return diningRoom;
@@ -63,6 +44,39 @@ class Board {
 
     public void setDiningRoom(List<Integer> diningRoom) {
         this.diningRoom = diningRoom;
+    }
+
+    public int getTowerYard() {
+        return towerYard;
+    }
+
+    public void setTowerYard(int towerYard) {
+        this.towerYard = towerYard;
+    }
+
+    public TColour getTowerColour() {
+        return towerColour;
+    }
+
+    public void setTowerColour(TColour towerColour) {
+        this.towerColour = towerColour;
+    }
+
+    public int getMaxStudent() { return maxStudent; }
+
+    /**
+     * update the entranceRoom with new
+     * students from CloudTile
+     * @param newStudents new students
+     */
+    public void addStudentEntrance(List<Integer> newStudents) {
+        setEntranceRoom(addStudentsToTarget(entranceRoom,newStudents));
+
+    }
+
+    public void removeStudentEntrance(int studentColour)
+    {
+        setEntranceRoom(removeStudentFromTarget(entranceRoom,studentColour));
     }
 
     /**
@@ -83,19 +97,12 @@ class Board {
      */
     public void increaseNumberOfStudent(int studentColour) throws ArrayIndexOutOfBoundsException
     {
-        if(diningRoom.size() == maxStudent )
+        if(getDiningRoom().size() == getMaxStudent() )
             throw new ArrayIndexOutOfBoundsException();
         else
-            diningRoom.add(studentColour, diningRoom.get(studentColour) + 1);
+            setDiningRoom(addStudentToTarget(getDiningRoom(),studentColour));
     }
 
-    public int getTowerYard() {
-        return towerYard;
-    }
-
-    public void setTowerYard(int towerYard) {
-        this.towerYard = towerYard;
-    }
 
     /**
      * increase the number of tower by one, it means
@@ -103,10 +110,7 @@ class Board {
      * an island to the towerYard
      *
      */
-    public void increaseTowerYard() {
-
-        towerYard++;
-    }
+    public void increaseTowerYard() { towerYard++; }
 
     /**
      * decrease the number of tower by one, it means
@@ -117,14 +121,5 @@ class Board {
     public void decreaseTowerYard() {
         towerYard--;
     }
-
-    public TColour getTowerColour() {
-        return towerColour;
-    }
-
-    public void setTowerColour(TColour towerColour) {
-        this.towerColour = towerColour;
-    }
-
 
 }
