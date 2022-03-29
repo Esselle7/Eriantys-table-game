@@ -36,27 +36,21 @@ public class Deck {
     }
 
     /**
-     * Static method that create the four decks
-     * only if there are no previous instance,
-     * so we should call thi method one time
+     * Static method that create a deck
+     * only if there are less then 4 instance,
+     * so we should call this method 4 times
      * per game
      * @param motherNatureSteps parameter to give in input
      *                          to deck constructor
+     * @param wizardName name of the deck
      * @return if the decks aren't setted up yet, the return
-     *         value is the list of the four decks
+     *         value is a deck
      * @throws InstantiationError if the decks are already
      *                            setted up return error
      */
-    public static List<Deck> setUpDecks(List<Integer> motherNatureSteps) throws InstantiationError{
+    public static Deck setUpDecks(List<Integer> motherNatureSteps, Wizard wizardName) throws InstantiationError{
         if(!decksSeatedUp)
-        {
-            assistantCards = new ArrayList<>();
-            List<Deck> wizardDecks = new ArrayList<>();
-            for(Wizard wizardName : Wizard.values())
-                wizardDecks.add(new Deck(wizardName,motherNatureSteps));
-            decksSeatedUp = true;
-            return wizardDecks;
-        }
+            return new Deck(wizardName,motherNatureSteps);
         else
             throw new InstantiationError();
     }
@@ -99,5 +93,9 @@ public class Deck {
 
     public static boolean isDecksSeatedUp() {
         return decksSeatedUp;
+    }
+
+    public static void setDecksSeatedUp() {
+        decksSeatedUp = true;
     }
 }
