@@ -1,6 +1,8 @@
 package it.polimi.ingsw.server.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * This abstract class is the student manager
@@ -58,6 +60,19 @@ public abstract class ManagerStudent {
     public List<Integer> removeStudentFromTarget(List<Integer> target,int studentColour) {
         target.set(studentColour,target.get(studentColour) - 1);
         return target;
+    }
+
+    public List<Integer> generateStudents(int numberToGenerate)
+    {
+        List<Integer> result = new ArrayList<>(Colour.colourCount);
+        for(int i = 0; i < numberToGenerate; i++)
+            addStudentToTarget(result,chooseRandomColour());
+        return result;
+    }
+
+    private int chooseRandomColour()
+    {
+        return new Random().nextInt(Colour.colourCount);
     }
 
 
