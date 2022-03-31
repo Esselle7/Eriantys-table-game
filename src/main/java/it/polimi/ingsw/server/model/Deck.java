@@ -54,14 +54,16 @@ public class Deck {
      *          if there isn't a card with
      *          value = value in input
      */
-    public boolean useCard(int value)
+    public Card useCard(int value)
     {
+        Card result;
         for (Card toFind : assistantCards)
             if (toFind.getValue() == value) {
+                result = new Card(toFind.getValue(), toFind.getMotherNatureSteps());
                 assistantCards.remove(toFind);
-                return true;
+                return result;
             }
-        return false;
+        return null; // non va bene, usa eccezioni
 
     }
 
