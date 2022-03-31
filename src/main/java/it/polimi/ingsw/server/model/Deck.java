@@ -15,10 +15,9 @@ import java.util.List;
 public class Deck {
     private final Wizard deckName;
     private static List<Card> assistantCards;
-    private static boolean decksSeatedUp = false;
 
     /**
-     * Private constructor that create a
+     * Public constructor that create a
      * single deck with 10 assistant cards
      * @param deckName the name of the deck
      *                 choosen between Wizard enum
@@ -27,32 +26,12 @@ public class Deck {
      *                          mother nature steps allowed
      *                          by an assistant card
      */
-    private Deck(Wizard deckName,List<Integer> motherNatureSteps){
+    public Deck(Wizard deckName,List<Integer> motherNatureSteps){
         this.deckName = deckName;
         for (int index = 0; index < motherNatureSteps.size(); index++) {
             assistantCards.add(new Card(index+1,motherNatureSteps.get(index)));
         }
 
-    }
-
-    /**
-     * Static method that create a deck
-     * only if there are less then 4 instance,
-     * so we should call this method 4 times
-     * per game
-     * @param motherNatureSteps parameter to give in input
-     *                          to deck constructor
-     * @param wizardName name of the deck
-     * @return if the decks aren't setted up yet, the return
-     *         value is a deck
-     * @throws InstantiationError if the decks are already
-     *                            setted up return error
-     */
-    public static Deck setUpDecks(List<Integer> motherNatureSteps, Wizard wizardName) throws InstantiationError{
-        if(!decksSeatedUp)
-            return new Deck(wizardName,motherNatureSteps);
-        else
-            throw new InstantiationError();
     }
 
     public Wizard getDeckName() {
@@ -91,11 +70,4 @@ public class Deck {
         return assistantCards.size() == 0;
     }
 
-    public static boolean isDecksSeatedUp() {
-        return decksSeatedUp;
-    }
-
-    public static void setDecksSeatedUp() {
-        decksSeatedUp = true;
-    }
 }
