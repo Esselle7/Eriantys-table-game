@@ -1,8 +1,5 @@
 package it.polimi.ingsw.server.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A board of the game.
  * Every board belongs to a specific player.
@@ -12,11 +9,10 @@ import java.util.List;
  */
 
 class Board extends ManagerStudent {
-    private List<Integer> entranceRoom;
-    private List<Integer> diningRoom;
+    private int[] entranceRoom;
+    private final int[] diningRoom;
     private int towerYard;
     private TColour towerColour;
-    private final int maxStudent;
 
     /**
      * Create a board.
@@ -25,25 +21,20 @@ class Board extends ManagerStudent {
      * @param towerYard represents the number of tower that are on the board
      * @param towerColour represents the tower colour choosen by the player
      */
-    public Board(List<Integer> entranceRoom, int towerYard, TColour towerColour) {
+    public Board(int[] entranceRoom, int towerYard, TColour towerColour) {
         this.entranceRoom = entranceRoom;
         this.towerYard = towerYard;
         this.towerColour = towerColour;
-        maxStudent = 10;
-        diningRoom = new ArrayList<>();
+        diningRoom = new int[Colour.colourCount];
 
     }
 
-    public List<Integer> getEntranceRoom() { return entranceRoom; }
+    public int[] getEntranceRoom() { return entranceRoom; }
 
-    public void setEntranceRoom(List<Integer> entranceRoom) { this.entranceRoom = entranceRoom; }
+    public void setEntranceRoom(int[] entranceRoom) { this.entranceRoom = entranceRoom; }
 
-    public List<Integer> getDiningRoom() {
+    public int[] getDiningRoom() {
         return diningRoom;
-    }
-
-    public void setDiningRoom(List<Integer> diningRoom) {
-        this.diningRoom = diningRoom;
     }
 
     public int getTowerYard() {
@@ -62,21 +53,20 @@ class Board extends ManagerStudent {
         this.towerColour = towerColour;
     }
 
-    public int getMaxStudent() { return maxStudent; }
 
     /**
      * update the entranceRoom with new
      * students from CloudTile
      * @param newStudents new students
      */
-    public void addStudentEntrance(List<Integer> newStudents) {
+    public void addStudentEntrance(int[] newStudents) {
         setEntranceRoom(addStudentsToTarget(entranceRoom,newStudents));
 
     }
 
     public void removeStudentEntrance(int studentColour)
     {
-        setEntranceRoom(removeStudentFromTarget(entranceRoom,studentColour));
+        entranceRoom[studentColour] --;
     }
 
     /**
@@ -87,7 +77,7 @@ class Board extends ManagerStudent {
      */
     public int getNumberOfStudent(int studentColour) {
 
-        return diningRoom.get(studentColour);
+        return diningRoom[studentColour];
     }
 
     /**
@@ -95,12 +85,9 @@ class Board extends ManagerStudent {
      * by the colour sit down in the diningRoom
      * @param studentColour colour of the students to increase the count
      */
-    public void increaseNumberOfStudent(int studentColour) throws ArrayIndexOutOfBoundsException
+    public void increaseNumberOfStudent(int studentColour)
     {
-        if(getDiningRoom().size() == getMaxStudent() )
-            throw new ArrayIndexOutOfBoundsException();
-        else
-            setDiningRoom(addStudentToTarget(getDiningRoom(),studentColour));
+        diningRoom[studentColour]++;
     }
 
 
