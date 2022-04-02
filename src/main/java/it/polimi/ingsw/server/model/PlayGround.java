@@ -15,6 +15,7 @@ public class PlayGround {
     private final Player[] professorsControl;
     private CloudTile[] cloudTiles;
     private static final PlayGround instance = null;
+    private final GameSettings gameSettings;
 
     /**
      * Private constructor, applied
@@ -24,10 +25,11 @@ public class PlayGround {
      * @param cloudTiles list of cloud tile with students
      *                   already on it
      */
-    private PlayGround(List<Player> playersList, List<Island> islands, CloudTile[] cloudTiles) {
+    private PlayGround(List<Player> playersList, List<Island> islands, CloudTile[] cloudTiles, GameSettings gameSettings) {
         this.playersList = playersList;
         this.islands = islands;
         this.cloudTiles = cloudTiles;
+        this.gameSettings = gameSettings;
         professorsControl = new Player[Colour.colourCount];
     }
 
@@ -42,9 +44,9 @@ public class PlayGround {
      *      *            already on it
      * @return the playGround instance
      */
-    public static PlayGround createPlayground(List<Player> playersList, List<Island> islands, CloudTile[] cloudTiles)
+    public static PlayGround createPlayground(List<Player> playersList, List<Island> islands, CloudTile[] cloudTiles, GameSettings gameSettings)
     {
-        return Objects.requireNonNullElseGet(instance, () -> new PlayGround(playersList, islands, cloudTiles));
+        return Objects.requireNonNullElseGet(instance, () -> new PlayGround(playersList, islands, cloudTiles, gameSettings));
     }
 
     public List<Player> getPlayersList() {
@@ -53,6 +55,10 @@ public class PlayGround {
 
     public void setPlayersList(List<Player> playersList) {
         this.playersList = playersList;
+    }
+
+    public GameSettings getGameSettings() {
+        return gameSettings;
     }
 
     public List<Island> getIslands() {
