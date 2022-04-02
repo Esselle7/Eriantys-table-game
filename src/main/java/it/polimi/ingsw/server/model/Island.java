@@ -1,8 +1,5 @@
 package it.polimi.ingsw.server.model;
 
-import java.util.List;
-import java.util.ArrayList;
-
 /**
  * This class implement an
  * Island where a player can place students
@@ -13,40 +10,23 @@ import java.util.ArrayList;
  */
 
 public class Island extends ManagerStudent {
-    private List<Integer> placedStudent;
+    private final int[] placedStudent;
     private boolean motherNature;
     private int towerCount;
     private TColour towerColour;
-    private static boolean islandSeatedUp = false; // magari mettilo in controller,non qui
 
     /**
-     * First constructor that create an
+     * Constructor that create an
      * empty island, only call this method
      * the first time at the beginning of the
      * game.
      */
-    private Island()
+    public Island()
     {
-        placedStudent = new ArrayList<>();
+        placedStudent = new int[Colour.colourCount];
         motherNature = false;
         towerCount = 0;
     }
-
-    /**
-     * Call the constructor only if
-     * the islands aren't set up yet
-     * @return instace of island
-     * @throws InstantiationError if the 12 islands are already instanced
-     */
-
-    public static Island setUpIslands() throws InstantiationError
-    {
-        if (!islandSeatedUp)
-            return new Island();
-        else
-            throw new InstantiationError();
-    }
-
 
     /**
      *Private constructor only to call
@@ -56,7 +36,7 @@ public class Island extends ManagerStudent {
      *                   the number of islands unified together)
      */
 
-    private Island(List<Integer> placedStudent, int towerCount)
+    private Island(int[] placedStudent, int towerCount)
     {
         this.placedStudent = placedStudent;
         this.towerCount = towerCount;
@@ -81,20 +61,11 @@ public class Island extends ManagerStudent {
      * influence to an island by adding a
      * tower to that island.
      *
-     * @throws IllegalCallerException If there are more than
-     *                                a tower on a island it means that
-     *                                it is a unified island and so you
-     *                                cannot call this method
      */
-    public void setTowerCount() throws IllegalCallerException{
-        if(towerCount == 0)
-            towerCount = 1;
-        else
-            throw new IllegalCallerException();
-    }
+    public void setInfluence(){
 
-    public static void setIslandSeatedUp() {
-        islandSeatedUp = true;
+        towerCount = 1;
+
     }
 
     public boolean isMotherNature() {
@@ -105,18 +76,14 @@ public class Island extends ManagerStudent {
         this.motherNature = motherNature;
     }
 
-    public void setPlacedStudent(List<Integer> placedStudent) {
-        this.placedStudent = placedStudent;
+    public void setPlacedStudent(int studentColour) {
+        placedStudent[studentColour]++;
     }
 
-    public List<Integer> getPlacedStudent() {
+    public int[] getPlacedStudent() {
         return placedStudent;
     }
 
-    public void addStudent(int studentColour)
-    {
-        setPlacedStudent(addStudentToTarget(getPlacedStudent(), studentColour));
-    }
 
     /**
      * this method counts the number of
@@ -126,7 +93,7 @@ public class Island extends ManagerStudent {
      */
     public int numberOfStudentByColour(int studentColour)
     {
-        return placedStudent.get(studentColour);
+        return placedStudent[studentColour];
     }
 
     /**
