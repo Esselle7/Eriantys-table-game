@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoardTest {
     int towerYard = 8;
     int[] entranceRoom = {1,2,0,0,4};
-    int[] diningRoom = {0,0,0,0,0};
+    int[] diningRoom = {0,0,0,0,1};
     Board board = new Board(entranceRoom, towerYard, TColour.BLACK);
 
     @Test
