@@ -1,14 +1,28 @@
 package it.polimi.ingsw.server.model;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
 class IslandTest {
     int[] placedStudent = {0,0,0,0,0};
-    boolean motherNature = false;
-    int towerCount = 0;
-    TColour towerColour = TColour.BLACK;
-    Island island = new Island();
+    boolean motherNature;
+    int towerCount;
+    TColour towerColour;
+    Island island;
 
+    @BeforeEach
+    void setUp() {
+        motherNature = false;
+        towerCount = 0;
+        towerColour = TColour.BLACK;
+        island = new Island();
+    }
+
+    @AfterEach
+    void tearDown() {
+        island = null;
+    }
     @Test
     public void testNumberOfStudentByColour(){
         int test = island.numberOfStudentByColour(1);

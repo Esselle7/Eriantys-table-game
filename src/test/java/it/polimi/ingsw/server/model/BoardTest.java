@@ -1,15 +1,27 @@
 package it.polimi.ingsw.server.model;
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
-    int towerYard = 8;
+    int towerYard;
     int[] entranceRoom = {1,2,0,0,4};
     int[] diningRoom = {0,0,0,0,0};
-    Board board = new Board(entranceRoom, towerYard, TColour.BLACK);
+    Board board;
+
+    @BeforeEach
+    void setUp() {
+        towerYard = 8;
+        board = new Board(entranceRoom, towerYard, TColour.BLACK);
+    }
+
+    @AfterEach
+    void tearDown() {
+        board = null;
+    }
 
     @Test
     public void testAddStudentEntrance(){
