@@ -17,5 +17,6 @@ public class ThreeGameSettings extends GameSettings{
         setTowerYard(6);
         setStudentsEntranceRoom(9);
         setDiningRoomLenght(10);
+        setNumberOfIslands(12);
     }
 }

@@ -11,6 +11,7 @@ public abstract class GameSettings {
     private int towerYard;
     private int studentsCloudTile;
     private int diningRoomLenght;
+    private int numberOfIslands;
 
     /**
      * This method will be implemented
@@ -20,6 +21,14 @@ public abstract class GameSettings {
      * (the attributes)
      */
     public abstract void manageSettings();
+
+    public int getNumberOfIslands() {
+        return numberOfIslands;
+    }
+
+    public void setNumberOfIslands(int numberOfIslands) {
+        this.numberOfIslands = numberOfIslands;
+    }
 
     public int getDiningRoomLenght() {
         return diningRoomLenght;
