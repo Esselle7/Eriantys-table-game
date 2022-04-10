@@ -1,14 +1,18 @@
 package it.polimi.ingsw.server.model;
 
-public class Player extends ManagerStudent {
+public class Player extends ManagerStudent implements Comparable<Player> {
     private final String nickname;
     private Board playerBoard;
     private Deck assistantCards;
+    private Card currentCard;
 
     public Player(String nickname)
     {
         this.nickname = nickname;
+        currentCard = new Card();
     }
+
+
 
     public String getNickname() {
         return nickname;
@@ -32,11 +36,25 @@ public class Player extends ManagerStudent {
         this.playerBoard = playerBoard;
     }
 
-    public Card useCard(int cardNumber)
+    public void setAssistantCards(Deck assistantCards) {
+        this.assistantCards = assistantCards;
+    }
+
+    public Card getCurrentCard() {
+        return currentCard;
+    }
+
+    public void setCurrentCard(Card currentCard) {
+        this.currentCard = currentCard;
+    }
+
+    public void useCard(int cardNumber)
     {
-        return assistantCards.useCard(cardNumber);
+        setCurrentCard(assistantCards.useCard(cardNumber));
 
     }
 
-
+    public int compareTo(Player otherPlayer) {
+        return Integer.compare(this.currentCard.getValue(),otherPlayer.currentCard.getValue());
+    }
 }
