@@ -10,17 +10,25 @@ package it.polimi.ingsw.server.model;
 
 public class CloudTile {
     private int[] students;
+    private boolean isUsed;
 
     public CloudTile(int[] students) {
         this.students = students;
-        boolean isUsed = false;
+        isUsed = false;
     }
 
     public int[] getStudents() {
+        isUsed = true;
         return students;
+
     }
 
-    public void setStudents(int[] students) {
+    public void reFill(int[] students) {
         this.students = students;
+        isUsed = false;
+    }
+
+    public boolean isUsed() {
+        return isUsed;
     }
 }
