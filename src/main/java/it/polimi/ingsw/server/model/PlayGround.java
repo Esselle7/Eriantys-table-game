@@ -12,6 +12,7 @@ import java.util.Objects;
 public class PlayGround {
     private List<Player> playersList;
     private List<Island> islands;
+    private Island islandWithMotherNature;
     private final Player[] professorsControl;
     private CloudTile[] cloudTiles;
     private static final PlayGround instance = null;
@@ -55,6 +56,14 @@ public class PlayGround {
 
     public Player getPlayerByNickname(String nickname){
         return getPlayersList().stream().filter(p -> p.getNickname().equals(nickname)).findFirst().orElse(null);
+    }
+
+    public Island getIslandWithMotherNature() {
+        return islandWithMotherNature;
+    }
+
+    public void setIslandWithMotherNature(Island islandWithMotherNature) {
+        this.islandWithMotherNature = islandWithMotherNature;
     }
 
     public void setPlayersList(List<Player> playersList) {
