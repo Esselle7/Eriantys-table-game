@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Deck {
     private final Wizard deckName;
-    private static List<Card> assistantCards;
+    private final List<Card> assistantCards;
 
     /**
      * Public constructor that create a
@@ -28,6 +28,7 @@ public class Deck {
      */
     public Deck(Wizard deckName,List<Integer> motherNatureSteps){
         this.deckName = deckName;
+        assistantCards = new ArrayList<>();
         for (int index = 0; index < motherNatureSteps.size(); index++) {
             assistantCards.add(new Card(index+1,motherNatureSteps.get(index)));
         }
