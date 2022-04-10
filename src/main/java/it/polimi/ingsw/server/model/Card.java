@@ -1,7 +1,5 @@
 package it.polimi.ingsw.server.model;
 
-import java.util.ArrayList;
-
 /**
  * An assistant Card of the game.
  * Every card belongs to a single Deck.
