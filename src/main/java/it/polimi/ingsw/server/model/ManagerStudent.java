@@ -9,7 +9,7 @@ import java.util.Random;
  */
 
 public abstract class ManagerStudent {
-
+    private int totalStudentPaws;
     /**
      * This method make the fusion
      * of two lists given in input by
@@ -32,13 +32,31 @@ public abstract class ManagerStudent {
         return target;
     }
 
+    public int getTotalStudentPaws() {
+        return totalStudentPaws;
+    }
+
+    public void setTotalStudentPaws(int totalStudentPaws) {
+        this.totalStudentPaws = totalStudentPaws;
+    }
+
+    public void decreaseStudentPaws()
+    {
+        totalStudentPaws--;
+    }
+
 
     public int[] generateStudents(int numberToGenerate)
     {
-        int[] result = new int[Colour.colourCount];
-        for(int i = 0; i < numberToGenerate; i++)
-            result[chooseRandomColour()]++;
-        return result;
+        setTotalStudentPaws(getTotalStudentPaws()-numberToGenerate);
+        if(getTotalStudentPaws()>=0)
+        {
+            int[] result = new int[Colour.colourCount];
+            for(int i = 0; i < numberToGenerate; i++)
+                result[chooseRandomColour()]++;
+            return result;
+        }
+        return null; // exception to return
     }
 
     private int chooseRandomColour()
