@@ -7,9 +7,15 @@ package it.polimi.ingsw.server.model;
  * for each deck.
  *
  */
-class Card {
+public class Card {
     private final int value;
     private final int motherNatureSteps;
+
+    public Card()
+    {
+        value = 0;
+        motherNatureSteps = 0;
+    }
 
     public Card(int value, int motherNatureSteps){
         this.value = value;
