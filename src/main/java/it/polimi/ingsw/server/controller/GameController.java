@@ -33,5 +33,9 @@ public class GameController {
         return null; // da modificare, l'ho messo solo per poter committare
     }
 
+    public void moveMotherNature(Island island_to_move){
+        island_to_move.setMotherNature();
+    }
+
 
 }
