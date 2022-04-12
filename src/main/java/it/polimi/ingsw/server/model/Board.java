@@ -26,7 +26,6 @@ public class Board extends ManagerStudent {
         this.towerYard = towerYard;
         this.towerColour = towerColour;
         diningRoom = new int[Colour.colourCount];
-
     }
 
     public int[] getEntranceRoom() { return entranceRoom; }
