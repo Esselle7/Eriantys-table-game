@@ -9,7 +9,6 @@ public class GameController extends ManagerStudent {
     private GameSettings currentSettings;
     private final IslandController islandController;
     private final BoardController boardController;
-    private TurnHandler turnHandler;
 
     public GameController() {
         islandController = new IslandController();
@@ -85,7 +84,6 @@ public class GameController extends ManagerStudent {
     {
         for(int i = 0; i < getCurrentSettings().getNumberOfIslands(); i++){
             if(i == 0){
-                getCurrentGame().getIslands().get(i).setMotherNature(true);
                 getCurrentGame().setIslandWithMotherNature(getCurrentGame().getIslands().get(i));
             }
             else if(i!= 6){

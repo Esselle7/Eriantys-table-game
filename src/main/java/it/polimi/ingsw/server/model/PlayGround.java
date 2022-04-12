@@ -17,7 +17,6 @@ public class PlayGround {
     private CloudTile[] cloudTiles;
     private static final PlayGround instance = null;
     private final GameSettings gameSettings;
-    private Island islandWithMotherNature;
 
     /**
      * Private constructor, applied
@@ -109,13 +108,5 @@ public class PlayGround {
 
     public void setCloudTiles(CloudTile[] cloudTiles) {
         this.cloudTiles = cloudTiles;
-    }
-  
-    public Island getIslandWithMotherNature() {
-        return islandWithMotherNature;
-    }
-
-    public void setIslandWithMotherNature(Island islandWithMotherNature) {
-        this.islandWithMotherNature = islandWithMotherNature;
     }
 }
