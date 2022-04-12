@@ -8,7 +8,7 @@ package it.polimi.ingsw.server.model;
  *
  */
 
-class Board extends ManagerStudent {
+public class Board extends ManagerStudent {
     private int[] entranceRoom;
     private final int[] diningRoom;
     private int towerYard;

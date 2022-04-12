@@ -1,6 +1,6 @@
 package it.polimi.ingsw.server.model;
 
-enum TColour {
+public enum TColour {
     GRAY,
     BLACK,
     WHITE,
