@@ -21,17 +21,13 @@ public class Deck {
      * single deck with 10 assistant cards
      * @param deckName the name of the deck
      *                 choosen between Wizard enum
-     * @param motherNatureSteps each element of this
-     *                          list contains the maximum
-     *                          mother nature steps allowed
-     *                          by an assistant card
      */
-    public Deck(Wizard deckName,List<Integer> motherNatureSteps){
+    public Deck(Wizard deckName){
+        int[] motherNatureSteps = {1,1,2,2,3,3,4,4,5,5};
         this.deckName = deckName;
-        for (int index = 0; index < motherNatureSteps.size(); index++) {
-            assistantCards.add(new Card(index+1,motherNatureSteps.get(index)));
+        for (int index = 0; index < 10; index++) {
+            assistantCards.add(new Card(index+1,motherNatureSteps[index]));
         }
-
     }
 
     public Wizard getDeckName() {

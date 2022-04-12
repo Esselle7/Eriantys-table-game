@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CardTest {
     int value, value2;
-    int motherNatureSteps, motherNatureSteps2;
+    int motherNatureSteps;
     Card card, card2;
 
     @BeforeEach

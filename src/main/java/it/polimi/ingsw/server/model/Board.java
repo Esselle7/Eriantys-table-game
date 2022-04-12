@@ -8,7 +8,7 @@ package it.polimi.ingsw.server.model;
  *
  */
 
-class Board extends ManagerStudent {
+public class Board extends ManagerStudent {
     private int[] entranceRoom;
     private final int[] diningRoom;
     private int towerYard;
@@ -26,7 +26,6 @@ class Board extends ManagerStudent {
         this.towerYard = towerYard;
         this.towerColour = towerColour;
         diningRoom = new int[Colour.colourCount];
-
     }
 
     public int[] getEntranceRoom() { return entranceRoom; }
