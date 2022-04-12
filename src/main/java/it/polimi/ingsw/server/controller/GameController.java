@@ -1,19 +1,17 @@
 package it.polimi.ingsw.server.controller;
 import it.polimi.ingsw.server.model.*;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameController extends ManagerStudent {
     private PlayGround currentGame;
+    private TurnHandler turnHandler;
     private GameSettings currentSettings;
     private final IslandController islandController;
     private final BoardController boardController;
     private TurnHandler turnHandler;
 
-    public GameController(GameSettings settings)
-    {
+    public GameController() {
         islandController = new IslandController();
         boardController = new BoardController();
     }
@@ -73,7 +71,7 @@ public class GameController extends ManagerStudent {
         }
         getCurrentGame().setIslands(islands);
     }
-
+  
     private void setUpBoard(){
         TColour[] colours = {TColour.WHITE, TColour.BLACK, TColour.GRAY}; //check se si può migliorare
         List<Board> boards = new ArrayList<>();

@@ -12,6 +12,7 @@ import java.util.Objects;
 public class PlayGround {
     private List<Player> playersList;
     private List<Island> islands;
+    private Island islandWithMotherNature;
     private final Player[] professorsControl;
     private CloudTile[] cloudTiles;
     private static final PlayGround instance = null;
@@ -26,7 +27,7 @@ public class PlayGround {
      * @param cloudTiles list of cloud tile with students
      *                   already on it
      */
-    private PlayGround(List<Player> playersList, List<Island> islands, CloudTile[] cloudTiles, GameSettings gameSettings) {
+    public PlayGround(List<Player> playersList, List<Island> islands, CloudTile[] cloudTiles, GameSettings gameSettings) {
         this.playersList = playersList;
         this.islands = islands;
         this.cloudTiles = cloudTiles;
@@ -54,6 +55,18 @@ public class PlayGround {
         return playersList;
     }
 
+    public Player getPlayerByNickname(String nickname){
+        return getPlayersList().stream().filter(p -> p.getNickname().equals(nickname)).findFirst().orElse(null);
+    }
+
+    public Island getIslandWithMotherNature() {
+        return islandWithMotherNature;
+    }
+
+    public void setIslandWithMotherNature(Island islandWithMotherNature) {
+        this.islandWithMotherNature = islandWithMotherNature;
+    }
+
     public void setPlayersList(List<Player> playersList) {
         this.playersList = playersList;
     }
@@ -64,6 +77,11 @@ public class PlayGround {
 
     public List<Island> getIslands() {
         return islands;
+    }
+
+    public Island getIslandByIndex(int index)
+    {
+        return islands.get(index);
     }
 
     public void setIslands(List<Island> islands) {
@@ -92,7 +110,7 @@ public class PlayGround {
     public void setCloudTiles(CloudTile[] cloudTiles) {
         this.cloudTiles = cloudTiles;
     }
-
+  
     public Island getIslandWithMotherNature() {
         return islandWithMotherNature;
     }
@@ -101,4 +119,3 @@ public class PlayGround {
         this.islandWithMotherNature = islandWithMotherNature;
     }
 }
-
