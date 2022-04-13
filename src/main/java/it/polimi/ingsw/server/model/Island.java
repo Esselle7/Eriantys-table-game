@@ -13,7 +13,6 @@ import java.util.List;
 
 public class Island extends ManagerStudent {
     private final int[] placedStudent;
-    private boolean motherNature;
     private int towerCount;
     private TColour towerColour;
     private List<Island> NearbyIslands;
@@ -27,7 +26,6 @@ public class Island extends ManagerStudent {
     public Island()
     {
         placedStudent = new int[Colour.colourCount];
-        motherNature = false;
         towerCount = 0;
     }
 
@@ -77,14 +75,6 @@ public class Island extends ManagerStudent {
 
         towerCount = 1;
 
-    }
-
-    public boolean isMotherNature() {
-        return motherNature;
-    }
-
-    public void setMotherNature() {
-        this.motherNature = motherNature;
     }
 
     public void setPlacedStudent(int studentColour) {

@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Deck {
     private final Wizard deckName;
-    private static List<Card> assistantCards;
+    private final List<Card> assistantCards;
 
     /**
      * Public constructor that create a
@@ -23,9 +23,10 @@ public class Deck {
      *                 choosen between Wizard enum
      */
     public Deck(Wizard deckName){
-        int[] motherNatureSteps = {1,1,2,2,3,3,4,4,5,5};
         this.deckName = deckName;
-        for (int index = 0; index < 10; index++) {
+        int[] motherNatureSteps = {1,1,2,2,3,3,4,4,5,5};
+        assistantCards = new ArrayList<>();
+        for (int index = 0; index < motherNatureSteps.length; index++) {
             assistantCards.add(new Card(index+1,motherNatureSteps[index]));
         }
     }
@@ -59,8 +60,7 @@ public class Deck {
                 assistantCards.remove(toFind);
                 return result;
             }
-        return null; // non va bene, usa eccezioni
-
+        return null;
     }
 
     public boolean isEmpty()

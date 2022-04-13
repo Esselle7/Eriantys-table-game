@@ -1,7 +1,5 @@
 package it.polimi.ingsw.server.model;
 
-import java.util.ArrayList;
-
 /**
  * An assistant Card of the game.
  * Every card belongs to a single Deck.
@@ -9,9 +7,15 @@ import java.util.ArrayList;
  * for each deck.
  *
  */
-class Card {
+public class Card {
     private final int value;
     private final int motherNatureSteps;
+
+    public Card()
+    {
+        value = 0;
+        motherNatureSteps = 0;
+    }
 
     public Card(int value, int motherNatureSteps){
         this.value = value;

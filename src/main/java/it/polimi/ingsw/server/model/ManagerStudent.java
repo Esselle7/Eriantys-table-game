@@ -5,11 +5,13 @@ import java.util.Random;
 /**
  * This abstract class is the student manager
  * that allows class (that extends from that) to
- * perform action in array list of students
+ * perform action in array list of students.
+ * It also store the total number of student
+ * paws
  */
 
 public abstract class ManagerStudent {
-
+    private int totalStudentPaws = 130;
     /**
      * This method make the fusion
      * of two lists given in input by
@@ -32,13 +34,32 @@ public abstract class ManagerStudent {
         return target;
     }
 
+    public int getTotalStudentPaws() {
+        return totalStudentPaws;
+    }
+
+    public void setTotalStudentPaws(int totalStudentPaws) {
+        this.totalStudentPaws = totalStudentPaws;
+    }
+
+    private void decreaseStudentPaws(int numberToDecrease)
+    {
+        totalStudentPaws-=numberToDecrease;
+    }
+
 
     public int[] generateStudents(int numberToGenerate)
     {
-        int[] result = new int[Colour.colourCount];
-        for(int i = 0; i < numberToGenerate; i++)
-            result[chooseRandomColour()]++;
-        return result;
+        setTotalStudentPaws(getTotalStudentPaws()-numberToGenerate);
+        if(getTotalStudentPaws()>=0)
+        {
+            int[] result = new int[Colour.colourCount];
+            for(int i = 0; i < numberToGenerate; i++)
+                result[chooseRandomColour()]++;
+            decreaseStudentPaws(numberToGenerate);
+            return result;
+        }
+        return null; // exception to return
     }
 
     private int chooseRandomColour()

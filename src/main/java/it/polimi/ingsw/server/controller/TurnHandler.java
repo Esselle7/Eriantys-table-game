@@ -1,6 +1,6 @@
 package it.polimi.ingsw.server.controller;
 
-import it.polimi.ingsw.server.model.Player;
+import it.polimi.ingsw.server.model.*;
 
 public class TurnHandler {
 
@@ -12,5 +12,10 @@ public class TurnHandler {
 
     public void setCurrentPlayer(Player currentPlayer) {
         CurrentPlayer = currentPlayer;
+    }
+
+    public Board getCurrentPlayerBoard()
+    {
+        return CurrentPlayer.getPlayerBoard();
     }
 }

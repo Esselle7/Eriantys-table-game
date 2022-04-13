@@ -13,7 +13,7 @@ public class PlayGround {
     private List<Player> playersList;
     private List<Island> islands;
     private Island islandWithMotherNature;
-    private final Player[] professorsControl;
+    private final String[] professorsControl;
     private CloudTile[] cloudTiles;
     private static final PlayGround instance = null;
     private final GameSettings gameSettings;
@@ -31,7 +31,7 @@ public class PlayGround {
         this.islands = islands;
         this.cloudTiles = cloudTiles;
         this.gameSettings = gameSettings;
-        professorsControl = new Player[Colour.colourCount];
+        professorsControl = new String[Colour.colourCount];
     }
 
     /**
@@ -54,6 +54,12 @@ public class PlayGround {
         return playersList;
     }
 
+    /**
+     * This method allows to retrieve
+     * a player by it's nickname
+     * @param nickname nickname of player to find
+     * @return the player with nickname in input
+     */
     public Player getPlayerByNickname(String nickname){
         return getPlayersList().stream().filter(p -> p.getNickname().equals(nickname)).findFirst().orElse(null);
     }
@@ -87,18 +93,35 @@ public class PlayGround {
         this.islands = islands;
     }
 
-    public Player[] getProfessorsControl() {
+    public String[] getProfessorsControl() {
         return professorsControl;
     }
 
-    public Player getProfessorControlByColour(int professorColour)
+    /**
+     * This method allows to get
+     * the player nickname that have
+     * the control of the professor
+     * given in input
+     * @param professorColour colour of the professor
+     * @return player that own the control of the professor
+     *         given in input
+     */
+    public String getProfessorControlByColour(int professorColour)
     {
         return professorsControl[professorColour];
     }
 
-    public void setProfessorControlByColour(int professorColour, Player professorController)
+    /**
+     * This method allows to change
+     * the control of a professor
+     * from one player to another
+     * given in input
+     * @param professorColour colour of the professor to control
+     * @param professorController future professor controller
+     */
+    public void setProfessorControlByColour(int professorColour, String professorController)
     {
-        professorsControl[professorColour] = professorController;
+        professorsControl[professorColour] =  professorController;
     }
 
 
