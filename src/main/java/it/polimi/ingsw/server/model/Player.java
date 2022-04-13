@@ -1,5 +1,10 @@
 package it.polimi.ingsw.server.model;
 
+/**
+ * This class represent a player of
+ * the game. Every player has its own
+ * board and deck.
+ */
 public class Player extends ManagerStudent implements Comparable<Player> {
     private final String nickname;
     private Board playerBoard;
@@ -11,7 +16,6 @@ public class Player extends ManagerStudent implements Comparable<Player> {
         this.nickname = nickname;
         currentCard = new Card();
     }
-
 
 
     public String getNickname() {
@@ -48,13 +52,26 @@ public class Player extends ManagerStudent implements Comparable<Player> {
         this.currentCard = currentCard;
     }
 
+    /**
+     * This method allows to use
+     * an assistant card from the deck
+     * and set it as the current card
+     * @param cardNumber number of the card to play
+     */
     public void useCard(int cardNumber)
     {
-        setCurrentCard(assistantCards.useCard(cardNumber));
-
+        setCurrentCard(getAssistantCards().useCard(cardNumber));
     }
 
+    /**
+     * This method allows comparing
+     * two player by their current card
+     * value
+     * @param otherPlayer other player to compare
+     * @return an int =0,>0 or <0 by the values
+     *         of the two cards
+     */
     public int compareTo(Player otherPlayer) {
-        return Integer.compare(this.currentCard.getValue(),otherPlayer.currentCard.getValue());
+        return Integer.compare(getCurrentCard().getValue(),otherPlayer.getCurrentCard().getValue());
     }
 }
