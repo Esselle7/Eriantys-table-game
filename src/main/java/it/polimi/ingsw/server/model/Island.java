@@ -11,7 +11,6 @@ package it.polimi.ingsw.server.model;
 
 public class Island extends ManagerStudent {
     private final int[] placedStudent;
-    private boolean motherNature;
     private int towerCount;
     private TColour towerColour;
 
@@ -24,7 +23,6 @@ public class Island extends ManagerStudent {
     public Island()
     {
         placedStudent = new int[Colour.colourCount];
-        motherNature = false;
         towerCount = 0;
     }
 
@@ -68,13 +66,6 @@ public class Island extends ManagerStudent {
 
     }
 
-    public boolean isMotherNature() {
-        return motherNature;
-    }
-
-    public void setMotherNature(boolean motherNature) {
-        this.motherNature = motherNature;
-    }
 
     public void setPlacedStudent(int studentColour) {
         placedStudent[studentColour]++;
