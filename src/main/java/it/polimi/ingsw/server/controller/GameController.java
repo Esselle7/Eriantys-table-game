@@ -352,21 +352,20 @@ public class GameController extends ManagerStudent{
      *                                             more than the number of mother nature steps
      *                                             stored in the current assistant card
      */
-    public void moveMotherNature(int islandId) throws ExceededMotherNatureStepsException
-    {
+    public void moveMotherNature(int islandId) throws ExceededMotherNatureStepsException {
         int indexIslandMotherNature = getCurrentGame().getIslands().indexOf(getCurrentGame().getIslandWithMotherNature());
-        int steps = (islandId+indexIslandMotherNature)%getCurrentGame().getGameSettings().getNumberOfIslands();
+        int steps = (islandId + indexIslandMotherNature) % getCurrentGame().getGameSettings().getNumberOfIslands();
         int numberOfIslands = getCurrentGame().getGameSettings().getNumberOfIslands();
         int motherNatureSteps = getTurnHandler().getCurrentPlayer().getCurrentCard().getMotherNatureSteps();
 
-        if( steps > getTurnHandler().getCurrentPlayer().getCurrentCard().getMotherNatureSteps() )
+        if (steps > getTurnHandler().getCurrentPlayer().getCurrentCard().getMotherNatureSteps())
             throw new ExceededMotherNatureStepsException();
-        else
-        {
-            if(indexIslandMotherNature + steps > numberOfIslands )
+        else {
+            if (indexIslandMotherNature + steps > numberOfIslands)
                 steps -= numberOfIslands;
             getCurrentGame().setIslandWithMotherNature(getCurrentGame().getIslandByIndex(steps));
-     }
+        }
+    }
 
     private void setUpDecks(int numberOfPlayer)
     {
