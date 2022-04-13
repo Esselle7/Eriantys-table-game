@@ -5,7 +5,6 @@ import it.polimi.ingsw.server.model.*;
 public class TurnHandler {
 
     private Player CurrentPlayer;
-   // private GameController gameController;
 
     public Player getCurrentPlayer() {
         return CurrentPlayer;
@@ -19,5 +18,4 @@ public class TurnHandler {
     {
         return CurrentPlayer.getPlayerBoard();
     }
-
 }

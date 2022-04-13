@@ -29,7 +29,6 @@ public class Deck {
         for (int index = 0; index < motherNatureSteps.length; index++) {
             assistantCards.add(new Card(index+1,motherNatureSteps[index]));
         }
-
     }
 
     public Wizard getDeckName() {

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.server.model;
 
+import java.util.List;
+
 /**
  * This class implement an
  * Island where a player can place students
@@ -13,6 +15,7 @@ public class Island extends ManagerStudent {
     private final int[] placedStudent;
     private int towerCount;
     private TColour towerColour;
+    private List<Island> NearbyIslands;
 
     /**
      * Constructor that create an
@@ -54,6 +57,14 @@ public class Island extends ManagerStudent {
         return towerCount;
     }
 
+    public List<Island> getNearbyIslands() {
+        return NearbyIslands;
+    }
+
+    public void setNearbyIslands(List<Island> IslandsToSetAsNearby) {
+        this.NearbyIslands = IslandsToSetAsNearby;
+    }
+
     /**
      * This method set a player
      * influence to an island by adding a
@@ -65,7 +76,6 @@ public class Island extends ManagerStudent {
         towerCount = 1;
 
     }
-
 
     public void setPlacedStudent(int studentColour) {
         placedStudent[studentColour]++;
