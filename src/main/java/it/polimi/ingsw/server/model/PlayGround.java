@@ -15,22 +15,14 @@ public class PlayGround {
     private Island islandWithMotherNature;
     private final String[] professorsControl;
     private CloudTile[] cloudTiles;
-    private static final PlayGround instance = null;
-    private final GameSettings gameSettings;
+    private static PlayGround instance = null;
+
 
     /**
      * Private constructor, applied
      * singleton pattern
-     * @param playersList list of the current players
-     * @param islands list of the islands instances
-     * @param cloudTiles list of cloud tile with students
-     *                   already on it
      */
-    public PlayGround(List<Player> playersList, List<Island> islands, CloudTile[] cloudTiles, GameSettings gameSettings) {
-        this.playersList = playersList;
-        this.islands = islands;
-        this.cloudTiles = cloudTiles;
-        this.gameSettings = gameSettings;
+    private PlayGround() {
         professorsControl = new String[Colour.colourCount];
     }
 
@@ -39,15 +31,13 @@ public class PlayGround {
      * an instance of playground only
      * if there are no others object that
      * has been instanced before
-     * @param playersList list of the current players
-     * @param islands list of the islands instances
-     * @param cloudTiles list of cloud tile with students
-     *      *            already on it
      * @return the playGround instance
      */
-    public static PlayGround createPlayground(List<Player> playersList, List<Island> islands, CloudTile[] cloudTiles, GameSettings gameSettings)
+    public static PlayGround createPlayground()
     {
-        return Objects.requireNonNullElseGet(instance, () -> new PlayGround(playersList, islands, cloudTiles, gameSettings));
+        if(instance == null)
+           instance = new PlayGround();
+        return instance;
     }
 
     public List<Player> getPlayersList() {
@@ -74,10 +64,6 @@ public class PlayGround {
 
     public void setPlayersList(List<Player> playersList) {
         this.playersList = playersList;
-    }
-
-    public GameSettings getGameSettings() {
-        return gameSettings;
     }
 
     public List<Island> getIslands() {
