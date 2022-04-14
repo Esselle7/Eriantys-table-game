@@ -31,4 +31,8 @@ public class CloudTile {
     public boolean isUsed() {
         return isUsed;
     }
+    public void setUsed()
+    {
+        isUsed = false;
+    }
 }
