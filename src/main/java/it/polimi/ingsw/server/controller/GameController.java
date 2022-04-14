@@ -45,7 +45,7 @@ public class GameController extends ManagerStudent{
      * on the number of players
      * @param numberOfPlayers the number of players in the game
      */
-    private void setUpGameSettings(int numberOfPlayers)
+    public void setUpGameSettings(int numberOfPlayers)
     {
         if(numberOfPlayers == 2){
             currentSettings = new TwoGameSettings();
@@ -63,10 +63,10 @@ public class GameController extends ManagerStudent{
      * with their nicknames
      * @param playersName string of names associated with players
      */
-    private void setUpPlayers(String[] playersName)
+    public void setUpPlayers(String[] playersName)
     {
         List<Player> playersList = new ArrayList<>();
-        for(int i = 0; i < currentSettings.getNumberOfPlayers(); i++){
+        for(int i = 0; i < getCurrentSettings().getNumberOfPlayers(); i++){
             playersList.add(new Player(playersName[i]));
         }
         getCurrentGame().setPlayersList(playersList);
@@ -366,8 +366,8 @@ public class GameController extends ManagerStudent{
      */
     public void moveMotherNature(int islandId) throws ExceededMotherNatureStepsException {
         int indexIslandMotherNature = getCurrentGame().getIslands().indexOf(getCurrentGame().getIslandWithMotherNature());
-        int steps = (islandId + indexIslandMotherNature) % getCurrentGame().getGameSettings().getNumberOfIslands();
-        int numberOfIslands = getCurrentGame().getGameSettings().getNumberOfIslands();
+        int steps = (islandId + indexIslandMotherNature) % getCurrentSettings().getNumberOfIslands();
+        int numberOfIslands = getCurrentSettings().getNumberOfIslands();
         int motherNatureSteps = getTurnHandler().getCurrentPlayer().getCurrentCard().getMotherNatureSteps();
 
         if (steps > getTurnHandler().getCurrentPlayer().getCurrentCard().getMotherNatureSteps())
@@ -384,11 +384,11 @@ public class GameController extends ManagerStudent{
      * the correct number of decks based on the number
      * of players in the game
      */
-    private void setUpDecks()
+    public void setUpDecks()
     {
         Wizard[] wizards = {Wizard.WIZARD1, Wizard.WIZARD2, Wizard.WIZARD3, Wizard.WIZARD4};
         List<Deck> decks = new ArrayList<>();
-        for(int i = 0; i < currentSettings.getNumberOfPlayers(); i++){
+        for(int i = 0; i < getCurrentSettings().getNumberOfPlayers(); i++){
             decks.add(new Deck(wizards[i]));
             getCurrentGame().getPlayersList().get(i).setDeck(decks.get(i));
         }
@@ -398,7 +398,7 @@ public class GameController extends ManagerStudent{
      * This method allows to set up 12
      * islands in the playground
      */
-    private void setUpIslands()
+    public void setUpIslands()
     {
         List<Island> islands = new ArrayList<>();
         for(int i = 0; i < getCurrentSettings().getNumberOfIslands(); i++){
@@ -412,7 +412,7 @@ public class GameController extends ManagerStudent{
      * the boards a nd associate them to
      * each players in the game
      */
-    private void setUpBoard(){
+    public void setUpBoard(){
         TColour[] colours = {TColour.WHITE, TColour.BLACK, TColour.GRAY};
         List<Board> boards = new ArrayList<>();
         for(int i = 0; i < getCurrentGame().getPlayersList().size(); i++){
@@ -429,7 +429,7 @@ public class GameController extends ManagerStudent{
      * correct positions
 
      */
-    private void setUpElementsOnIslands()
+    public void setUpElementsOnIslands()
     {
         for(int i = 0; i < getCurrentSettings().getNumberOfIslands(); i++){
             if(i == 0){
@@ -445,7 +445,7 @@ public class GameController extends ManagerStudent{
      * This method allows to set up
      * the cloud tiles
      */
-    private void setUpCloudTile()
+    public void setUpCloudTile()
     {
         CloudTile[] cloudTiles = new CloudTile[getCurrentGame().getPlayersList().size()];
         for(int i = 0; i < getCurrentGame().getPlayersList().size(); i++){
