@@ -18,5 +18,6 @@ public class TwoGameSettings extends GameSettings{
         setStudentsEntranceRoom(7);
         setDiningRoomLenght(10);
         setNumberOfIslands(12);
+        setNumberOfPlayers(2);
     }
 }

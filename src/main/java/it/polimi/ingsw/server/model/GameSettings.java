@@ -12,6 +12,7 @@ public abstract class GameSettings {
     private int studentsCloudTile;
     private int diningRoomLenght;
     private int numberOfIslands;
+    private int numberOfPlayers;
 
     /**
      * This method will be implemented
@@ -61,4 +62,9 @@ public abstract class GameSettings {
     public void setStudentsCloudTile(int studentsCloudTile) {
         this.studentsCloudTile = studentsCloudTile;
     }
+
+    public int getNumberOfPlayers() {return numberOfPlayers;}
+
+    public void setNumberOfPlayers(int numberOfPlayers) {this.numberOfPlayers = numberOfPlayers;}
+
 }
