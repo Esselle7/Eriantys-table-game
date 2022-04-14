@@ -27,11 +27,11 @@ class GameControllerTest {
         players[0] = "Francesco";
         players[1] = "Marco";
         GC.setUpGameSettings(numberOfPlayers);
-        GC.setUpPlayers(numberOfPlayers,players);
+        GC.setUpPlayers(players);
         GC.setUpIslands();
         GC.setUpBoard();
         GC.setUpCloudTile();
-        GC.setUpDecks(numberOfPlayers);
+        GC.setUpDecks();
         GC.setTurnHandler(new TurnHandler());
         GC.getTurnHandler().setCurrentPlayer(GC.getCurrentGame().getPlayerByNickname("Francesco"));
 
