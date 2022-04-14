@@ -21,7 +21,7 @@ class GameControllerTest {
     @BeforeEach
     void setup(){
         gs = new TwoGameSettings();
-        GC = new GameController(gs);
+        GC = new GameController();
         GC.setTurnHandler(new TurnHandler());
         ct = new CloudTile[3];
         ct[0] = new CloudTile(new int[]{1,1,1,1,1});
@@ -170,6 +170,7 @@ class GameControllerTest {
         }
 
     }
+
 
 
 }
