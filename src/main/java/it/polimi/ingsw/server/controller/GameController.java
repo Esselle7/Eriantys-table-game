@@ -20,6 +20,8 @@ public class GameController extends ManagerStudent{
     public GameController() {
         islandController = new IslandController();
         boardController = new BoardController();
+        turnHandler = new TurnHandler();
+
 
     }
 
@@ -29,6 +31,8 @@ public class GameController extends ManagerStudent{
 
     public void setCurrentGame(PlayGround currentGame) {
         this.currentGame = currentGame;
+        getIslandController().setPlayGround(currentGame);
+        getTurnHandler().setGameController(this);
     }
 
     public GameSettings getCurrentSettings() {
@@ -139,16 +143,25 @@ public class GameController extends ManagerStudent{
 
     public void setInfluenceToIsland()
     {
-        getCurrentPlayerBoard().decreaseTowerYard();
+        Player playerInfluence = getIslandController().checkInfluence();
+        playerInfluence.getPlayerBoard().decreaseTowerYard();
         getCurrentGame().getIslandWithMotherNature().setInfluence();
-        getCurrentGame().getIslandWithMotherNature().setTowerColour(getCurrentPlayerBoard().getTowerColour());
+        getCurrentGame().getIslandWithMotherNature().setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
     }
 
     public void changeInfluenceToIsland()
     {
-        getCurrentPlayerBoard().decreaseTowerYard();
-        getCurrentGame().getPlayersList().stream().filter(p -> p.getPlayerBoard().getTowerColour().equals(getCurrentGame().getIslandWithMotherNature().getTowerColour())).forEachOrdered(p -> p.getPlayerBoard().increaseTowerYard()); //add tower to previous island owner
-        getCurrentGame().getIslandWithMotherNature().setTowerColour(getCurrentPlayerBoard().getTowerColour());
+        Player playerInfluence = getIslandController().checkInfluence();
+        for(int i = 0; i < getCurrentGame().getIslandWithMotherNature().getTowerCount(); i++)
+            playerInfluence.getPlayerBoard().decreaseTowerYard();
+        for(Player p : getCurrentGame().getPlayersList())
+        {
+            if(p.getPlayerBoard().getTowerColour().equals(getCurrentGame().getIslandWithMotherNature().getTowerColour()))
+            {
+                p.getPlayerBoard().setTowerYard(p.getPlayerBoard().getTowerYard()+getCurrentGame().getIslandWithMotherNature().getTowerCount());
+            }
+        }
+        getCurrentGame().getIslandWithMotherNature().setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
 
     }
 
@@ -211,7 +224,7 @@ public class GameController extends ManagerStudent{
      * the new professor controller
      * @param professorColour colour of the professor
      *                        of which will be checked the
-     *                        controll
+     *                        control
      * @return the nickname of the player that control the
      *         professor given in input
      */
@@ -227,8 +240,8 @@ public class GameController extends ManagerStudent{
                 nickname = player.getNickname();
             }
             else
-                if(playerNumberOfStudentByColour == maximum)
-                    return nickname;
+                if(playerNumberOfStudentByColour == maximum && maximum != 0)
+                    return getCurrentGame().getProfessorsControl()[professorColour];
         }
         return nickname;
     }
@@ -273,11 +286,14 @@ public class GameController extends ManagerStudent{
         String nicknameWinner = null;
         int occurrencesWinner = 0;
         for (String nicknamePlayer: getCurrentGame().getProfessorsControl()) {
-            int occurrencesPlayer = Collections.frequency(Arrays.asList(getCurrentGame().getProfessorsControl()),nicknamePlayer);
-            if(occurrencesPlayer > occurrencesWinner)
+            if(nicknamePlayer != null)
             {
-                occurrencesWinner = occurrencesPlayer;
-                nicknameWinner = nicknamePlayer;
+                int occurrencesPlayer = Collections.frequency(Arrays.asList(getCurrentGame().getProfessorsControl()),nicknamePlayer);
+                if(occurrencesPlayer > occurrencesWinner)
+                {
+                    occurrencesWinner = occurrencesPlayer;
+                    nicknameWinner = nicknamePlayer;
+                }
             }
         }
         return nicknameWinner;
@@ -370,7 +386,7 @@ public class GameController extends ManagerStudent{
         int numberOfIslands = getCurrentSettings().getNumberOfIslands();
         int motherNatureSteps = getTurnHandler().getCurrentPlayer().getCurrentCard().getMotherNatureSteps();
 
-        if (steps > getTurnHandler().getCurrentPlayer().getCurrentCard().getMotherNatureSteps())
+        if (steps > motherNatureSteps)
             throw new ExceededMotherNatureStepsException();
         else {
             if (indexIslandMotherNature + steps > numberOfIslands)
@@ -405,6 +421,7 @@ public class GameController extends ManagerStudent{
             islands.add(new Island());
         }
         getCurrentGame().setIslands(islands);
+        setUpElementsOnIslands();
     }
 
     /**
@@ -429,7 +446,7 @@ public class GameController extends ManagerStudent{
      * correct positions
 
      */
-    public void setUpElementsOnIslands()
+    private void setUpElementsOnIslands()
     {
         for(int i = 0; i < getCurrentSettings().getNumberOfIslands(); i++){
             if(i == 0){
