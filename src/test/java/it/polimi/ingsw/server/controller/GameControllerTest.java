@@ -6,17 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 class GameControllerTest {
-
-    PlayGround currentGame;
-    List<Island> islands;
-    List<Player> players;
-    GameSettings gs;
     GameController GC;
-    CloudTile[] ct;
 
     @BeforeEach
     void setup(){
@@ -57,6 +48,21 @@ class GameControllerTest {
 
         assertEquals(GC.getCurrentGame().getPlayerByNickname(GC.getTurnHandler().getCurrentPlayer().getNickname()).getPlayerBoard().getDiningRoom()[0],1);
         assertEquals(GC.getCurrentGame().getPlayerByNickname(GC.getTurnHandler().getCurrentPlayer().getNickname()).getPlayerBoard().getDiningRoom()[0],1);
+    }
+    @Test
+    void moveStudentEntranceToDiningExceptionTest() {
+        for(int i = 0; i < GC.getCurrentSettings().getDiningRoomLenght(); i++)
+        {
+            GC.getTurnHandler().getCurrentPlayerBoard().increaseNumberOfStudent(0);
+        }
+
+        try{
+            GC.moveStudentEntranceToDining(0);
+        }
+        catch (FullDiningRoomTable e)
+        {
+            assertTrue(true);
+        }
     }
 /*
     @Test
@@ -112,7 +118,20 @@ class GameControllerTest {
         assertArrayEquals(GC.getTurnHandler().getCurrentPlayer().getPlayerBoard().getEntranceRoom(),result);
 
     }
-/*
+
+    @Test
+    void takeStudentsFromCloudTileExceptionTest() {
+        int chosenCloudTile = 0;
+        GC.getCurrentGame().getCloudTiles()[chosenCloudTile].getStudents();
+        try{
+            GC.takeStudentsFromCloudTile(chosenCloudTile);
+
+        }catch(CloudTileAlreadyTakenException e)
+        {
+            assertTrue(true);
+        }
+    }
+
     @Test
     void useAssistantCardTest() {
         try{
@@ -128,26 +147,130 @@ class GameControllerTest {
     }
 
     @Test
-    void checkProfessorsControlTest() {
-        GC.checkProfessorsControl();
-        for (String p : GC.getCurrentGame().getProfessorsControl()) {
-            assertEquals(p, "Simo");
+    void useAssistantCardExceptionTest() {
+        GC.getTurnHandler().setCurrentPlayer(GC.getCurrentGame().getPlayerByNickname("Marco"));
+        GC.getCurrentGame().getPlayersList().get(0).setCurrentCard(new Card(1,1));
+        try{
+            GC.useAssistantCard(1);
+        }
+        catch (UnableToUseCardException e)
+        {
+            assertTrue(true);
         }
     }
 
     @Test
-    void checkWinTest() {
+    void checkProfessorsControlTest() {
+        GC.getCurrentGame().getPlayersList().get(0).getPlayerBoard().increaseNumberOfStudent(0);
+        GC.getCurrentGame().getPlayersList().get(1).getPlayerBoard().increaseNumberOfStudent(1);
+        GC.getCurrentGame().getPlayersList().get(1).getPlayerBoard().increaseNumberOfStudent(0);
+        GC.getCurrentGame().getPlayersList().get(1).getPlayerBoard().increaseNumberOfStudent(0);
+        GC.checkProfessorsControl();
+        GC.getCurrentGame().getPlayersList().get(0).getPlayerBoard().increaseNumberOfStudent(0);
+        GC.checkProfessorsControl();
+        assertEquals(GC.getCurrentGame().getProfessorsControl()[0],"Marco");
+        assertEquals(GC.getCurrentGame().getProfessorsControl()[1],"Marco");
+        assertNull(GC.getCurrentGame().getProfessorsControl()[2]);
+        assertNull(GC.getCurrentGame().getProfessorsControl()[3]);
+        assertNull(GC.getCurrentGame().getProfessorsControl()[4]);
+
+
+    }
+
+    @Test
+    void checkWinEmptyTowerYardTest() {
+        GC.getCurrentGame().getPlayersList().get(0).getPlayerBoard().setTowerYard(0);
+        try
+        {
+            assertEquals(GC.checkWin(), "Francesco");
+        }
+        catch(noWinnerException e)
+        {
+            fail();
+        }
+    }
+
+    @Test
+    void checkWinByTowerYardTest() {
+        GC.getCurrentGame().getPlayersList().get(0).getPlayerBoard().increaseNumberOfStudent(0);
+        GC.getCurrentGame().getPlayersList().get(1).getPlayerBoard().increaseNumberOfStudent(1);
+        GC.getCurrentGame().getPlayersList().get(1).getPlayerBoard().increaseNumberOfStudent(0);
+        GC.getCurrentGame().getPlayersList().get(1).getPlayerBoard().increaseNumberOfStudent(0);
+        GC.checkProfessorsControl();
+        GC.setTotalStudentPaws(0);
+        try
+        {
+            assertEquals(GC.checkWin(), "Marco");
+        }
+        catch(noWinnerException e)
+        {
+            fail();
+        }
+    }
+
+    @Test
+    void checkWinByProfessorsControlTest() {
+        GC.getCurrentGame().getPlayersList().get(0).getPlayerBoard().setTowerYard(5);
+        GC.setTotalStudentPaws(0);
+        try
+        {
+            assertEquals(GC.checkWin(), "Francesco");
+        }
+        catch(noWinnerException e)
+        {
+            fail();
+        }
+    }
+
+    @Test
+    void checkWinExceptionTest() {
         GC.checkProfessorsControl();
         try
         {
-            assertEquals(GC.checkWin(),"Simo");
+            GC.checkWin();
         }
         catch(noWinnerException e)
         {
             assertTrue(true);
         }
-
     }
 
-*/
+
+    @Test
+    void moveMotherNatureTest() {
+        GC.getCurrentGame().setIslandWithMotherNature(GC.getCurrentGame().getIslandByIndex(11));
+        GC.getTurnHandler().getCurrentPlayer().useCard(4);
+        try{
+            GC.moveMotherNature(2);
+            assertEquals(GC.getCurrentGame().getIslandWithMotherNature(), GC.getCurrentGame().getIslandByIndex(1));
+        }catch (ExceededMotherNatureStepsException e)
+        {
+            fail();
+        }
+    }
+
+    @Test
+    void moveMotherNatureExceptionTest() {
+        GC.getTurnHandler().getCurrentPlayer().useCard(4);
+        try{
+            GC.moveMotherNature(5);
+        }
+        catch (ExceededMotherNatureStepsException e)
+        {
+            assertTrue(true);
+        }
+    }
+
+/*
+    @Test
+    void setInfluenceToIsland() {
+        GC.moveStudentsEntranceToIsland(0,0);
+        GC.moveStudentsEntranceToIsland(0,0);
+        GC.checkProfessorsControl();
+        GC.setInfluenceToIsland();
+        assertEquals(GC.getCurrentGame().getIslands().get(0).getTowerColour(),GC.getTurnHandler().getCurrentPlayerBoard().getTowerColour());
+        assertEquals(GC.getTurnHandler().getCurrentPlayerBoard().getTowerYard(),GC.getCurrentSettings().getTowerYard()-1);
+
+
+    }*/
 }
