@@ -6,10 +6,16 @@ import java.util.Collections;
 
 public class TurnHandler {
     private Player CurrentPlayer;
-    private GameController gameController;
+    private GameMoves gameMoves;
 
-    public GameController getGameController() {return gameController;}
-    public void setGameController(GameController gameController) {this.gameController = gameController;}
+    public GameMoves getGameMoves() {
+        return gameMoves;
+    }
+
+    public void setGameMoves(GameMoves gameMoves) {
+        this.gameMoves = gameMoves;
+    }
+
     public Player getCurrentPlayer() {
         return CurrentPlayer;
     }
@@ -25,11 +31,11 @@ public class TurnHandler {
     public void initializeTurn()
     {
         CurrentPlayer = null;
-        for (Player player: getGameController().getCurrentGame().getPlayersList()) {
+        for (Player player: getGameMoves().getCurrentGame().getPlayersList()) {
             chooseTurnAssistantCard(player);
         }
-        Collections.sort(getGameController().getCurrentGame().getPlayersList()); // sorto per valore carta assistente
-        setCurrentPlayer(getGameController().getCurrentGame().getPlayersList().get(0));
+        Collections.sort(getGameMoves().getCurrentGame().getPlayersList()); // sorto per valore carta assistente
+        setCurrentPlayer(getGameMoves().getCurrentGame().getPlayersList().get(0));
     }
 
     private void turn()
