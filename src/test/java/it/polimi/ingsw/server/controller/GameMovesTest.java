@@ -6,23 +6,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
-class GameControllerTest {
-    GameController GC;
+class GameMovesTest {
+    GameMoves GC;
 
     @BeforeEach
     void setup(){
         int numberOfPlayers = 2;
-        GC = new GameController();
+        GC = new GameMoves();
         GC.setCurrentGame(PlayGround.createPlayground());
         String[] players = new String[numberOfPlayers];
         players[0] = "Francesco";
         players[1] = "Marco";
-        GC.setUpGameSettings(numberOfPlayers);
-        GC.setUpPlayers(players);
-        GC.setUpIslands();
-        GC.setUpBoard();
-        GC.setUpCloudTile();
-        GC.setUpDecks();
+        GC.setUpGame(numberOfPlayers,players);
         GC.setTurnHandler(new TurnHandler());
         GC.getTurnHandler().setCurrentPlayer(GC.getCurrentGame().getPlayerByNickname("Francesco"));
 
