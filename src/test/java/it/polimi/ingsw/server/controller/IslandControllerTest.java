@@ -48,7 +48,7 @@ class IslandControllerTest {
     }
 
     @Test
-    void testcheckInfluence(){
+    void checkInfluence1Test(){
         playGround.setProfessorControlByColour(0, player1.getNickname());
         playGround.setProfessorControlByColour(1, player2.getNickname());
         playGround.setIslandWithMotherNature(island1);
@@ -59,7 +59,29 @@ class IslandControllerTest {
     }
 
     @Test
-    void testislandUnification_1(){
+    void checkInfluence2Test(){
+        playGround.setProfessorControlByColour(0, player1.getNickname());
+        playGround.setProfessorControlByColour(1, player2.getNickname());
+        playGround.setIslandWithMotherNature(island1);
+        island1.setPlacedStudent(0);
+        island1.setPlacedStudent(1);
+        island1.setTowerColour(player1.getPlayerBoard().getTowerColour());
+        island1.setInfluence();
+        assertEquals(player1, islandController.checkInfluence());
+    }
+
+    @Test
+    void checkInfluence3Test(){
+        playGround.setProfessorControlByColour(0, player1.getNickname());
+        playGround.setProfessorControlByColour(1, player2.getNickname());
+        playGround.setIslandWithMotherNature(island1);
+        island1.setPlacedStudent(0);
+        island1.setPlacedStudent(1);
+        assertNull(islandController.checkInfluence());
+    }
+
+    @Test
+    void islandUnification1Test(){
         island1.setTowerColour(TColour.GRAY);
         island2.setTowerColour(TColour.WHITE);
         island3.setTowerColour(TColour.WHITE);
@@ -78,7 +100,7 @@ class IslandControllerTest {
     }
 
     @Test
-    void testislandUnification_2(){
+    void islandUnification2Test(){
         island1.setTowerColour(TColour.GRAY);
         island2.setTowerColour(TColour.WHITE);
         island3.setTowerColour(TColour.WHITE);
@@ -97,7 +119,7 @@ class IslandControllerTest {
     }
 
     @Test
-    void testislandUnification_3(){
+    void islandUnification3Test(){
         island1.setTowerColour(TColour.GRAY);
         island2.setTowerColour(TColour.WHITE);
         island3.setTowerColour(TColour.WHITE);
@@ -113,5 +135,12 @@ class IslandControllerTest {
         assertEquals(TColour.GRAY, playGround.getIslands().get(2).getTowerColour());
         assertEquals(island3, playGround.getIslands().get(2).getNearbyIslands().get(0));
         assertEquals(island2, playGround.getIslands().get(2).getNearbyIslands().get(1));
+    }
+
+    @Test
+    void updateNearbyIslandsTest(){
+        islandController.updateNearbyIslands(island3);
+        assertEquals(island2, island3.getNearbyIslands().get(0));
+        assertEquals(island4, island3.getNearbyIslands().get(1));
     }
 }

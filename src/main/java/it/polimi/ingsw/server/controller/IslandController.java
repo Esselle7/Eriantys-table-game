@@ -3,7 +3,6 @@ package it.polimi.ingsw.server.controller;
 import it.polimi.ingsw.server.model.Island;
 import it.polimi.ingsw.server.model.PlayGround;
 import it.polimi.ingsw.server.model.Player;
-import it.polimi.ingsw.server.model.TColour;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +34,7 @@ public class IslandController {
      * @return the player that has the highest influence
      */
     public Player checkInfluence(){
-        int counter = 0;
-        int maxCounter = 0;
+        int counter = 0, maxCounter = 0;
         Player maxPlayer = null;
         Island mothernatureIsland = playGround.getIslandWithMotherNature();
         for (Player player : playGround.getPlayersList()){
@@ -44,9 +42,13 @@ public class IslandController {
                 if(player.getNickname().equals(playGround.getProfessorsControl()[index]))
                     counter = counter + mothernatureIsland.getPlacedStudent()[index];
             }
+            if(player.getPlayerBoard().getTowerColour().equals(mothernatureIsland.getTowerColour()))
+                counter = counter + mothernatureIsland.getTowerCount();
             if (counter > maxCounter){
                 maxPlayer = player;
                 maxCounter = counter;
+            } else if (counter == maxCounter){
+                maxPlayer = null;
             }
             counter = 0;
         }
@@ -62,6 +64,7 @@ public class IslandController {
      * @param island from which the propagation has to start
      */
     public void islandUnification(Island island){
+        this.updateNearbyIslands(island);
         for(Island nearbyIsland: island.getNearbyIslands()) {
             if (nearbyIsland.getTowerColour() == island.getTowerColour()) {
                 Island newIsland = island.unifyIslands(nearbyIsland);
@@ -69,22 +72,32 @@ public class IslandController {
                 newIslandsList.set(playGround.getIslands().indexOf(island), newIsland);
                 newIslandsList.remove(nearbyIsland);
                 playGround.setIslands(newIslandsList);
-                //Set the new nearby islands
-                List<Island> newNearbyIslands = new ArrayList<>();
-                if(newIslandsList.indexOf(newIsland) == 0){
-                    newNearbyIslands.add(newIslandsList.get(newIslandsList.size() - 1));
-                    newNearbyIslands.add(newIslandsList.get(newIslandsList.indexOf(newIsland) + 1));
-                } else if(newIslandsList.indexOf(newIsland) == newIslandsList.size()-1){
-                    newNearbyIslands.add(newIslandsList.get(newIslandsList.indexOf(newIsland) - 1));
-                    newNearbyIslands.add(newIslandsList.get(0));
-                } else {
-                    newNearbyIslands.add(newIslandsList.get(newIslandsList.indexOf(newIsland) - 1));
-                    newNearbyIslands.add(newIslandsList.get(newIslandsList.indexOf(newIsland) + 1));
-                }
-                newIsland.setNearbyIslands(newNearbyIslands);
+                this.updateNearbyIslands(newIsland);
                 island = newIsland;
                 newIsland.setTowerColour(nearbyIsland.getTowerColour());
             }
         }
+    }
+    /**
+     * This method updates island.NearbyIslands by looking at the intended Island's position
+     * in PlayGround.getIslands().
+     * After the execution, the first element of island.getNearbyIslands() is the island previous/on the left
+     * compared to island while the second and last element is the island after/on the right
+     * @param island whose nearby islands have to be updated
+     */
+    public void updateNearbyIslands(Island island){
+        List<Island> newIslandsList = playGround.getIslands();
+        List<Island> newNearbyIslands = new ArrayList<>();
+        if(newIslandsList.indexOf(island) == 0){
+            newNearbyIslands.add(newIslandsList.get(newIslandsList.size() - 1));
+            newNearbyIslands.add(newIslandsList.get(newIslandsList.indexOf(island) + 1));
+        } else if(newIslandsList.indexOf(island) == newIslandsList.size()-1){
+            newNearbyIslands.add(newIslandsList.get(newIslandsList.indexOf(island) - 1));
+            newNearbyIslands.add(newIslandsList.get(0));
+        } else {
+            newNearbyIslands.add(newIslandsList.get(newIslandsList.indexOf(island) - 1));
+            newNearbyIslands.add(newIslandsList.get(newIslandsList.indexOf(island) + 1));
+        }
+        island.setNearbyIslands(newNearbyIslands);
     }
 }
