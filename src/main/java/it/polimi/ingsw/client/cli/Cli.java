@@ -22,7 +22,6 @@ public class Cli implements View {
     public Cli()
     {
         input = new Scanner(System.in);
-
         loadView();
     }
 
@@ -228,8 +227,26 @@ public class Cli implements View {
         return true;
     }
 
+    /**
+     * This method allows to print in the cli
+     * the text given in input in PURPLE colour
+     * @param text the text to print
+     */
+    private void printText(String text)
+    {
+        System.out.println(CliColour.PURPLE_BRIGHT + "> " + text + CliColour.RESET);
+    }
 
-
+    /**
+     * This method allows to print the text given in input
+     * with the colour also given in input
+     * @param text the text to print
+     * @param colour the text colour
+     */
+    private void printTextWithColour(String text, CliColour colour)
+    {
+        System.out.println(colour + "> " + text + CliColour.RESET);
+    }
 
 
 
