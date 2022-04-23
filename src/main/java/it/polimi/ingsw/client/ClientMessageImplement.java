@@ -4,6 +4,8 @@ import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.connection.ConnectionClientSide;
 import it.polimi.ingsw.network.messages.Message;
 
+import java.io.IOException;
+
 /**
  * This interface contains the method elaborateMessage that
  * will be implemented in a different way from the classes
@@ -15,6 +17,6 @@ public interface ClientMessageImplement extends Message {
      * @param userInterface user interface used by the specific client (gui/cli)
      * @param socket the connection between client and server
      */
-    void elaborateMessage(View userInterface, ConnectionClientSide socket);
+    void elaborateMessage(View userInterface, ConnectionClientSide socket) throws IOException;
 
 }
