@@ -1,4 +1,6 @@
 package it.polimi.ingsw.server.model;
+import it.polimi.ingsw.server.controller.Exceptions.EmptyTowerYard;
+import it.polimi.ingsw.server.controller.Exceptions.GameWonException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +36,11 @@ class BoardTest {
     @Test
     public void testRemoveStudentEntrance(){
         int[] result = {0,2,0,0,4};
-        board.removeStudentEntrance(0);
+        try{
+            board.removeStudentEntrance(0);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         assertArrayEquals(result, board.getEntranceRoom());
     }
 
@@ -52,7 +58,11 @@ class BoardTest {
 
     @Test
     public void testDecreaseTowerYard(){
-        board.decreaseTowerYard();
+        try {
+            board.decreaseTowerYard();
+        } catch (EmptyTowerYard e){
+            e.printStackTrace();
+        }
         assertEquals(7,board.getTowerYard());
     }
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.controller;
 
+import it.polimi.ingsw.server.controller.Exceptions.GameWonException;
 import it.polimi.ingsw.server.model.Island;
 import it.polimi.ingsw.server.model.PlayGround;
 import it.polimi.ingsw.server.model.Player;
@@ -9,7 +10,7 @@ import java.util.List;
 
 /**
  * This class allows to verify the influence count on an island as
- * well as updating the islands asset right after the influence status of an
+ * well as updating the islands' asset right after the influence status of an
  * island has been modified
  */
 
@@ -62,8 +63,9 @@ public class IslandController {
      * a new island is created, the 2 islands to unify get removed from the islands array in playground
      * and a new island is added in their place
      * @param island from which the propagation has to start
+     * @throws GameWonException in case there are 3 or fewer islands remaining
      */
-    public void islandUnification(Island island){
+    public void islandUnification(Island island) throws GameWonException{
         this.updateNearbyIslands(island);
         for(Island nearbyIsland: island.getNearbyIslands()) {
             if (nearbyIsland.getTowerColour() == island.getTowerColour()) {
@@ -77,6 +79,8 @@ public class IslandController {
                 newIsland.setTowerColour(nearbyIsland.getTowerColour());
             }
         }
+        if(getPlayGround().getIslands().size() <= 3)
+            throw new GameWonException();
     }
     /**
      * This method updates island.NearbyIslands by looking at the intended Island's position

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.server.model;
 
+import it.polimi.ingsw.server.controller.VirtualView;
+
 /**
  * This class represent a player of
  * the game. Every player has its own
@@ -10,6 +12,7 @@ public class Player extends ManagerStudent implements Comparable<Player> {
     private Board playerBoard;
     private Deck assistantCards;
     private Card currentCard;
+    private VirtualView Client;
 
     public Player(String nickname)
     {
@@ -17,6 +20,13 @@ public class Player extends ManagerStudent implements Comparable<Player> {
         currentCard = new Card();
     }
 
+    public void setClient(VirtualView Client){
+        this.Client = Client;
+    }
+
+    public VirtualView getClient(){
+        return this.Client;
+    }
 
     public String getNickname() {
         return nickname;

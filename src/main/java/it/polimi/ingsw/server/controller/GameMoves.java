@@ -111,11 +111,10 @@ public class GameMoves extends ManagerStudent{
      * @param selectedIsland the island where will be
      *                       placed the student
      */
-    public void moveStudentsEntranceToIsland(int studentColour, int selectedIsland)
+    public void moveStudentsEntranceToIsland(int studentColour, int selectedIsland) throws noStudentForColour
     {
         getCurrentPlayerBoard().removeStudentEntrance(studentColour);
         getCurrentGame().getIslandByIndex(selectedIsland).setPlacedStudent(studentColour);
-
     }
 
     /**
@@ -127,19 +126,21 @@ public class GameMoves extends ManagerStudent{
      *                              chairs in the dining
      *                              room
      */
-    public void moveStudentEntranceToDining(int studentColour) throws FullDiningRoomTable
+    public void moveStudentEntranceToDining(int studentColour) throws FullDiningRoomTable, noStudentForColour
     {
-        if(getCurrentPlayerBoard().getDiningRoom()[studentColour] < getCurrentSettings().getDiningRoomLenght())
+        if(getCurrentPlayerBoard().getDiningRoom()[studentColour] < getCurrentSettings().getDiningRoomLenght() &&
+                getCurrentPlayerBoard().getEntranceRoom()[studentColour] > 0)
         {
             getCurrentPlayerBoard().removeStudentEntrance(studentColour);
             getCurrentPlayerBoard().increaseNumberOfStudent(studentColour);
         }
-        else
+        else if(getCurrentPlayerBoard().getDiningRoom()[studentColour] >= getCurrentSettings().getDiningRoomLenght())
             throw new FullDiningRoomTable();
-
+        else if(getCurrentPlayerBoard().getEntranceRoom()[studentColour] == 0)
+            throw new noStudentForColour();
     }
 
-    public void setInfluenceToIsland()
+    public void setInfluenceToIsland() throws EmptyTowerYard
     {
         Player playerInfluence = getIslandController().checkInfluence();
         playerInfluence.getPlayerBoard().decreaseTowerYard();
@@ -147,7 +148,7 @@ public class GameMoves extends ManagerStudent{
         getCurrentGame().getIslandWithMotherNature().setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
     }
 
-    public void changeInfluenceToIsland()
+    public void changeInfluenceToIsland() throws EmptyTowerYard
     {
         Player playerInfluence = getIslandController().checkInfluence();
         for(int i = 0; i < getCurrentGame().getIslandWithMotherNature().getTowerCount(); i++)
@@ -266,7 +267,7 @@ public class GameMoves extends ManagerStudent{
     {
         if(checkForEmptyTowerYard() != null)
             return checkForEmptyTowerYard().getNickname();
-        if(existDeckEmpty() || isBagEmpty() || threeIslandRemain())
+        if(existDeckEmpty() || isBagEmpty())
                 return findWinnerTower();
         else
             throw new noWinnerException();
@@ -327,7 +328,7 @@ public class GameMoves extends ManagerStudent{
      * with no towers
      * @return the nickname of the winner
      */
-    private Player checkForEmptyTowerYard()
+    public Player checkForEmptyTowerYard()
     {
         return getCurrentGame().getPlayersList().stream().filter(player -> player.getPlayerBoard().getTowerYard() == 0).findFirst().orElse(null);
     }
@@ -339,7 +340,7 @@ public class GameMoves extends ManagerStudent{
      * the winner
      * @return true if there is at least an empty deck
      */
-    private boolean existDeckEmpty()
+    public boolean existDeckEmpty()
     {
         return getCurrentGame().getPlayersList().stream().anyMatch(player -> player.getAssistantCards().getResidualCards().size() == 0);
     }
@@ -354,18 +355,6 @@ public class GameMoves extends ManagerStudent{
     private boolean isBagEmpty()
     {
         return getTotalStudentPaws() == 0;
-    }
-
-    /**
-     * This method check if there are
-     * 3 or less island on the playground
-     * and allows proceeding with the calculus of
-     * the winner
-     * @return true if there are less than 3 islands
-     */
-    private boolean threeIslandRemain()
-    {
-        return getCurrentGame().getIslands().size() == 3;
     }
 
     /**

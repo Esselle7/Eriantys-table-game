@@ -25,18 +25,26 @@ class GameMovesTest {
 
     @Test
     void moveStudentsEntranceToIslandTest() {
+        int[] entranceRoom = {1,0,0,0,0};
+        GC.getTurnHandler().getCurrentPlayer().getPlayerBoard().setEntranceRoom(entranceRoom);
         int previousValue = GC.getCurrentGame().getIslandByIndex(1).numberOfStudentByColour(0);
-        GC.moveStudentsEntranceToIsland(0,1);
+        try {
+            GC.moveStudentsEntranceToIsland(0, 1);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         assertEquals(GC.getCurrentGame().getIslandByIndex(1).numberOfStudentByColour(0), 1+previousValue);
     }
 
 
     @Test
     void moveStudentEntranceToDiningTest() {
+        int[] entranceRoom = {1,0,0,0,0};
+        GC.getTurnHandler().getCurrentPlayer().getPlayerBoard().setEntranceRoom(entranceRoom);
         try{
             GC.moveStudentEntranceToDining(0);
         }
-        catch (FullDiningRoomTable e)
+        catch (Exception e)
         {
             fail();
         }
@@ -45,7 +53,7 @@ class GameMovesTest {
         assertEquals(GC.getCurrentGame().getPlayerByNickname(GC.getTurnHandler().getCurrentPlayer().getNickname()).getPlayerBoard().getDiningRoom()[0],1);
     }
     @Test
-    void moveStudentEntranceToDiningExceptionTest() {
+    void moveStudentEntranceToDiningFullDiningRoomTableExceptionTest() {
         for(int i = 0; i < GC.getCurrentSettings().getDiningRoomLenght(); i++)
         {
             GC.getTurnHandler().getCurrentPlayerBoard().increaseNumberOfStudent(0);
@@ -55,6 +63,25 @@ class GameMovesTest {
             GC.moveStudentEntranceToDining(0);
         }
         catch (FullDiningRoomTable e)
+        {
+            assertTrue(true);
+        }
+        catch (noStudentForColour e)
+        {
+            fail();
+        }
+    }
+
+    @Test
+    void moveStudentEntranceToDiningNoStudentForColourExceptionTest() {
+        try{
+            GC.moveStudentEntranceToDining(1);
+        }
+        catch (FullDiningRoomTable e)
+        {
+            fail();
+        }
+        catch (noStudentForColour e)
         {
             assertTrue(true);
         }

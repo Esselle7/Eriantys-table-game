@@ -1,5 +1,9 @@
 package it.polimi.ingsw.server.model;
 
+import it.polimi.ingsw.server.controller.Exceptions.EmptyTowerYard;
+import it.polimi.ingsw.server.controller.Exceptions.GameWonException;
+import it.polimi.ingsw.server.controller.Exceptions.noStudentForColour;
+
 /**
  * A board of the game.
  * Every board belongs to a specific player.
@@ -63,9 +67,12 @@ public class Board extends ManagerStudent {
 
     }
 
-    public void removeStudentEntrance(int studentColour)
+    public void removeStudentEntrance(int studentColour) throws noStudentForColour
     {
-        entranceRoom[studentColour] --;
+        if(entranceRoom[studentColour] > 0)
+            entranceRoom[studentColour] --;
+        else
+            throw new noStudentForColour();
     }
 
     /**
@@ -99,13 +106,14 @@ public class Board extends ManagerStudent {
     public void increaseTowerYard() { towerYard++; }
 
     /**
-     * decrease the number of tower by one, it means
-     * that a tower go from
-     * the towerYard to an island
+     * Decrease the number of towers in the tower yard by one.
+     * @throws EmptyTowerYard in case, if the tower yard is empty AFTER subtracting one tower from it
      *
      */
-    public void decreaseTowerYard() {
+    public void decreaseTowerYard() throws EmptyTowerYard {
         towerYard--;
+        if(towerYard == 0)
+            throw new EmptyTowerYard();
     }
 
 }
