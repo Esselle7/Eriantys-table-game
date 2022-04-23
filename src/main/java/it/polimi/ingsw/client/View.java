@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.client.cli.CliPrint;
-
+import it.polimi.ingsw.client.cli.CliColour;
 import java.util.List;
 
 /**
@@ -25,7 +24,7 @@ public interface View {
      * @param text the text to print
      * @param colour the text colour
      */
-     void printTextWithColour(String text, CliPrint colour);
+     void printTextWithColour(String text, CliColour colour);
 
     /**
      * This method allows to insert the server IP

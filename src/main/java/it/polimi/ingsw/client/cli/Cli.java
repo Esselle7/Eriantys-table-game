@@ -26,13 +26,13 @@ public class Cli implements View {
 
     public void printText(String text)
     {
-        System.out.println(CliPrint.PURPLE_BRIGHT + "> " + text + CliPrint.RESET);
+        System.out.println(CliColour.PURPLE_BRIGHT + "> " + text + CliColour.RESET);
     }
 
 
-    public void printTextWithColour(String text, CliPrint colour)
+    public void printTextWithColour(String text, CliColour colour)
     {
-        System.out.println(colour + "> " + text + CliPrint.RESET);
+        System.out.println(colour + "> " + text + CliColour.RESET);
     }
 
     /**
@@ -58,9 +58,9 @@ public class Cli implements View {
      */
     public void connectionOutcome(boolean isConnected) {
         if (isConnected)
-            printText("Connection established\n");
+            printText("Connection established. Waiting for a game...\n");
         else
-            printText("Error: Server unreachable\n");
+            printText("Error: Server unreachable, please try again lather\n");
     }
 
     /**
@@ -71,15 +71,6 @@ public class Cli implements View {
      */
     public void joinGame(int numberOfPlayers) {
         printText("You have been assigned to a game with  " + numberOfPlayers + " players game mode\n");
-    }
-
-    /**
-     * This method shows in output that this client
-     * is creating a new game and will not join an already
-     * exist game
-     */
-    public void createGame() {
-        printText("You are creating a new game.");
     }
 
     public void loadView() {
@@ -128,6 +119,15 @@ public class Cli implements View {
     public void notifyValidNick()
     {
         printText("Nickname accepted");
+    }
+
+    /**
+     * This method shows in output that this client
+     * is creating a new game and will not join an already
+     * exist game
+     */
+    public void createGame() {
+        printText("You are creating a new game.");
     }
 
     /**
