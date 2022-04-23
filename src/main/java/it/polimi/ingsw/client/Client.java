@@ -24,9 +24,9 @@ public class Client {
             try {
                 socket = new Socket(ui.getServerAddress(),ui.getServerPort());
                 connected = true;
-                ui.printText("Connected! Waiting for a game...");
+                ui.connectionOutcome(connected);
             } catch (IOException e) {
-                ui.printText("Could not connect to the server. Please try again later.");
+                ui.connectionOutcome(connected);
                 System.exit(-1);
             }
         }
