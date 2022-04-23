@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.cli;
 
-import it.polimi.ingsw.client.PlayerClient;
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.server.model.*;
 
@@ -22,7 +21,18 @@ public class Cli implements View {
     public Cli()
     {
         input = new Scanner(System.in);
-        loadView();
+    }
+
+
+    public void printText(String text)
+    {
+        System.out.println(CliPrint.PURPLE_BRIGHT + "> " + text + CliPrint.RESET);
+    }
+
+
+    public void printTextWithColour(String text, CliPrint colour)
+    {
+        System.out.println(colour + "> " + text + CliPrint.RESET);
     }
 
     /**
@@ -31,8 +41,13 @@ public class Cli implements View {
      * @return The IP of the server to connect to
      */
     public String getServerAddress() {
-        System.out.println("Please insert remote Server IP:");
+        printText("Please insert remote Server IP:");
         return input.nextLine();
+    }
+
+    public int getServerPort(){
+        printText("Please insert remote Server port:");
+        return input.nextInt();
     }
 
     /**
@@ -43,9 +58,9 @@ public class Cli implements View {
      */
     public void connectionOutcome(boolean isConnected) {
         if (isConnected)
-            System.out.println("Connection established\n");
+            printText("Connection established\n");
         else
-            System.out.println("Error: Server unreachable\n");
+            printText("Error: Server unreachable\n");
     }
 
     /**
@@ -55,7 +70,7 @@ public class Cli implements View {
      *                        player will participate
      */
     public void joinGame(int numberOfPlayers) {
-        System.out.print("You have been assigned to a game with  " + numberOfPlayers + " players game mode\n");
+        printText("You have been assigned to a game with  " + numberOfPlayers + " players game mode\n");
     }
 
     /**
@@ -64,16 +79,16 @@ public class Cli implements View {
      * exist game
      */
     public void createGame() {
-        System.out.println("You are creating a new game.");
+        printText("You are creating a new game.");
     }
 
-    private void loadView() {
+    public void loadView() {
 
         String start;
         eryantisFigure();
-        System.out.println("\nWELCOME! WE ARE GLAD TO SE YOU. ");
+        printText("\nWELCOME! WE ARE GLAD TO SEE YOU. ");
         do {
-            System.out.println("-- please type START to play --");
+            printText("-- please type START to play --");
             start = input.nextLine().toUpperCase();
         } while (!start.equals("START"));
 
@@ -101,8 +116,8 @@ public class Cli implements View {
      */
     public void nicknameFormatError()
     {
-        System.out.print("Nickname chosen is invalid:");
-        System.out.println("you must insert nickname between 2 and 8 characters");
+        printText("Nickname chosen is invalid:");
+        printText("you must insert nickname between 2 and 8 characters");
     }
 
 
@@ -112,7 +127,7 @@ public class Cli implements View {
      */
     public void notifyValidNick()
     {
-        System.out.println("Nickname accepted");
+        printText("Nickname accepted");
     }
 
     /**
@@ -124,19 +139,19 @@ public class Cli implements View {
     public int askGameMode()
     {
         int numberOfPlayers;
-        System.out.println("Choose game mode between:");
-        System.out.println("2 players Game Mode");
-        System.out.println("3 players Game Mode");
+        printText("Choose game mode between:");
+        printText("2 players Game Mode");
+        printText("3 players Game Mode");
         while (true) {
             try {
                 numberOfPlayers = input.nextInt();
                 if (numberOfPlayers != 2 && numberOfPlayers != 3)
-                    System.out.println("Please insert 2 or 3 players Game Mode.");
+                    printText("Please insert 2 or 3 players Game Mode.");
                 else
                     return numberOfPlayers;
 
             } catch (InputMismatchException ex) {
-                System.out.println("Error: input not valid, type '2' or '3'");
+                printText("Error: input not valid, type '2' or '3'");
                 input.next();
             }
         }
@@ -149,9 +164,9 @@ public class Cli implements View {
     public void notAvailableNickname()
     {
         if (myNickname.length() >= 9 || myNickname.length()<2)
-            System.out.println("This nickname is too long, choose a shorter one!  (Max length is 8)");
+            printText("This nickname is too long, choose a shorter one!  (Max length is 8)");
         else
-            System.out.println("Your chosen nickname is already used by an other player");
+            printText("Your chosen nickname is already used by an other player");
 
     }
 
@@ -162,8 +177,8 @@ public class Cli implements View {
      */
     public boolean winningView()
     {
-        System.out.println("\nCongratulations, you have won the game !");
-        System.out.println("Thanks to participate, see you soon .");
+        printText("\nCongratulations, you have won the game !");
+        printText("Thanks to participate, see you soon .");
         return true;
     }
 
@@ -173,7 +188,7 @@ public class Cli implements View {
      */
     public void waitOthersChoseAssistantCard()
     {
-        System.out.print("Other players are choosing assistant cards for this game...");
+        printText("Other players are choosing assistant cards for this game...");
     }
 
     /**
@@ -186,7 +201,7 @@ public class Cli implements View {
     public void otherPlayerAssistantCards(List<String> otherPlayers, int[] currentCardValue, int[] currentCardSteps)
     {
         for (String playerNickname:otherPlayers) {
-            System.out.println(playerNickname + "choose" + currentCardValue[otherPlayers.indexOf(playerNickname)] + " value assistant card with " + currentCardSteps[otherPlayers.indexOf(playerNickname)] + "mother nature steps ,");
+            printText(playerNickname + "choose" + currentCardValue[otherPlayers.indexOf(playerNickname)] + " value assistant card with " + currentCardSteps[otherPlayers.indexOf(playerNickname)] + "mother nature steps ,");
         }
     }
 
@@ -197,7 +212,7 @@ public class Cli implements View {
      */
     public void printStartPlayer(String startPlayer)
     {
-        System.out.println(startPlayer + "is the start player");
+        printText(startPlayer + "is the start player");
     }
 
     /**
@@ -207,8 +222,8 @@ public class Cli implements View {
      */
     public void otherPlayerTurn(String currentPlayer)
     {
-        System.out.println("Current player:" + currentPlayer);
-        System.out.println("Please wait until is you turn");
+        printText("Current player:" + currentPlayer);
+        printText("Please wait until is you turn");
     }
 
 
@@ -221,32 +236,13 @@ public class Cli implements View {
      */
     public boolean losingView(String winner)
     {
-        System.out.println("We are sorry, you lost the game ...");
-        System.out.println("The winner is " + winner);
-        System.out.println("Join or create another game, you will be more lucky");
+        printText("We are sorry, you lost the game ...");
+        printText("The winner is " + winner);
+        printText("Join or create another game, you will be more lucky");
         return true;
     }
 
-    /**
-     * This method allows to print in the cli
-     * the text given in input in PURPLE colour
-     * @param text the text to print
-     */
-    private void printText(String text)
-    {
-        System.out.println(CliColour.PURPLE_BRIGHT + "> " + text + CliColour.RESET);
-    }
 
-    /**
-     * This method allows to print the text given in input
-     * with the colour also given in input
-     * @param text the text to print
-     * @param colour the text colour
-     */
-    private void printTextWithColour(String text, CliColour colour)
-    {
-        System.out.println(colour + "> " + text + CliColour.RESET);
-    }
 
 
 

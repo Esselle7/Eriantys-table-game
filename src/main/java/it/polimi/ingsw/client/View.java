@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.cli.CliPrint;
+
 import java.util.List;
 
 /**
@@ -10,12 +12,34 @@ public interface View {
 
 
     /**
+     * This method allows to print in the cli
+     * the text given in input in PURPLE colour
+     * @param text the text to print
+     */
+    void printText(String text);
+
+
+    /**
+     * This method allows to print the text given in input
+     * with the colour also given in input
+     * @param text the text to print
+     * @param colour the text colour
+     */
+     void printTextWithColour(String text, CliPrint colour);
+
+    /**
      * This method allows to insert the server IP
      *
      * @return The IP of the server to connect to
      */
     String getServerAddress();
 
+    /**
+     * This method allows to insert the server port
+     *
+     * @return The port of the server to connect to
+     */
+    int getServerPort();
 
     /**
      * This method allows to join a created game
@@ -24,6 +48,10 @@ public interface View {
      */
     void joinGame(int numberOfPlayers);
 
+    /**
+     * This is a "welcome" method to the user
+     */
+    void loadView();
 
     /**
      * This method allows a player to create
