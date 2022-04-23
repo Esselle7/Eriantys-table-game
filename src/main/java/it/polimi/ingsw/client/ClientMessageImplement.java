@@ -1,6 +1,7 @@
-package it.polimi.ingsw.client.connection;
+package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.View;
+import it.polimi.ingsw.client.connection.ConnectionClientSide;
 import it.polimi.ingsw.network.messages.Message;
 
 /**
