@@ -1,4 +1,5 @@
 package it.polimi.ingsw.server.controller;
+import it.polimi.ingsw.server.ControllerViewObserver;
 import it.polimi.ingsw.server.controller.Exceptions.*;
 import it.polimi.ingsw.server.model.*;
 import java.util.*;
@@ -15,6 +16,21 @@ public class GameMoves extends ManagerStudent{
     private TurnHandler turnHandler;
     private GameSettings currentSettings;
     private IslandController islandController;
+    private final List<ControllerViewObserver> observers = new ArrayList<>();
+
+    /**
+     * This method notify all the current
+     * observers of this class, allowing to
+     * update the playground
+     */
+    public void notifyObservers(Object toUpdate) {
+        for (ControllerViewObserver observer : this.observers)
+            observer.update(toUpdate);
+    }
+
+    public void addObserver (ControllerViewObserver observer){this.observers.add(observer);}
+
+    public void removeObserver(ControllerViewObserver observer) {this.observers.remove(observer);}
 
     public GameMoves() {
         islandController = new IslandController();
@@ -65,6 +81,7 @@ public class GameMoves extends ManagerStudent{
             currentSettings = new ThreeGameSettings();
             getCurrentSettings().manageSettings();
         }
+        notifyObservers(currentSettings);
     }
 
     /**
@@ -115,6 +132,8 @@ public class GameMoves extends ManagerStudent{
     {
         getCurrentPlayerBoard().removeStudentEntrance(studentColour);
         getCurrentGame().getIslandByIndex(selectedIsland).setPlacedStudent(studentColour);
+        notifyObservers(getCurrentPlayerBoard());
+        notifyObservers(getCurrentGame().getIslandByIndex(selectedIsland));
 
     }
 
@@ -133,6 +152,7 @@ public class GameMoves extends ManagerStudent{
         {
             getCurrentPlayerBoard().removeStudentEntrance(studentColour);
             getCurrentPlayerBoard().increaseNumberOfStudent(studentColour);
+            notifyObservers(getCurrentPlayerBoard());
         }
         else
             throw new FullDiningRoomTable();
@@ -175,8 +195,11 @@ public class GameMoves extends ManagerStudent{
      */
     public void takeStudentsFromCloudTile(int chosenCloudTile) throws CloudTileAlreadyTakenException
     {
-        if(!getCurrentGame().getCloudTiles()[chosenCloudTile].isUsed())
-            getCurrentPlayerBoard().setEntranceRoom(addStudentsToTarget(getCurrentPlayerBoard().getEntranceRoom(),getCurrentGame().getCloudTiles()[chosenCloudTile].getStudents()));
+        if(!getCurrentGame().getCloudTiles()[chosenCloudTile].isUsed()) {
+            getCurrentPlayerBoard().setEntranceRoom(addStudentsToTarget(getCurrentPlayerBoard().getEntranceRoom(), getCurrentGame().getCloudTiles()[chosenCloudTile].getStudents()));
+            notifyObservers(getCurrentGame().getCloudTiles()[chosenCloudTile]);
+            notifyObservers(getCurrentPlayerBoard());
+        }
         else
             throw new CloudTileAlreadyTakenException();
     }
@@ -191,8 +214,10 @@ public class GameMoves extends ManagerStudent{
      */
     public void useAssistantCard(int cardNumber) throws UnableToUseCardException
     {
-        if(checkCardValidity(cardNumber))
+        if(checkCardValidity(cardNumber)) {
             getTurnHandler().getCurrentPlayer().useCard(cardNumber);
+            notifyObservers(getTurnHandler().getCurrentPlayer().getCurrentCard());
+        }
         else
             throw new UnableToUseCardException();
 
@@ -236,6 +261,7 @@ public class GameMoves extends ManagerStudent{
             {
                 maximum = playerNumberOfStudentByColour;
                 nickname = player.getNickname();
+                notifyObservers(getCurrentPlayerBoard());
             }
             else
                 if(playerNumberOfStudentByColour == maximum && maximum != 0)
@@ -390,6 +416,7 @@ public class GameMoves extends ManagerStudent{
             if (indexIslandMotherNature + steps > numberOfIslands)
                 steps -= numberOfIslands;
             getCurrentGame().setIslandWithMotherNature(getCurrentGame().getIslandByIndex(steps));
+            notifyObservers(getCurrentGame().getIslandByIndex(steps));
         }
     }
 
