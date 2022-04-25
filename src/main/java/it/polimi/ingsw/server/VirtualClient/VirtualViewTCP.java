@@ -12,9 +12,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+/**
+ * This class represent a remote client connection.
+ * It stores input and output stream for sending and receiving
+ * messages with TCP protocol.
+ */
+
 public class VirtualViewTCP implements VirtualViewConnection {
     private final IncomingTCP InFromClient;
     private final OutcomingTCP OutToClient;
+    private String nickname;
 
     public VirtualViewTCP(final Socket socket) throws IOException {
 
@@ -30,6 +37,18 @@ public class VirtualViewTCP implements VirtualViewConnection {
         inputThread.start();
         outputThread.start();
     }
+
+    @Override
+    public String getNickname() {
+        return nickname;
+    }
+
+    @Override
+    public void setNickname(String nickname)
+    {
+        this.nickname = nickname;
+    }
+
     @Override
     public void ping() throws IOException {
         sendMessage(new Ping());
@@ -49,7 +68,6 @@ public class VirtualViewTCP implements VirtualViewConnection {
     @Override
     public int receiveChooseInt() throws IOException {
         chooseInt choice = (chooseInt) receiveMessage();
-
         return choice.getData();
     }
 

@@ -41,22 +41,16 @@ public interface View {
     int getServerPort();
 
     /**
-     * This method allows to join a created game
-     * by inserting the number of players
-     * @param numberOfPlayers The number of players of the game the player has been assigned to
+     * This method allows to communicate to the
+     * client a notification
      */
-    void joinGame(int numberOfPlayers);
+    void printNotification(String notification);
+
 
     /**
      * This is a "welcome" method to the user
      */
     void loadView();
-
-    /**
-     * This method allows a player to create
-     * a new game
-     */
-    void createGame();
 
 
     /**
@@ -67,6 +61,10 @@ public interface View {
      */
     void connectionOutcome(boolean isConnected);
 
+    /**
+     * This method allows to choose a valid nickname for the game
+     */
+    String choseNickname();
 
     /**
      * This method check if the nickname entered
@@ -76,27 +74,12 @@ public interface View {
 
 
     /**
-     * This method notify the player that his nickname
-     * was accepted by the server.
-     */
-    void notifyValidNick();
-
-
-
-    /**
      * This method allows to insert the game
      * number of players
      *
      * @return The number of players decided by the creator of the game
      */
     int askGameMode();
-
-
-    /**
-     * This method tells the player that the inserted nickname was not available.
-     * This error can occur when the length of the nickname is too long or when the same nick was already chosen by another player.
-     */
-    void notAvailableNickname();
 
 
     /**

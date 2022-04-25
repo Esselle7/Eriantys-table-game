@@ -4,7 +4,16 @@ import it.polimi.ingsw.network.messages.Message;
 
 import java.io.IOException;
 
+/**
+ * This class represent a generic method to have
+ * a connection between server and client. It can be
+ * implemented with which network protocol you want.
+ */
 public interface VirtualViewConnection {
+
+    String getNickname();
+
+    void setNickname(String nickname);
 
     /**
      * This method allows to send ping message

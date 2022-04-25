@@ -10,9 +10,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * This class allows to store, get and add in a blocking queue
  * all the connections between the server and multiple clients.
- *
+ *In the javadoc of other method we mention this class as a factory
+ * and also as a listener because this class listen for new
+ * opened socket and create from the socket an element
+ * with virtual view tcp dynamic type.
  */
-public class VirtualViewTCPFactory {
+public class VirtualViewTCPFactory implements Runnable {
     private final ServerSocket serverSocket;
     private final BlockingQueue<VirtualViewConnection> virtualClientQueue = new LinkedBlockingQueue<>();
 
@@ -25,6 +28,7 @@ public class VirtualViewTCPFactory {
      * connection, after receiving a connection request from a client
      * this method store the socket in a blocking queue.
      */
+    @Override
     public void run() {
         while (true) {
             Socket newVirtualClient;

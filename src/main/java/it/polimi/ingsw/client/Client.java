@@ -2,12 +2,16 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.cli.Cli;
 import it.polimi.ingsw.client.connection.ConnectionClientSide;
-import it.polimi.ingsw.client.connection.TCPClientSideConnection;
-
-import java.io.IOException;
+import it.polimi.ingsw.client.connection.TCPClientSideConnection;import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * This class implement a client. It allows: choosing which
+ * user interface the player want to use, creating a TCP connection
+ * between this and server, setup message listener to listen
+ * for new message from the server and elaborating that messages.
+ */
 public class Client {
 
     private static View ui;
@@ -42,9 +46,6 @@ public class Client {
         }
         Thread messageListener = new Thread(clientProcessingCommands);
         messageListener.start();
-
-
-
     }
 
     /**

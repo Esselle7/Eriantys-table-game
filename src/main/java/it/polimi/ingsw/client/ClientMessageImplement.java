@@ -9,7 +9,8 @@ import java.io.IOException;
 /**
  * This interface contains the method elaborateMessage that
  * will be implemented in a different way from the classes
- * that implements this.
+ * that implements this. So it allows binding request from the server
+ * to specific implementations in client View (userInterface).
  */
 public interface ClientMessageImplement extends Message {
     /**
