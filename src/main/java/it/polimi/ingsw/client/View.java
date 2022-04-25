@@ -1,8 +1,5 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.client.cli.CliColour;
-import java.util.List;
-
 /**
  * Interface that defines the methods of the interfaces (CLI and GUI)
  * that need to be implemented to guarantee a correct game flow.
@@ -24,7 +21,7 @@ public interface View {
      * @param text the text to print
      * @param colour the text colour
      */
-     void printTextWithColour(String text, CliColour colour);
+     void printTextWithColour(String text, String colour);
 
     /**
      * This method allows to insert the server IP
@@ -83,47 +80,53 @@ public interface View {
 
 
     /**
+     * This method allows to print info about all the player to allows
+     * current player to take decisions about his turn
+     */
+    void printPlayersInfo();
+
+    /**
+     * This method allows to print all the students on each island
+     * and the number of tower (and the colour) of each island
+     * (remember that if I unify two island they will be considered as
+     * an only one island with tower count equals to 2)
+     */
+    void printIslandsInfo();
+
+    /**
+     * This method allows to print all the students in each cloud tiles
+     */
+    void printCloudTilesInfo();
+
+    /**
+     * This method allows to print all the professor controller
+     */
+    void printProfessorsControl();
+
+    /**
+     * This method allows to print the remaining assistan card
+     * in the player deck
+     */
+    void printMyDeck();
+
+    /**
+     * This method allows to print the current card
+     * of the player
+     */
+    void printMyCurrentCard();
+
+    /**
+     * This method allows to print the board of the player
+     */
+    void printMyBoard();
+
+
+    /**
      * This method print congratulations on winning the game
      *
      * @return return true to the server to disconnect client
      */
     boolean winningView();
-
-
-    /**
-     * This method print that other player is choosing
-     * the assistant card to initiate a turn
-     */
-    void waitOthersChoseAssistantCard();
-
-    /**
-     * This method print all chosen assistant cards
-     * for the turn
-     * @param otherPlayers other nickname of the participants
-     * @param currentCardValue chosen assistant card value for each player
-     * @param currentCardSteps chosen assistant card mother nature steps for each player
-     */
-    void otherPlayerAssistantCards(List<String> otherPlayers, int[] currentCardValue, int[] currentCardSteps);
-
-
-
-    /**
-     * This method print the start player
-     *
-     * @param startPlayer start player nickname
-     */
-    void printStartPlayer(String startPlayer);
-
-
-
-
-    /**
-     * This method advise that is other player turn
-     *
-     * @param currentPlayer nickname of the player that is playing his turn
-     */
-    void otherPlayerTurn(String currentPlayer);
-
 
     /**
      * This method displays that this client

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.cli;
 
 import it.polimi.ingsw.client.View;
+import it.polimi.ingsw.client.model.*;
 import it.polimi.ingsw.server.model.*;
 import java.util.*;
 
@@ -12,32 +13,72 @@ public class Cli implements View {
     private final Scanner input;
     private String myNickname;
 
-    private PlayGround currentGame;
-    private Board myBoard;
-    private List<Island> islandList;
-    private List<CloudTile> cloudTileList;
-    private Deck myDeck;
+    private ClientPlayGround playGround;
+    private ClientBoard myBoard;
+    private ClientDeck myDeck;
+    private ClientCard currentCard;
+
+    private final ClientColour studentColour;
 
     public Cli()
     {
         input = new Scanner(System.in);
+        studentColour = new ClientColour();
+    }
+
+    public ClientCard getCurrentCard() {
+        return currentCard;
+    }
+
+    public void setCurrentCard(ClientCard currentCard) {
+        this.currentCard = currentCard;
+    }
+
+    public ClientColour getStudentColour() {
+        return studentColour;
     }
 
     public String getMyNickname() {
         return myNickname;
     }
 
+    public ClientPlayGround getPlayGround() {
+        return playGround;
+    }
+
+    public void setPlayGround(ClientPlayGround playGround) {
+        this.playGround = playGround;
+    }
+
+    public ClientBoard getMyBoard() {
+        return myBoard;
+    }
+
+    public void setMyBoard(ClientBoard myBoard) {
+        this.myBoard = myBoard;
+    }
+
+
+    public ClientDeck getMyDeck() {
+        return myDeck;
+    }
+
+    public void setMyDeck(ClientDeck myDeck) {
+        this.myDeck = myDeck;
+    }
+
     public void setMyNickname(String myNickname) {
         this.myNickname = myNickname;
     }
 
+    @Override
     public void printText(String text)
     {
         System.out.println(CliColour.PURPLE_BRIGHT + "> " + text + CliColour.RESET);
     }
 
-
-    public void printTextWithColour(String text, CliColour colour)
+    @Override
+    public void printTextWithColour(String text, String colour)
     {
         System.out.println(colour + "> " + text + CliColour.RESET);
     }
@@ -156,12 +197,129 @@ public class Cli implements View {
         }
     }
 
+    /**
+     * This method allows to print the number of student of each colour
+     * in an array of student target given in input
+     * @param target the students array (each cell is referred to a student colour
+     *               and contains the number of student of that colour
+     * @param playerColour the colour of the text to print, different for each player
+     */
+    private void printStudentsInfo(int[] target, String playerColour)
+    {
+        for(int index = 0; index < getStudentColour().getColourCount(); index++ )
+        {
+            printTextWithColour(getStudentColour().getStudentColours()[index]+"Students : " + target[index], playerColour);
+        }
+    }
 
     /**
-     * This method print congratulations on winning the game
-     *
-     * @return return true to the server to disconnect client
+     * This method allows to print the number of student of each colour
+     * in an array of student target given in input with the default colour
+     * @param target the students array (each cell is referred to a student colour
+     *               and contains the number of student of that colour
      */
+    private void printStudentsInfo(int[] target)
+    {
+        for(int index = 0; index < getStudentColour().getColourCount(); index++ )
+        {
+            int studentsToPrint = target[index];
+            if (studentsToPrint > 0)
+                printText(getStudentColour().getStudentColours()[index]+"Students : " + studentsToPrint);
+        }
+    }
+
+   @Override
+    public void printPlayersInfo()
+    {
+        int indexPlayerColour = 0;
+
+        for (ClientPlayer p: getPlayGround().getPlayersList()) {
+            if(!p.getNickname().equals(getMyNickname()))
+            {
+                String playerColour = CliColour.playerColours[indexPlayerColour];
+                printTextWithColour("> Nickname: " + p.getNickname().toUpperCase(),playerColour);
+                printTextWithColour("> Current card value: " + p.getCurrentCard().getValue(), playerColour);
+                printTextWithColour("> Current MotherNature Steps: " + p.getCurrentCard().getMotherNatureSteps(), playerColour);
+                printTextWithColour("> Entrance room : ",playerColour);
+                printStudentsInfo(p.getPlayerBoard().getEntranceRoom(), playerColour);
+                printTextWithColour("> Dining room : ", playerColour);
+                printStudentsInfo(p.getPlayerBoard().getDiningRoom(), playerColour);
+                printTextWithColour("> Tower Yard: ", playerColour);
+                printTextWithColour(p.getPlayerBoard().getTowerYard()+"tower remained ", playerColour);
+            }
+            indexPlayerColour++;
+
+        }
+    }
+
+    @Override
+    public void printIslandsInfo()
+    {
+        int indexIsland = 1;
+        for (ClientIsland island: getPlayGround().getIslands()) {
+            printText("ISLAND "+indexIsland+": ");
+            printStudentsInfo(island.getPlacedStudent());
+            printText("Number of "+island.getTowerColour()+" tower on it: "+ island.getTowerCount());
+            if(island == getPlayGround().getIslandWithMotherNature())
+                printText("This Island has Mother Nature on it");
+            indexIsland++;
+        }
+    }
+
+    @Override
+    public void printCloudTilesInfo()
+    {
+        int indexCloudTiles = 1;
+        for(ClientCloudTiles cloudTiles : getPlayGround().getCloudTiles())
+        {
+            printText("CLOUD TILE "+indexCloudTiles+": ");
+            printStudentsInfo(cloudTiles.getStudents());
+            indexCloudTiles++;
+        }
+    }
+
+    @Override
+    public void printProfessorsControl()
+    {
+        for (int indexProfessor = 0; indexProfessor<getPlayGround().getProfessorsControl().length;indexProfessor++) {
+            String nickname = getPlayGround().getProfessorsControl()[indexProfessor];
+            String currentProfessor = getStudentColour().getStudentColours()[indexProfessor];
+            if(nickname != null)
+                printText(currentProfessor+"professor is controlled by: "+nickname);
+            else
+                printText(currentProfessor + "professor is not controlled by anyone");
+        }
+    }
+
+    @Override
+    public void printMyDeck()
+    {
+        printText(getMyNickname()+"'s remains assistant card: ");
+        for (ClientCard card: getMyDeck().getAssistantCards()) {
+            printText("Card Value: "+card.getValue()+", Mother Nature Steps: "+card.getMotherNatureSteps());
+        }
+    }
+
+   @Override
+    public void printMyCurrentCard()
+    {
+        printText(getMyNickname()+"'s current card:");
+        printText("Card value: "+ getCurrentCard().getValue()+", Mother nature Steps "+ getCurrentCard().getMotherNatureSteps());
+    }
+
+    @Override
+    public void printMyBoard()
+    {
+        printText(getMyNickname()+"'s board: ");
+        printStudentsInfo(getMyBoard().getEntranceRoom());
+        printStudentsInfo(getMyBoard().getDiningRoom());
+        printText(getMyBoard().getTowerYard()+"remains"+getMyBoard().getTowerColour()+ "tower in the Tower Yard");
+
+    }
+
+
+
+    @Override
     public boolean winningView()
     {
         printText("\nCongratulations, you have won the game !");
@@ -169,58 +327,6 @@ public class Cli implements View {
         return true;
     }
 
-    /**
-     * This method print that other player is choosing
-     * the assistant card to initiate a turn
-     */
-    public void waitOthersChoseAssistantCard()
-    {
-        printText("Other players are choosing assistant cards for this game...");
-    }
-
-    /**
-     * This method print all chosen assistant cards
-     * for the turn
-     * @param otherPlayers other nickname of the participants
-     * @param currentCardValue chosen assistant card value for each player
-     * @param currentCardSteps chosen assistant card mother nature steps for each player
-     */
-    public void otherPlayerAssistantCards(List<String> otherPlayers, int[] currentCardValue, int[] currentCardSteps)
-    {
-        for (String playerNickname:otherPlayers) {
-            printText(playerNickname + "choose" + currentCardValue[otherPlayers.indexOf(playerNickname)] + " value assistant card with " + currentCardSteps[otherPlayers.indexOf(playerNickname)] + "mother nature steps ,");
-        }
-    }
-
-    /**
-     * This method print the start player
-     *
-     * @param startPlayer start player nickname
-     */
-    public void printStartPlayer(String startPlayer)
-    {
-        printText(startPlayer + "is the start player");
-    }
-
-    /**
-     * This method advise that is other player turn
-     *
-     * @param currentPlayer nickname of the player that is playing his turn
-     */
-    public void otherPlayerTurn(String currentPlayer)
-    {
-        printText("Current player:" + currentPlayer);
-        printText("Please wait until is you turn");
-    }
-
-
-    /**
-     * This method displays that this client
-     * lost the game and print the winner nickname
-     *
-     * @param winner nickname of the winner
-     * @return return true to the server to disconnect client
-     */
     public boolean losingView(String winner)
     {
         printText("We are sorry, you lost the game ...");
