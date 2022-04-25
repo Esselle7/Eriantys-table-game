@@ -2,9 +2,12 @@ package it.polimi.ingsw.client.cli;
 
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.server.model.*;
-
 import java.util.*;
 
+/**
+ * This is the class that create a cli for
+ * players interactions with the game
+ */
 public class Cli implements View {
     private final Scanner input;
     private String myNickname;
@@ -15,14 +18,18 @@ public class Cli implements View {
     private List<CloudTile> cloudTileList;
     private Deck myDeck;
 
-
-
-
     public Cli()
     {
         input = new Scanner(System.in);
     }
 
+    public String getMyNickname() {
+        return myNickname;
+    }
+
+    public void setMyNickname(String myNickname) {
+        this.myNickname = myNickname;
+    }
 
     public void printText(String text)
     {
@@ -50,6 +57,12 @@ public class Cli implements View {
         return input.nextInt();
     }
 
+    @Override
+    public void printNotification(String notification)
+    {
+        printText(notification);
+    }
+
     /**
      * This method type in output if the connection
      * between client and server was established
@@ -63,14 +76,18 @@ public class Cli implements View {
             printText("Error: Server unreachable, please try again lather\n");
     }
 
-    /**
-     * This method allows the player to join an instance
-     * of the game created by someone else.
-     * @param numberOfPlayers The number of players of the game that
-     *                        player will participate
-     */
-    public void joinGame(int numberOfPlayers) {
-        printText("You have been assigned to a game with  " + numberOfPlayers + " players game mode\n");
+    @Override
+    public String choseNickname()
+    {
+        printText("Please insert a nickname between 3 and 9 chars: ");
+        setMyNickname(input.nextLine());
+        while (getMyNickname().length() >= 9 || getMyNickname().length()<2)
+        {
+            nicknameFormatError();
+            setMyNickname(input.nextLine());
+        }
+
+        return getMyNickname();
     }
 
     public void loadView() {
@@ -113,24 +130,6 @@ public class Cli implements View {
 
 
     /**
-     * This method notify the player that his nickname
-     * was accepted by the server.
-     */
-    public void notifyValidNick()
-    {
-        printText("Nickname accepted");
-    }
-
-    /**
-     * This method shows in output that this client
-     * is creating a new game and will not join an already
-     * exist game
-     */
-    public void createGame() {
-        printText("You are creating a new game.");
-    }
-
-    /**
      * This method allows to insert the game
      * number of players
      *
@@ -157,18 +156,6 @@ public class Cli implements View {
         }
     }
 
-    /**
-     * This method tells the player that the inserted nickname was not available.
-     * This error can occur when the length of the nickname is too long or when the same nick was already chosen by another player.
-     */
-    public void notAvailableNickname()
-    {
-        if (myNickname.length() >= 9 || myNickname.length()<2)
-            printText("This nickname is too long, choose a shorter one!  (Max length is 8)");
-        else
-            printText("Your chosen nickname is already used by an other player");
-
-    }
 
     /**
      * This method print congratulations on winning the game
