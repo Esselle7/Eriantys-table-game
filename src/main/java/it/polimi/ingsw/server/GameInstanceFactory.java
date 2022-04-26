@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server;
 
+import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.network.messages.NicknameCMI;
 import it.polimi.ingsw.network.messages.NotificationCMI;
@@ -7,7 +8,6 @@ import it.polimi.ingsw.network.messages.LobbySizeCMI;
 import it.polimi.ingsw.network.messages.chooseString;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewTCPFactory;
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +54,8 @@ public class GameInstanceFactory implements Runnable{
      */
     private void instancingGamesLoop() throws IOException {
         List<VirtualViewConnection> gamePlayers = null;
+        printConsole("THIS IS THE SERVER FOR ERYANTIS GAME");
+        printConsole("WELCOME ADMIN.");
         while (true) {
             printConsole("Creating new lobby");
             printConsole("Waiting for lobby Leader ...");
@@ -145,6 +147,6 @@ public class GameInstanceFactory implements Runnable{
      */
     private void printConsole(String textToPrint)
     {
-        System.out.println(SystemColor.MAGENTA + "> "+ textToPrint);
+        System.out.println(TextColours.PURPLE_BRIGHT + "> "+ textToPrint);
     }
 }
