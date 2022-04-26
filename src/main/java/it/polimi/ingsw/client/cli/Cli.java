@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.cli;
 
+import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.model.*;
 import it.polimi.ingsw.server.model.*;
@@ -11,14 +12,13 @@ import java.util.*;
  */
 public class Cli implements View {
     private final Scanner input;
-    private String myNickname;
-
-    private ClientPlayGround playGround;
-    private ClientBoard myBoard;
-    private ClientDeck myDeck;
-    private ClientCard currentCard;
-
+    private String myNickname = null;
     private final ClientColour studentColour;
+
+    private PlayGround playGround = null;
+    private Board myBoard = null;
+    private Deck myDeck = null;
+    private Card myCurrentCard = null;
 
     public Cli()
     {
@@ -26,47 +26,57 @@ public class Cli implements View {
         studentColour = new ClientColour();
     }
 
-    public ClientCard getCurrentCard() {
-        return currentCard;
+    @Override
+    public Card getMyCurrentCard() {
+        return myCurrentCard;
     }
 
-    public void setCurrentCard(ClientCard currentCard) {
-        this.currentCard = currentCard;
+    @Override
+    public void setMyCurrentCard(Card myCurrentCard) {
+        this.myCurrentCard = myCurrentCard;
     }
+
 
     public ClientColour getStudentColour() {
         return studentColour;
     }
 
+    @Override
     public String getMyNickname() {
         return myNickname;
     }
 
-    public ClientPlayGround getPlayGround() {
+    @Override
+    public PlayGround getPlayGround() {
         return playGround;
     }
 
-    public void setPlayGround(ClientPlayGround playGround) {
+    @Override
+    public void setPlayGround(PlayGround playGround) {
         this.playGround = playGround;
     }
 
-    public ClientBoard getMyBoard() {
+    @Override
+    public Board getMyBoard() {
         return myBoard;
     }
 
-    public void setMyBoard(ClientBoard myBoard) {
+    @Override
+    public void setMyBoard(Board myBoard) {
         this.myBoard = myBoard;
     }
 
-
-    public ClientDeck getMyDeck() {
+    @Override
+    public Deck getMyDeck() {
         return myDeck;
     }
 
-    public void setMyDeck(ClientDeck myDeck) {
+    @Override
+    public void setMyDeck(Deck myDeck) {
         this.myDeck = myDeck;
     }
 
+    @Override
     public void setMyNickname(String myNickname) {
         this.myNickname = myNickname;
     }
@@ -74,13 +84,13 @@ public class Cli implements View {
     @Override
     public void printText(String text)
     {
-        System.out.println(CliColour.PURPLE_BRIGHT + "> " + text + CliColour.RESET);
+        System.out.println(TextColours.PURPLE_BRIGHT + "> " + text + TextColours.RESET);
     }
 
     @Override
     public void printTextWithColour(String text, String colour)
     {
-        System.out.println(colour + "> " + text + CliColour.RESET);
+        System.out.println(colour + "> " + text + TextColours.RESET);
     }
 
     /**
@@ -233,10 +243,10 @@ public class Cli implements View {
     {
         int indexPlayerColour = 0;
 
-        for (ClientPlayer p: getPlayGround().getPlayersList()) {
+        for (Player p: getPlayGround().getPlayersList()) {
             if(!p.getNickname().equals(getMyNickname()))
             {
-                String playerColour = CliColour.playerColours[indexPlayerColour];
+                String playerColour = TextColours.playerColours[indexPlayerColour];
                 printTextWithColour("> Nickname: " + p.getNickname().toUpperCase(),playerColour);
                 printTextWithColour("> Current card value: " + p.getCurrentCard().getValue(), playerColour);
                 printTextWithColour("> Current MotherNature Steps: " + p.getCurrentCard().getMotherNatureSteps(), playerColour);
@@ -256,7 +266,7 @@ public class Cli implements View {
     public void printIslandsInfo()
     {
         int indexIsland = 1;
-        for (ClientIsland island: getPlayGround().getIslands()) {
+        for (Island island: getPlayGround().getIslands()) {
             printText("ISLAND "+indexIsland+": ");
             printStudentsInfo(island.getPlacedStudent());
             printText("Number of "+island.getTowerColour()+" tower on it: "+ island.getTowerCount());
@@ -270,7 +280,7 @@ public class Cli implements View {
     public void printCloudTilesInfo()
     {
         int indexCloudTiles = 1;
-        for(ClientCloudTiles cloudTiles : getPlayGround().getCloudTiles())
+        for(CloudTile cloudTiles : getPlayGround().getCloudTiles())
         {
             printText("CLOUD TILE "+indexCloudTiles+": ");
             printStudentsInfo(cloudTiles.getStudents());
@@ -295,7 +305,7 @@ public class Cli implements View {
     public void printMyDeck()
     {
         printText(getMyNickname()+"'s remains assistant card: ");
-        for (ClientCard card: getMyDeck().getAssistantCards()) {
+        for (Card card: getMyDeck().getResidualCards()) {
             printText("Card Value: "+card.getValue()+", Mother Nature Steps: "+card.getMotherNatureSteps());
         }
     }
@@ -304,7 +314,7 @@ public class Cli implements View {
     public void printMyCurrentCard()
     {
         printText(getMyNickname()+"'s current card:");
-        printText("Card value: "+ getCurrentCard().getValue()+", Mother nature Steps "+ getCurrentCard().getMotherNatureSteps());
+        printText("Card value: "+ getMyCurrentCard().getValue()+", Mother nature Steps "+ getMyCurrentCard().getMotherNatureSteps());
     }
 
     @Override
@@ -314,7 +324,20 @@ public class Cli implements View {
         printStudentsInfo(getMyBoard().getEntranceRoom());
         printStudentsInfo(getMyBoard().getDiningRoom());
         printText(getMyBoard().getTowerYard()+"remains"+getMyBoard().getTowerColour()+ "tower in the Tower Yard");
+    }
 
+    @Override
+    public void update(Board myBoardNew, Deck myDeckNew, Card myCurrentCardNew)
+    {
+        setMyBoard(myBoardNew);
+        setMyCurrentCard(myCurrentCardNew);
+        setMyDeck(myDeckNew);
+    }
+
+    @Override
+    public void update(PlayGround playGroundNew)
+    {
+        setPlayGround(playGroundNew);
     }
 
 
