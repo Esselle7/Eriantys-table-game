@@ -1,11 +1,11 @@
-package it.polimi.ingsw.client.cli;
+package it.polimi.ingsw;
 
 /**
  * This abstract class contains all the colours used in the cli
  */
-public abstract class CliColour {
+public abstract class TextColours {
 
-    public static final String[] playerColours= {CliColour.YELLOW,CliColour.CYAN};
+    public static final String[] playerColours= {TextColours.YELLOW,TextColours.CYAN};
     // Reset
     public static final String RESET = "\033[0m";  // Text Reset
 
