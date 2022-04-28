@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client;
+package it.polimi.ingsw.client.connection;
 
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.connection.ConnectionClientSide;
@@ -18,6 +18,6 @@ public interface ClientMessageImplement extends Message {
      * @param userInterface user interface used by the specific client (gui/cli)
      * @param socket the connection between client and server
      */
-    void elaborateMessage(View userInterface, ConnectionClientSide socket) throws IOException;
+    void elaborateMessage(View userInterface, ConnectionClientSide socket) throws IOException, InterruptedException;
 
 }

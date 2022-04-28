@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.cli;
 
+import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.model.*;
 import it.polimi.ingsw.server.model.*;
@@ -11,14 +12,13 @@ import java.util.*;
  */
 public class Cli implements View {
     private final Scanner input;
-    private String myNickname;
-
-    private ClientPlayGround playGround;
-    private ClientBoard myBoard;
-    private ClientDeck myDeck;
-    private ClientCard currentCard;
-
+    private String myNickname = null;
     private final ClientColour studentColour;
+
+    private PlayGround playGround = null;
+    private Board myBoard = null;
+    private Deck myDeck = null;
+    private Card myCurrentCard = null;
 
     public Cli()
     {
@@ -26,47 +26,61 @@ public class Cli implements View {
         studentColour = new ClientColour();
     }
 
-    public ClientCard getCurrentCard() {
-        return currentCard;
+    public Scanner getInput() {
+        return input;
     }
 
-    public void setCurrentCard(ClientCard currentCard) {
-        this.currentCard = currentCard;
+    @Override
+    public Card getMyCurrentCard() {
+        return myCurrentCard;
     }
+
+    @Override
+    public void setMyCurrentCard(Card myCurrentCard) {
+        this.myCurrentCard = myCurrentCard;
+    }
+
 
     public ClientColour getStudentColour() {
         return studentColour;
     }
 
+    @Override
     public String getMyNickname() {
         return myNickname;
     }
 
-    public ClientPlayGround getPlayGround() {
+    @Override
+    public PlayGround getPlayGround() {
         return playGround;
     }
 
-    public void setPlayGround(ClientPlayGround playGround) {
+    @Override
+    public void setPlayGround(PlayGround playGround) {
         this.playGround = playGround;
     }
 
-    public ClientBoard getMyBoard() {
+    @Override
+    public Board getMyBoard() {
         return myBoard;
     }
 
-    public void setMyBoard(ClientBoard myBoard) {
+    @Override
+    public void setMyBoard(Board myBoard) {
         this.myBoard = myBoard;
     }
 
-
-    public ClientDeck getMyDeck() {
+    @Override
+    public Deck getMyDeck() {
         return myDeck;
     }
 
-    public void setMyDeck(ClientDeck myDeck) {
+    @Override
+    public void setMyDeck(Deck myDeck) {
         this.myDeck = myDeck;
     }
 
+    @Override
     public void setMyNickname(String myNickname) {
         this.myNickname = myNickname;
     }
@@ -74,28 +88,40 @@ public class Cli implements View {
     @Override
     public void printText(String text)
     {
-        System.out.println(CliColour.PURPLE_BRIGHT + "> " + text + CliColour.RESET);
+        System.out.println(TextColours.PURPLE_BRIGHT + "> " + text + TextColours.RESET);
     }
 
     @Override
     public void printTextWithColour(String text, String colour)
     {
-        System.out.println(colour + "> " + text + CliColour.RESET);
+        System.out.println(colour + "> " + text + TextColours.RESET);
     }
 
-    /**
-     * This method get IP of the server where the client
-     * wants to connect to
-     * @return The IP of the server to connect to
-     */
+    @Override
+    public boolean isDefaultServer() {
+        printText("Please type 'NEW' to insert new Server IP/PORT, else type 'DEF");
+        String chose;
+        while(true)
+        {
+            chose = getInput().nextLine().toUpperCase();
+            if(chose.equals("DEF"))
+                return true;
+            else if(chose.equals("NEW"))
+                return false;
+            else{
+                printText("Please follow the instructions! You insert an invalid input");
+            }
+        }
+    }
+
     public String getServerAddress() {
         printText("Please insert remote Server IP:");
-        return input.nextLine();
+        return getInput().nextLine();
     }
 
     public int getServerPort(){
         printText("Please insert remote Server port:");
-        return input.nextInt();
+        return getInput().nextInt();
     }
 
     @Override
@@ -120,14 +146,11 @@ public class Cli implements View {
     @Override
     public String choseNickname()
     {
-        printText("Please insert a nickname between 3 and 9 chars: ");
-        setMyNickname(input.nextLine());
-        while (getMyNickname().length() >= 9 || getMyNickname().length()<2)
-        {
-            nicknameFormatError();
-            setMyNickname(input.nextLine());
-        }
-
+        printText("Please insert a nickname: ");
+        String nickname = null;
+        while(nickname == null || nickname.equals("") || nickname.equals(" "))
+            nickname = getInput().nextLine();
+        setMyNickname(nickname);
         return getMyNickname();
     }
 
@@ -138,7 +161,7 @@ public class Cli implements View {
         printText("\nWELCOME! WE ARE GLAD TO SEE YOU. ");
         do {
             printText("-- please type START to play --");
-            start = input.nextLine().toUpperCase();
+            start = getInput().nextLine().toUpperCase();
         } while (!start.equals("START"));
 
     }
@@ -184,7 +207,7 @@ public class Cli implements View {
         printText("3 players Game Mode");
         while (true) {
             try {
-                numberOfPlayers = input.nextInt();
+                numberOfPlayers = getInput().nextInt();
                 if (numberOfPlayers != 2 && numberOfPlayers != 3)
                     printText("Please insert 2 or 3 players Game Mode.");
                 else
@@ -192,7 +215,7 @@ public class Cli implements View {
 
             } catch (InputMismatchException ex) {
                 printText("Error: input not valid, type '2' or '3'");
-                input.next();
+                getInput().next();
             }
         }
     }
@@ -233,10 +256,10 @@ public class Cli implements View {
     {
         int indexPlayerColour = 0;
 
-        for (ClientPlayer p: getPlayGround().getPlayersList()) {
+        for (Player p: getPlayGround().getPlayersList()) {
             if(!p.getNickname().equals(getMyNickname()))
             {
-                String playerColour = CliColour.playerColours[indexPlayerColour];
+                String playerColour = TextColours.playerColours[indexPlayerColour];
                 printTextWithColour("> Nickname: " + p.getNickname().toUpperCase(),playerColour);
                 printTextWithColour("> Current card value: " + p.getCurrentCard().getValue(), playerColour);
                 printTextWithColour("> Current MotherNature Steps: " + p.getCurrentCard().getMotherNatureSteps(), playerColour);
@@ -256,7 +279,7 @@ public class Cli implements View {
     public void printIslandsInfo()
     {
         int indexIsland = 1;
-        for (ClientIsland island: getPlayGround().getIslands()) {
+        for (Island island: getPlayGround().getIslands()) {
             printText("ISLAND "+indexIsland+": ");
             printStudentsInfo(island.getPlacedStudent());
             printText("Number of "+island.getTowerColour()+" tower on it: "+ island.getTowerCount());
@@ -270,7 +293,7 @@ public class Cli implements View {
     public void printCloudTilesInfo()
     {
         int indexCloudTiles = 1;
-        for(ClientCloudTiles cloudTiles : getPlayGround().getCloudTiles())
+        for(CloudTile cloudTiles : getPlayGround().getCloudTiles())
         {
             printText("CLOUD TILE "+indexCloudTiles+": ");
             printStudentsInfo(cloudTiles.getStudents());
@@ -295,7 +318,7 @@ public class Cli implements View {
     public void printMyDeck()
     {
         printText(getMyNickname()+"'s remains assistant card: ");
-        for (ClientCard card: getMyDeck().getAssistantCards()) {
+        for (Card card: getMyDeck().getResidualCards()) {
             printText("Card Value: "+card.getValue()+", Mother Nature Steps: "+card.getMotherNatureSteps());
         }
     }
@@ -304,7 +327,7 @@ public class Cli implements View {
     public void printMyCurrentCard()
     {
         printText(getMyNickname()+"'s current card:");
-        printText("Card value: "+ getCurrentCard().getValue()+", Mother nature Steps "+ getCurrentCard().getMotherNatureSteps());
+        printText("Card value: "+ getMyCurrentCard().getValue()+", Mother nature Steps "+ getMyCurrentCard().getMotherNatureSteps());
     }
 
     @Override
@@ -314,7 +337,20 @@ public class Cli implements View {
         printStudentsInfo(getMyBoard().getEntranceRoom());
         printStudentsInfo(getMyBoard().getDiningRoom());
         printText(getMyBoard().getTowerYard()+"remains"+getMyBoard().getTowerColour()+ "tower in the Tower Yard");
+    }
 
+    @Override
+    public void update(Board myBoardNew, Deck myDeckNew, Card myCurrentCardNew)
+    {
+        setMyBoard(myBoardNew);
+        setMyCurrentCard(myCurrentCardNew);
+        setMyDeck(myDeckNew);
+    }
+
+    @Override
+    public void update(PlayGround playGroundNew)
+    {
+        setPlayGround(playGroundNew);
     }
 
 

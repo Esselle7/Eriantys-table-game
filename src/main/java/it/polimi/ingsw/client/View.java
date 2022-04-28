@@ -1,11 +1,36 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.model.ClientColour;
+import it.polimi.ingsw.server.model.Board;
+import it.polimi.ingsw.server.model.Card;
+import it.polimi.ingsw.server.model.Deck;
+import it.polimi.ingsw.server.model.PlayGround;
+
 /**
  * Interface that defines the methods of the interfaces (CLI and GUI)
  * that need to be implemented to guarantee a correct game flow.
  */
 public interface View {
 
+    Card getMyCurrentCard();
+
+    void setMyCurrentCard(Card currentCard);
+
+    String getMyNickname();
+
+    PlayGround getPlayGround();
+
+    void setPlayGround(PlayGround playGround);
+
+    Board getMyBoard();
+
+    void setMyBoard(Board myBoard);
+
+    Deck getMyDeck();
+
+    void setMyDeck(Deck myDeck);
+
+    void setMyNickname(String myNickname);
 
     /**
      * This method allows to print in the cli
@@ -24,8 +49,15 @@ public interface View {
      void printTextWithColour(String text, String colour);
 
     /**
-     * This method allows to insert the server IP
-     *
+     * This method request to the client if it want to
+     * connect to the default server (127.0.0.1/50) or if
+     * it wants to insert new ip/port
+     */
+    boolean isDefaultServer();
+
+    /**
+     * This method get IP of the server where the client
+     * wants to connect to
      * @return The IP of the server to connect to
      */
     String getServerAddress();
@@ -120,7 +152,22 @@ public interface View {
      */
     void printMyBoard();
 
+    /**
+     * This method allows to update
+     * model in Client
+     * @param myBoardNew updated client board
+     * @param myDeckNew updated client deck
+     * @param myCurrentCardNew updated client current card
+     */
+    void update(Board myBoardNew, Deck myDeckNew, Card myCurrentCardNew);
 
+    /**
+     * This method allows to update
+     * model in Client
+     * @param playGroundNew updated playground with all
+     *                      information about the game
+     */
+    void update(PlayGround playGroundNew);
     /**
      * This method print congratulations on winning the game
      *

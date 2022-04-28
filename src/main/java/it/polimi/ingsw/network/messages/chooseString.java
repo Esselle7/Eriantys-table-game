@@ -1,6 +1,9 @@
 package it.polimi.ingsw.network.messages;
 
-
+/**
+ * This class represent a String chosen by the client
+ * sent to te server
+ */
 public class chooseString implements Message {
         private final String data;
 

@@ -21,16 +21,33 @@ public class IncomingTCP implements Runnable {
     private final ObjectInputStream inputStream;
     private Instant previousTimestamp = Instant.now();
     private final Object timestampLock = new Object();
+    private boolean alive;
 
     public IncomingTCP(ObjectInputStream inputStream) {
         this.inputStream = inputStream;
+        alive = true;
     }
 
+    /**
+     * Verify if the incoming connection
+     * @return true if the incoming connection is alive
+     */
+    public boolean isAlive() {
+        return alive;
+    }
+
+    /**
+     * Set the incoming connection to die
+     */
+    public void setNotAlive() {
+        alive = false;
+    }
     /**
      * This method allows to close the inputStream
      * @throws IOException if the connection can't be closed
      */
     public void close() throws IOException {
+        setNotAlive();
         inputStream.close();
     }
 
@@ -53,6 +70,7 @@ public class IncomingTCP implements Runnable {
                     inputQueue.add(message);
             } catch (ClassNotFoundException | IOException e) {
                 previousTimestamp = Instant.EPOCH;
+                setNotAlive();
                 return;
             }
         }
@@ -81,6 +99,7 @@ public class IncomingTCP implements Runnable {
             } while (message == null);
             return message;
         } catch (InterruptedException e) {
+            setNotAlive();
             throw new IOException();
         }
     }

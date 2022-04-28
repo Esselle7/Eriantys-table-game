@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client;
 
 
+import it.polimi.ingsw.client.connection.ClientMessageImplement;
 import it.polimi.ingsw.client.connection.ConnectionClientSide;
 import java.io.IOException;
 
@@ -26,6 +27,14 @@ public class ClientProcessingCommands implements Runnable {
         this.ui = ui;
     }
 
+    public ConnectionClientSide getServerConnection() {
+        return serverConnection;
+    }
+
+    public View getUi() {
+        return ui;
+    }
+
     /**
      * This method allows receiving continuously messages from the
      * server and executes in an infinite loop.
@@ -36,14 +45,14 @@ public class ClientProcessingCommands implements Runnable {
     public void run() {
         while (true) {
             try {
-                ClientMessageImplement receivedMessage = (ClientMessageImplement) serverConnection.receiveMessage();
-                receivedMessage.elaborateMessage(ui, serverConnection);
-            } catch (IOException e1) {
-                ui.printText("Connection lost. Closing current connection...");
+                ClientMessageImplement receivedMessage = (ClientMessageImplement) getServerConnection().receiveMessage();
+                receivedMessage.elaborateMessage(getUi(), getServerConnection());
+            } catch (IOException | InterruptedException e1) {
+                getUi().printText("Connection lost. Closing current connection...");
                 try {
-                    serverConnection.close();
+                    getServerConnection().close();
                 } catch (IOException e2) {
-                    ui.printText("Could not close. Killing program...");
+                    getUi().printText("Could not close. Killing program...");
                 }
                 System.exit(-1);
                 return;
