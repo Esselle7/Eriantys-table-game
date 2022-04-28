@@ -11,6 +11,7 @@ import it.polimi.ingsw.server.VirtualClient.VirtualViewTCPFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * This class allows to instance different games lobby
@@ -20,6 +21,7 @@ import java.util.List;
  */
 public class GameInstanceFactory implements Runnable{
     private final VirtualViewTCPFactory virtualViewTCPFactory;
+    private List<VirtualViewConnection> gamePlayers;
 
     /**
      * The constructor create receive a tcp factory and create
@@ -28,117 +30,164 @@ public class GameInstanceFactory implements Runnable{
      */
     public GameInstanceFactory(VirtualViewTCPFactory virtualViewTCPFactory) {
         this.virtualViewTCPFactory = virtualViewTCPFactory;
+        gamePlayers = new ArrayList<>();
         Thread connectionsAccepter = new Thread(virtualViewTCPFactory);
+
+        printConsole("THIS IS THE SERVER FOR ERYANTIS GAME");
+        printConsole("WELCOME ADMIN.");
         connectionsAccepter.start();
     }
 
+    public VirtualViewTCPFactory getVirtualViewTCPFactory() {
+        return virtualViewTCPFactory;
+    }
+
+    public List<VirtualViewConnection> getGamePlayers() {
+        return gamePlayers;
+    }
+
+
+
     /**
-     * This method allows to start the game generator loop
+     * This method allows to start the game generator loop. In case
+     * there is an interrupt or i/o exception this method will
+     * call the connection releaser
      */
     @Override
     public void run() {
-        try {
-            instancingGamesLoop();
-        } catch (IOException e) {
-            e.printStackTrace();
+        while(true) {
+            try {
+                instancingGameLoop();
+            } catch (InterruptedException | IOException e) {
+                connectionReleaser();
+            }
         }
     }
+
+    /**
+     * This method allows to released connection previously added
+     * to a game, so it add the connection in the blocking queue in the
+     * tcp virtual view factory and then delete the game.
+     */
+    public synchronized void connectionReleaser()
+    {
+        System.out.println("> A client was disconnected!");
+        int aliveConnection = 0;
+        try
+        {
+            for (VirtualViewConnection c: getGamePlayers()
+            ) {
+                if(c.getInFromClient().isAlive() && c.getOutToClient().isAlive())
+                {
+                    aliveConnection++;
+                    getVirtualViewTCPFactory().addClientConnection(c);
+                    c.sendMessage(new NotificationCMI("Sorry, a client in your lobby left the game ..."));
+                    c.sendMessage(new NotificationCMI("You will be add to another game asap ..."));
+                }
+            }
+            gamePlayers = new ArrayList<>();
+            printConsole(aliveConnection + " Alive Connection found and released!");
+        }catch (IOException ignored)
+        {}
+    }
+
 
     /**
      * This method continuously create new game instances
      * until the blocking queue in virtual tcp factory is empty.
      * If the queue is empty this method will wait until it
      * can create the current game instance.
+     * It also instances and launch the thread
+     * that contains the turn handler to let the players
+     * to play the game.
      * @throws IOException if something in sending and receive message
      * (or in take a connection from the queue) fails
+     * @throws InterruptedException if something in sending and receive message
+     * (or in take a connection from the queue) fails
      */
-    private void instancingGamesLoop() throws IOException {
-        List<VirtualViewConnection> gamePlayers = null;
-        printConsole("THIS IS THE SERVER FOR ERYANTIS GAME");
-        printConsole("WELCOME ADMIN.");
+    private void instancingGameLoop() throws InterruptedException, IOException {
         while (true) {
             printConsole("Creating new lobby");
             printConsole("Waiting for lobby Leader ...");
-            try{
-                gamePlayers = setUpLobby();
-            }
-            catch (InterruptedException | IOException e)
-            {
-                if(gamePlayers != null) // if there are connections in this lobby then close the connections
-                    for(VirtualViewConnection c : gamePlayers)
-                        c.close();
-                break;
-            }
+            setUpLobby();
+            //thread turn handler
+
         }
     }
 
     /**
      * This method allows to create a game lobby, to send
      * notification and request message to the client and to
-     * receive a response. It also instances and launch the thread
-     * that contains the turn handler to let the players
-     * to play the game.
-     * @return The list of client connections
+     * receive a response.
      * @throws InterruptedException If something in taking elements from queue fails
      * @throws IOException If something in send or receiving messages fails
      */
 
-    private List<VirtualViewConnection> setUpLobby() throws InterruptedException, IOException
+    private void setUpLobby() throws InterruptedException, IOException
     {
-        List<VirtualViewConnection> gamePlayers = new ArrayList<>();
         List<String> users = new ArrayList<>();
-        try
-        {
-            gamePlayers.add(virtualViewTCPFactory.getVirtualClientConnection());
-            VirtualViewConnection leader = gamePlayers.get(0);
-            leader.sendMessage(new NotificationCMI("You are the lobby leader!"));
-            printConsole("Lobby leader found!");
-            printConsole("Ask lobby size to lobby leader, waiting response...");
-            leader.sendMessage(new LobbySizeCMI());
-            int lobbySize = leader.receiveChooseInt();
-            printConsole("Lobby size is:"+ lobbySize + "players!");
-            printConsole("Waiting for Player 2 ...");
-            leader.sendMessage(new NotificationCMI("Waiting remaining players..."));
-            gamePlayers.add(virtualViewTCPFactory.getVirtualClientConnection());
-            printConsole("Player 2 found!");
-            leader.sendMessage(new NotificationCMI("Player 2 found!"));
-            gamePlayers.get(1).sendMessage(new NotificationCMI("You have been assigned to a game of "+lobbySize+" players"));
-            if(lobbySize == 3)
-            {
-                printConsole("Waiting for Player 3 ...");
-                leader.sendMessage(new NotificationCMI("Waiting for Player 3 ..."));
-                gamePlayers.get(1).sendMessage(new NotificationCMI("Waiting for Player 3 ..."));
-                gamePlayers.add(virtualViewTCPFactory.getVirtualClientConnection());
-                printConsole("Player 3 found!");
-                leader.sendMessage(new NotificationCMI("Player 3 found!"));
-                gamePlayers.get(1).sendMessage(new NotificationCMI("Player 3 found!"));
-                gamePlayers.get(2).sendMessage(new NotificationCMI("You have been assigned to a game of "+lobbySize+" players already found"));
-            }
-            for(VirtualViewConnection clients : gamePlayers)
-                clients.sendMessage(new NotificationCMI("Starting game ..."));
-            printConsole("Creating game ...");
-            for(VirtualViewConnection clients : gamePlayers)
-                clients.ping();
+        int lobbySize;
+        lobbySize = findLeader();
 
-            for(VirtualViewConnection clients : gamePlayers){
-                clients.sendMessage(new NicknameCMI());
-                String nickname = clients.receiveChooseString();
-                while (users.contains(nickname))
-                {
-                    clients.sendMessage(new NotificationCMI("The nickname chosen is already taken"));
-                    clients.sendMessage(new NicknameCMI());
-                    nickname = clients.receiveChooseString();
-                }
-                clients.setNickname(nickname);
-                users.add(nickname);
-            }
-            // qui istanzio turn handler dandogli le connection e non string di players, poi dentro turn handler mi devo quindi salvare le connection
-
-        }catch (InterruptedException | IOException e)
-        {
-            throw new InterruptedException();
+        for(int countPlayer = 2; countPlayer <= lobbySize; countPlayer++) {
+            findPlayer(countPlayer,lobbySize);
+            if(countPlayer < lobbySize)
+                getGamePlayers().get(countPlayer-1).sendMessage(new NotificationCMI("Waiting for remaining player ..."));
         }
-        return gamePlayers;
+
+        for(VirtualViewConnection clients : getGamePlayers())
+            clients.sendMessage(new NotificationCMI("Starting game ..."));
+        printConsole("Creating game ...");
+        printConsole("Asking nicknames to players");
+        printConsole("Nicknames received:");
+        for(VirtualViewConnection clients : getGamePlayers()) {
+            clients.sendMessage(new NicknameCMI());
+            String nickname = clients.receiveChooseString();
+            while (users.contains(nickname)) {
+                clients.sendMessage(new NotificationCMI("The nickname chosen is already taken"));
+                clients.sendMessage(new NicknameCMI());
+                nickname = clients.receiveChooseString();
+            }
+            clients.setNickname(nickname);
+            printConsole(nickname);
+            users.add(nickname);
+        }
+        for(VirtualViewConnection clients : getGamePlayers())
+            clients.ping();
+
+    }
+
+    /**
+     * This method allows to find a lobby leader and to request to it
+     * the lobby size.
+     * @return lobby sie chosen by the leader
+     * @throws InterruptedException if there is a disconnection
+     * @throws IOException if there are problems with the socket connection
+     */
+    private synchronized int findLeader() throws InterruptedException, IOException {
+        getGamePlayers().add(getVirtualViewTCPFactory().getVirtualClientConnection());
+        getGamePlayers().get(0).sendMessage(new NotificationCMI("Game found and you are the lobby leader!"));
+        printConsole("Lobby leader found!");
+        printConsole("Ask lobby size to lobby leader, waiting response...");
+        getGamePlayers().get(0).sendMessage(new LobbySizeCMI());
+        int lobbySize = getGamePlayers().get(0).receiveChooseInt();
+        printConsole("Lobby size is: "+ lobbySize + " players!");
+        getGamePlayers().get(0).sendMessage(new NotificationCMI("Waiting remaining players..."));
+        return lobbySize;
+    }
+
+    /**
+     * This method allows finding remaining players of the game.
+     * @param player number of player to find (in this case 2 or 3)
+     * @param lobbySize the current lobby size
+     * @throws InterruptedException if there is a disconnection
+     * @throws IOException if there are problems with the socket connection
+     */
+    private synchronized void findPlayer(int player,int lobbySize) throws InterruptedException, IOException {
+        printConsole("Waiting for "+player+" player ...");
+        getGamePlayers().add(getVirtualViewTCPFactory().getVirtualClientConnection());
+        printConsole("Player "+player+" found!");
+        getGamePlayers().get(player-1).sendMessage(new NotificationCMI("You have been assigned to a game of "+lobbySize+" players"));
     }
 
     /**
