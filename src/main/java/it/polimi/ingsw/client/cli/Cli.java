@@ -26,6 +26,10 @@ public class Cli implements View {
         studentColour = new ClientColour();
     }
 
+    public Scanner getInput() {
+        return input;
+    }
+
     @Override
     public Card getMyCurrentCard() {
         return myCurrentCard;
@@ -93,19 +97,31 @@ public class Cli implements View {
         System.out.println(colour + "> " + text + TextColours.RESET);
     }
 
-    /**
-     * This method get IP of the server where the client
-     * wants to connect to
-     * @return The IP of the server to connect to
-     */
+    @Override
+    public boolean isDefaultServer() {
+        printText("Please type 'NEW' to insert new Server IP/PORT, else type 'DEF");
+        String chose;
+        while(true)
+        {
+            chose = getInput().nextLine().toUpperCase();
+            if(chose.equals("DEF"))
+                return true;
+            else if(chose.equals("NEW"))
+                return false;
+            else{
+                printText("Please follow the instructions! You insert an invalid input");
+            }
+        }
+    }
+
     public String getServerAddress() {
         printText("Please insert remote Server IP:");
-        return input.nextLine();
+        return getInput().nextLine();
     }
 
     public int getServerPort(){
         printText("Please insert remote Server port:");
-        return input.nextInt();
+        return getInput().nextInt();
     }
 
     @Override
@@ -130,14 +146,11 @@ public class Cli implements View {
     @Override
     public String choseNickname()
     {
-        printText("Please insert a nickname between 3 and 9 chars: ");
-        setMyNickname(input.nextLine());
-        while (getMyNickname().length() >= 9 || getMyNickname().length()<2)
-        {
-            nicknameFormatError();
-            setMyNickname(input.nextLine());
-        }
-
+        printText("Please insert a nickname: ");
+        String nickname = null;
+        while(nickname == null || nickname.equals("") || nickname.equals(" "))
+            nickname = getInput().nextLine();
+        setMyNickname(nickname);
         return getMyNickname();
     }
 
@@ -148,7 +161,7 @@ public class Cli implements View {
         printText("\nWELCOME! WE ARE GLAD TO SEE YOU. ");
         do {
             printText("-- please type START to play --");
-            start = input.nextLine().toUpperCase();
+            start = getInput().nextLine().toUpperCase();
         } while (!start.equals("START"));
 
     }
@@ -194,7 +207,7 @@ public class Cli implements View {
         printText("3 players Game Mode");
         while (true) {
             try {
-                numberOfPlayers = input.nextInt();
+                numberOfPlayers = getInput().nextInt();
                 if (numberOfPlayers != 2 && numberOfPlayers != 3)
                     printText("Please insert 2 or 3 players Game Mode.");
                 else
@@ -202,7 +215,7 @@ public class Cli implements View {
 
             } catch (InputMismatchException ex) {
                 printText("Error: input not valid, type '2' or '3'");
-                input.next();
+                getInput().next();
             }
         }
     }
