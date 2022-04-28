@@ -49,8 +49,15 @@ public interface View {
      void printTextWithColour(String text, String colour);
 
     /**
-     * This method allows to insert the server IP
-     *
+     * This method request to the client if it want to
+     * connect to the default server (127.0.0.1/50) or if
+     * it wants to insert new ip/port
+     */
+    boolean isDefaultServer();
+
+    /**
+     * This method get IP of the server where the client
+     * wants to connect to
      * @return The IP of the server to connect to
      */
     String getServerAddress();
