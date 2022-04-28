@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class LobbySizeCMI implements ClientMessageImplement {
     @Override
-    public void elaborateMessage(View userInterface, ConnectionClientSide socket) throws IOException {
+    public void elaborateMessage(View userInterface, ConnectionClientSide socket) throws IOException{
         int lobbySize = userInterface.askGameMode();
         socket.sendMessage(new chooseInt(lobbySize));
     }

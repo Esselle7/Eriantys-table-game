@@ -12,6 +12,6 @@ import java.io.IOException;
 public class NicknameCMI implements ClientMessageImplement {
     @Override
     public void elaborateMessage(View userInterface, ConnectionClientSide socket) throws IOException {
-      socket.sendMessage(new chooseString( userInterface.choseNickname()));
+      socket.sendMessage(new chooseString(userInterface.choseNickname()));
     }
 }

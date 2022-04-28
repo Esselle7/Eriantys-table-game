@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server;
 
+import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewTCPFactory;
 import java.io.IOException;
 
@@ -18,5 +19,6 @@ public class Server {
         main.setName("gamesGenerator");
         main.start();
         main.join(); // wait for all the other thread created
+
     }
 }
