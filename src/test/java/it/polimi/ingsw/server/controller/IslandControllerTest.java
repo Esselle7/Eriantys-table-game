@@ -27,7 +27,6 @@ class IslandControllerTest {
     int[] entranceRoom2 = {0, 0, 0, 0, 0};
     Board player1board = new Board(entranceRoom1, 6, TColour.GRAY);
     Board player2board = new Board(entranceRoom2, 6, TColour.BLACK);
-
     PlayGround playGround = PlayGround.createPlayground();
     IslandController islandController = new IslandController();
 
