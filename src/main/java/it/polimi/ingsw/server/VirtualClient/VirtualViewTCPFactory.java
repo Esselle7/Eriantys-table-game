@@ -23,6 +23,10 @@ public class VirtualViewTCPFactory implements Runnable {
         serverSocket = new ServerSocket(hostPort);
     }
 
+    public BlockingQueue<VirtualViewConnection> getVirtualClientQueue() {
+        return virtualClientQueue;
+    }
+
     /**
      * This method allows to continuously check for incoming
      * connection, after receiving a connection request from a client
@@ -34,7 +38,7 @@ public class VirtualViewTCPFactory implements Runnable {
             Socket newVirtualClient;
             try {
                 newVirtualClient = serverSocket.accept();
-                System.out.println("New client connected!");
+                System.out.println("> New client connected!");
                 try {
                     VirtualViewConnection newConnection = new VirtualViewTCP(newVirtualClient);
                     virtualClientQueue.put(newConnection);
@@ -43,6 +47,7 @@ public class VirtualViewTCPFactory implements Runnable {
                     System.exit(-1);
                 }
             } catch (IOException ignored) {}
+
         }
     }
 
@@ -59,18 +64,18 @@ public class VirtualViewTCPFactory implements Runnable {
                 VirtualViewConnection virtualClient = virtualClientQueue.take();
                 virtualClient.ping();
                 return virtualClient;
-            } catch (IOException e)  {
-                System.out.println("Bad connection, delete...");
+            } catch (IOException ignored)  {
             }
         }
     }
 
     /**
      * This method allows to add a virtual Client connection to
-     * the blocking queue
+     * the blocking queue, if it wasn't previously stored in that queue
      * @param virtualClient the virtual client connection to add
      */
     public void addClientConnection(VirtualViewConnection virtualClient) {
-        virtualClientQueue.add(virtualClient);
+       if(!virtualClientQueue.contains(virtualClient))
+            virtualClientQueue.add(virtualClient);
     }
 }
