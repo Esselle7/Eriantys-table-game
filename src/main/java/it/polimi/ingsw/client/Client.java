@@ -12,25 +12,26 @@ import java.util.Scanner;
  * between this and server, setup message listener to listen
  * for new message from the server and elaborating that messages.
  */
-public class Client {
+public class Client{
 
     private static View ui;
-   // private static int defaultPort = 5000;
-   //private static String defaultAddress = "127.0.0.1";
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Socket socket = null;
         boolean connected = false;
 
         chooseView();
-        ui.loadView();
+        getUi().loadView();
         while (!connected) {
             try {
-                socket = new Socket(ui.getServerAddress(),ui.getServerPort());
+                if(getUi().isDefaultServer())
+                    socket = new Socket(getDefaultAddress(),getDefaultPort());
+                else
+                    socket = new Socket(getUi().getServerAddress(),getUi().getServerPort());
                 connected = true;
-                ui.connectionOutcome(connected);
+                getUi().connectionOutcome(connected);
             } catch (IOException e) {
-                ui.connectionOutcome(connected);
+                getUi().connectionOutcome(connected);
                 System.exit(-1);
             }
         }
@@ -41,11 +42,23 @@ public class Client {
             currentConnection = new TCPClientSideConnection(socket);
             clientProcessingCommands = new ClientProcessingCommands(currentConnection, ui);
         } catch (IOException e) {
-            ui.printText("Error connecting to the server. Please try again later.");
+            getUi().printText("Error connecting to the server. Please try again later.");
             System.exit(-1);
         }
         Thread messageListener = new Thread(clientProcessingCommands);
         messageListener.start();
+    }
+
+    public static View getUi() {
+        return ui;
+    }
+
+    public static int getDefaultPort() {
+        return 5000;
+    }
+
+    public static String getDefaultAddress() {
+        return "127.0.0.1";
     }
 
     /**
