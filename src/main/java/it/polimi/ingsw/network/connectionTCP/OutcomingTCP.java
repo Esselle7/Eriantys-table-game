@@ -15,16 +15,20 @@ import static java.lang.Thread.*;
  */
 public class OutcomingTCP implements Runnable {
     private final ObjectOutputStream outputStream;
+    private boolean alive;
 
     public OutcomingTCP(ObjectOutputStream outputStream) {
         this.outputStream = outputStream;
+        alive = true;
     }
+
 
     /**
      * This method allows to close the outputStream
      * @throws IOException if the connection can't be closed.
      */
     public void close() throws IOException {
+        setNotAlive();
         outputStream.close();
     }
 
@@ -42,11 +46,26 @@ public class OutcomingTCP implements Runnable {
                     outputStream.writeObject(new Ping());
                 }
                 int sleepTime = 1000;
-                sleep(sleepTime);
+                Thread.sleep(sleepTime);
             } catch (IOException | InterruptedException e) {
-                return;
+               setNotAlive();
             }
         }
+    }
+
+    /**
+     * Verify if the outgoing connection
+     * @return true if the outgoing connection is alive
+     */
+    public boolean isAlive() {
+        return alive;
+    }
+
+    /**
+     * Set the outgoing connection to die
+     */
+    public void setNotAlive() {
+        alive = false;
     }
 
     /**

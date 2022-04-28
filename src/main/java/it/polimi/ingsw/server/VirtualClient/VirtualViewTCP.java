@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Set;
 
 /**
  * This class represent a remote client connection.
@@ -25,6 +26,7 @@ public class VirtualViewTCP implements VirtualViewConnection {
 
     public VirtualViewTCP(final Socket socket) throws IOException {
 
+
         InFromClient = new IncomingTCP(new ObjectInputStream(socket.getInputStream()));
         OutToClient = new OutcomingTCP(new ObjectOutputStream(socket.getOutputStream()));
 
@@ -36,6 +38,14 @@ public class VirtualViewTCP implements VirtualViewConnection {
 
         inputThread.start();
         outputThread.start();
+    }
+
+    public IncomingTCP getInFromClient() {
+        return InFromClient;
+    }
+
+    public OutcomingTCP getOutToClient() {
+        return OutToClient;
     }
 
     @Override
@@ -57,12 +67,26 @@ public class VirtualViewTCP implements VirtualViewConnection {
 
     @Override
     public void sendMessage(Message messageToSend) throws IOException {
-        OutToClient.sendMessage(messageToSend);
+        try {
+            OutToClient.sendMessage(messageToSend);
+        }
+        catch (IOException e)
+        {
+            OutToClient.setNotAlive();
+            throw new IOException();
+        }
     }
 
     @Override
     public Message receiveMessage() throws IOException {
-        return InFromClient.receiveMessage();
+        try {
+            return InFromClient.receiveMessage();
+        }
+        catch (IOException e)
+        {
+            InFromClient.setNotAlive();
+            throw new IOException();
+        }
     }
 
     @Override
@@ -74,7 +98,10 @@ public class VirtualViewTCP implements VirtualViewConnection {
     @Override
     public String receiveChooseString() throws IOException {
         chooseString string = (chooseString) receiveMessage();
-        return string.getData();
+        if(string == null)
+            return "";
+        else
+            return string.getData();
     }
 
     @Override
