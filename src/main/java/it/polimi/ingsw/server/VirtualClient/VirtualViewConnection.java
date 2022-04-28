@@ -1,5 +1,7 @@
 package it.polimi.ingsw.server.VirtualClient;
 
+import it.polimi.ingsw.network.connectionTCP.IncomingTCP;
+import it.polimi.ingsw.network.connectionTCP.OutcomingTCP;
 import it.polimi.ingsw.network.messages.Message;
 
 import java.io.IOException;
@@ -14,6 +16,18 @@ public interface VirtualViewConnection {
     String getNickname();
 
     void setNickname(String nickname);
+
+    /**
+     * This method allows to get the ingoing connection
+     * @return the ingoing TCP connection
+     */
+    IncomingTCP getInFromClient();
+
+    /**
+     * This method allows to get the outgoing connection
+     * @return the outgoing TCP connection
+     */
+    OutcomingTCP getOutToClient();
 
     /**
      * This method allows to send ping message
@@ -61,3 +75,4 @@ public interface VirtualViewConnection {
 
 
 }
+
