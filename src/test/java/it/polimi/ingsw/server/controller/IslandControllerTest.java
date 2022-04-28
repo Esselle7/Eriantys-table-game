@@ -1,4 +1,5 @@
 package it.polimi.ingsw.server.controller;
+import it.polimi.ingsw.server.controller.Exceptions.GameWonException;
 import it.polimi.ingsw.server.model.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,6 +49,7 @@ class IslandControllerTest {
 
     @Test
     void checkInfluence1Test(){
+        //Basic influence calculation
         playGround.setProfessorControlByColour(0, player1.getNickname());
         playGround.setProfessorControlByColour(1, player2.getNickname());
         playGround.setIslandWithMotherNature(island1);
@@ -59,6 +61,7 @@ class IslandControllerTest {
 
     @Test
     void checkInfluence2Test(){
+        //Checking tower calculation
         playGround.setProfessorControlByColour(0, player1.getNickname());
         playGround.setProfessorControlByColour(1, player2.getNickname());
         playGround.setIslandWithMotherNature(island1);
@@ -71,6 +74,7 @@ class IslandControllerTest {
 
     @Test
     void checkInfluence3Test(){
+        //Checking that null is returned in case 2 players have the same influence count on the island
         playGround.setProfessorControlByColour(0, player1.getNickname());
         playGround.setProfessorControlByColour(1, player2.getNickname());
         playGround.setIslandWithMotherNature(island1);
@@ -90,7 +94,12 @@ class IslandControllerTest {
         nearby_islands.add(island2);
         nearby_islands.add(island4);
         island3.setNearbyIslands(nearby_islands);
-        islandController.islandUnification(island3);
+        try {
+            islandController.islandUnification(island3);
+        }
+        catch(GameWonException e){
+            e.printStackTrace();
+        }
         assertEquals(3, playGround.getIslands().size());
         //Island2, island3 and island4 unify under the same island, the third one in playGround.getIslands()
         assertEquals(TColour.WHITE, playGround.getIslands().get(1).getTowerColour());
@@ -109,7 +118,12 @@ class IslandControllerTest {
         nearby_islands.add(island5);
         nearby_islands.add(island2);
         island1.setNearbyIslands(nearby_islands);
-        islandController.islandUnification(island1);
+        try {
+            islandController.islandUnification(island1);
+        }
+        catch(GameWonException e){
+            e.printStackTrace();
+        }
         assertEquals(4, playGround.getIslands().size());
         //Island1 and Island5 unify under the same island which is located in Island1's former position: 0
         assertEquals(TColour.GRAY, playGround.getIslands().get(0).getTowerColour());
@@ -128,7 +142,12 @@ class IslandControllerTest {
         nearby_islands.add(island1);
         nearby_islands.add(island4);
         island5.setNearbyIslands(nearby_islands);
-        islandController.islandUnification(island5);
+        try {
+            islandController.islandUnification(island5);
+        }
+        catch(GameWonException e){
+            e.printStackTrace();
+        }
         assertEquals(3, playGround.getIslands().size());
         //Island4, Island1 and Island5 unify and the unified island is placed in Island5's former position
         assertEquals(TColour.GRAY, playGround.getIslands().get(2).getTowerColour());

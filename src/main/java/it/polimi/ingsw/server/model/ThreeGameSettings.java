@@ -6,7 +6,6 @@ package it.polimi.ingsw.server.model;
  */
 
 public class ThreeGameSettings extends GameSettings{
-
     /**
      * This method allow to set
      * the settings for two players
@@ -19,5 +18,6 @@ public class ThreeGameSettings extends GameSettings{
         setDiningRoomLenght(10);
         setNumberOfIslands(12);
         setNumberOfPlayers(3);
+        setStudentsToMove(4);
     }
 }

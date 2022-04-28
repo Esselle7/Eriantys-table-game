@@ -13,6 +13,7 @@ public abstract class GameSettings {
     private int diningRoomLenght;
     private int numberOfIslands;
     private int numberOfPlayers;
+    private int studentsToMove;
 
     /**
      * This method will be implemented
@@ -66,5 +67,13 @@ public abstract class GameSettings {
     public int getNumberOfPlayers() {return numberOfPlayers;}
 
     public void setNumberOfPlayers(int numberOfPlayers) {this.numberOfPlayers = numberOfPlayers;}
+
+    public int getStudentsToMove() {
+        return studentsToMove;
+    }
+
+    public void setStudentsToMove(int studentsToMove){
+        this.studentsToMove = studentsToMove;
+    }
 
 }
