@@ -1,19 +1,26 @@
 package it.polimi.ingsw.server.controller;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import it.polimi.ingsw.TextColours;
+import it.polimi.ingsw.network.messages.*;
+import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.controller.Exceptions.*;
 import it.polimi.ingsw.server.model.*;
 import java.util.List;
 
-public class TurnHandler {
+public class TurnHandler implements Runnable{
     private Player CurrentPlayer;
-    private VirtualView currentClient;
-    private GameMoves gameMoves;
+    private VirtualViewConnection currentClient;
+
+    private final GameMoves gameMoves;
     private List <Player> playerOrder = null;
     private boolean gameOn;
     private boolean lastTurn = false;
     private String winner = null;
+
+    private final List<VirtualViewConnection> gamePlayers;
 
     private void setWinner(String playerNickname){ winner = playerNickname; }
 
@@ -29,8 +36,15 @@ public class TurnHandler {
 
     public void setLastTurn(boolean lastTurn){ this.lastTurn = lastTurn;}
 
-    public TurnHandler(){
+    public TurnHandler(List<VirtualViewConnection> gamePlayers){
         gameOn = true;
+        this.gamePlayers = gamePlayers;
+        gameMoves = new GameMoves();
+    }
+
+
+    public List<VirtualViewConnection> getGamePlayers() {
+        return gamePlayers;
     }
 
     private void setPlayerOrder(List <Player> newPlayerOrder){this.playerOrder = newPlayerOrder;}
@@ -41,16 +55,17 @@ public class TurnHandler {
         return gameMoves;
     }
 
-    public void setGameMoves(GameMoves gameMoves) {
-        this.gameMoves = gameMoves;
-    }
-
     public Player getCurrentPlayer() {
         return CurrentPlayer;
     }
     public void setCurrentPlayer(Player currentPlayer) {
         CurrentPlayer = currentPlayer;
         currentClient = currentPlayer.getClient();
+        getGameMoves().setCurrentPlayer(currentPlayer);
+    }
+
+    public VirtualViewConnection getCurrentClient() {
+        return currentClient;
     }
 
     public Board getCurrentPlayerBoard()
@@ -58,11 +73,11 @@ public class TurnHandler {
         return CurrentPlayer.getPlayerBoard();
     }
 
-    public void setupGame(){
+    private void setupGame(){
         //Setup phase
         //When storing all the players' names remember to scramble the array in order to choose randomly the order
         //for the first turn, as per the rules
-        //gameMoves.setUpGame();
+        getGameMoves().setUpGame(getGamePlayers().size(),getGamePlayers());
         setGameOn(true);
     }
 
@@ -72,7 +87,8 @@ public class TurnHandler {
      * At the end of each turn gameMoves.checkWin() is executed and if the game is over, gameOn is set to false and the name of
      * the winner is printed, otherwise "New Turn" is printed and the game goes on.
      */
-    public void gameFlow(){
+    public void run(){
+        setupGame();
         try {
             while (getGame()) {
                 //Planning phase
@@ -82,10 +98,18 @@ public class TurnHandler {
                 //Action phase
                 for (Player player : playerOrder) {
                     setCurrentPlayer(player);
+                    getCurrentClient().sendMessage(new NotificationCMI("It's your turn!"));
+                    getCurrentClient().sendMessage(new NotificationCMI("This is the current playground:"));
+                    getCurrentClient().sendMessage(new InfoForDecisionsCMI());
                     moveStudents();
-                    gameMoves.checkProfessorsControl();
+                    getGameMoves().checkProfessorsControl();
+                    getCurrentClient().sendMessage(new NotificationCMI("This is the new playground after your move:"));
+                    getCurrentClient().sendMessage((new InfoForDecisionsCMI()));
                     moveMotherNature();
                     influenceUpdate();
+                    getCurrentClient().sendMessage(new NotificationCMI("This is the final playground after your moves:"));
+                    getCurrentClient().sendMessage((new InfoForDecisionsCMI()));
+
                     chooseCloudTiles();
                 }
 
@@ -93,13 +117,23 @@ public class TurnHandler {
                 if (getLastTurn())
                     throw new GameWonException();
                 else
-                    System.out.print("New Turn");
+                    printConsole("New Turn");
             }
         } catch (EmptyTowerYard e){
-            setWinner(gameMoves.checkForEmptyTowerYard().getNickname());
+            setWinner(getGameMoves().checkForEmptyTowerYard().getNickname());
             setGameOn(false);
         } catch (GameWonException e){
-            setWinner(gameMoves.findWinnerTower());
+            setWinner(getGameMoves().findWinnerTower());
+            setGameOn(false);
+        }catch (IOException e)
+        {
+            for (VirtualViewConnection c: getGamePlayers()
+                 ) {
+                try {
+                    c.close();
+                } catch (IOException ignored) {}
+            }
+            setWinner(null);
             setGameOn(false);
         }
     }
@@ -110,10 +144,11 @@ public class TurnHandler {
      */
     public void refillCloudTiles() {
         //Check if there are enough studentPaws to refill all the cloud tiles, if not, don't refill them and set this turn as the last
-        if (gameMoves.getTotalStudentPaws() > gameMoves.getCurrentSettings().getStudentsCloudTile() * gameMoves.getCurrentGame().getPlayersList().size()){
-            for (CloudTile cloudTile : gameMoves.getCurrentGame().getCloudTiles()) {
-                cloudTile.reFill(gameMoves.generateStudents(gameMoves.getCurrentSettings().getStudentsCloudTile()));
+        if (getGameMoves().getTotalStudentPaws() > getGameMoves().getCurrentSettings().getStudentsCloudTile() * getGameMoves().getCurrentGame().getPlayersList().size()){
+            for (CloudTile cloudTile : getGameMoves().getCurrentGame().getCloudTiles()) {
+                cloudTile.reFill(getGameMoves().generateStudents(getGameMoves().getCurrentSettings().getStudentsCloudTile()));
             }
+            // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
         } else
             setLastTurn(true);
     }
@@ -128,12 +163,15 @@ public class TurnHandler {
         int i = 0;
         while(i < getGameMoves().getCurrentSettings().getStudentsToMove()) {
             try{
-                studentColour = currentClient.askColour();
+                getCurrentClient().sendMessage(new StudentColourToMoveCMI());
+                studentColour = getCurrentClient().receiveChooseInt(); // il resto degli errori saranno gestiti così, non ho avuto aancora tempo per correggere tutto
                 if (getCurrentPlayer().getClient().askWetherIslandOrDining() == 0) {
-                    gameMoves.moveStudentEntranceToDining(studentColour);
+                    getGameMoves().moveStudentEntranceToDining(studentColour);
+                    // manda a tutti messaggio a current di aggiornamento mydata
                     i++;
                 } else if (getCurrentPlayer().getClient().askWetherIslandOrDining() == 1) {
-                    gameMoves.moveStudentsEntranceToIsland(studentColour, currentClient.askWhichIsland());
+                    getGameMoves().moveStudentsEntranceToIsland(studentColour, getCurrentClient().askWhichIsland());
+                    // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
                     i++;
                 }
             }
@@ -151,23 +189,26 @@ public class TurnHandler {
      * In case the player only has already drawn cards in his hands, an exception is made (as per the rules) and he is
      * allowed to draw an already drawn card of his choice
      */
-    private void chooseTurnAssistantCards()
+    private void chooseTurnAssistantCards() throws IOException
     {
         List <Player> newPlayerOrder = getGameMoves().getCurrentGame().getPlayersList();
         List <Card> usedCards =  new ArrayList<>();
         int selectedCardNumber;
         for (Player player: playerOrder){
             setCurrentPlayer(player);
+            getCurrentClient().sendMessage(new InfoMyDeck());
             while(true){
                 //In case the player has only already drawn cards in his hands
                 if(usedCards.containsAll(getCurrentPlayer().getAssistantCards().getResidualCards())){
                     while(true) {
-                        selectedCardNumber = currentClient.askTurnAssistantCard();
+                        getCurrentClient().sendMessage(new AssistantCardCMI());
+                        selectedCardNumber = getCurrentClient().receiveChooseInt();
                         //Checking if the player actually has the selectedCardNumber Card in his hands
-                        if (player.getAssistantCards().useCard(selectedCardNumber) != null) {
-                            player.useCard(currentClient.askTurnAssistantCard());
+                        if (getCurrentPlayer().useCard(selectedCardNumber)) {
                             break;
                         }
+                        else
+                            getCurrentClient().sendMessage(new NotificationCMI("Insert a valid card!"));
                     }
                     break;
                 }
@@ -175,18 +216,21 @@ public class TurnHandler {
                 //gameMoves.checkValidity() method. If that's the case, the loop goes on until it breaks when the player
                 //selects a valid card
                 try{
-                    gameMoves.useAssistantCard(currentClient.askTurnAssistantCard());
+                    getGameMoves().useAssistantCard(getCurrentClient().askTurnAssistantCard());
                     usedCards.add(getCurrentPlayer().getCurrentCard());
                     break;
                 } catch (UnableToUseCardException e){
                     e.printStackTrace();
                 }
             }
+            getCurrentClient().sendMessage(new NotificationCMI("Waiting for other players to chose assistant card ..."));
+            // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
+            // manda a current player messaggio aggiornamneto current card
         }
         newPlayerOrder.sort(Comparator.comparing(player1 -> player1.getCurrentCard().getValue()));
         setPlayerOrder(newPlayerOrder);
         setCurrentPlayer(getPlayerOrder().get(0));
-        if(gameMoves.existDeckEmpty())
+        if(getGameMoves().existDeckEmpty())
             setLastTurn(true);
     }
 
@@ -197,12 +241,13 @@ public class TurnHandler {
     private void moveMotherNature(){
         while (true) {
             try {
-                gameMoves.moveMotherNature(currentClient.askWhichIsland());
+                getGameMoves().moveMotherNature(getCurrentClient().askWhichIsland());
                 break;
             } catch (ExceededMotherNatureStepsException e) {
                 e.printStackTrace();
             }
         }
+        // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
     }
 
     /**
@@ -216,15 +261,17 @@ public class TurnHandler {
     private void influenceUpdate() throws EmptyTowerYard, GameWonException{
         //Updating influence in case checkInfluence() is not null and if motherNatureIsland's towerColour is different from
         //the new influence-calculated player's towerColour
-        Player islandPlayer = gameMoves.getIslandController().checkInfluence();
+        Player islandPlayer = getGameMoves().getIslandController().checkInfluence();
         Island motherNatureIsland = getGameMoves().getCurrentGame().getIslandWithMotherNature();
         if(islandPlayer != null && islandPlayer.getPlayerBoard().getTowerColour() != motherNatureIsland.getTowerColour()){
             if (motherNatureIsland.getTowerCount() == 0)
-                gameMoves.setInfluenceToIsland();
+                getGameMoves().setInfluenceToIsland();
             else
-                gameMoves.changeInfluenceToIsland();
-            gameMoves.getIslandController().islandUnification(getGameMoves().getCurrentGame().getIslandWithMotherNature());
+                getGameMoves().changeInfluenceToIsland();
+            getGameMoves().getIslandController().islandUnification(getGameMoves().getCurrentGame().getIslandWithMotherNature());
         }
+        // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
+        // manda a current player aggiornamneto tramite oggetti virtualviewtcp
     }
 
     /**
@@ -235,11 +282,23 @@ public class TurnHandler {
     private void chooseCloudTiles(){
         while(!getLastTurn()){
             try {
-                gameMoves.takeStudentsFromCloudTile(currentClient.askCloudTile());
+                getGameMoves().takeStudentsFromCloudTile(getCurrentClient().askCloudTile());
                 break;
             } catch(CloudTileAlreadyTakenException e){
                 e.printStackTrace();
             }
         }
+        // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
+        // manda a current player aggiornamneto tramite oggetti virtualviewtcp
+
+    }
+
+    /**
+     * This method print the input in MAGENTA for the server side console
+     * @param textToPrint the text to be printed
+     */
+    private void printConsole(String textToPrint)
+    {
+        System.out.println(TextColours.PURPLE_BRIGHT + "> "+ textToPrint);
     }
 }

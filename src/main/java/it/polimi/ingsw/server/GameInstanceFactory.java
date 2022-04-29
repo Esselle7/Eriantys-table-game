@@ -8,6 +8,8 @@ import it.polimi.ingsw.network.messages.LobbySizeCMI;
 import it.polimi.ingsw.network.messages.chooseString;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewTCPFactory;
+import it.polimi.ingsw.server.controller.TurnHandler;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,15 +104,16 @@ public class GameInstanceFactory implements Runnable{
      * to play the game.
      * @throws IOException if something in sending and receive message
      * (or in take a connection from the queue) fails
-     * @throws InterruptedException if something in sending and receive message
-     * (or in take a connection from the queue) fails
+     * @throws InterruptedException if something in taking a connection from the blocking queue fails (disconnection)
      */
     private void instancingGameLoop() throws InterruptedException, IOException {
         while (true) {
             printConsole("Creating new lobby");
             printConsole("Waiting for lobby Leader ...");
             setUpLobby();
-            //thread turn handler
+            TurnHandler th = new TurnHandler(getGamePlayers());
+            Thread gameManager = new Thread(th);
+            gameManager.start();
 
         }
     }
@@ -119,7 +122,7 @@ public class GameInstanceFactory implements Runnable{
      * This method allows to create a game lobby, to send
      * notification and request message to the client and to
      * receive a response.
-     * @throws InterruptedException If something in taking elements from queue fails
+     * @throws InterruptedException  if something in taking a connection from the blocking queue fails (disconnection)
      * @throws IOException If something in send or receiving messages fails
      */
 
@@ -161,7 +164,7 @@ public class GameInstanceFactory implements Runnable{
      * This method allows to find a lobby leader and to request to it
      * the lobby size.
      * @return lobby sie chosen by the leader
-     * @throws InterruptedException if there is a disconnection
+     * @throws InterruptedException  if something in taking a connection from the blocking queue fails (disconnection)
      * @throws IOException if there are problems with the socket connection
      */
     private synchronized int findLeader() throws InterruptedException, IOException {
@@ -180,7 +183,7 @@ public class GameInstanceFactory implements Runnable{
      * This method allows finding remaining players of the game.
      * @param player number of player to find (in this case 2 or 3)
      * @param lobbySize the current lobby size
-     * @throws InterruptedException if there is a disconnection
+     * @throws InterruptedException  if something in taking a connection from the blocking queue fails (disconnection)
      * @throws IOException if there are problems with the socket connection
      */
     private synchronized void findPlayer(int player,int lobbySize) throws InterruptedException, IOException {

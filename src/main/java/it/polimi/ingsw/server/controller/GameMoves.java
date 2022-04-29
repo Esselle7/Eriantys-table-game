@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.controller;
 import it.polimi.ingsw.server.ControllerViewObserver;
+import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.controller.Exceptions.*;
 import it.polimi.ingsw.server.model.*;
 import java.util.*;
@@ -13,10 +14,10 @@ import java.util.*;
  */
 public class GameMoves extends ManagerStudent{
     private PlayGround currentGame;
-    private TurnHandler turnHandler;
     private GameSettings currentSettings;
     private IslandController islandController;
     private final List<ControllerViewObserver> observers = new ArrayList<>();
+    private Player currentPlayer;
 
     /**
      * This method notify all the current
@@ -34,7 +35,6 @@ public class GameMoves extends ManagerStudent{
 
     public GameMoves() {
         islandController = new IslandController();
-        turnHandler = new TurnHandler();
     }
 
     public PlayGround getCurrentGame() {
@@ -44,7 +44,6 @@ public class GameMoves extends ManagerStudent{
     public void setCurrentGame(PlayGround currentGame) {
         this.currentGame = currentGame;
         getIslandController().setPlayGround(currentGame);
-        getTurnHandler().setGameMoves(this);
     }
 
     public GameSettings getCurrentSettings() {
@@ -55,11 +54,18 @@ public class GameMoves extends ManagerStudent{
         this.currentSettings = currentSettings;
     }
 
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
 
-    public void setUpGame(int numberOfPlayers, String[] playersName)
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public void setUpGame(int numberOfPlayers, List<VirtualViewConnection> gamePlayers)
     {
         setUpGameSettings(numberOfPlayers);
-        setUpPlayers(playersName);
+        setUpPlayers(gamePlayers);
         setUpDecks();
         setUpIslands();
         setUpCloudTile();
@@ -88,13 +94,13 @@ public class GameMoves extends ManagerStudent{
      * This method allows to create
      * the correct number of players
      * with their nicknames
-     * @param playersName string of names associated with players
+     * @param gamePlayers list of associate client
      */
-    private void setUpPlayers(String[] playersName)
+    private void setUpPlayers(List<VirtualViewConnection> gamePlayers)
     {
         List<Player> playersList = new ArrayList<>();
-        for(int i = 0; i < getCurrentSettings().getNumberOfPlayers(); i++){
-            playersList.add(new Player(playersName[i]));
+        for(VirtualViewConnection c: gamePlayers){
+            playersList.add(new Player(c));
         }
         getCurrentGame().setPlayersList(playersList);
     }
@@ -107,17 +113,10 @@ public class GameMoves extends ManagerStudent{
         this.islandController = islandController;
     }
 
-    public TurnHandler getTurnHandler() {
-        return turnHandler;
-    }
 
-    public void setTurnHandler(TurnHandler turnHandler) {
-        this.turnHandler = turnHandler;
-    }
-
-    private Board getCurrentPlayerBoard() //shortcut
+    public Board getCurrentPlayerBoard() //shortcut
     {
-        return getTurnHandler().getCurrentPlayerBoard();
+        return getCurrentPlayer().getPlayerBoard();
     }
 
     /**
@@ -216,8 +215,8 @@ public class GameMoves extends ManagerStudent{
     public void useAssistantCard(int cardNumber) throws UnableToUseCardException
     {
         if(checkCardValidity(cardNumber)) {
-            getTurnHandler().getCurrentPlayer().useCard(cardNumber);
-            notifyObservers(getTurnHandler().getCurrentPlayer().getCurrentCard());
+           getCurrentPlayer().useCard(cardNumber);
+            notifyObservers(getCurrentPlayer().getCurrentCard());
         }
         else
             throw new UnableToUseCardException();
@@ -235,7 +234,7 @@ public class GameMoves extends ManagerStudent{
     private boolean checkCardValidity(int cardNumber)
     {
         for (Player player: getCurrentGame().getPlayersList()) {
-            if(player.getNickname().equals(getTurnHandler().getCurrentPlayer().getNickname()))
+            if(player.getNickname().equals(getCurrentPlayer().getNickname()))
                 return true;
             if(player.getCurrentCard().getValue() == cardNumber)
                 return false;
@@ -397,7 +396,7 @@ public class GameMoves extends ManagerStudent{
         int indexIslandMotherNature = getCurrentGame().getIslands().indexOf(getCurrentGame().getIslandWithMotherNature());
         int steps = (islandId + indexIslandMotherNature) % getCurrentSettings().getNumberOfIslands();
         int numberOfIslands = getCurrentSettings().getNumberOfIslands();
-        int motherNatureSteps = getTurnHandler().getCurrentPlayer().getCurrentCard().getMotherNatureSteps();
+        int motherNatureSteps = getCurrentPlayer().getCurrentCard().getMotherNatureSteps();
 
         if (steps > motherNatureSteps)
             throw new ExceededMotherNatureStepsException();

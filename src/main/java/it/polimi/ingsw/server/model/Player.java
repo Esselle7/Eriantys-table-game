@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.model;
 
+import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.controller.VirtualView;
 
 /**
@@ -12,19 +13,20 @@ public class Player extends ManagerStudent implements Comparable<Player> {
     private Board playerBoard;
     private Deck assistantCards;
     private Card currentCard;
-    private VirtualView Client;
+    private VirtualViewConnection Client;
 
-    public Player(String nickname)
+    public Player(VirtualViewConnection Client)
     {
-        this.nickname = nickname;
+        this.nickname = Client.getNickname();
         currentCard = new Card();
-    }
-
-    public void setClient(VirtualView Client){
         this.Client = Client;
     }
 
-    public VirtualView getClient(){
+    public void setClient(VirtualViewConnection Client){
+        this.Client = Client;
+    }
+
+    public VirtualViewConnection getClient(){
         return this.Client;
     }
 
@@ -68,9 +70,17 @@ public class Player extends ManagerStudent implements Comparable<Player> {
      * and set it as the current card
      * @param cardNumber number of the card to play
      */
-    public void useCard(int cardNumber)
+    public boolean useCard(int cardNumber)
     {
-        setCurrentCard(getAssistantCards().useCard(cardNumber));
+        Card toUse = getAssistantCards().useCard(cardNumber);
+        if(toUse != null)
+        {
+            setCurrentCard(toUse);
+            return true;
+        }
+        else
+            return false;
+
     }
 
     /**
