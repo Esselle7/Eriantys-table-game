@@ -1,8 +1,8 @@
 package it.polimi.ingsw.server;
 import it.polimi.ingsw.server.model.*;
 
-public interface ControllerViewObserver {
-    void update(Object toUpdate);
+public abstract class ControllerViewObserver {
+    public abstract void update();
 }
 
 /*
