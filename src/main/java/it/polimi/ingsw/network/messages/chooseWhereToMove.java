@@ -6,9 +6,9 @@ import it.polimi.ingsw.client.connection.ConnectionClientSide;
 
 import java.io.IOException;
 
-public class InfoMyDeck implements ClientMessageImplement {
+public class chooseWhereToMove implements ClientMessageImplement {
     @Override
     public void elaborateMessage(View userInterface, ConnectionClientSide socket) throws IOException, InterruptedException {
-        userInterface.showMyDeck();
+        socket.sendMessage(new chooseInt(userInterface.chooseWhereToMove()));
     }
 }

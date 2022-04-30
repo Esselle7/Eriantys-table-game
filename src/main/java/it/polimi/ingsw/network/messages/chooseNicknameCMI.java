@@ -9,7 +9,7 @@ import java.io.IOException;
  * This class represent a nickname request message from the server
  * to the client.
  */
-public class NicknameCMI implements ClientMessageImplement {
+public class chooseNicknameCMI implements ClientMessageImplement {
     @Override
     public void elaborateMessage(View userInterface, ConnectionClientSide socket) throws IOException {
       socket.sendMessage(new chooseString(userInterface.choseNickname()));

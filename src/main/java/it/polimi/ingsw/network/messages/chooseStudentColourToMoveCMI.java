@@ -6,9 +6,9 @@ import it.polimi.ingsw.client.connection.ConnectionClientSide;
 
 import java.io.IOException;
 
-public class AssistantCardCMI implements ClientMessageImplement {
+public class chooseStudentColourToMoveCMI implements ClientMessageImplement {
     @Override
     public void elaborateMessage(View userInterface, ConnectionClientSide socket) throws IOException, InterruptedException {
-        socket.sendMessage(new chooseInt(userInterface.chooseAssistantCard()));
+        socket.sendMessage(new chooseInt(userInterface.chooseStudentColourToMove()));
     }
 }

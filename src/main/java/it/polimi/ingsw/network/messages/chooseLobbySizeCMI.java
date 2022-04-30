@@ -9,7 +9,7 @@ import java.io.IOException;
  * This class represent a lobby size request message from the server
  * to the client.
  */
-public class LobbySizeCMI implements ClientMessageImplement {
+public class chooseLobbySizeCMI implements ClientMessageImplement {
     @Override
     public void elaborateMessage(View userInterface, ConnectionClientSide socket) throws IOException{
         int lobbySize = userInterface.askGameMode();

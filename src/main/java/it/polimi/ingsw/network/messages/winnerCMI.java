@@ -6,10 +6,18 @@ import it.polimi.ingsw.client.connection.ConnectionClientSide;
 
 import java.io.IOException;
 
-public class InfoCloudTiles implements ClientMessageImplement {
-
+public class winnerCMI implements ClientMessageImplement {
+    String winner;
     @Override
     public void elaborateMessage(View userInterface, ConnectionClientSide socket) throws IOException, InterruptedException {
-        userInterface.showCloudTilesInfo();
+        userInterface.displayWinner(getWinner());
+    }
+
+    public winnerCMI(String winner) {
+        this.winner = winner;
+    }
+
+    public String getWinner() {
+        return winner;
     }
 }
