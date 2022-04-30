@@ -194,22 +194,18 @@ public class TurnHandler implements Runnable{
         List <Player> newPlayerOrder = getGameMoves().getCurrentGame().getPlayersList();
         List <Card> usedCards =  new ArrayList<>();
         int selectedCardNumber;
+        Card selectedCard;
         for (Player player: playerOrder){
             setCurrentPlayer(player);
             getCurrentClient().sendMessage(new InfoMyDeck());
             while(true){
                 //In case the player has only already drawn cards in his hands
                 if(usedCards.containsAll(getCurrentPlayer().getAssistantCards().getResidualCards())){
-                    while(true) {
-                        getCurrentClient().sendMessage(new AssistantCardCMI());
-                        selectedCardNumber = getCurrentClient().receiveChooseInt();
-                        //Checking if the player actually has the selectedCardNumber Card in his hands
-                        if (getCurrentPlayer().useCard(selectedCardNumber)) {
-                            break;
-                        }
-                        else
-                            getCurrentClient().sendMessage(new NotificationCMI("Insert a valid card!"));
-                    }
+                    do{
+                        selectedCardNumber = currentClient.askTurnAssistantCard();
+                        selectedCard = player.getAssistantCards().useCard(selectedCardNumber);
+                    } while(selectedCard == null);
+                    player.setCurrentCard(selectedCard);
                     break;
                 }
                 //useAssistantCard checks whether the card has already been drawn or not by another player by using the
