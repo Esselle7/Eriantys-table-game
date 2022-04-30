@@ -156,19 +156,17 @@ public class TurnHandler {
         List <Player> newPlayerOrder = getGameMoves().getCurrentGame().getPlayersList();
         List <Card> usedCards =  new ArrayList<>();
         int selectedCardNumber;
+        Card selectedCard;
         for (Player player: playerOrder){
             setCurrentPlayer(player);
             while(true){
                 //In case the player has only already drawn cards in his hands
                 if(usedCards.containsAll(getCurrentPlayer().getAssistantCards().getResidualCards())){
-                    while(true) {
+                    do{
                         selectedCardNumber = currentClient.askTurnAssistantCard();
-                        //Checking if the player actually has the selectedCardNumber Card in his hands
-                        if (player.getAssistantCards().useCard(selectedCardNumber) != null) {
-                            player.useCard(currentClient.askTurnAssistantCard());
-                            break;
-                        }
-                    }
+                        selectedCard = player.getAssistantCards().useCard(selectedCardNumber);
+                    } while(selectedCard == null);
+                    player.setCurrentCard(selectedCard);
                     break;
                 }
                 //useAssistantCard checks whether the card has already been drawn or not by another player by using the
