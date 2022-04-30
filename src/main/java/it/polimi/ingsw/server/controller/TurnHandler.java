@@ -5,12 +5,13 @@ import java.util.Comparator;
 
 import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.network.messages.*;
+import it.polimi.ingsw.server.ControllerViewObserver;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.controller.Exceptions.*;
 import it.polimi.ingsw.server.model.*;
 import java.util.List;
 
-public class TurnHandler implements Runnable{
+public class TurnHandler extends ControllerViewObserver implements Runnable {
     private Player CurrentPlayer;
     private VirtualViewConnection currentClient;
 
@@ -68,10 +69,7 @@ public class TurnHandler implements Runnable{
         return currentClient;
     }
 
-    public Board getCurrentPlayerBoard()
-    {
-        return CurrentPlayer.getPlayerBoard();
-    }
+
 
     private void setupGame(){
         //Setup phase
@@ -117,7 +115,7 @@ public class TurnHandler implements Runnable{
                 if (getLastTurn())
                     throw new GameWonException();
                 else
-                    printConsole("New Turn");
+                    printConsole("------------------NEW TURN----------------------");
             }
         } catch (EmptyTowerYard e){
             setWinner(getGameMoves().checkForEmptyTowerYard().getNickname());
@@ -135,6 +133,18 @@ public class TurnHandler implements Runnable{
             }
             setWinner(null);
             setGameOn(false);
+        }
+        if(getWinner() != null)
+        {
+            printConsole(getWinner()+" is the winner of this lobby!");
+            for(VirtualViewConnection c : getGamePlayers())
+            {
+                try
+                {
+                    c.sendMessage(new winnerCMI(getWinner()));
+                    c.close();
+                }catch (IOException ignored){}
+            }
         }
     }
 
@@ -158,27 +168,35 @@ public class TurnHandler implements Runnable{
      * it in the dining room or on an island (hence asking which island he wants to move it to). The process is repeated
      * until the player has moved the number of students he has to move as per gameSettings.
      */
-    private void moveStudents(){
+    private void moveStudents() throws IOException{
         int studentColour;
+        int whereToMove;
         int i = 0;
         while(i < getGameMoves().getCurrentSettings().getStudentsToMove()) {
             try{
-                getCurrentClient().sendMessage(new StudentColourToMoveCMI());
+                getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
                 studentColour = getCurrentClient().receiveChooseInt(); // il resto degli errori saranno gestiti così, non ho avuto aancora tempo per correggere tutto
-                if (getCurrentPlayer().getClient().askWetherIslandOrDining() == 0) {
+                getCurrentClient().sendMessage(new chooseWhereToMove());
+                whereToMove = getCurrentClient().receiveChooseInt();
+                if (whereToMove == 0) {
                     getGameMoves().moveStudentEntranceToDining(studentColour);
                     // manda a tutti messaggio a current di aggiornamento mydata
-                    i++;
-                } else if (getCurrentPlayer().getClient().askWetherIslandOrDining() == 1) {
-                    getGameMoves().moveStudentsEntranceToIsland(studentColour, getCurrentClient().askWhichIsland());
+                } else{
+                    getCurrentClient().sendMessage(new chooseIslandCMI());
+                    int island = getCurrentClient().receiveChooseInt();
+                    getGameMoves().moveStudentsEntranceToIsland(studentColour, island);
                     // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
-                    i++;
                 }
+                i++;
             }
-            catch (Exception e) {
-                //The only exception that can be thrown are FullDiningRoomTable
-                //and noStudentForColour, both of them just have to be acknowledged.
-                e.printStackTrace();
+            catch (noStudentForColour e) {
+                printConsole("No student for colour entrance exception occurs!");
+                getCurrentClient().sendMessage(new NotificationCMI("You don't have that student in your entrance room!"));
+            }
+            catch (FullDiningRoomTable e1)
+            {
+                printConsole("Full dining room exception occurs!");
+                getCurrentClient().sendMessage(new NotificationCMI("You don't have enough space to move that student to the dining room!"));
             }
         }
     }
@@ -197,12 +215,13 @@ public class TurnHandler implements Runnable{
         Card selectedCard;
         for (Player player: playerOrder){
             setCurrentPlayer(player);
-            getCurrentClient().sendMessage(new InfoMyDeck());
+            getCurrentClient().sendMessage(new InfoMyDeckCMI());
             while(true){
                 //In case the player has only already drawn cards in his hands
                 if(usedCards.containsAll(getCurrentPlayer().getAssistantCards().getResidualCards())){
                     do{
-                        selectedCardNumber = currentClient.askTurnAssistantCard();
+                        getCurrentClient().sendMessage(new chooseAssistantCardCMI());
+                        selectedCardNumber = getCurrentClient().receiveChooseInt();
                         selectedCard = player.getAssistantCards().useCard(selectedCardNumber);
                     } while(selectedCard == null);
                     player.setCurrentCard(selectedCard);
@@ -212,11 +231,13 @@ public class TurnHandler implements Runnable{
                 //gameMoves.checkValidity() method. If that's the case, the loop goes on until it breaks when the player
                 //selects a valid card
                 try{
-                    getGameMoves().useAssistantCard(getCurrentClient().askTurnAssistantCard());
+                    getCurrentClient().sendMessage(new chooseAssistantCardCMI());
+                    getGameMoves().useAssistantCard(getCurrentClient().receiveChooseInt());
                     usedCards.add(getCurrentPlayer().getCurrentCard());
                     break;
                 } catch (UnableToUseCardException e){
-                    e.printStackTrace();
+                    printConsole("Player fails to choose assistant card");
+                    getCurrentClient().sendMessage(new NotificationCMI("Another player use that assistant card in this turn!"));
                 }
             }
             getCurrentClient().sendMessage(new NotificationCMI("Waiting for other players to chose assistant card ..."));
@@ -234,13 +255,16 @@ public class TurnHandler implements Runnable{
      * This method asks the player which island he wants to move mother nature to. In case he asks to move mothernature
      * to an island where he can't move it to, he gets asked again until he asks for a valid number of steps.
      */
-    private void moveMotherNature(){
+    private void moveMotherNature()throws IOException{
         while (true) {
             try {
-                getGameMoves().moveMotherNature(getCurrentClient().askWhichIsland());
+                getCurrentClient().sendMessage(new chooseIslandCMI());
+
+                getGameMoves().moveMotherNature(getCurrentClient().receiveChooseInt());
                 break;
             } catch (ExceededMotherNatureStepsException e) {
-                e.printStackTrace();
+                printConsole("Mother nature steps");
+                getCurrentClient().sendMessage(new NotificationCMI("You exceeded mother nature steps"));
             }
         }
         // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
@@ -275,13 +299,15 @@ public class TurnHandler implements Runnable{
      * students from, in case the chosen cloudTile has been already taken, CloudTileAlreadyTakenException is handled
      * and the player is asked again.
      */
-    private void chooseCloudTiles(){
+    private void chooseCloudTiles() throws  IOException{
         while(!getLastTurn()){
             try {
-                getGameMoves().takeStudentsFromCloudTile(getCurrentClient().askCloudTile());
+                getCurrentClient().sendMessage(new chooseCloudTileCMI());
+                getGameMoves().takeStudentsFromCloudTile(getCurrentClient().receiveChooseInt());
                 break;
             } catch(CloudTileAlreadyTakenException e){
-                e.printStackTrace();
+                printConsole("CloudTile already taken exception occurs!");
+                getCurrentClient().sendMessage(new NotificationCMI("The selected CloudTile is empty!"));
             }
         }
         // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
@@ -296,5 +322,26 @@ public class TurnHandler implements Runnable{
     private void printConsole(String textToPrint)
     {
         System.out.println(TextColours.PURPLE_BRIGHT + "> "+ textToPrint);
+    }
+
+
+    @Override
+    public void update() {
+
+        for (VirtualViewConnection c : getGamePlayers()) {
+            try{
+                c.sendMessage(new UpdatePlayGroundCMI(getGameMoves().getCurrentGame()));
+            }
+            catch (IOException e)
+            {
+                try {
+                    c.close();
+                }
+                catch (IOException ignored){}
+
+            }
+
+        }
+
     }
 }
