@@ -45,11 +45,11 @@ public class Deck {
      * for a round of game
      * @param value the value of the card
      *              to use
-     * @return true if there was a card
-     *          with the value in input
-     *          and so we can use it, false
-     *          if there isn't a card with
-     *          value = value in input
+     * @return the card
+     *         with the value in input
+     *         and so we can use it, false
+     *         if there isn't a card with
+     *         value = value in input
      */
     public Card useCard(int value)
     {
@@ -60,7 +60,7 @@ public class Deck {
                 assistantCards.remove(toFind);
                 return result;
             }
-        return null;
+        return null; // not very good, throw an exception maybe
     }
 
     public boolean isEmpty()

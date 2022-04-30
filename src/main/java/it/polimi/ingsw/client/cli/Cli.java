@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.cli;
 import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.model.*;
+import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.server.model.*;
 import java.util.*;
 
@@ -220,6 +221,21 @@ public class Cli implements View {
         }
     }
 
+    public void showInfoForDecisions()
+    {
+        printPlayersInfo();
+        printIslandsInfo();
+        printProfessorsControl();
+    }
+
+    public void showMyDeck()
+    {
+        printText(getMyNickname()+"'s remains assistant card: ");
+        for (Card card: getMyDeck().getResidualCards()) {
+            printText("Card Value: "+card.getValue()+", Mother Nature Steps: "+card.getMotherNatureSteps());
+        }
+    }
+
     /**
      * This method allows to print the number of student of each colour
      * in an array of student target given in input
@@ -251,8 +267,11 @@ public class Cli implements View {
         }
     }
 
-   @Override
-    public void printPlayersInfo()
+    /**
+     * This method allows to print info about all the player to allows
+     * current player to take decisions about his turn
+     */
+    private void printPlayersInfo()
     {
         int indexPlayerColour = 0;
 
@@ -275,8 +294,13 @@ public class Cli implements View {
         }
     }
 
-    @Override
-    public void printIslandsInfo()
+    /**
+     * This method allows to print all the students on each island
+     * and the number of tower (and the colour) of each island
+     * (remember that if I unify two island they will be considered as
+     * an only one island with tower count equals to 2)
+     */
+    private void printIslandsInfo()
     {
         int indexIsland = 1;
         for (Island island: getPlayGround().getIslands()) {
@@ -289,8 +313,8 @@ public class Cli implements View {
         }
     }
 
-    @Override
-    public void printCloudTilesInfo()
+
+    public void showCloudTilesInfo()
     {
         int indexCloudTiles = 1;
         for(CloudTile cloudTiles : getPlayGround().getCloudTiles())
@@ -301,8 +325,10 @@ public class Cli implements View {
         }
     }
 
-    @Override
-    public void printProfessorsControl()
+    /**
+     * This method allows to print all the professor controller
+     */
+    private void printProfessorsControl()
     {
         for (int indexProfessor = 0; indexProfessor<getPlayGround().getProfessorsControl().length;indexProfessor++) {
             String nickname = getPlayGround().getProfessorsControl()[indexProfessor];
@@ -314,29 +340,51 @@ public class Cli implements View {
         }
     }
 
-    @Override
-    public void printMyDeck()
-    {
-        printText(getMyNickname()+"'s remains assistant card: ");
-        for (Card card: getMyDeck().getResidualCards()) {
-            printText("Card Value: "+card.getValue()+", Mother Nature Steps: "+card.getMotherNatureSteps());
-        }
-    }
 
-   @Override
-    public void printMyCurrentCard()
+
+    /**
+     * This method allows to print the current card
+     * of the player
+     */
+    private void printMyCurrentCard()
     {
         printText(getMyNickname()+"'s current card:");
         printText("Card value: "+ getMyCurrentCard().getValue()+", Mother nature Steps "+ getMyCurrentCard().getMotherNatureSteps());
     }
 
-    @Override
-    public void printMyBoard()
+    /**
+     * This method allows to print the board of the player
+     */
+    private void printMyBoard()
     {
         printText(getMyNickname()+"'s board: ");
         printStudentsInfo(getMyBoard().getEntranceRoom());
         printStudentsInfo(getMyBoard().getDiningRoom());
         printText(getMyBoard().getTowerYard()+"remains"+getMyBoard().getTowerColour()+ "tower in the Tower Yard");
+    }
+
+    @Override
+    public int chooseAssistantCard()
+    {
+        printText("Please choose an assistant card between the remains assistant cards:");
+        showMyDeck();
+        return getInput().nextInt();
+
+    }
+
+    @Override
+    public int chooseStudentColourToMove()
+    {
+        printText("Please select a student from your entrance room to move");
+        printMyCurrentCard();
+        printMyBoard();
+        String studentColour = getInput().nextLine();
+        int index;
+        for (index = 0; index < getStudentColour().getColourCount(); index ++) {
+            if(getStudentColour().getStudentColours()[index].equals(studentColour))
+                break;
+        }
+        return index;
     }
 
     @Override

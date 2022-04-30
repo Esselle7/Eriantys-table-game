@@ -110,48 +110,36 @@ public interface View {
      */
     int askGameMode();
 
-
     /**
-     * This method allows to print info about all the player to allows
-     * current player to take decisions about his turn
+     * This method allows to print the remaining assistant card
+     * in the player deck
      */
-    void printPlayersInfo();
-
-    /**
-     * This method allows to print all the students on each island
-     * and the number of tower (and the colour) of each island
-     * (remember that if I unify two island they will be considered as
-     * an only one island with tower count equals to 2)
-     */
-    void printIslandsInfo();
+    void showMyDeck();
 
     /**
      * This method allows to print all the students in each cloud tiles
      */
-    void printCloudTilesInfo();
+    void showCloudTilesInfo();
 
     /**
-     * This method allows to print all the professor controller
+     * This method allows to print al necessary information for player to
+     * play a turn
      */
-    void printProfessorsControl();
+    void showInfoForDecisions();
 
     /**
-     * This method allows to print the remaining assistan card
-     * in the player deck
+     * This method allows to choose an assistant card for the turn
+     * @return the value of the card to use
+     *
      */
-    void printMyDeck();
+    int chooseAssistantCard();
 
     /**
-     * This method allows to print the current card
-     * of the player
+     * This method allows to choose which student the player
+     * want to move from the entrance room
+     * @return the colour corresponding int to the colour chosen
      */
-    void printMyCurrentCard();
-
-    /**
-     * This method allows to print the board of the player
-     */
-    void printMyBoard();
-
+    int chooseStudentColourToMove();
     /**
      * This method allows to update
      * model in Client
