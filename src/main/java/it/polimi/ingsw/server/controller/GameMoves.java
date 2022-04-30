@@ -24,9 +24,9 @@ public class GameMoves extends ManagerStudent{
      * observers of this class, allowing to
      * update the playground
      */
-    public void notifyObservers(Object toUpdate) {
+    public void notifyObservers() {
         for (ControllerViewObserver observer : this.observers)
-            observer.update(toUpdate);
+            observer.update();
     }
 
     public void addObserver (ControllerViewObserver observer){this.observers.add(observer);}
@@ -87,7 +87,7 @@ public class GameMoves extends ManagerStudent{
             currentSettings = new ThreeGameSettings();
             getCurrentSettings().manageSettings();
         }
-        notifyObservers(currentSettings);
+        notifyObservers();
     }
 
     /**
@@ -131,8 +131,7 @@ public class GameMoves extends ManagerStudent{
     {
         getCurrentPlayerBoard().removeStudentEntrance(studentColour);
         getCurrentGame().getIslandByIndex(selectedIsland).setPlacedStudent(studentColour);
-        notifyObservers(getCurrentPlayerBoard());
-        notifyObservers(getCurrentGame().getIslandByIndex(selectedIsland));
+        notifyObservers();
     }
 
     /**
@@ -151,7 +150,7 @@ public class GameMoves extends ManagerStudent{
         {
             getCurrentPlayerBoard().removeStudentEntrance(studentColour);
             getCurrentPlayerBoard().increaseNumberOfStudent(studentColour);
-            notifyObservers(getCurrentPlayerBoard());
+            notifyObservers();
         }
         else if(getCurrentPlayerBoard().getDiningRoom()[studentColour] >= getCurrentSettings().getDiningRoomLenght())
             throw new FullDiningRoomTable();
@@ -197,8 +196,7 @@ public class GameMoves extends ManagerStudent{
     {
         if(!getCurrentGame().getCloudTiles()[chosenCloudTile].isUsed()) {
             getCurrentPlayerBoard().setEntranceRoom(addStudentsToTarget(getCurrentPlayerBoard().getEntranceRoom(), getCurrentGame().getCloudTiles()[chosenCloudTile].getStudents()));
-            notifyObservers(getCurrentGame().getCloudTiles()[chosenCloudTile]);
-            notifyObservers(getCurrentPlayerBoard());
+            notifyObservers();
         }
         else
             throw new CloudTileAlreadyTakenException();
@@ -216,7 +214,7 @@ public class GameMoves extends ManagerStudent{
     {
         if(checkCardValidity(cardNumber)) {
            getCurrentPlayer().useCard(cardNumber);
-            notifyObservers(getCurrentPlayer().getCurrentCard());
+           notifyObservers();
         }
         else
             throw new UnableToUseCardException();
@@ -261,12 +259,15 @@ public class GameMoves extends ManagerStudent{
             {
                 maximum = playerNumberOfStudentByColour;
                 nickname = player.getNickname();
-                notifyObservers(getCurrentPlayerBoard());
             }
             else
                 if(playerNumberOfStudentByColour == maximum && maximum != 0)
+                {
+                    notifyObservers();
                     return getCurrentGame().getProfessorsControl()[professorColour];
+                }
         }
+        notifyObservers();
         return nickname;
     }
 
@@ -280,6 +281,7 @@ public class GameMoves extends ManagerStudent{
         {
             getCurrentGame().setProfessorControlByColour(professorColour,checkProfessorsControlByColour(professorColour));
         }
+        notifyObservers();
     }
 
     /**
@@ -404,7 +406,7 @@ public class GameMoves extends ManagerStudent{
             if (indexIslandMotherNature + steps > numberOfIslands)
                 steps -= numberOfIslands;
             getCurrentGame().setIslandWithMotherNature(getCurrentGame().getIslandByIndex(steps));
-            notifyObservers(getCurrentGame().getIslandByIndex(steps));
+            notifyObservers();
         }
     }
 
