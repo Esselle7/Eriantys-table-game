@@ -2,9 +2,9 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.client.Client;
-import it.polimi.ingsw.network.messages.NicknameCMI;
+import it.polimi.ingsw.network.messages.chooseNicknameCMI;
 import it.polimi.ingsw.network.messages.NotificationCMI;
-import it.polimi.ingsw.network.messages.LobbySizeCMI;
+import it.polimi.ingsw.network.messages.chooseLobbySizeCMI;
 import it.polimi.ingsw.network.messages.chooseString;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewTCPFactory;
@@ -144,11 +144,11 @@ public class GameInstanceFactory implements Runnable{
         printConsole("Asking nicknames to players");
         printConsole("Nicknames received:");
         for(VirtualViewConnection clients : getGamePlayers()) {
-            clients.sendMessage(new NicknameCMI());
+            clients.sendMessage(new chooseNicknameCMI());
             String nickname = clients.receiveChooseString();
             while (users.contains(nickname)) {
                 clients.sendMessage(new NotificationCMI("The nickname chosen is already taken"));
-                clients.sendMessage(new NicknameCMI());
+                clients.sendMessage(new chooseNicknameCMI());
                 nickname = clients.receiveChooseString();
             }
             clients.setNickname(nickname);
@@ -172,7 +172,7 @@ public class GameInstanceFactory implements Runnable{
         getGamePlayers().get(0).sendMessage(new NotificationCMI("Game found and you are the lobby leader!"));
         printConsole("Lobby leader found!");
         printConsole("Ask lobby size to lobby leader, waiting response...");
-        getGamePlayers().get(0).sendMessage(new LobbySizeCMI());
+        getGamePlayers().get(0).sendMessage(new chooseLobbySizeCMI());
         int lobbySize = getGamePlayers().get(0).receiveChooseInt();
         printConsole("Lobby size is: "+ lobbySize + " players!");
         getGamePlayers().get(0).sendMessage(new NotificationCMI("Waiting remaining players..."));

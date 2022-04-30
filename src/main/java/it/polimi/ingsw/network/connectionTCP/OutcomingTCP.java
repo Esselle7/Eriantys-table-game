@@ -49,6 +49,7 @@ public class OutcomingTCP implements Runnable {
                 Thread.sleep(sleepTime);
             } catch (IOException | InterruptedException e) {
                setNotAlive();
+               return;
             }
         }
     }
