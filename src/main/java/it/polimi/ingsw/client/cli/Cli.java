@@ -317,11 +317,16 @@ public class Cli implements View {
     public void showCloudTilesInfo()
     {
         int indexCloudTiles = 1;
-        for(CloudTile cloudTiles : getPlayGround().getCloudTiles())
+        for(CloudTile cloudTile : getPlayGround().getCloudTiles())
         {
             printText("CLOUD TILE "+indexCloudTiles+": ");
-            printStudentsInfo(cloudTiles.getStudents());
-            indexCloudTiles++;
+            if(cloudTile.isUsed())
+                printText("Already used...");
+            else
+            {
+                printStudentsInfo(cloudTile.getStudents());
+                indexCloudTiles++;
+            }
         }
     }
 
@@ -388,6 +393,39 @@ public class Cli implements View {
     }
 
     @Override
+    public int chooseIsland()
+    {
+        printText("Please type the Island index where you want to move:");
+        return getInput().nextInt();
+    }
+
+    @Override
+    public int chooseCloudTile()
+    {
+        printText("Please type the Cloud Tile index:");
+        showCloudTilesInfo();
+        return getInput().nextInt();
+
+    }
+
+    @Override
+    public int chooseWhereToMove()
+    {
+        printText("You want to move the selected student to the Dining Room or to an Island?");
+        String choice = getInput().nextLine();
+        while(true)
+        {
+            if(choice.equalsIgnoreCase("DINING") || choice.equalsIgnoreCase("DINING ROOM"))
+                return 0;
+            else if(choice.equalsIgnoreCase("ISLAND"))
+                return 1;
+            else
+                printText("Please type 'DINING ROOM' or 'ISLAND'");
+        }
+
+    }
+
+    @Override
     public void update(Board myBoardNew, Deck myDeckNew, Card myCurrentCardNew)
     {
         setMyBoard(myBoardNew);
@@ -401,23 +439,22 @@ public class Cli implements View {
         setPlayGround(playGroundNew);
     }
 
-
-
     @Override
-    public boolean winningView()
+    public void displayWinner(String winner)
     {
-        printText("\nCongratulations, you have won the game !");
-        printText("Thanks to participate, see you soon .");
-        return true;
+        if(winner.equals(getMyNickname()))
+        {
+            printText("Congratulations, you have won the game !");
+            printText("Thanks to participate, see you soon .");
+        }
+        else
+        {
+            printText("We are sorry, you lost the game ...");
+            printText("The winner is " + winner);
+            printText("Join or create another game, you will be more lucky");
+        }
     }
 
-    public boolean losingView(String winner)
-    {
-        printText("We are sorry, you lost the game ...");
-        printText("The winner is " + winner);
-        printText("Join or create another game, you will be more lucky");
-        return true;
-    }
 
 
 

@@ -140,6 +140,27 @@ public interface View {
      * @return the colour corresponding int to the colour chosen
      */
     int chooseStudentColourToMove();
+
+    /**
+     * This method allows the player to choose an island in order
+     * to move a student or mother nature on it
+     * @return the index of the selected island
+     */
+    int chooseIsland();
+
+    /**
+     * This method allows to choose a cloud tile from
+     * the play ground
+     * @return the index of the selected cloud tile
+     */
+    int chooseCloudTile();
+
+    /**
+     * This method allows the player to choose where to place
+     * a student (if in the dining room or in an island)
+     * @return 0 if island, 1 if dining
+     */
+    int chooseWhereToMove();
     /**
      * This method allows to update
      * model in Client
@@ -156,20 +177,12 @@ public interface View {
      *                      information about the game
      */
     void update(PlayGround playGroundNew);
-    /**
-     * This method print congratulations on winning the game
-     *
-     * @return return true to the server to disconnect client
-     */
-    boolean winningView();
+
 
     /**
-     * This method displays that this client
-     * lost the game and print the winner nickname
-     *
+     * This method displays the game winner
      * @param winner nickname of the winner
-     * @return return true to the server to disconnect client
      */
-    boolean losingView(String winner);
+    void displayWinner(String winner);
 
 }
