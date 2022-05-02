@@ -34,7 +34,6 @@ public class GameInstanceFactory implements Runnable{
         this.virtualViewTCPFactory = virtualViewTCPFactory;
         gamePlayers = new ArrayList<>();
         Thread connectionsAccepter = new Thread(virtualViewTCPFactory);
-
         printConsole("THIS IS THE SERVER FOR ERYANTIS GAME");
         printConsole("WELCOME ADMIN.");
         connectionsAccepter.start();
@@ -108,13 +107,13 @@ public class GameInstanceFactory implements Runnable{
      */
     private void instancingGameLoop() throws InterruptedException, IOException {
         while (true) {
+            gamePlayers = new ArrayList<>();
             printConsole("Creating new lobby");
             printConsole("Waiting for lobby Leader ...");
             setUpLobby();
             TurnHandler th = new TurnHandler(getGamePlayers());
             Thread gameManager = new Thread(th);
             gameManager.start();
-
         }
     }
 
@@ -151,6 +150,7 @@ public class GameInstanceFactory implements Runnable{
                 clients.sendMessage(new chooseNicknameCMI());
                 nickname = clients.receiveChooseString();
             }
+            clients.sendMessage(new NotificationCMI("Waiting for other players to choose nickname ..."));
             clients.setNickname(nickname);
             printConsole(nickname);
             users.add(nickname);

@@ -2,16 +2,12 @@ package it.polimi.ingsw.server.VirtualClient;
 
 import it.polimi.ingsw.network.connectionTCP.IncomingTCP;
 import it.polimi.ingsw.network.connectionTCP.OutcomingTCP;
-import it.polimi.ingsw.network.messages.Message;
-import it.polimi.ingsw.network.messages.Ping;
-import it.polimi.ingsw.network.messages.chooseInt;
-import it.polimi.ingsw.network.messages.chooseString;
+import it.polimi.ingsw.network.messages.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Set;
 
 /**
  * This class represent a remote client connection.
