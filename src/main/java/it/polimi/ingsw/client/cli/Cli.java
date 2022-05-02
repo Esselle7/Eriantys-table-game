@@ -3,7 +3,6 @@ package it.polimi.ingsw.client.cli;
 import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.model.*;
-import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.server.model.*;
 import java.util.*;
 
@@ -228,6 +227,12 @@ public class Cli implements View {
         printProfessorsControl();
     }
 
+    public void showMyInfo()
+    {
+        printMyCurrentCard();
+        printMyBoard();
+
+    }
     public void showMyDeck()
     {
         printText(getMyNickname()+"'s remains assistant card: ");
@@ -372,7 +377,6 @@ public class Cli implements View {
     public int chooseAssistantCard()
     {
         printText("Please choose an assistant card between the remains assistant cards:");
-        showMyDeck();
         return getInput().nextInt();
 
     }
@@ -431,12 +435,27 @@ public class Cli implements View {
         setMyBoard(myBoardNew);
         setMyCurrentCard(myCurrentCardNew);
         setMyDeck(myDeckNew);
+        ReFreshConsole();
     }
 
     @Override
     public void update(PlayGround playGroundNew)
     {
         setPlayGround(playGroundNew);
+
+    }
+
+    private void ReFreshConsole()
+    {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+        eryantisFigure();
+        printText("--------------------GAME INFO--------------------------");
+        showInfoForDecisions();
+        printText("--------------------PERSONAL INFO----------------------");
+        showMyInfo();
+
+
     }
 
     @Override

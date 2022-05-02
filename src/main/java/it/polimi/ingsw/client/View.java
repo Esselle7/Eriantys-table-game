@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.client.model.ClientColour;
 import it.polimi.ingsw.server.model.Board;
 import it.polimi.ingsw.server.model.Card;
 import it.polimi.ingsw.server.model.Deck;
@@ -111,6 +110,11 @@ public interface View {
     int askGameMode();
 
     /**
+     * This method allows to sho inf
+     */
+    void showMyInfo();
+
+    /**
      * This method allows to print the remaining assistant card
      * in the player deck
      */
@@ -161,6 +165,7 @@ public interface View {
      * @return 0 if island, 1 if dining
      */
     int chooseWhereToMove();
+
     /**
      * This method allows to update
      * model in Client
