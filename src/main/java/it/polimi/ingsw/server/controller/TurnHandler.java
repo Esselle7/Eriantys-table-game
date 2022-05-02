@@ -5,13 +5,12 @@ import java.util.Comparator;
 
 import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.network.messages.*;
-import it.polimi.ingsw.server.ControllerViewObserver;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.controller.Exceptions.*;
 import it.polimi.ingsw.server.model.*;
 import java.util.List;
 
-public class TurnHandler extends ControllerViewObserver implements Runnable {
+public class TurnHandler implements Runnable {
     private Player CurrentPlayer;
     private VirtualViewConnection currentClient;
 
@@ -37,10 +36,15 @@ public class TurnHandler extends ControllerViewObserver implements Runnable {
 
     public void setLastTurn(boolean lastTurn){ this.lastTurn = lastTurn;}
 
-    public TurnHandler(List<VirtualViewConnection> gamePlayers){
+    public TurnHandler(List<VirtualViewConnection> gamePlayersOut) throws IOException {
         gameOn = true;
-        this.gamePlayers = gamePlayers;
+        gamePlayers = new ArrayList<>();
+        gamePlayers.addAll(gamePlayersOut);
         gameMoves = new GameMoves();
+        for (VirtualViewConnection c: gamePlayers
+             ) {
+            c.ping();
+        }
     }
 
 
@@ -61,7 +65,9 @@ public class TurnHandler extends ControllerViewObserver implements Runnable {
     }
     public void setCurrentPlayer(Player currentPlayer) {
         CurrentPlayer = currentPlayer;
-        currentClient = currentPlayer.getClient();
+        for(VirtualViewConnection c: getGamePlayers())
+            if(c.getNickname().equals(currentPlayer.getNickname()))
+                currentClient = c;
         getGameMoves().setCurrentPlayer(currentPlayer);
     }
 
@@ -76,7 +82,9 @@ public class TurnHandler extends ControllerViewObserver implements Runnable {
         //When storing all the players' names remember to scramble the array in order to choose randomly the order
         //for the first turn, as per the rules
         getGameMoves().setUpGame(getGamePlayers().size(),getGamePlayers());
+        setPlayerOrder(getGameMoves().getCurrentGame().getPlayersList());
         setGameOn(true);
+
     }
 
     /**
@@ -86,29 +94,44 @@ public class TurnHandler extends ControllerViewObserver implements Runnable {
      * the winner is printed, otherwise "New Turn" is printed and the game goes on.
      */
     public void run(){
+        printConsole("Setting up the game ...");
         setupGame();
         try {
+            update();
             while (getGame()) {
                 //Planning phase
+                printConsole("------------PLANNING PHASE--------------");
+                for(VirtualViewConnection c : getGamePlayers())
+                    c.sendMessage(new NotificationCMI("------------PLANNING PHASE--------------"));
                 refillCloudTiles();
+                printConsole("Cloud Tile refilled with success!");
+                printConsole("Choose turn assistant card for each player");
                 chooseTurnAssistantCards();
-
                 //Action phase
-                for (Player player : playerOrder) {
+                for(VirtualViewConnection c : getGamePlayers())
+                    c.sendMessage(new NotificationCMI("------------ACTION PHASE--------------"));
+                printConsole("------------ACTION PHASE--------------");
+                for (Player player : getPlayerOrder()) {
                     setCurrentPlayer(player);
+                    printConsole(getCurrentPlayer().getNickname()+"'s turn!");
+                    printConsole("Moving student phase");
                     getCurrentClient().sendMessage(new NotificationCMI("It's your turn!"));
                     getCurrentClient().sendMessage(new NotificationCMI("This is the current playground:"));
                     getCurrentClient().sendMessage(new InfoForDecisionsCMI());
                     moveStudents();
                     getGameMoves().checkProfessorsControl();
-                    getCurrentClient().sendMessage(new NotificationCMI("This is the new playground after your move:"));
+                    getCurrentClient().sendMessage(new NotificationCMI("This is the new playground after your moves:"));
+                    update();
                     getCurrentClient().sendMessage((new InfoForDecisionsCMI()));
+                    printConsole("Moving mother nature phase");
                     moveMotherNature();
+                    printConsole("Updating influence ...");
                     influenceUpdate();
-                    getCurrentClient().sendMessage(new NotificationCMI("This is the final playground after your moves:"));
+                    getCurrentClient().sendMessage(new NotificationCMI("This is the final playground after mother nature move:"));
                     getCurrentClient().sendMessage((new InfoForDecisionsCMI()));
-
+                    printConsole("Choosing cloud tile phase");
                     chooseCloudTiles();
+                    printConsole(getCurrentPlayer().getNickname()+ "'s turn finished");
                 }
 
                 //In case there's an empty deck or the student bag is empty, this has to be the last turn
@@ -136,6 +159,7 @@ public class TurnHandler extends ControllerViewObserver implements Runnable {
         }
         if(getWinner() != null)
         {
+            printConsole("------------CLOSING--------------");
             printConsole(getWinner()+" is the winner of this lobby!");
             for(VirtualViewConnection c : getGamePlayers())
             {
@@ -145,6 +169,10 @@ public class TurnHandler extends ControllerViewObserver implements Runnable {
                     c.close();
                 }catch (IOException ignored){}
             }
+        }
+        else
+        {
+            printConsole("A connection error during the game occurred... ");
         }
     }
 
@@ -175,19 +203,22 @@ public class TurnHandler extends ControllerViewObserver implements Runnable {
         while(i < getGameMoves().getCurrentSettings().getStudentsToMove()) {
             try{
                 getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
-                studentColour = getCurrentClient().receiveChooseInt(); // il resto degli errori saranno gestiti così, non ho avuto aancora tempo per correggere tutto
+                studentColour = getCurrentClient().receiveChooseInt();
                 getCurrentClient().sendMessage(new chooseWhereToMove());
                 whereToMove = getCurrentClient().receiveChooseInt();
                 if (whereToMove == 0) {
                     getGameMoves().moveStudentEntranceToDining(studentColour);
-                    // manda a tutti messaggio a current di aggiornamento mydata
+                    getCurrentClient().sendMessage(new NotificationCMI("You move a student form entrance room to the dining room"));
                 } else{
                     getCurrentClient().sendMessage(new chooseIslandCMI());
                     int island = getCurrentClient().receiveChooseInt();
-                    getGameMoves().moveStudentsEntranceToIsland(studentColour, island);
-                    // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
+                    getGameMoves().moveStudentsEntranceToIsland(studentColour, island-1);
+                    getCurrentClient().sendMessage(new NotificationCMI("You move a student form entrance room to Island "+ island));
                 }
                 i++;
+                printConsole("Correct student move!");
+                update();
+
             }
             catch (noStudentForColour e) {
                 printConsole("No student for colour entrance exception occurs!");
@@ -199,6 +230,7 @@ public class TurnHandler extends ControllerViewObserver implements Runnable {
                 getCurrentClient().sendMessage(new NotificationCMI("You don't have enough space to move that student to the dining room!"));
             }
         }
+        printConsole("Student Moves finished for "+ getCurrentPlayer().getNickname());
     }
 
     /**
@@ -214,6 +246,7 @@ public class TurnHandler extends ControllerViewObserver implements Runnable {
         int selectedCardNumber;
         Card selectedCard;
         for (Player player: playerOrder){
+            printConsole(player.getNickname() +" is choosing their card");
             setCurrentPlayer(player);
             getCurrentClient().sendMessage(new InfoMyDeckCMI());
             while(true){
@@ -240,9 +273,8 @@ public class TurnHandler extends ControllerViewObserver implements Runnable {
                     getCurrentClient().sendMessage(new NotificationCMI("Another player use that assistant card in this turn!"));
                 }
             }
-            getCurrentClient().sendMessage(new NotificationCMI("Waiting for other players to chose assistant card ..."));
-            // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
-            // manda a current player messaggio aggiornamneto current card
+            getCurrentClient().sendMessage(new NotificationCMI("Waiting for other players to choose assistant card ..."));
+            update();
         }
         newPlayerOrder.sort(Comparator.comparing(player1 -> player1.getCurrentCard().getValue()));
         setPlayerOrder(newPlayerOrder);
@@ -315,6 +347,14 @@ public class TurnHandler extends ControllerViewObserver implements Runnable {
 
     }
 
+    private void update() throws IOException {
+       PlayGround updatePG = getGameMoves().getCurrentGame();
+        for (VirtualViewConnection client: getGamePlayers()) {
+                client.sendMessage(new UpdatePlayGroundCMI(updatePG));
+        }
+    }
+
+
     /**
      * This method print the input in MAGENTA for the server side console
      * @param textToPrint the text to be printed
@@ -324,24 +364,4 @@ public class TurnHandler extends ControllerViewObserver implements Runnable {
         System.out.println(TextColours.PURPLE_BRIGHT + "> "+ textToPrint);
     }
 
-
-    @Override
-    public void update() {
-
-        for (VirtualViewConnection c : getGamePlayers()) {
-            try{
-                c.sendMessage(new UpdatePlayGroundCMI(getGameMoves().getCurrentGame()));
-            }
-            catch (IOException e)
-            {
-                try {
-                    c.close();
-                }
-                catch (IOException ignored){}
-
-            }
-
-        }
-
-    }
 }
