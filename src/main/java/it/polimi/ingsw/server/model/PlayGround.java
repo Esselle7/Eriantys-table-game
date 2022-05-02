@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.model;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Class that store every
@@ -8,20 +9,19 @@ import java.util.Objects;
  * play a game.
  */
 
-public class PlayGround {
+public class PlayGround implements Serializable {
     private List<Player> playersList;
     private List<Island> islands;
     private Island islandWithMotherNature;
     private final String[] professorsControl;
     private CloudTile[] cloudTiles;
-    private static PlayGround instance = null;
-
+   // private static PlayGround instance = null;
 
     /**
      * Private constructor, applied
      * singleton pattern
      */
-    private PlayGround() {
+    public PlayGround() {
         professorsControl = new String[Colour.colourCount];
     }
 
@@ -32,12 +32,12 @@ public class PlayGround {
      * has been instanced before
      * @return the playGround instance
      */
-    public static PlayGround createPlayground()
+   /* public static PlayGround createPlayground()
     {
         if(instance == null)
            instance = new PlayGround();
         return instance;
-    }
+    }*/
 
     public List<Player> getPlayersList() {
         return playersList;
@@ -61,7 +61,7 @@ public class PlayGround {
         this.islandWithMotherNature = islandWithMotherNature;
     }
 
-    public void setPlayersList(List<Player> playersList) {
+    public void setPlayersList(ArrayList<Player> playersList) {
         this.playersList = playersList;
     }
 
@@ -117,4 +117,5 @@ public class PlayGround {
     public void setCloudTiles(CloudTile[] cloudTiles) {
         this.cloudTiles = cloudTiles;
     }
+
 }

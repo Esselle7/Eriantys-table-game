@@ -1,6 +1,8 @@
 package it.polimi.ingsw.server.model;
 
-public enum TColour {
+import java.io.Serializable;
+
+public enum TColour implements Serializable {
     GRAY,
     BLACK,
     WHITE,

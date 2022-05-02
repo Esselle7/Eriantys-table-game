@@ -1,12 +1,14 @@
 package it.polimi.ingsw.server.model;
 
+import java.io.Serializable;
+
 /**
  * This abstract class will contain
  * the main information for two players
  * mode and three players mode
  */
 
-public abstract class GameSettings {
+public abstract class GameSettings implements Serializable {
     private int studentsEntranceRoom;
     private int towerYard;
     private int studentsCloudTile;

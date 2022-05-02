@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  *
  */
 
-public class Island extends ManagerStudent {
+public class Island extends ManagerStudent implements Serializable {
     private final int[] placedStudent;
     private int towerCount;
     private TColour towerColour;

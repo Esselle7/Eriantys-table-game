@@ -1,34 +1,37 @@
 package it.polimi.ingsw.server.model;
 
+import it.polimi.ingsw.network.messages.UpdatePlayGroundCMI;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
-import it.polimi.ingsw.server.controller.VirtualView;
+
+import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * This class represent a player of
  * the game. Every player has its own
  * board and deck.
  */
-public class Player extends ManagerStudent implements Comparable<Player> {
+public class Player extends ManagerStudent implements Comparable<Player>, Serializable {
     private final String nickname;
     private Board playerBoard;
     private Deck assistantCards;
     private Card currentCard;
-    private VirtualViewConnection Client;
+   // private VirtualViewConnection Client;
 
-    public Player(VirtualViewConnection Client)
+    public Player(String nickname)
     {
-        this.nickname = Client.getNickname();
+        this.nickname = nickname;
         currentCard = new Card();
-        this.Client = Client;
+      //  this.Client = Client;
     }
 
-    public void setClient(VirtualViewConnection Client){
+  /*  public void setClient(VirtualViewConnection Client){
         this.Client = Client;
     }
 
     public VirtualViewConnection getClient(){
         return this.Client;
-    }
+    }*/
 
     public String getNickname() {
         return nickname;
@@ -82,6 +85,7 @@ public class Player extends ManagerStudent implements Comparable<Player> {
             return false;
 
     }
+
 
     /**
      * This method allows comparing

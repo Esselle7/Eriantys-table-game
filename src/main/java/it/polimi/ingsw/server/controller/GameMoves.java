@@ -1,8 +1,9 @@
 package it.polimi.ingsw.server.controller;
-import it.polimi.ingsw.server.ControllerViewObserver;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.controller.Exceptions.*;
 import it.polimi.ingsw.server.model.*;
+
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -12,30 +13,20 @@ import java.util.*;
  * the game, the game settings and the turn
  * handler.
  */
-public class GameMoves extends ManagerStudent{
+public class GameMoves extends ManagerStudent implements Serializable {
     private PlayGround currentGame;
     private GameSettings currentSettings;
     private IslandController islandController;
-    private final List<ControllerViewObserver> observers = new ArrayList<>();
     private Player currentPlayer;
-
-    /**
-     * This method notify all the current
-     * observers of this class, allowing to
-     * update the playground
-     */
-    public void notifyObservers() {
-        for (ControllerViewObserver observer : this.observers)
-            observer.update();
-    }
-
-    public void addObserver (ControllerViewObserver observer){this.observers.add(observer);}
-
-    public void removeObserver(ControllerViewObserver observer) {this.observers.remove(observer);}
 
     public GameMoves() {
         islandController = new IslandController();
+        currentGame = new PlayGround();
     }
+
+
+
+
 
     public PlayGround getCurrentGame() {
         return currentGame;
@@ -64,8 +55,8 @@ public class GameMoves extends ManagerStudent{
 
     public void setUpGame(int numberOfPlayers, List<VirtualViewConnection> gamePlayers)
     {
-        setUpGameSettings(numberOfPlayers);
         setUpPlayers(gamePlayers);
+        setUpGameSettings(numberOfPlayers);
         setUpDecks();
         setUpIslands();
         setUpCloudTile();
@@ -87,7 +78,6 @@ public class GameMoves extends ManagerStudent{
             currentSettings = new ThreeGameSettings();
             getCurrentSettings().manageSettings();
         }
-        notifyObservers();
     }
 
     /**
@@ -98,9 +88,9 @@ public class GameMoves extends ManagerStudent{
      */
     private void setUpPlayers(List<VirtualViewConnection> gamePlayers)
     {
-        List<Player> playersList = new ArrayList<>();
+        ArrayList<Player> playersList = new ArrayList<>();
         for(VirtualViewConnection c: gamePlayers){
-            playersList.add(new Player(c));
+            playersList.add(new Player(c.getNickname()));
         }
         getCurrentGame().setPlayersList(playersList);
     }
@@ -131,7 +121,7 @@ public class GameMoves extends ManagerStudent{
     {
         getCurrentPlayerBoard().removeStudentEntrance(studentColour);
         getCurrentGame().getIslandByIndex(selectedIsland).setPlacedStudent(studentColour);
-        notifyObservers();
+
     }
 
     /**
@@ -150,7 +140,7 @@ public class GameMoves extends ManagerStudent{
         {
             getCurrentPlayerBoard().removeStudentEntrance(studentColour);
             getCurrentPlayerBoard().increaseNumberOfStudent(studentColour);
-            notifyObservers();
+
         }
         else if(getCurrentPlayerBoard().getDiningRoom()[studentColour] >= getCurrentSettings().getDiningRoomLenght())
             throw new FullDiningRoomTable();
@@ -164,6 +154,7 @@ public class GameMoves extends ManagerStudent{
         playerInfluence.getPlayerBoard().decreaseTowerYard();
         getCurrentGame().getIslandWithMotherNature().setInfluence();
         getCurrentGame().getIslandWithMotherNature().setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
+
     }
 
     public void changeInfluenceToIsland() throws EmptyTowerYard
@@ -179,6 +170,7 @@ public class GameMoves extends ManagerStudent{
             }
         }
         getCurrentGame().getIslandWithMotherNature().setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
+
 
     }
 
@@ -196,7 +188,7 @@ public class GameMoves extends ManagerStudent{
     {
         if(!getCurrentGame().getCloudTiles()[chosenCloudTile].isUsed()) {
             getCurrentPlayerBoard().setEntranceRoom(addStudentsToTarget(getCurrentPlayerBoard().getEntranceRoom(), getCurrentGame().getCloudTiles()[chosenCloudTile].getStudents()));
-            notifyObservers();
+
         }
         else
             throw new CloudTileAlreadyTakenException();
@@ -214,7 +206,7 @@ public class GameMoves extends ManagerStudent{
     {
         if(checkCardValidity(cardNumber)) {
            getCurrentPlayer().useCard(cardNumber);
-           notifyObservers();
+
         }
         else
             throw new UnableToUseCardException();
@@ -263,11 +255,11 @@ public class GameMoves extends ManagerStudent{
             else
                 if(playerNumberOfStudentByColour == maximum && maximum != 0)
                 {
-                    notifyObservers();
+
                     return getCurrentGame().getProfessorsControl()[professorColour];
                 }
         }
-        notifyObservers();
+
         return nickname;
     }
 
@@ -281,7 +273,7 @@ public class GameMoves extends ManagerStudent{
         {
             getCurrentGame().setProfessorControlByColour(professorColour,checkProfessorsControlByColour(professorColour));
         }
-        notifyObservers();
+
     }
 
     /**
@@ -406,7 +398,7 @@ public class GameMoves extends ManagerStudent{
             if (indexIslandMotherNature + steps > numberOfIslands)
                 steps -= numberOfIslands;
             getCurrentGame().setIslandWithMotherNature(getCurrentGame().getIslandByIndex(steps));
-            notifyObservers();
+
         }
     }
 
@@ -431,7 +423,7 @@ public class GameMoves extends ManagerStudent{
      */
     private void setUpIslands()
     {
-        List<Island> islands = new ArrayList<>();
+        ArrayList<Island> islands = new ArrayList<>();
         for(int i = 0; i < getCurrentSettings().getNumberOfIslands(); i++){
             islands.add(new Island());
         }
@@ -485,4 +477,5 @@ public class GameMoves extends ManagerStudent{
         }
         getCurrentGame().setCloudTiles(cloudTiles);
     }
+
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.model;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Random;
  * paws
  */
 
-public abstract class ManagerStudent {
+public abstract class ManagerStudent implements Serializable {
     private int totalStudentPaws = 130;
     /**
      * This method make the fusion
