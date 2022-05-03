@@ -1,7 +1,7 @@
 package it.polimi.ingsw.server.model;
 
 import it.polimi.ingsw.server.controller.Exceptions.EmptyTowerYard;
-import it.polimi.ingsw.server.controller.Exceptions.GameWonException;
+import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
 import it.polimi.ingsw.server.controller.Exceptions.noStudentForColour;
 
 /**
@@ -17,6 +17,7 @@ public class Board extends ManagerStudent {
     private final int[] diningRoom;
     private int towerYard;
     private TColour towerColour;
+    private int coins;
 
     /**
      * Create a board.
@@ -29,7 +30,23 @@ public class Board extends ManagerStudent {
         this.entranceRoom = entranceRoom;
         this.towerYard = towerYard;
         this.towerColour = towerColour;
+        this.coins = 0;
         diningRoom = new int[Colour.colourCount];
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public void addCoin(){
+        coins++;
+    }
+
+    public void decreaseCoins(int coinsToSubtract) throws NotEnoughCoins{
+        if(this.coins >= coinsToSubtract)
+            this.coins = this.coins - coinsToSubtract;
+        else
+            throw new NotEnoughCoins();
     }
 
     public int[] getEntranceRoom() { return entranceRoom; }
