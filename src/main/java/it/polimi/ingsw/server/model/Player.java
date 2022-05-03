@@ -14,12 +14,22 @@ public class Player extends ManagerStudent implements Comparable<Player> {
     private Deck assistantCards;
     private Card currentCard;
     private VirtualViewConnection Client;
+    private int motherNatureSteps;
 
     public Player(VirtualViewConnection Client)
     {
         this.nickname = Client.getNickname();
         currentCard = new Card();
         this.Client = Client;
+        this.motherNatureSteps = 0;
+    }
+
+    public int getMotherNatureSteps() {
+        return motherNatureSteps;
+    }
+
+    public void setMotherNatureSteps(int motherNatureSteps) {
+        this.motherNatureSteps = motherNatureSteps;
     }
 
     public void setClient(VirtualViewConnection Client){
@@ -62,6 +72,7 @@ public class Player extends ManagerStudent implements Comparable<Player> {
 
     public void setCurrentCard(Card currentCard) {
         this.currentCard = currentCard;
+        setMotherNatureSteps(currentCard.getMotherNatureSteps() + getMotherNatureSteps());
     }
 
     /**

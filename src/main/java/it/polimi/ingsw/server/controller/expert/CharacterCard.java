@@ -29,4 +29,8 @@ public abstract class CharacterCard {
     public void useCard() throws Exception{
 
     }
+
+    public void resetCard() throws Exception{
+
+    }
 }

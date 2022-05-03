@@ -16,6 +16,8 @@ public class Island extends ManagerStudent {
     private int towerCount;
     private TColour towerColour;
     private List<Island> NearbyIslands;
+    private boolean isBanned;
+    private boolean isTowerBanned;
 
     /**
      * Constructor that create an
@@ -27,6 +29,8 @@ public class Island extends ManagerStudent {
     {
         placedStudent = new int[Colour.colourCount];
         towerCount = 0;
+        isBanned = false;
+        isTowerBanned = false;
     }
 
     /**
@@ -51,6 +55,22 @@ public class Island extends ManagerStudent {
 
     public void setTowerColour(TColour towerColour) {
         this.towerColour = towerColour;
+    }
+
+    public boolean isBanned() {
+        return isBanned;
+    }
+
+    public void setBanned(boolean banned) {
+        isBanned = banned;
+    }
+
+    public boolean isTowersBanned() {
+        return isTowerBanned;
+    }
+
+    public void setTowersBanned(boolean banned) {
+        isTowerBanned = banned;
     }
 
     public int getTowerCount() {

@@ -14,6 +14,7 @@ public class DrawStudentsCard extends CharacterCard {
         this.students = gameMoves.generateStudents(4);
     }
 
+    @Override
     public void useCard() throws Exception {
         buyCard();
         int colour;

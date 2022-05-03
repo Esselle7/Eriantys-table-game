@@ -62,6 +62,14 @@ public class GameMoves extends ManagerStudent{
         this.currentPlayer = currentPlayer;
     }
 
+    public Player getPlayerByNickname(String nickname){
+        for(Player player : currentGame.getPlayersList()){
+            if(player.getNickname() == nickname)
+                return player;
+        }
+        return null;
+    }
+
     public void setUpGame(int numberOfPlayers, List<VirtualViewConnection> gamePlayers)
     {
         setUpGameSettings(numberOfPlayers);

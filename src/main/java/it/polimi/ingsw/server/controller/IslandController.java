@@ -34,16 +34,15 @@ public class IslandController {
      * This method calculates (only for 2-3 player modes) the influence count for an island
      * @return the player that has the highest influence
      */
-    public Player checkInfluence(){
+    public Player checkInfluence(Island mothernatureIsland){
         int counter = 0, maxCounter = 0;
         Player maxPlayer = null;
-        Island mothernatureIsland = playGround.getIslandWithMotherNature();
         for (Player player : playGround.getPlayersList()){
             for(int index = 0; index < playGround.getProfessorsControl().length; index++){
                 if(player.getNickname().equals(playGround.getProfessorsControl()[index]))
                     counter = counter + mothernatureIsland.getPlacedStudent()[index];
             }
-            if(player.getPlayerBoard().getTowerColour().equals(mothernatureIsland.getTowerColour()))
+            if(player.getPlayerBoard().getTowerColour().equals(mothernatureIsland.getTowerColour()) && !mothernatureIsland.isTowersBanned())
                 counter = counter + mothernatureIsland.getTowerCount();
             if (counter > maxCounter){
                 maxPlayer = player;
