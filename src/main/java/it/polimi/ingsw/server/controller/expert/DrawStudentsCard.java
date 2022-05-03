@@ -1,4 +1,5 @@
 package it.polimi.ingsw.server.controller.expert;
+import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.network.messages.chooseIslandCMI;
 import it.polimi.ingsw.network.messages.chooseStudentColourToMoveCMI;
 import it.polimi.ingsw.server.controller.*;
@@ -9,25 +10,22 @@ public class DrawStudentsCard extends CharacterCard {
     private int[] students;
 
     public DrawStudentsCard(TurnHandler turnHandler){
-        super(turnHandler);
+        super(turnHandler, 1);
         this.students = gameMoves.generateStudents(4);
-        this.price = 1;
     }
 
     public void useCard() throws Exception {
         buyCard();
-        while true {
+        int colour;
+        do {
+            turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Select the colour of the student to pick"));
             turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
-            int colour = turnHandler.getCurrentClient().receiveChooseInt();
-            if (students[colour] > 0) {
-                students[colour] = students[colour] - 1;
-                //No need to use addStudentsToTarget since we have to move only one student
-                turnHandler.getCurrentClient().sendMessage(new chooseIslandCMI());
-                int islandIndex = turnHandler.getCurrentClient().receiveChooseInt();
-                gameMoves.getCurrentGame().getIslandByIndex(islandIndex).setPlacedStudent(colour);
-                gameMoves.addStudentsToTarget(this.students, gameMoves.generateStudents(1));
-            } else
-                throw new noStudentForColour();
-        }
+            colour = turnHandler.getCurrentClient().receiveChooseInt();
+        } while(students[colour] <= 0);
+        students[colour] = students[colour] - 1;
+        turnHandler.getCurrentClient().sendMessage(new chooseIslandCMI());
+        int islandIndex = turnHandler.getCurrentClient().receiveChooseInt();
+        gameMoves.getCurrentGame().getIslandByIndex(islandIndex).setPlacedStudent(colour);
+        gameMoves.addStudentsToTarget(this.students, gameMoves.generateStudents(1));
     }
 }
