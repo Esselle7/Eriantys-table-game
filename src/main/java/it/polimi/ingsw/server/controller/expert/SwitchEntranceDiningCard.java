@@ -5,34 +5,34 @@ import it.polimi.ingsw.network.messages.chooseStudentColourToMoveCMI;
 import it.polimi.ingsw.network.messages.chooseWhereToMove;
 import it.polimi.ingsw.server.controller.TurnHandler;
 
-public class SwitchStudentsCard extends CharacterCard{
-    private int[] students;
+public class SwitchEntranceDiningCard extends CharacterCard{
 
-    public SwitchStudentsCard(TurnHandler turnHandler){
+    public SwitchEntranceDiningCard(TurnHandler turnHandler){
         super(turnHandler, 1);
-        this.students = gameMoves.generateStudents(6);
     }
 
     @Override
     public void useCard() throws Exception {
         buyCard();
-        int studentsMoved = 0, chooseAnother, studentColourToDrop, studentColourToChoose;
+        int[] diningRoom = currentPlayer.getPlayerBoard().getDiningRoom();
+        int[] entranceRoom = currentPlayer.getPlayerBoard().getEntranceRoom();
+        int studentsMoved = 0, chooseAnother, diningToMove, entranceToMove;
         do {
             turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
-            studentColourToDrop = turnHandler.getCurrentClient().receiveChooseInt();
+            diningToMove = turnHandler.getCurrentClient().receiveChooseInt();
             turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
-            studentColourToChoose = turnHandler.getCurrentClient().receiveChooseInt();
-            if(this.students[studentColourToChoose] > 0 && currentPlayer.getPlayerBoard().getEntranceRoom()[studentColourToDrop] > 0){
+            entranceToMove = turnHandler.getCurrentClient().receiveChooseInt();
+            if(entranceRoom[entranceToMove] > 0 && diningRoom[diningToMove] > 0){
                 studentsMoved++;
-                this.students[studentColourToChoose]--;
-                this.students[studentColourToDrop]++;
-                currentPlayer.getPlayerBoard().getEntranceRoom()[studentColourToChoose]++;
-                currentPlayer.getPlayerBoard().getEntranceRoom()[studentColourToDrop]--;
+                diningRoom[diningToMove]--;
+                diningRoom[entranceToMove]++;
+                entranceRoom[diningToMove]++;
+                entranceRoom[entranceToMove]--;
             } else {
                 turnHandler.getCurrentClient().sendMessage(new NotificationCMI("No students available"));
             }
             turnHandler.getCurrentClient().sendMessage(new chooseWhereToMove());
             chooseAnother = turnHandler.getCurrentClient().receiveChooseInt();
-        } while (chooseAnother == 1 && studentsMoved < 3);
+        } while (chooseAnother == 1 && studentsMoved < 2);
     }
 }

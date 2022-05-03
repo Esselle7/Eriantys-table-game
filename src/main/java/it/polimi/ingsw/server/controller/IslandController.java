@@ -15,11 +15,12 @@ import java.util.List;
  */
 
 public class IslandController {
-
     private PlayGround playGround = null;
+    private int bannedColour;
 
     public IslandController()
     {
+        bannedColour = 6;
     }
 
     public void setPlayGround(PlayGround playGround) {
@@ -28,6 +29,14 @@ public class IslandController {
 
     public PlayGround getPlayGround() {
         return this.playGround;
+    }
+
+    public void setBannedColour(int bannedColour) {
+        this.bannedColour = bannedColour;
+    }
+
+    public int getBannedColour() {
+        return bannedColour;
     }
 
     /**
@@ -39,11 +48,12 @@ public class IslandController {
         Player maxPlayer = null;
         for (Player player : playGround.getPlayersList()){
             for(int index = 0; index < playGround.getProfessorsControl().length; index++){
-                if(player.getNickname().equals(playGround.getProfessorsControl()[index]))
+                if(player.getNickname().equals(playGround.getProfessorsControl()[index]) && index != getBannedColour())
                     counter = counter + mothernatureIsland.getPlacedStudent()[index];
             }
             if(player.getPlayerBoard().getTowerColour().equals(mothernatureIsland.getTowerColour()) && !mothernatureIsland.isTowersBanned())
                 counter = counter + mothernatureIsland.getTowerCount();
+            counter = counter + player.getExtraInfluence();
             if (counter > maxCounter){
                 maxPlayer = player;
                 maxCounter = counter;

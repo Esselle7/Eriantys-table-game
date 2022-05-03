@@ -113,6 +113,16 @@ public class Board extends ManagerStudent {
         diningRoom[studentColour]++;
     }
 
+    /**
+     * increase the current number of students
+     * by the colour sit down in the diningRoom
+     * @param studentColour colour of the students to increase the count
+     */
+    public void decreaseNumberOfStudent(int studentColour)
+    {
+        diningRoom[studentColour]--;
+    }
+
 
     /**
      * increase the number of tower by one, it means

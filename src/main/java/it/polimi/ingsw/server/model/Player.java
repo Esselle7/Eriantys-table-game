@@ -1,7 +1,6 @@
 package it.polimi.ingsw.server.model;
 
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
-import it.polimi.ingsw.server.controller.VirtualView;
 
 /**
  * This class represent a player of
@@ -15,6 +14,7 @@ public class Player extends ManagerStudent implements Comparable<Player> {
     private Card currentCard;
     private VirtualViewConnection Client;
     private int motherNatureSteps;
+    private int extraInfluence;
 
     public Player(VirtualViewConnection Client)
     {
@@ -22,6 +22,15 @@ public class Player extends ManagerStudent implements Comparable<Player> {
         currentCard = new Card();
         this.Client = Client;
         this.motherNatureSteps = 0;
+        this.extraInfluence = 0;
+    }
+
+    public void setExtraInfluence(int extraInfluence) {
+        this.extraInfluence = extraInfluence;
+    }
+
+    public int getExtraInfluence(){
+        return extraInfluence;
     }
 
     public int getMotherNatureSteps() {
