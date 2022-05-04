@@ -94,15 +94,40 @@ public class Cli implements View {
     }
 
     @Override
-    public void printText(String text)
+    public void showNotification(String text)
+    {
+        printText(text);
+    }
+
+    /**
+     * This method allows to print the text given in input
+     * with the colour also given in input
+     * @param text the text to print
+     * @param colour the text colour
+     */
+    private void printTextWithColour(String text, String colour)
+    {
+        System.out.println(colour + "> " + text + TextColours.RESET);
+    }
+
+    /**
+     * This method allows to print in the cli
+     * the text given in input in PURPLE colour
+     * @param text the text to print
+     */
+    private void printText(String text)
     {
         System.out.println(getDefaultColour() + "> " + text + TextColours.RESET);
     }
 
-    @Override
-    public void printTextWithColour(String text, String colour)
+    /**
+     * This method allows to print in a cute way
+     * that the players has to perform an action
+     * @param text the action to perform
+     */
+    private void printAction(String text)
     {
-        System.out.println(colour + "> " + text + TextColours.RESET);
+        printText("> ACTION: "+ text+ " <<");
     }
 
     @Override
@@ -346,8 +371,8 @@ public class Cli implements View {
             else
             {
                 printStudentsInfo(cloudTile.getStudents(),getDefaultColour());
-                indexCloudTiles++;
             }
+            indexCloudTiles++;
         }
     }
 
@@ -395,7 +420,7 @@ public class Cli implements View {
     @Override
     public int chooseAssistantCard()
     {
-        printText("Please choose an assistant card between the remains assistant cards:");
+        printAction("Please choose an assistant card between the remains assistant cards:");
         return Integer.parseInt(getInput().nextLine());
 
     }
@@ -403,7 +428,7 @@ public class Cli implements View {
     @Override
     public int chooseStudentColourToMove()
     {
-        printText("Please select a student from your entrance room to move");
+        printAction("Please select a student from your entrance room to move");
         showMyInfo();
         String studentColour = getInput().nextLine();
         for (int index = 0; index < Colour.colourCount; index ++) {
@@ -416,14 +441,14 @@ public class Cli implements View {
     @Override
     public int chooseIsland()
     {
-        printText("Please type the Island index where you want to move:");
+        printAction("Please type the Island index where you want to move:");
         return  Integer.parseInt(getInput().nextLine());
     }
 
     @Override
     public int chooseCloudTile()
     {
-        printText("Please type the Cloud Tile index:");
+        printAction("Please type the Cloud Tile index:");
         showCloudTilesInfo();
         return Integer.parseInt(getInput().nextLine());
 
@@ -432,10 +457,10 @@ public class Cli implements View {
     @Override
     public int chooseWhereToMove()
     {
-        printText("You want to move the selected student to the Dining Room or to an Island?");
-        String choice = getInput().nextLine();
+        printAction("You want to move the selected student to the Dining Room or to an Island?");
         while(true)
         {
+            String choice = getInput().nextLine();
             if(choice.equalsIgnoreCase("DINING") || choice.equalsIgnoreCase("DINING ROOM"))
                 return 0;
             else if(choice.equalsIgnoreCase("ISLAND"))
@@ -468,7 +493,6 @@ public class Cli implements View {
                 break;
             }
         }
-
     }
 
     private void ReFreshConsole()

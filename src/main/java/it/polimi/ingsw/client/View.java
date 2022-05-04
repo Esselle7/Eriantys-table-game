@@ -29,20 +29,10 @@ public interface View {
     void setMyNickname(String myNickname);
 
     /**
-     * This method allows to print in the cli
-     * the text given in input in PURPLE colour
-     * @param text the text to print
+     * This method allows to show the player a notification
+     * @param text the notification to show (as a string)
      */
-    void printText(String text);
-
-
-    /**
-     * This method allows to print the text given in input
-     * with the colour also given in input
-     * @param text the text to print
-     * @param colour the text colour
-     */
-     void printTextWithColour(String text, String colour);
+    void showNotification(String text);
 
     /**
      * This method request to the client if it want to
