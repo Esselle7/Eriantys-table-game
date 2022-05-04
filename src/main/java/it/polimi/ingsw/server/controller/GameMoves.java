@@ -121,7 +121,6 @@ public class GameMoves extends ManagerStudent implements Serializable {
     {
         getCurrentPlayerBoard().removeStudentEntrance(studentColour);
         getCurrentGame().getIslandByIndex(selectedIsland).setPlacedStudent(studentColour);
-
     }
 
     /**
@@ -140,7 +139,6 @@ public class GameMoves extends ManagerStudent implements Serializable {
         {
             getCurrentPlayerBoard().removeStudentEntrance(studentColour);
             getCurrentPlayerBoard().increaseNumberOfStudent(studentColour);
-
         }
         else if(getCurrentPlayerBoard().getDiningRoom()[studentColour] >= getCurrentSettings().getDiningRoomLenght())
             throw new FullDiningRoomTable();
@@ -154,7 +152,6 @@ public class GameMoves extends ManagerStudent implements Serializable {
         playerInfluence.getPlayerBoard().decreaseTowerYard();
         getCurrentGame().getIslandWithMotherNature().setInfluence();
         getCurrentGame().getIslandWithMotherNature().setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
-
     }
 
     public void changeInfluenceToIsland() throws EmptyTowerYard
@@ -188,7 +185,6 @@ public class GameMoves extends ManagerStudent implements Serializable {
     {
         if(!getCurrentGame().getCloudTiles()[chosenCloudTile].isUsed()) {
             getCurrentPlayerBoard().setEntranceRoom(addStudentsToTarget(getCurrentPlayerBoard().getEntranceRoom(), getCurrentGame().getCloudTiles()[chosenCloudTile].getStudents()));
-
         }
         else
             throw new CloudTileAlreadyTakenException();
@@ -206,11 +202,9 @@ public class GameMoves extends ManagerStudent implements Serializable {
     {
         if(checkCardValidity(cardNumber)) {
            getCurrentPlayer().useCard(cardNumber);
-
         }
         else
             throw new UnableToUseCardException();
-
     }
 
     /**
@@ -255,11 +249,9 @@ public class GameMoves extends ManagerStudent implements Serializable {
             else
                 if(playerNumberOfStudentByColour == maximum && maximum != 0)
                 {
-
                     return getCurrentGame().getProfessorsControl()[professorColour];
                 }
         }
-
         return nickname;
     }
 

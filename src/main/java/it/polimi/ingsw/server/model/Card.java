@@ -13,7 +13,7 @@ public class Card implements Serializable {
     private final int value;
     private final int motherNatureSteps;
 
-    public Card()
+   public Card()
     {
         value = 0;
         motherNatureSteps = 0;
