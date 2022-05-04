@@ -42,7 +42,7 @@ public class Client{
             currentConnection = new TCPClientSideConnection(socket);
             clientProcessingCommands = new ClientProcessingCommands(currentConnection, ui);
         } catch (IOException e) {
-            getUi().printText("Error connecting to the server. Please try again later.");
+            getUi().showNotification("Error connecting to the server. Please try again later.");
             System.exit(-1);
         }
         Thread messageListener = new Thread(clientProcessingCommands);
