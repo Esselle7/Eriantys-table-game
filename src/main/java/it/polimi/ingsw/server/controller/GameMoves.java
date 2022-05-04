@@ -34,7 +34,6 @@ public class GameMoves extends ManagerStudent implements Serializable {
 
     public void setCurrentGame(PlayGround currentGame) {
         this.currentGame = currentGame;
-        getIslandController().setPlayGround(currentGame);
     }
 
     public GameSettings getCurrentSettings() {
@@ -132,8 +131,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
      *                              chairs in the dining
      *                              room
      */
-    public void moveStudentEntranceToDining(int studentColour) throws FullDiningRoomTable, noStudentForColour
-    {
+    public void moveStudentEntranceToDining(int studentColour) throws FullDiningRoomTable, noStudentForColour {
         if(getCurrentPlayerBoard().getDiningRoom()[studentColour] < getCurrentSettings().getDiningRoomLenght() &&
                 getCurrentPlayerBoard().getEntranceRoom()[studentColour] > 0)
         {
@@ -142,13 +140,12 @@ public class GameMoves extends ManagerStudent implements Serializable {
         }
         else if(getCurrentPlayerBoard().getDiningRoom()[studentColour] >= getCurrentSettings().getDiningRoomLenght())
             throw new FullDiningRoomTable();
-        else if(getCurrentPlayerBoard().getEntranceRoom()[studentColour] == 0)
-            throw new noStudentForColour();
+
     }
 
     public void setInfluenceToIsland() throws EmptyTowerYard
     {
-        Player playerInfluence = getIslandController().checkInfluence();
+        Player playerInfluence = getIslandController().checkInfluence(getCurrentGame());
         playerInfluence.getPlayerBoard().decreaseTowerYard();
         getCurrentGame().getIslandWithMotherNature().setInfluence();
         getCurrentGame().getIslandWithMotherNature().setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
@@ -156,7 +153,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
 
     public void changeInfluenceToIsland() throws EmptyTowerYard
     {
-        Player playerInfluence = getIslandController().checkInfluence();
+        Player playerInfluence = getIslandController().checkInfluence(getCurrentGame());
         for(int i = 0; i < getCurrentGame().getIslandWithMotherNature().getTowerCount(); i++)
             playerInfluence.getPlayerBoard().decreaseTowerYard();
         for(Player p : getCurrentGame().getPlayersList())
@@ -183,8 +180,8 @@ public class GameMoves extends ManagerStudent implements Serializable {
      */
     public void takeStudentsFromCloudTile(int chosenCloudTile) throws CloudTileAlreadyTakenException
     {
-        if(!getCurrentGame().getCloudTiles()[chosenCloudTile].isUsed()) {
-            getCurrentPlayerBoard().setEntranceRoom(addStudentsToTarget(getCurrentPlayerBoard().getEntranceRoom(), getCurrentGame().getCloudTiles()[chosenCloudTile].getStudents()));
+        if(!getCurrentGame().getCloudTiles()[chosenCloudTile-1].isUsed()) {
+            getCurrentPlayerBoard().setEntranceRoom(addStudentsToTarget(getCurrentPlayerBoard().getEntranceRoom(), getCurrentGame().getCloudTiles()[chosenCloudTile-1].getStudents()));
         }
         else
             throw new CloudTileAlreadyTakenException();
@@ -380,18 +377,16 @@ public class GameMoves extends ManagerStudent implements Serializable {
      */
     public void moveMotherNature(int islandId) throws ExceededMotherNatureStepsException {
         int indexIslandMotherNature = getCurrentGame().getIslands().indexOf(getCurrentGame().getIslandWithMotherNature());
-        int steps = (islandId + indexIslandMotherNature) % getCurrentSettings().getNumberOfIslands();
-        int numberOfIslands = getCurrentSettings().getNumberOfIslands();
+        int steps;
+        if(islandId<indexIslandMotherNature)
+            steps = (getCurrentSettings().getNumberOfIslands()-1)-indexIslandMotherNature+islandId;
+        else
+            steps = islandId-indexIslandMotherNature;
         int motherNatureSteps = getCurrentPlayer().getCurrentCard().getMotherNatureSteps();
-
         if (steps > motherNatureSteps)
             throw new ExceededMotherNatureStepsException();
-        else {
-            if (indexIslandMotherNature + steps > numberOfIslands)
-                steps -= numberOfIslands;
-            getCurrentGame().setIslandWithMotherNature(getCurrentGame().getIslandByIndex(steps));
-
-        }
+        else
+            getCurrentGame().setIslandWithMotherNature(getCurrentGame().getIslandByIndex(islandId-1));
     }
 
     /**
