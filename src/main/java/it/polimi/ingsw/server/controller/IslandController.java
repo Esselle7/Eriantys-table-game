@@ -16,25 +16,11 @@ import java.util.List;
 
 public class IslandController {
 
-    private PlayGround playGround = null;
-
-    public IslandController()
-    {
-    }
-
-    public void setPlayGround(PlayGround playGround) {
-        this.playGround = playGround;
-    }
-
-    public PlayGround getPlayGround() {
-        return this.playGround;
-    }
-
     /**
      * This method calculates (only for 2-3 player modes) the influence count for an island
      * @return the player that has the highest influence
      */
-    public Player checkInfluence(){
+    public Player checkInfluence(PlayGround playGround){
         int counter = 0, maxCounter = 0;
         Player maxPlayer = null;
         Island mothernatureIsland = playGround.getIslandWithMotherNature();
@@ -65,8 +51,8 @@ public class IslandController {
      * @param island from which the propagation has to start
      * @throws GameWonException in case there are 3 or fewer islands remaining
      */
-    public void islandUnification(Island island) throws GameWonException{
-        this.updateNearbyIslands(island);
+    public void islandUnification(Island island, PlayGround playGround) throws GameWonException{
+        this.updateNearbyIslands(island,playGround);
         for(Island nearbyIsland: island.getNearbyIslands()) {
             if (nearbyIsland.getTowerColour() == island.getTowerColour()) {
                 Island newIsland = island.unifyIslands(nearbyIsland);
@@ -74,12 +60,13 @@ public class IslandController {
                 newIslandsList.set(playGround.getIslands().indexOf(island), newIsland);
                 newIslandsList.remove(nearbyIsland);
                 playGround.setIslands(newIslandsList);
-                this.updateNearbyIslands(newIsland);
+                this.updateNearbyIslands(newIsland,playGround);
                 island = newIsland;
                 newIsland.setTowerColour(nearbyIsland.getTowerColour());
+                playGround.setIslandWithMotherNature(newIsland);
             }
         }
-        if(getPlayGround().getIslands().size() <= 3)
+        if(playGround.getIslands().size() <= 3)
             throw new GameWonException();
     }
     /**
@@ -89,7 +76,7 @@ public class IslandController {
      * compared to island while the second and last element is the island after/on the right
      * @param island whose nearby islands have to be updated
      */
-    public void updateNearbyIslands(Island island){
+    private void updateNearbyIslands(Island island, PlayGround playGround){
         List<Island> newIslandsList = playGround.getIslands();
         List<Island> newNearbyIslands = new ArrayList<>();
         if(newIslandsList.indexOf(island) == 0){
