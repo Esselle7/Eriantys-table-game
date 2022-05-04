@@ -113,7 +113,11 @@ public class TurnHandler implements Runnable {
                 chooseTurnAssistantCards();
                 //Action phase
                 for(VirtualViewConnection c : getGamePlayers())
+                {
                     c.sendMessage(new NotificationCMI("------------ACTION PHASE--------------"));
+                    c.sendMessage(new NotificationCMI("Please wait for you turn ..."));
+                }
+
                 printConsole("------------action phase--------------");
                 for (Player player : getPlayerOrder()) {
                     setCurrentPlayer(player);
@@ -208,6 +212,8 @@ public class TurnHandler implements Runnable {
             try{
                 getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
                 studentColour = getCurrentClient().receiveChooseInt();
+                if(getGameMoves().getCurrentPlayerBoard().getEntranceRoom()[studentColour] == 0)
+                    throw new noStudentForColour();
                 getCurrentClient().sendMessage(new chooseWhereToMove());
                 whereToMove = getCurrentClient().receiveChooseInt();
                 if (whereToMove == 0) {
@@ -249,6 +255,8 @@ public class TurnHandler implements Runnable {
         List <Card> usedCards =  new ArrayList<>();
         int selectedCardNumber;
         boolean selectedCard;
+        for(VirtualViewConnection c: getGamePlayers())
+            c.sendMessage(new NotificationCMI("You will be able to choose yor assistant card in a few seconds ..."));
         for (Player player: getPlayerOrder()){
             printConsole(player.getNickname() +" is choosing their card");
             setCurrentPlayer(player);
@@ -277,7 +285,6 @@ public class TurnHandler implements Runnable {
                 }
             }
             getCurrentClient().sendMessage(new NotificationCMI("Waiting for other players to choose assistant card ..."));
-
         }
         newPlayerOrder.sort(Comparator.comparing(player1 -> player1.getCurrentCard().getValue()));
         setPlayerOrder(newPlayerOrder);
@@ -292,11 +299,10 @@ public class TurnHandler implements Runnable {
      * to an island where he can't move it to, he gets asked again until he asks for a valid number of steps.
      */
     private void moveMotherNature()throws IOException{
+        getCurrentClient().sendMessage(new NotificationCMI("Now you have to move mother nature!"));
         while (true) {
             try {
-                getCurrentClient().sendMessage(new NotificationCMI("Now you have to move mother nature!"));
                 getCurrentClient().sendMessage(new chooseIslandCMI());
-
                 getGameMoves().moveMotherNature(getCurrentClient().receiveChooseInt());
                 break;
             } catch (ExceededMotherNatureStepsException e) {
@@ -318,14 +324,14 @@ public class TurnHandler implements Runnable {
     private void influenceUpdate() throws EmptyTowerYard, GameWonException{
         //Updating influence in case checkInfluence() is not null and if motherNatureIsland's towerColour is different from
         //the new influence-calculated player's towerColour
-        Player islandPlayer = getGameMoves().getIslandController().checkInfluence();
+        Player islandPlayer = getGameMoves().getIslandController().checkInfluence(getGameMoves().getCurrentGame());
         Island motherNatureIsland = getGameMoves().getCurrentGame().getIslandWithMotherNature();
         if(islandPlayer != null && islandPlayer.getPlayerBoard().getTowerColour() != motherNatureIsland.getTowerColour()){
             if (motherNatureIsland.getTowerCount() == 0)
                 getGameMoves().setInfluenceToIsland();
             else
                 getGameMoves().changeInfluenceToIsland();
-            getGameMoves().getIslandController().islandUnification(getGameMoves().getCurrentGame().getIslandWithMotherNature());
+            getGameMoves().getIslandController().islandUnification(getGameMoves().getCurrentGame().getIslandWithMotherNature(),getGameMoves().getCurrentGame());
         }
         // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
         // manda a current player aggiornamneto tramite oggetti virtualviewtcp
