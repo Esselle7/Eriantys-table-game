@@ -1,9 +1,6 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.server.model.Board;
-import it.polimi.ingsw.server.model.Card;
-import it.polimi.ingsw.server.model.Deck;
-import it.polimi.ingsw.server.model.PlayGround;
+import it.polimi.ingsw.server.model.*;
 
 /**
  * Interface that defines the methods of the interfaces (CLI and GUI)
@@ -110,7 +107,7 @@ public interface View {
     int askGameMode();
 
     /**
-     * This method allows to sho inf
+     * This method allows to show info about the player that uses that cli
      */
     void showMyInfo();
 
@@ -181,7 +178,7 @@ public interface View {
      * @param playGroundNew updated playground with all
      *                      information about the game
      */
-    void update(PlayGround playGroundNew);
+    void update(Object playGroundNew);
 
 
     /**
