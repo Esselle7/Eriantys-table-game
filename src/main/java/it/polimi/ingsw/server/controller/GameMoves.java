@@ -195,10 +195,10 @@ public class GameMoves extends ManagerStudent implements Serializable {
      * @throws UnableToUseCardException if the check validity
      *                                  return false
      */
-    public void useAssistantCard(int cardNumber) throws UnableToUseCardException
-    {
+    public void useAssistantCard(int cardNumber) throws UnableToUseCardException, CardNotFoundException {
         if(checkCardValidity(cardNumber)) {
-           getCurrentPlayer().useCard(cardNumber);
+           if(!getCurrentPlayer().useCard(cardNumber))
+               throw new CardNotFoundException();
         }
         else
             throw new UnableToUseCardException();
@@ -378,6 +378,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
     public void moveMotherNature(int islandId) throws ExceededMotherNatureStepsException {
         int indexIslandMotherNature = getCurrentGame().getIslands().indexOf(getCurrentGame().getIslandWithMotherNature());
         int steps;
+        islandId = islandId-1;
         if(islandId<indexIslandMotherNature)
             steps = (getCurrentSettings().getNumberOfIslands()-1)-indexIslandMotherNature+islandId;
         else
@@ -386,7 +387,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
         if (steps > motherNatureSteps)
             throw new ExceededMotherNatureStepsException();
         else
-            getCurrentGame().setIslandWithMotherNature(getCurrentGame().getIslandByIndex(islandId-1));
+            getCurrentGame().setIslandWithMotherNature(getCurrentGame().getIslandByIndex(islandId));
     }
 
     /**
@@ -446,7 +447,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
             if(i == 0){
                 getCurrentGame().setIslandWithMotherNature(getCurrentGame().getIslands().get(i));
             }
-            else if(i!= 6){
+            if(i!= 6){
                 addStudentsToTarget(getCurrentGame().getIslands().get(i).getPlacedStudent(), generateStudents(1));
             }
         }
