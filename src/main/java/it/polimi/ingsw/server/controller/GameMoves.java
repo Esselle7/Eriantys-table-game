@@ -243,13 +243,14 @@ public class GameMoves extends ManagerStudent implements Serializable {
                 maximum = playerNumberOfStudentByColour;
                 nickname = player.getNickname();
             }
-            else
-                if(playerNumberOfStudentByColour == maximum && maximum != 0)
-                {
-                    return getCurrentGame().getProfessorsControl()[professorColour];
-                }
+
         }
-        return nickname;
+        if(getCurrentGame().getPlayerByNickname(getCurrentGame().getProfessorsControl()[professorColour]).getPlayerBoard().getDiningRoom()[professorColour] == maximum)
+        {
+            return getCurrentGame().getProfessorsControl()[professorColour];
+        }
+        else
+            return nickname;
     }
 
     /**
