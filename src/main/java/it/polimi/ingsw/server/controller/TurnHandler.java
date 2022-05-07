@@ -134,7 +134,7 @@ public class TurnHandler implements Runnable {
                     printConsole("Moving mother nature phase");
                     moveMotherNature();
                     printConsole("Updating influence ...");
-                    influenceUpdate();
+                    influenceUpdate(gameMoves.getCurrentGame().getIslandWithMotherNature());
                     getCurrentClient().sendMessage(new NotificationCMI("This is the final playground after mother nature move:"));
                     update();
                     getCurrentClient().sendMessage((new InfoForDecisionsCMI()));
@@ -316,6 +316,7 @@ public class TurnHandler implements Runnable {
                 getCurrentClient().sendMessage(new NotificationCMI("You exceeded mother nature steps"));
             }
         }
+        getCurrentPlayer().setMotherNatureSteps(0);
         // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
     }
 
@@ -327,20 +328,24 @@ public class TurnHandler implements Runnable {
      * @throws EmptyTowerYard propagating from Board.decreaseTowerYard
      * @throws GameWonException propagating from IslandController.islandUnification
      */
-    private void influenceUpdate() throws EmptyTowerYard, GameWonException{
+    public void influenceUpdate(Island motherNatureIsland) throws EmptyTowerYard, GameWonException{
         //Updating influence in case checkInfluence() is not null and if motherNatureIsland's towerColour is different from
         //the new influence-calculated player's towerColour
-        Player islandPlayer = getGameMoves().getIslandController().checkInfluence(getGameMoves().getCurrentGame());
-        Island motherNatureIsland = getGameMoves().getCurrentGame().getIslandWithMotherNature();
-        if(islandPlayer != null && islandPlayer.getPlayerBoard().getTowerColour() != motherNatureIsland.getTowerColour()){
-            if (motherNatureIsland.getTowerCount() == 0)
-                getGameMoves().setInfluenceToIsland();
-            else
-                getGameMoves().changeInfluenceToIsland();
-            getGameMoves().getIslandController().islandUnification(getGameMoves().getCurrentGame().getIslandWithMotherNature(),getGameMoves().getCurrentGame());
+        if(!motherNatureIsland.isBanned()) {
+            Player islandPlayer = getGameMoves().getIslandController().checkInfluence(motherNatureIsland);
+            if (islandPlayer != null && islandPlayer.getPlayerBoard().getTowerColour() != motherNatureIsland.getTowerColour()) {
+                if (motherNatureIsland.getTowerCount() == 0)
+                    getGameMoves().setInfluenceToIsland(motherNatureIsland);
+                else
+                    getGameMoves().changeInfluenceToIsland(motherNatureIsland);
+                getGameMoves().getIslandController().islandUnification(getGameMoves().getCurrentGame().getIslandWithMotherNature());
+            }
+            // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
+            // manda a current player aggiornamneto tramite oggetti virtualviewtcp
+        } else {
+            motherNatureIsland.setBanned(false);
+            //diminuisci bancardnumber
         }
-        // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
-        // manda a current player aggiornamneto tramite oggetti virtualviewtcp
     }
 
     /**
@@ -378,5 +383,4 @@ public class TurnHandler implements Runnable {
     {
         System.out.println(TextColours.PURPLE_BRIGHT + "> "+ textToPrint);
     }
-
 }

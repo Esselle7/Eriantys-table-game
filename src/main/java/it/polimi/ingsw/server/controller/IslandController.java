@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.server.controller.Exceptions.GameWonException;
+import it.polimi.ingsw.server.model.Colour;
 import it.polimi.ingsw.server.model.Island;
 import it.polimi.ingsw.server.model.PlayGround;
 import it.polimi.ingsw.server.model.Player;
@@ -15,22 +16,45 @@ import java.util.List;
  */
 
 public class IslandController {
+    private PlayGround playGround = null;
+    private int bannedColour;
+
+    public IslandController()
+    {
+        bannedColour = Colour.colourCount +1;
+    }
+
+    public void setPlayGround(PlayGround playGround) {
+        this.playGround = playGround;
+    }
+
+    public PlayGround getPlayGround() {
+        return this.playGround;
+    }
+
+    public void setBannedColour(int bannedColour) {
+        this.bannedColour = bannedColour;
+    }
+
+    public int getBannedColour() {
+        return bannedColour;
+    }
 
     /**
      * This method calculates (only for 2-3 player modes) the influence count for an island
      * @return the player that has the highest influence
      */
-    public Player checkInfluence(PlayGround playGround){
+    public Player checkInfluence(Island mothernatureIsland){
         int counter = 0, maxCounter = 0;
         Player maxPlayer = null;
-        Island mothernatureIsland = playGround.getIslandWithMotherNature();
         for (Player player : playGround.getPlayersList()){
             for(int index = 0; index < playGround.getProfessorsControl().length; index++){
-                if(player.getNickname().equals(playGround.getProfessorsControl()[index]))
+                if(player.getNickname().equals(playGround.getProfessorsControl()[index]) && index != getBannedColour())
                     counter = counter + mothernatureIsland.getPlacedStudent()[index];
             }
-            if(player.getPlayerBoard().getTowerColour().equals(mothernatureIsland.getTowerColour()))
+            if(player.getPlayerBoard().getTowerColour().equals(mothernatureIsland.getTowerColour()) && !mothernatureIsland.isTowersBanned())
                 counter = counter + mothernatureIsland.getTowerCount();
+            counter = counter + player.getExtraInfluence();
             if (counter > maxCounter){
                 maxPlayer = player;
                 maxCounter = counter;

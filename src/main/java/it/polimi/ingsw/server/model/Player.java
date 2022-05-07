@@ -16,11 +16,41 @@ public class Player extends ManagerStudent implements Serializable {
     private Board playerBoard;
     private Deck assistantCards;
     private Card currentCard;
+    private VirtualViewConnection Client;
+    private int motherNatureSteps;
+    private int extraInfluence;
 
     public Player(String nickname)
     {
         this.nickname = nickname;
         currentCard = new Card();
+        this.Client = Client;
+        this.motherNatureSteps = 0;
+        this.extraInfluence = 0;
+    }
+
+    public void setExtraInfluence(int extraInfluence) {
+        this.extraInfluence = extraInfluence;
+    }
+
+    public int getExtraInfluence(){
+        return extraInfluence;
+    }
+
+    public int getMotherNatureSteps() {
+        return motherNatureSteps;
+    }
+
+    public void setMotherNatureSteps(int motherNatureSteps) {
+        this.motherNatureSteps = motherNatureSteps;
+    }
+
+    public void setClient(VirtualViewConnection Client){
+        this.Client = Client;
+    }
+
+    public VirtualViewConnection getClient(){
+        return this.Client;
     }
 
     public String getNickname() {
@@ -55,6 +85,7 @@ public class Player extends ManagerStudent implements Serializable {
 
     public void setCurrentCard(Card currentCard) {
         this.currentCard = currentCard;
+        setMotherNatureSteps(currentCard.getMotherNatureSteps() + getMotherNatureSteps());
     }
 
     /**

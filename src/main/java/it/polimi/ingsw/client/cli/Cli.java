@@ -382,7 +382,7 @@ public class Cli implements View {
     private void printProfessorsControl()
     {
         for (int indexProfessor = 0; indexProfessor<getPlayGround().getProfessorsControl().length;indexProfessor++) {
-            String nickname = getPlayGround().getProfessorsControl()[indexProfessor];
+            String nickname = getPlayGround().getProfessorsControl()[indexProfessor].getNickname();
             String currentProfessor = getStudentColour().getStudentColours()[indexProfessor];
             if(nickname != null)
                 printText(currentProfessor+" professor is controlled by: "+nickname);

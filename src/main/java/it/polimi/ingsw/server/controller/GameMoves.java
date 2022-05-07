@@ -18,12 +18,22 @@ public class GameMoves extends ManagerStudent implements Serializable {
     private GameSettings currentSettings;
     private IslandController islandController;
     private Player currentPlayer;
+    private Player priorityPlayer = null;
 
     public GameMoves() {
         islandController = new IslandController();
         currentGame = new PlayGround();
     }
 
+    public void setPriorityPlayer(Player priorityPlayer) {
+        this.priorityPlayer = priorityPlayer;
+    }
+
+    public Player getPriorityPlayer() {
+        return priorityPlayer;
+    }
+
+    public void addObserver (ControllerViewObserver observer){this.observers.add(observer);}
 
 
 
@@ -50,6 +60,14 @@ public class GameMoves extends ManagerStudent implements Serializable {
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
+    }
+
+    public Player getPlayerByNickname(String nickname){
+        for(Player player : currentGame.getPlayersList()){
+            if(player.getNickname() == nickname)
+                return player;
+        }
+        return null;
     }
 
     public void setUpGame(int numberOfPlayers, List<VirtualViewConnection> gamePlayers)
@@ -143,27 +161,27 @@ public class GameMoves extends ManagerStudent implements Serializable {
 
     }
 
-    public void setInfluenceToIsland() throws EmptyTowerYard
+    public void setInfluenceToIsland(Island island) throws EmptyTowerYard
     {
-        Player playerInfluence = getIslandController().checkInfluence(getCurrentGame());
+        Player playerInfluence = getIslandController().checkInfluence(island);
         playerInfluence.getPlayerBoard().decreaseTowerYard();
-        getCurrentGame().getIslandWithMotherNature().setInfluence();
-        getCurrentGame().getIslandWithMotherNature().setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
+        island.setInfluence();
+        island.setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
     }
 
-    public void changeInfluenceToIsland() throws EmptyTowerYard
+    public void changeInfluenceToIsland(Island island) throws EmptyTowerYard
     {
-        Player playerInfluence = getIslandController().checkInfluence(getCurrentGame());
-        for(int i = 0; i < getCurrentGame().getIslandWithMotherNature().getTowerCount(); i++)
+        Player playerInfluence = getIslandController().checkInfluence(island);
+        for(int i = 0; i < island.getTowerCount(); i++)
             playerInfluence.getPlayerBoard().decreaseTowerYard();
         for(Player p : getCurrentGame().getPlayersList())
         {
-            if(p.getPlayerBoard().getTowerColour().equals(getCurrentGame().getIslandWithMotherNature().getTowerColour()))
+            if(p.getPlayerBoard().getTowerColour().equals(island.getTowerColour()))
             {
-                p.getPlayerBoard().setTowerYard(p.getPlayerBoard().getTowerYard()+getCurrentGame().getIslandWithMotherNature().getTowerCount());
+                p.getPlayerBoard().setTowerYard(p.getPlayerBoard().getTowerYard()+island.getTowerCount());
             }
         }
-        getCurrentGame().getIslandWithMotherNature().setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
+        island.setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
 
 
     }
@@ -243,9 +261,12 @@ public class GameMoves extends ManagerStudent implements Serializable {
                 maximum = playerNumberOfStudentByColour;
                 nickname = player.getNickname();
             }
-
         }
-        if(getCurrentGame().getPlayerByNickname(getCurrentGame().getProfessorsControl()[professorColour]).getPlayerBoard().getDiningRoom()[professorColour] == maximum)
+        Player currentControlPlayer = getCurrentGame().getPlayerByNickname(getCurrentGame().getProfessorsControl()[professorColour]);
+        if(priorityPlayer.getPlayerBoard().getDiningRoom()[professorColour] == maximum){
+            return priorityPlayer.getNickname();
+        }
+        else if(currentControlPlayer.getPlayerBoard().getDiningRoom()[professorColour] == maximum)
         {
             return getCurrentGame().getProfessorsControl()[professorColour];
         }
