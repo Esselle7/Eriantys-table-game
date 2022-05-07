@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.server.controller.Exceptions.GameWonException;
+import it.polimi.ingsw.server.model.Colour;
 import it.polimi.ingsw.server.model.Island;
 import it.polimi.ingsw.server.model.PlayGround;
 import it.polimi.ingsw.server.model.Player;
@@ -20,7 +21,7 @@ public class IslandController {
 
     public IslandController()
     {
-        bannedColour = 6;
+        bannedColour = Colour.colourCount +1;
     }
 
     public void setPlayGround(PlayGround playGround) {
