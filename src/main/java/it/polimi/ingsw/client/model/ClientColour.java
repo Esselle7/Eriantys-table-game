@@ -8,11 +8,11 @@ public class ClientColour {
     public ClientColour() {
         colourCount = 5;
         studentColours = new String[colourCount];
-        studentColours[0] = "Red";
-        studentColours[1] = "Green";
-        studentColours[2] = "Blue";
-        studentColours[3] = "Pink";
-        studentColours[4] = "Yellow";
+        studentColours[0] = "RED";
+        studentColours[1] = "GREEN";
+        studentColours[2] = "BLUE";
+        studentColours[3] = "PINK";
+        studentColours[4] = "YELLOW";
     }
 
     public int getColourCount() {

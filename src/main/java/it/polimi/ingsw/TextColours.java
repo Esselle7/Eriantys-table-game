@@ -6,6 +6,7 @@ package it.polimi.ingsw;
 public abstract class TextColours {
 
     public static final String[] playerColours= {TextColours.YELLOW,TextColours.CYAN};
+    public static final String[] studentColours = {TextColours.RED,TextColours.GREEN,TextColours.BLUE,TextColours.PURPLE,TextColours.YELLOW};
     // Reset
     public static final String RESET = "\033[0m";  // Text Reset
 

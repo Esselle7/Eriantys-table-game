@@ -1,5 +1,7 @@
 package it.polimi.ingsw.server.model;
 
+import java.io.Serializable;
+
 /**
  * Class that represent
  * a cloud tile of the game.
@@ -8,7 +10,7 @@ package it.polimi.ingsw.server.model;
  * take
  */
 
-public class CloudTile {
+public class CloudTile  implements Serializable {
     private int[] students;
     private boolean isUsed;
 

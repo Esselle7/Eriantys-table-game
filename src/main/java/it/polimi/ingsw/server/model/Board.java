@@ -5,6 +5,8 @@ import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
 import it.polimi.ingsw.server.controller.Exceptions.noStudentForColour;
 import it.polimi.ingsw.server.controller.Exceptions.EmptyDiningRoom;
 
+import java.io.Serializable;
+
 /**
  * A board of the game.
  * Every board belongs to a specific player.
@@ -13,7 +15,7 @@ import it.polimi.ingsw.server.controller.Exceptions.EmptyDiningRoom;
  *
  */
 
-public class Board extends ManagerStudent {
+public class Board extends ManagerStudent implements Serializable {
     private int[] entranceRoom;
     private final int[] diningRoom;
     private int towerYard;

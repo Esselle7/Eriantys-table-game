@@ -1,8 +1,9 @@
 package it.polimi.ingsw.server.controller;
-import it.polimi.ingsw.server.ControllerViewObserver;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.controller.Exceptions.*;
 import it.polimi.ingsw.server.model.*;
+
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -12,22 +13,16 @@ import java.util.*;
  * the game, the game settings and the turn
  * handler.
  */
-public class GameMoves extends ManagerStudent{
+public class GameMoves extends ManagerStudent implements Serializable {
     private PlayGround currentGame;
     private GameSettings currentSettings;
     private IslandController islandController;
-    private final List<ControllerViewObserver> observers = new ArrayList<>();
     private Player currentPlayer;
     private Player priorityPlayer = null;
 
-    /**
-     * This method notify all the current
-     * observers of this class, allowing to
-     * update the playground
-     */
-    public void notifyObservers() {
-        for (ControllerViewObserver observer : this.observers)
-            observer.update();
+    public GameMoves() {
+        islandController = new IslandController();
+        currentGame = new PlayGround();
     }
 
     public void setPriorityPlayer(Player priorityPlayer) {
@@ -40,11 +35,8 @@ public class GameMoves extends ManagerStudent{
 
     public void addObserver (ControllerViewObserver observer){this.observers.add(observer);}
 
-    public void removeObserver(ControllerViewObserver observer) {this.observers.remove(observer);}
 
-    public GameMoves() {
-        islandController = new IslandController();
-    }
+
 
     public PlayGround getCurrentGame() {
         return currentGame;
@@ -52,7 +44,6 @@ public class GameMoves extends ManagerStudent{
 
     public void setCurrentGame(PlayGround currentGame) {
         this.currentGame = currentGame;
-        getIslandController().setPlayGround(currentGame);
     }
 
     public GameSettings getCurrentSettings() {
@@ -81,8 +72,8 @@ public class GameMoves extends ManagerStudent{
 
     public void setUpGame(int numberOfPlayers, List<VirtualViewConnection> gamePlayers)
     {
-        setUpGameSettings(numberOfPlayers);
         setUpPlayers(gamePlayers);
+        setUpGameSettings(numberOfPlayers);
         setUpDecks();
         setUpIslands();
         setUpCloudTile();
@@ -104,7 +95,6 @@ public class GameMoves extends ManagerStudent{
             currentSettings = new ThreeGameSettings();
             getCurrentSettings().manageSettings();
         }
-        notifyObservers();
     }
 
     /**
@@ -115,9 +105,9 @@ public class GameMoves extends ManagerStudent{
      */
     private void setUpPlayers(List<VirtualViewConnection> gamePlayers)
     {
-        List<Player> playersList = new ArrayList<>();
+        ArrayList<Player> playersList = new ArrayList<>();
         for(VirtualViewConnection c: gamePlayers){
-            playersList.add(new Player(c));
+            playersList.add(new Player(c.getNickname()));
         }
         getCurrentGame().setPlayersList(playersList);
     }
@@ -148,7 +138,6 @@ public class GameMoves extends ManagerStudent{
     {
         getCurrentPlayerBoard().removeStudentEntrance(studentColour);
         getCurrentGame().getIslandByIndex(selectedIsland).setPlacedStudent(studentColour);
-        notifyObservers();
     }
 
     /**
@@ -160,19 +149,16 @@ public class GameMoves extends ManagerStudent{
      *                              chairs in the dining
      *                              room
      */
-    public void moveStudentEntranceToDining(int studentColour) throws FullDiningRoomTable, noStudentForColour
-    {
+    public void moveStudentEntranceToDining(int studentColour) throws FullDiningRoomTable, noStudentForColour {
         if(getCurrentPlayerBoard().getDiningRoom()[studentColour] < getCurrentSettings().getDiningRoomLenght() &&
                 getCurrentPlayerBoard().getEntranceRoom()[studentColour] > 0)
         {
             getCurrentPlayerBoard().removeStudentEntrance(studentColour);
             getCurrentPlayerBoard().increaseNumberOfStudent(studentColour);
-            notifyObservers();
         }
         else if(getCurrentPlayerBoard().getDiningRoom()[studentColour] >= getCurrentSettings().getDiningRoomLenght())
             throw new FullDiningRoomTable();
-        else if(getCurrentPlayerBoard().getEntranceRoom()[studentColour] == 0)
-            throw new noStudentForColour();
+
     }
 
     public void setInfluenceToIsland(Island island) throws EmptyTowerYard
@@ -197,6 +183,7 @@ public class GameMoves extends ManagerStudent{
         }
         island.setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
 
+
     }
 
     /**
@@ -211,9 +198,8 @@ public class GameMoves extends ManagerStudent{
      */
     public void takeStudentsFromCloudTile(int chosenCloudTile) throws CloudTileAlreadyTakenException
     {
-        if(!getCurrentGame().getCloudTiles()[chosenCloudTile].isUsed()) {
-            getCurrentPlayerBoard().setEntranceRoom(addStudentsToTarget(getCurrentPlayerBoard().getEntranceRoom(), getCurrentGame().getCloudTiles()[chosenCloudTile].getStudents()));
-            notifyObservers();
+        if(!getCurrentGame().getCloudTiles()[chosenCloudTile-1].isUsed()) {
+            getCurrentPlayerBoard().setEntranceRoom(addStudentsToTarget(getCurrentPlayerBoard().getEntranceRoom(), getCurrentGame().getCloudTiles()[chosenCloudTile-1].getStudents()));
         }
         else
             throw new CloudTileAlreadyTakenException();
@@ -227,15 +213,13 @@ public class GameMoves extends ManagerStudent{
      * @throws UnableToUseCardException if the check validity
      *                                  return false
      */
-    public void useAssistantCard(int cardNumber) throws UnableToUseCardException
-    {
+    public void useAssistantCard(int cardNumber) throws UnableToUseCardException, CardNotFoundException {
         if(checkCardValidity(cardNumber)) {
-           getCurrentPlayer().useCard(cardNumber);
-           notifyObservers();
+           if(!getCurrentPlayer().useCard(cardNumber))
+               throw new CardNotFoundException();
         }
         else
             throw new UnableToUseCardException();
-
     }
 
     /**
@@ -300,7 +284,7 @@ public class GameMoves extends ManagerStudent{
         {
             getCurrentGame().setProfessorControlByColour(professorColour,checkProfessorsControlByColour(professorColour));
         }
-        notifyObservers();
+
     }
 
     /**
@@ -415,18 +399,17 @@ public class GameMoves extends ManagerStudent{
      */
     public void moveMotherNature(int islandId) throws ExceededMotherNatureStepsException {
         int indexIslandMotherNature = getCurrentGame().getIslands().indexOf(getCurrentGame().getIslandWithMotherNature());
-        int steps = (islandId + indexIslandMotherNature) % getCurrentSettings().getNumberOfIslands();
-        int numberOfIslands = getCurrentSettings().getNumberOfIslands();
+        int steps;
+        islandId = islandId-1;
+        if(islandId<indexIslandMotherNature)
+            steps = (getCurrentSettings().getNumberOfIslands()-1)-indexIslandMotherNature+islandId;
+        else
+            steps = islandId-indexIslandMotherNature;
         int motherNatureSteps = getCurrentPlayer().getCurrentCard().getMotherNatureSteps();
-
         if (steps > motherNatureSteps)
             throw new ExceededMotherNatureStepsException();
-        else {
-            if (indexIslandMotherNature + steps > numberOfIslands)
-                steps -= numberOfIslands;
-            getCurrentGame().setIslandWithMotherNature(getCurrentGame().getIslandByIndex(steps));
-            notifyObservers();
-        }
+        else
+            getCurrentGame().setIslandWithMotherNature(getCurrentGame().getIslandByIndex(islandId));
     }
 
     /**
@@ -450,7 +433,7 @@ public class GameMoves extends ManagerStudent{
      */
     private void setUpIslands()
     {
-        List<Island> islands = new ArrayList<>();
+        ArrayList<Island> islands = new ArrayList<>();
         for(int i = 0; i < getCurrentSettings().getNumberOfIslands(); i++){
             islands.add(new Island());
         }
@@ -486,7 +469,7 @@ public class GameMoves extends ManagerStudent{
             if(i == 0){
                 getCurrentGame().setIslandWithMotherNature(getCurrentGame().getIslands().get(i));
             }
-            else if(i!= 6){
+            if(i!= 6){
                 addStudentsToTarget(getCurrentGame().getIslands().get(i).getPlacedStudent(), generateStudents(1));
             }
         }
@@ -504,4 +487,5 @@ public class GameMoves extends ManagerStudent{
         }
         getCurrentGame().setCloudTiles(cloudTiles);
     }
+
 }

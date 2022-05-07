@@ -1,5 +1,7 @@
 package it.polimi.ingsw.server.model;
 
+import java.io.Serializable;
+
 /**
  * An assistant Card of the game.
  * Every card belongs to a single Deck.
@@ -7,11 +9,11 @@ package it.polimi.ingsw.server.model;
  * for each deck.
  *
  */
-public class Card {
+public class Card implements Serializable {
     private final int value;
     private final int motherNatureSteps;
 
-    public Card()
+   public Card()
     {
         value = 0;
         motherNatureSteps = 0;

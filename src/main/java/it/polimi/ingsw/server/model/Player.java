@@ -1,13 +1,17 @@
 package it.polimi.ingsw.server.model;
 
+import it.polimi.ingsw.network.messages.UpdatePlayGroundCMI;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
+
+import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * This class represent a player of
  * the game. Every player has its own
  * board and deck.
  */
-public class Player extends ManagerStudent implements Comparable<Player> {
+public class Player extends ManagerStudent implements Serializable {
     private final String nickname;
     private Board playerBoard;
     private Deck assistantCards;
@@ -16,9 +20,9 @@ public class Player extends ManagerStudent implements Comparable<Player> {
     private int motherNatureSteps;
     private int extraInfluence;
 
-    public Player(VirtualViewConnection Client)
+    public Player(String nickname)
     {
-        this.nickname = Client.getNickname();
+        this.nickname = nickname;
         currentCard = new Card();
         this.Client = Client;
         this.motherNatureSteps = 0;
@@ -102,6 +106,7 @@ public class Player extends ManagerStudent implements Comparable<Player> {
             return false;
 
     }
+
 
     /**
      * This method allows comparing

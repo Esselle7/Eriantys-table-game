@@ -1,10 +1,6 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.client.model.ClientColour;
-import it.polimi.ingsw.server.model.Board;
-import it.polimi.ingsw.server.model.Card;
-import it.polimi.ingsw.server.model.Deck;
-import it.polimi.ingsw.server.model.PlayGround;
+import it.polimi.ingsw.server.model.*;
 
 /**
  * Interface that defines the methods of the interfaces (CLI and GUI)
@@ -33,20 +29,10 @@ public interface View {
     void setMyNickname(String myNickname);
 
     /**
-     * This method allows to print in the cli
-     * the text given in input in PURPLE colour
-     * @param text the text to print
+     * This method allows to show the player a notification
+     * @param text the notification to show (as a string)
      */
-    void printText(String text);
-
-
-    /**
-     * This method allows to print the text given in input
-     * with the colour also given in input
-     * @param text the text to print
-     * @param colour the text colour
-     */
-     void printTextWithColour(String text, String colour);
+    void showNotification(String text);
 
     /**
      * This method request to the client if it want to
@@ -111,6 +97,11 @@ public interface View {
     int askGameMode();
 
     /**
+     * This method allows to show info about the player that uses that cli
+     */
+    void showMyInfo();
+
+    /**
      * This method allows to print the remaining assistant card
      * in the player deck
      */
@@ -161,6 +152,7 @@ public interface View {
      * @return 0 if island, 1 if dining
      */
     int chooseWhereToMove();
+
     /**
      * This method allows to update
      * model in Client
@@ -176,7 +168,7 @@ public interface View {
      * @param playGroundNew updated playground with all
      *                      information about the game
      */
-    void update(PlayGround playGroundNew);
+    void update(Object playGroundNew);
 
 
     /**

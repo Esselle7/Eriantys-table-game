@@ -3,8 +3,9 @@ package it.polimi.ingsw.client.cli;
 import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.model.*;
-import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.server.model.*;
+
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -20,11 +21,17 @@ public class Cli implements View {
     private Board myBoard = null;
     private Deck myDeck = null;
     private Card myCurrentCard = null;
+    private final String defaultColour;
 
     public Cli()
     {
         input = new Scanner(System.in);
         studentColour = new ClientColour();
+        defaultColour = TextColours.PURPLE_BRIGHT;
+    }
+
+    public String getDefaultColour() {
+        return defaultColour;
     }
 
     public Scanner getInput() {
@@ -87,20 +94,45 @@ public class Cli implements View {
     }
 
     @Override
-    public void printText(String text)
+    public void showNotification(String text)
     {
-        System.out.println(TextColours.PURPLE_BRIGHT + "> " + text + TextColours.RESET);
+        printText(text);
     }
 
-    @Override
-    public void printTextWithColour(String text, String colour)
+    /**
+     * This method allows to print the text given in input
+     * with the colour also given in input
+     * @param text the text to print
+     * @param colour the text colour
+     */
+    private void printTextWithColour(String text, String colour)
     {
         System.out.println(colour + "> " + text + TextColours.RESET);
     }
 
+    /**
+     * This method allows to print in the cli
+     * the text given in input in PURPLE colour
+     * @param text the text to print
+     */
+    private void printText(String text)
+    {
+        System.out.println(getDefaultColour() + "> " + text + TextColours.RESET);
+    }
+
+    /**
+     * This method allows to print in a cute way
+     * that the players has to perform an action
+     * @param text the action to perform
+     */
+    private void printAction(String text)
+    {
+        printText("> ACTION: "+ text+ " <<");
+    }
+
     @Override
     public boolean isDefaultServer() {
-        printText("Please type 'NEW' to insert new Server IP/PORT, else type 'DEF");
+        printText("Please type 'NEW' to insert new Server IP/PORT, else type 'DEF'");
         String chose;
         while(true)
         {
@@ -122,7 +154,7 @@ public class Cli implements View {
 
     public int getServerPort(){
         printText("Please insert remote Server port:");
-        return getInput().nextInt();
+        return Integer.parseInt(getInput().nextLine());
     }
 
     @Override
@@ -202,13 +234,14 @@ public class Cli implements View {
      */
     public int askGameMode()
     {
+       // ReFreshConsole();
         int numberOfPlayers;
         printText("Choose game mode between:");
         printText("2 players Game Mode");
         printText("3 players Game Mode");
         while (true) {
             try {
-                numberOfPlayers = getInput().nextInt();
+                numberOfPlayers = Integer.parseInt(getInput().nextLine());
                 if (numberOfPlayers != 2 && numberOfPlayers != 3)
                     printText("Please insert 2 or 3 players Game Mode.");
                 else
@@ -223,11 +256,27 @@ public class Cli implements View {
 
     public void showInfoForDecisions()
     {
+        printText("------------OTHERS PLAYER INFO------------");
         printPlayersInfo();
+        printText("----------------------------------");
+        System.out.println();
+        printText("------------ISLANDS INFO------------");
         printIslandsInfo();
+        printText("----------------------------------");
+        System.out.println();
+        printText("------------PROFESSORS CONTROL INFO------------");
         printProfessorsControl();
+        printText("----------------------------------");
+        System.out.println();
     }
 
+    public void showMyInfo()
+    {
+        printText("------------THESE ARE YOUR INFO------------");
+        printMyCurrentCard();
+        printMyBoard();
+
+    }
     public void showMyDeck()
     {
         printText(getMyNickname()+"'s remains assistant card: ");
@@ -236,20 +285,6 @@ public class Cli implements View {
         }
     }
 
-    /**
-     * This method allows to print the number of student of each colour
-     * in an array of student target given in input
-     * @param target the students array (each cell is referred to a student colour
-     *               and contains the number of student of that colour
-     * @param playerColour the colour of the text to print, different for each player
-     */
-    private void printStudentsInfo(int[] target, String playerColour)
-    {
-        for(int index = 0; index < getStudentColour().getColourCount(); index++ )
-        {
-            printTextWithColour(getStudentColour().getStudentColours()[index]+"Students : " + target[index], playerColour);
-        }
-    }
 
     /**
      * This method allows to print the number of student of each colour
@@ -257,14 +292,21 @@ public class Cli implements View {
      * @param target the students array (each cell is referred to a student colour
      *               and contains the number of student of that colour
      */
-    private void printStudentsInfo(int[] target)
+    private void printStudentsInfo(int[] target, String colour)
     {
+        boolean printed = false;
         for(int index = 0; index < getStudentColour().getColourCount(); index++ )
         {
             int studentsToPrint = target[index];
             if (studentsToPrint > 0)
-                printText(getStudentColour().getStudentColours()[index]+"Students : " + studentsToPrint);
+            {
+                printed = true;
+                printTextWithColour(getStudentColour().getStudentColours()[index]+"Students : " + studentsToPrint,TextColours.studentColours[index]);
+
+            }
         }
+        if(!printed)
+            printTextWithColour("** Empty **", colour);
     }
 
     /**
@@ -282,12 +324,12 @@ public class Cli implements View {
                 printTextWithColour("> Nickname: " + p.getNickname().toUpperCase(),playerColour);
                 printTextWithColour("> Current card value: " + p.getCurrentCard().getValue(), playerColour);
                 printTextWithColour("> Current MotherNature Steps: " + p.getCurrentCard().getMotherNatureSteps(), playerColour);
-                printTextWithColour("> Entrance room : ",playerColour);
-                printStudentsInfo(p.getPlayerBoard().getEntranceRoom(), playerColour);
-                printTextWithColour("> Dining room : ", playerColour);
-                printStudentsInfo(p.getPlayerBoard().getDiningRoom(), playerColour);
-                printTextWithColour("> Tower Yard: ", playerColour);
-                printTextWithColour(p.getPlayerBoard().getTowerYard()+"tower remained ", playerColour);
+                printTextWithColour("------------ENTRANCE ROOM----------",playerColour);
+                printStudentsInfo(p.getPlayerBoard().getEntranceRoom(),playerColour);
+                printTextWithColour("------------DINING ROOM------------",playerColour);
+                printStudentsInfo(p.getPlayerBoard().getDiningRoom(),playerColour);
+                printTextWithColour("------------TOWER YARD-------------",playerColour);
+                printTextWithColour(p.getPlayerBoard().getTowerYard()+" remains "+p.getPlayerBoard().getTowerColour()+ " tower in the Tower Yard", playerColour);
             }
             indexPlayerColour++;
 
@@ -305,11 +347,15 @@ public class Cli implements View {
         int indexIsland = 1;
         for (Island island: getPlayGround().getIslands()) {
             printText("ISLAND "+indexIsland+": ");
-            printStudentsInfo(island.getPlacedStudent());
-            printText("Number of "+island.getTowerColour()+" tower on it: "+ island.getTowerCount());
+            printStudentsInfo(island.getPlacedStudent(),getDefaultColour());
+            if(island.getTowerColour() != null)
+                printText("Number of "+island.getTowerColour()+" tower on it: "+ island.getTowerCount());
+            else
+                printText("No tower on this island");
             if(island == getPlayGround().getIslandWithMotherNature())
                 printText("This Island has Mother Nature on it");
             indexIsland++;
+            System.out.println();
         }
     }
 
@@ -324,9 +370,9 @@ public class Cli implements View {
                 printText("Already used...");
             else
             {
-                printStudentsInfo(cloudTile.getStudents());
-                indexCloudTiles++;
+                printStudentsInfo(cloudTile.getStudents(),getDefaultColour());
             }
+            indexCloudTiles++;
         }
     }
 
@@ -339,9 +385,9 @@ public class Cli implements View {
             String nickname = getPlayGround().getProfessorsControl()[indexProfessor].getNickname();
             String currentProfessor = getStudentColour().getStudentColours()[indexProfessor];
             if(nickname != null)
-                printText(currentProfessor+"professor is controlled by: "+nickname);
+                printText(currentProfessor+" professor is controlled by: "+nickname);
             else
-                printText(currentProfessor + "professor is not controlled by anyone");
+                printText(currentProfessor + " professor is not controlled by anyone");
         }
     }
 
@@ -363,64 +409,100 @@ public class Cli implements View {
     private void printMyBoard()
     {
         printText(getMyNickname()+"'s board: ");
-        printStudentsInfo(getMyBoard().getEntranceRoom());
-        printStudentsInfo(getMyBoard().getDiningRoom());
-        printText(getMyBoard().getTowerYard()+"remains"+getMyBoard().getTowerColour()+ "tower in the Tower Yard");
+        printText("------------MY ENTRANCE ROOM----------");
+        printStudentsInfo(getMyBoard().getEntranceRoom(),getDefaultColour());
+        printText("------------MY DINING ROOM------------");
+        printStudentsInfo(getMyBoard().getDiningRoom(),getDefaultColour());
+        printText("------------MY TOWER YARD-------------");
+        printText(getMyBoard().getTowerYard()+" remains "+getMyBoard().getTowerColour()+ " tower in the Tower Yard");
     }
 
     @Override
     public int chooseAssistantCard()
     {
-        printText("Please choose an assistant card between the remains assistant cards:");
-        showMyDeck();
-        return getInput().nextInt();
+
+        printAction("Please choose an assistant card between the remains assistant cards:");
+        while(true)
+        {
+            try{
+                return Integer.parseInt(getInput().nextLine());
+            }catch (NumberFormatException e)
+            {
+                printText("ERROR: Please type a Card number!");
+            }
+        }
+
 
     }
 
     @Override
     public int chooseStudentColourToMove()
     {
-        printText("Please select a student from your entrance room to move");
-        printMyCurrentCard();
-        printMyBoard();
+        printAction("Please select a student from your entrance room to move");
+        showMyInfo();
         String studentColour = getInput().nextLine();
-        int index;
-        for (index = 0; index < getStudentColour().getColourCount(); index ++) {
-            if(getStudentColour().getStudentColours()[index].equals(studentColour))
-                break;
+        for (int index = 0; index < Colour.colourCount; index ++) {
+            if(getStudentColour().getStudentColours()[index].equals(studentColour.toUpperCase()))
+                return index;
         }
-        return index;
+        return 0;
     }
 
     @Override
     public int chooseIsland()
     {
-        printText("Please type the Island index where you want to move:");
-        return getInput().nextInt();
+        printAction("Please type the Island index where you want to move:");
+        while(true)
+        {
+            try{
+                int choice = Integer.parseInt(getInput().nextLine());
+                if(choice >0 && choice<=getPlayGround().getIslands().size())
+                    return  choice;
+                else
+                    printText("ERROR: You insert an invalid index!");
+            }catch (NumberFormatException e)
+            {
+                printText("ERROR: Please type an Island number!");
+            }
+        }
+
+
     }
 
     @Override
     public int chooseCloudTile()
     {
-        printText("Please type the Cloud Tile index:");
+        printAction("Please type the Cloud Tile index:");
         showCloudTilesInfo();
-        return getInput().nextInt();
+        while(true)
+        {
+            try{
+                int choice = Integer.parseInt(getInput().nextLine());
+                if(choice >0 && choice<=getPlayGround().getPlayersList().size())
+                    return  choice;
+                else
+                    printText("ERROR: You insert an invalid index!");
+            }catch (NumberFormatException e)
+            {
+                printText("ERROR: Please type a Cloud Tile number!");
+            }
+        }
 
     }
 
     @Override
     public int chooseWhereToMove()
     {
-        printText("You want to move the selected student to the Dining Room or to an Island?");
-        String choice = getInput().nextLine();
+        printAction("You want to move the selected student to the Dining Room or to an Island?");
         while(true)
         {
+            String choice = getInput().nextLine();
             if(choice.equalsIgnoreCase("DINING") || choice.equalsIgnoreCase("DINING ROOM"))
                 return 0;
             else if(choice.equalsIgnoreCase("ISLAND"))
                 return 1;
             else
-                printText("Please type 'DINING ROOM' or 'ISLAND'");
+                printText("ERROR: Please type 'DINING ROOM' or 'ISLAND'");
         }
 
     }
@@ -431,12 +513,42 @@ public class Cli implements View {
         setMyBoard(myBoardNew);
         setMyCurrentCard(myCurrentCardNew);
         setMyDeck(myDeckNew);
+
     }
 
     @Override
-    public void update(PlayGround playGroundNew)
+    public void update(Object playGroundNew)
     {
-        setPlayGround(playGroundNew);
+
+        PlayGround playGroundUpdate = (PlayGround) playGroundNew;
+        setPlayGround(playGroundUpdate);
+        for (Player p: playGroundUpdate.getPlayersList()) {
+            if(p.getNickname().equals(getMyNickname()))
+            {
+                update(p.getPlayerBoard(),p.getAssistantCards(),p.getCurrentCard());
+                break;
+            }
+        }
+    }
+
+    private void ReFreshConsole()
+    {
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            }
+            else {
+                System.out.print("\033\143");
+            }
+        } catch (IOException | InterruptedException ignored) {}
+
+        eryantisFigure();
+        printText("--------------------GAME INFO--------------------------");
+        showInfoForDecisions();
+        printText("--------------------PERSONAL INFO----------------------");
+        showMyInfo();
+
+
     }
 
     @Override
@@ -454,7 +566,6 @@ public class Cli implements View {
             printText("Join or create another game, you will be more lucky");
         }
     }
-
 
 
 

@@ -1,11 +1,13 @@
 package it.polimi.ingsw.server.model;
 
+import java.io.Serializable;
+
 /**
  * This class store the settings
  * for three players
  */
 
-public class TwoGameSettings extends GameSettings{
+public class TwoGameSettings extends GameSettings implements Serializable {
     /**
      * This method allow to set
      * the settings for two players

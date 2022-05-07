@@ -4,32 +4,26 @@ import it.polimi.ingsw.client.connection.ClientMessageImplement;
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.connection.ConnectionClientSide;
 import it.polimi.ingsw.server.model.PlayGround;
-import it.polimi.ingsw.server.model.Player;
-
-import java.io.IOException;
 
 public class UpdatePlayGroundCMI implements ClientMessageImplement {
-    private final PlayGround playGroundNew;
-
-    public UpdatePlayGroundCMI(PlayGround playGroundNew) {
-        this.playGroundNew = playGroundNew;
-    }
+    private Object playGroundNew;
 
     @Override
     public void elaborateMessage(View userInterface, ConnectionClientSide socket){
-        userInterface.update(getPlayGroundNew());
-        for (Player p: getPlayGroundNew().getPlayersList()
-             ) {
-            if(p.getNickname().equals(userInterface.getMyNickname()))
-            {
-                userInterface.update(p.getPlayerBoard(),p.getAssistantCards(),p.getCurrentCard());
-            }
-        }
-
+       userInterface.update(getPlayGroundNew());
+       //userInterface.setPlayGround((PlayGround) getPlayGroundNew());
 
     }
+    public UpdatePlayGroundCMI(Object playGroundNew) {
+        this.playGroundNew = playGroundNew;
+    }
 
-    public PlayGround getPlayGroundNew() {
+
+    public Object getPlayGroundNew() {
         return playGroundNew;
+    }
+
+    public void setPlayGroundNew(Object playGroundNew) {
+        this.playGroundNew = playGroundNew;
     }
 }

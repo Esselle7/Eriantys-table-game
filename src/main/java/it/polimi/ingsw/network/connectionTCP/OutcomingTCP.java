@@ -44,6 +44,7 @@ public class OutcomingTCP implements Runnable {
             try {
                 synchronized (outputStream) {
                     outputStream.writeObject(new Ping());
+                    outputStream.reset();
                 }
                 int sleepTime = 1000;
                 Thread.sleep(sleepTime);
@@ -78,6 +79,7 @@ public class OutcomingTCP implements Runnable {
     public void sendMessage(Message message) throws IOException {
         synchronized (outputStream) {
             outputStream.writeObject(message);
+            outputStream.reset();
         }
     }
 }

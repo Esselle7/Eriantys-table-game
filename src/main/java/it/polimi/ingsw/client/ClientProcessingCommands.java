@@ -48,11 +48,11 @@ public class ClientProcessingCommands implements Runnable {
                 ClientMessageImplement receivedMessage = (ClientMessageImplement) getServerConnection().receiveMessage();
                 receivedMessage.elaborateMessage(getUi(), getServerConnection());
             } catch (IOException | InterruptedException e1) {
-                getUi().printText("Connection lost. Closing current connection...");
+                getUi().showNotification("Connection lost. Closing current connection...");
                 try {
                     getServerConnection().close();
                 } catch (IOException e2) {
-                    getUi().printText("Could not close. Killing program...");
+                    getUi().showNotification("Could not close. Killing program...");
                 }
                 System.exit(-1);
                 return;
