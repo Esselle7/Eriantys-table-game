@@ -7,6 +7,7 @@ import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.controller.Exceptions.*;
+import it.polimi.ingsw.server.controller.expert.*;
 import it.polimi.ingsw.server.model.*;
 import java.util.List;
 
@@ -18,6 +19,8 @@ public class TurnHandler implements Runnable {
     private boolean gameOn;
     private boolean lastTurn = false;
     private String winner = null;
+    private ArrayList <CharacterCard> CharacterDeck = new ArrayList<>();
+    private List <CharacterCard> DrawnCards;
 
     private final List<VirtualViewConnection> gamePlayers;
 
@@ -34,6 +37,30 @@ public class TurnHandler implements Runnable {
     public boolean getLastTurn(){ return lastTurn;}
 
     public void setLastTurn(boolean lastTurn){ this.lastTurn = lastTurn;}
+
+    public void setUpCharacterCards(){
+        CharacterDeck.add(new DrawStudentsIslandCard(this));
+        CharacterDeck.add(new EqualProfessorCard(this));
+        CharacterDeck.add(new InfluenceCalculateCard(this));
+        CharacterDeck.add(new ExtraStepsCard(this));
+        CharacterDeck.add(new NoInfluenceBanCard(this));
+        CharacterDeck.add(new NoInfluenceTowersCard(this));
+        CharacterDeck.add(new SwitchStudentsCard(this));
+        CharacterDeck.add(new TwoExtraInfluenceCard(this));
+        CharacterDeck.add(new NoColorInfluenceCard(this));
+        CharacterDeck.add(new SwitchEntranceDiningCard(this));
+        CharacterDeck.add(new DrawStudentsDiningCard(this));
+        CharacterDeck.add(new BackInTheBagCard(this));
+    }
+
+    public void drawRandomCharacterCards(){
+        for (int i = 0; i < 3; i++)
+        {
+            int index = (int)(Math.random() * CharacterDeck.size());
+            DrawnCards.add(CharacterDeck.get(index));
+            CharacterDeck.remove(index);
+        }
+    }
 
     public TurnHandler(List<VirtualViewConnection> gamePlayersOut) throws IOException {
         gameOn = true;
@@ -338,7 +365,7 @@ public class TurnHandler implements Runnable {
                     getGameMoves().setInfluenceToIsland(motherNatureIsland);
                 else
                     getGameMoves().changeInfluenceToIsland(motherNatureIsland);
-                getGameMoves().getIslandController().islandUnification(getGameMoves().getCurrentGame().getIslandWithMotherNature());
+                getGameMoves().getIslandController().islandUnification(motherNatureIsland, getGameMoves().getCurrentGame());
             }
             // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
             // manda a current player aggiornamneto tramite oggetti virtualviewtcp
@@ -366,6 +393,11 @@ public class TurnHandler implements Runnable {
         }
 
 
+    }
+
+    private void resetCards(){
+        for(CharacterCard drawnCard : DrawnCards)
+            drawnCard.resetCard();
     }
 
     private void update() throws IOException {

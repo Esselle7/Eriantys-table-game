@@ -34,7 +34,7 @@ public abstract class CharacterCard {
 
     }
 
-    public void resetCard() throws Exception{
+    public void resetCard(){
 
     }
 }

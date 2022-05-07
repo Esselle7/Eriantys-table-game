@@ -22,7 +22,7 @@ public class NoInfluenceTowersCard extends CharacterCard{
     }
 
     @Override
-    public void resetCard() throws Exception {
+    public void resetCard(){
         noInfluenceIsland.setTowersBanned(false);
     }
 }

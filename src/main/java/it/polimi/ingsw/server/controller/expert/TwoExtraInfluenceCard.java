@@ -14,7 +14,7 @@ public class TwoExtraInfluenceCard extends CharacterCard{
     }
 
     @Override
-    public void resetCard() throws Exception {
+    public void resetCard(){
         currentPlayer.setExtraInfluence(0);
     }
 }

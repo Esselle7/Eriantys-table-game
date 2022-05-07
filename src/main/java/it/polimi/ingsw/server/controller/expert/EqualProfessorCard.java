@@ -18,7 +18,7 @@ public class EqualProfessorCard extends CharacterCard{
     }
 
     @Override
-    public void resetCard() throws Exception {
+    public void resetCard(){
         turnHandler.getGameMoves().setPriorityPlayer(null);
     }
 }
