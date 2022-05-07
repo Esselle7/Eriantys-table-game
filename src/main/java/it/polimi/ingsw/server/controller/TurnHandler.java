@@ -115,7 +115,7 @@ public class TurnHandler implements Runnable {
                 for(VirtualViewConnection c : getGamePlayers())
                 {
                     c.sendMessage(new NotificationCMI("------------ACTION PHASE--------------"));
-                    c.sendMessage(new NotificationCMI("Please wait for you turn ..."));
+                    c.sendMessage(new NotificationCMI("Please wait for your turn ..."));
                 }
 
                 printConsole("------------action phase--------------");
@@ -141,6 +141,7 @@ public class TurnHandler implements Runnable {
                     printConsole("Choosing cloud tile phase");
                     chooseCloudTiles();
                     printConsole(getCurrentPlayer().getNickname()+ "'s turn finished");
+                    getCurrentClient().sendMessage(new NotificationCMI("Your turn is finished, wait for other player to play their turn ..."));
                     update();
                 }
 
@@ -282,6 +283,11 @@ public class TurnHandler implements Runnable {
                 } catch (UnableToUseCardException e){
                     printConsole("Player fails to choose assistant card");
                     getCurrentClient().sendMessage(new NotificationCMI("Another player use that assistant card in this turn!"));
+                }
+                catch (CardNotFoundException e)
+                {
+                    printConsole("Player fails to choose assistant card");
+                    getCurrentClient().sendMessage(new NotificationCMI("Card not found in you deck!!"));
                 }
             }
             getCurrentClient().sendMessage(new NotificationCMI("Waiting for other players to choose assistant card ..."));
