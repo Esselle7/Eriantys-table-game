@@ -18,6 +18,7 @@ public class GameMoves extends ManagerStudent{
     private IslandController islandController;
     private final List<ControllerViewObserver> observers = new ArrayList<>();
     private Player currentPlayer;
+    private Player priorityPlayer = null;
 
     /**
      * This method notify all the current
@@ -27,6 +28,14 @@ public class GameMoves extends ManagerStudent{
     public void notifyObservers() {
         for (ControllerViewObserver observer : this.observers)
             observer.update();
+    }
+
+    public void setPriorityPlayer(Player priorityPlayer) {
+        this.priorityPlayer = priorityPlayer;
+    }
+
+    public Player getPriorityPlayer() {
+        return priorityPlayer;
     }
 
     public void addObserver (ControllerViewObserver observer){this.observers.add(observer);}
@@ -166,27 +175,27 @@ public class GameMoves extends ManagerStudent{
             throw new noStudentForColour();
     }
 
-    public void setInfluenceToIsland() throws EmptyTowerYard
+    public void setInfluenceToIsland(Island island) throws EmptyTowerYard
     {
-        Player playerInfluence = getIslandController().checkInfluence();
+        Player playerInfluence = getIslandController().checkInfluence(island);
         playerInfluence.getPlayerBoard().decreaseTowerYard();
-        getCurrentGame().getIslandWithMotherNature().setInfluence();
-        getCurrentGame().getIslandWithMotherNature().setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
+        island.setInfluence();
+        island.setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
     }
 
-    public void changeInfluenceToIsland() throws EmptyTowerYard
+    public void changeInfluenceToIsland(Island island) throws EmptyTowerYard
     {
-        Player playerInfluence = getIslandController().checkInfluence();
-        for(int i = 0; i < getCurrentGame().getIslandWithMotherNature().getTowerCount(); i++)
+        Player playerInfluence = getIslandController().checkInfluence(island);
+        for(int i = 0; i < island.getTowerCount(); i++)
             playerInfluence.getPlayerBoard().decreaseTowerYard();
         for(Player p : getCurrentGame().getPlayersList())
         {
-            if(p.getPlayerBoard().getTowerColour().equals(getCurrentGame().getIslandWithMotherNature().getTowerColour()))
+            if(p.getPlayerBoard().getTowerColour().equals(island.getTowerColour()))
             {
-                p.getPlayerBoard().setTowerYard(p.getPlayerBoard().getTowerYard()+getCurrentGame().getIslandWithMotherNature().getTowerCount());
+                p.getPlayerBoard().setTowerYard(p.getPlayerBoard().getTowerYard()+island.getTowerCount());
             }
         }
-        getCurrentGame().getIslandWithMotherNature().setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
+        island.setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
 
     }
 
@@ -268,15 +277,17 @@ public class GameMoves extends ManagerStudent{
                 maximum = playerNumberOfStudentByColour;
                 nickname = player.getNickname();
             }
-            else
-                if(playerNumberOfStudentByColour == maximum && maximum != 0)
-                {
-                    notifyObservers();
-                    return getCurrentGame().getProfessorsControl()[professorColour];
-                }
         }
-        notifyObservers();
-        return nickname;
+        Player currentControlPlayer = getCurrentGame().getPlayerByNickname(getCurrentGame().getProfessorsControl()[professorColour]);
+        if(priorityPlayer.getPlayerBoard().getDiningRoom()[professorColour] == maximum){
+            return priorityPlayer.getNickname();
+        }
+        else if(currentControlPlayer.getPlayerBoard().getDiningRoom()[professorColour] == maximum)
+        {
+            return getCurrentGame().getProfessorsControl()[professorColour];
+        }
+        else
+            return nickname;
     }
 
     /**

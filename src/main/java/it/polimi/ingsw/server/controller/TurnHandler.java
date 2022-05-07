@@ -286,9 +286,9 @@ public class TurnHandler extends ControllerViewObserver implements Runnable {
             Player islandPlayer = getGameMoves().getIslandController().checkInfluence(motherNatureIsland);
             if (islandPlayer != null && islandPlayer.getPlayerBoard().getTowerColour() != motherNatureIsland.getTowerColour()) {
                 if (motherNatureIsland.getTowerCount() == 0)
-                    getGameMoves().setInfluenceToIsland();
+                    getGameMoves().setInfluenceToIsland(motherNatureIsland);
                 else
-                    getGameMoves().changeInfluenceToIsland();
+                    getGameMoves().changeInfluenceToIsland(motherNatureIsland);
                 getGameMoves().getIslandController().islandUnification(getGameMoves().getCurrentGame().getIslandWithMotherNature());
             }
             // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp

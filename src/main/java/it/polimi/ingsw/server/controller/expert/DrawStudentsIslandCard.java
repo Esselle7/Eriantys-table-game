@@ -3,13 +3,11 @@ import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.network.messages.chooseIslandCMI;
 import it.polimi.ingsw.network.messages.chooseStudentColourToMoveCMI;
 import it.polimi.ingsw.server.controller.*;
-import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
-import it.polimi.ingsw.server.controller.Exceptions.noStudentForColour;
 
-public class DrawStudentsCard extends CharacterCard {
+public class DrawStudentsIslandCard extends CharacterCard {
     private int[] students;
 
-    public DrawStudentsCard(TurnHandler turnHandler){
+    public DrawStudentsIslandCard(TurnHandler turnHandler){
         super(turnHandler, 1);
         this.students = gameMoves.generateStudents(4);
     }

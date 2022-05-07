@@ -3,6 +3,7 @@ package it.polimi.ingsw.server.model;
 import it.polimi.ingsw.server.controller.Exceptions.EmptyTowerYard;
 import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
 import it.polimi.ingsw.server.controller.Exceptions.noStudentForColour;
+import it.polimi.ingsw.server.controller.Exceptions.EmptyDiningRoom;
 
 /**
  * A board of the game.
@@ -18,6 +19,7 @@ public class Board extends ManagerStudent {
     private int towerYard;
     private TColour towerColour;
     private int coins;
+    static int coinReserve = 20;
 
     /**
      * Create a board.
@@ -30,7 +32,7 @@ public class Board extends ManagerStudent {
         this.entranceRoom = entranceRoom;
         this.towerYard = towerYard;
         this.towerColour = towerColour;
-        this.coins = 0;
+        this.addCoin();
         diningRoom = new int[Colour.colourCount];
     }
 
@@ -38,13 +40,20 @@ public class Board extends ManagerStudent {
         return coins;
     }
 
+    public void decreaseCoinReserve(){
+        coinReserve--;
+    }
+
     public void addCoin(){
         coins++;
+        coinReserve--;
     }
 
     public void decreaseCoins(int coinsToSubtract) throws NotEnoughCoins{
-        if(this.coins >= coinsToSubtract)
+        if(this.coins >= coinsToSubtract) {
             this.coins = this.coins - coinsToSubtract;
+            coinReserve = coinReserve + coinsToSubtract;
+        }
         else
             throw new NotEnoughCoins();
     }
@@ -72,6 +81,7 @@ public class Board extends ManagerStudent {
     public void setTowerColour(TColour towerColour) {
         this.towerColour = towerColour;
     }
+
 
 
     /**
@@ -111,16 +121,20 @@ public class Board extends ManagerStudent {
     public void increaseNumberOfStudent(int studentColour)
     {
         diningRoom[studentColour]++;
+        if(diningRoom[studentColour] == 3 || diningRoom[studentColour] == 6 || diningRoom[studentColour] == 9)
+            this.addCoin();
     }
 
     /**
      * increase the current number of students
      * by the colour sit down in the diningRoom
-     * @param studentColour colour of the students to increase the count
+     * @param colour colour of the students to increase the count
      */
-    public void decreaseNumberOfStudent(int studentColour)
-    {
-        diningRoom[studentColour]--;
+    public void decreaseDiningRoom(int colour) throws EmptyDiningRoom{
+        if(diningRoom[colour] > 0)
+            diningRoom[colour]--;
+        else
+            throw new EmptyDiningRoom();
     }
 
 

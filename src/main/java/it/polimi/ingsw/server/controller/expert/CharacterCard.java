@@ -22,8 +22,12 @@ public abstract class CharacterCard {
 
     public void buyCard() throws Exception {
         turnHandler.getCurrentPlayer().getPlayerBoard().decreaseCoins(price);
-        if(!hasBeenUsed)
+        if(!hasBeenUsed) {
             price++;
+            //When the card is bought the first time, its price is increased and one coin is put on it
+            turnHandler.getCurrentPlayer().getPlayerBoard().decreaseCoinReserve();
+            hasBeenUsed = true;
+        }
     }
 
     public void useCard() throws Exception{

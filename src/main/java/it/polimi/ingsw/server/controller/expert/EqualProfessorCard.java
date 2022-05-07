@@ -11,15 +11,14 @@ public class EqualProfessorCard extends CharacterCard{
     }
 
     @Override
-    public void useCard() throws Exception{
+    public void useCard() throws Exception {
         buyCard();
         int colorCounter = 0;
-        for(String nickname : playGround.getProfessorsControl()){
-            if(currentPlayer.getPlayerBoard().getDiningRoom()[colorCounter] ==
-                    turnHandler.getGameMoves().getPlayerByNickname(nickname).getPlayerBoard().getDiningRoom()[colorCounter]){
-                playGround.setProfessorControlByColour(colorCounter, currentPlayer.getNickname());
-            }
-            colorCounter++;
-        }
+        turnHandler.getGameMoves().setPriorityPlayer(currentPlayer);
+    }
+
+    @Override
+    public void resetCard() throws Exception {
+        turnHandler.getGameMoves().setPriorityPlayer(null);
     }
 }
