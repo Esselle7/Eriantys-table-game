@@ -414,14 +414,24 @@ public class Cli implements View {
         printText("------------MY DINING ROOM------------");
         printStudentsInfo(getMyBoard().getDiningRoom(),getDefaultColour());
         printText("------------MY TOWER YARD-------------");
-        printText(getMyBoard().getTowerYard()+" remains"+getMyBoard().getTowerColour()+ " tower in the Tower Yard");
+        printText(getMyBoard().getTowerYard()+" remains "+getMyBoard().getTowerColour()+ " tower in the Tower Yard");
     }
 
     @Override
     public int chooseAssistantCard()
     {
+
         printAction("Please choose an assistant card between the remains assistant cards:");
-        return Integer.parseInt(getInput().nextLine());
+        while(true)
+        {
+            try{
+                return Integer.parseInt(getInput().nextLine());
+            }catch (NumberFormatException e)
+            {
+                printText("ERROR: Please type a Card number!");
+            }
+        }
+
 
     }
 
@@ -442,7 +452,21 @@ public class Cli implements View {
     public int chooseIsland()
     {
         printAction("Please type the Island index where you want to move:");
-        return  Integer.parseInt(getInput().nextLine());
+        while(true)
+        {
+            try{
+                int choice = Integer.parseInt(getInput().nextLine());
+                if(choice >0 && choice<=getPlayGround().getIslands().size())
+                    return  choice;
+                else
+                    printText("ERROR: You insert an invalid index!");
+            }catch (NumberFormatException e)
+            {
+                printText("ERROR: Please type an Island number!");
+            }
+        }
+
+
     }
 
     @Override
@@ -450,7 +474,19 @@ public class Cli implements View {
     {
         printAction("Please type the Cloud Tile index:");
         showCloudTilesInfo();
-        return Integer.parseInt(getInput().nextLine());
+        while(true)
+        {
+            try{
+                int choice = Integer.parseInt(getInput().nextLine());
+                if(choice >0 && choice<=getPlayGround().getPlayersList().size())
+                    return  choice;
+                else
+                    printText("ERROR: You insert an invalid index!");
+            }catch (NumberFormatException e)
+            {
+                printText("ERROR: Please type a Cloud Tile number!");
+            }
+        }
 
     }
 
@@ -466,7 +502,7 @@ public class Cli implements View {
             else if(choice.equalsIgnoreCase("ISLAND"))
                 return 1;
             else
-                printText("Please type 'DINING ROOM' or 'ISLAND'");
+                printText("ERROR: Please type 'DINING ROOM' or 'ISLAND'");
         }
 
     }
