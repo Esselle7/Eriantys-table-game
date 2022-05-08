@@ -11,7 +11,6 @@ public class ExtraStepsCard extends CharacterCard{
     @Override
     public void useCard() throws Exception {
         buyCard();
-        super.useCard();
         currentPlayer.setMotherNatureSteps(currentPlayer.getMotherNatureSteps() + 2);
     }
 }
