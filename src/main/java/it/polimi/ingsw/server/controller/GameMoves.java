@@ -33,10 +33,6 @@ public class GameMoves extends ManagerStudent implements Serializable {
         return priorityPlayer;
     }
 
-    public void addObserver (ControllerViewObserver observer){this.observers.add(observer);}
-
-
-
 
     public PlayGround getCurrentGame() {
         return currentGame;
@@ -64,7 +60,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
 
     public Player getPlayerByNickname(String nickname){
         for(Player player : currentGame.getPlayersList()){
-            if(player.getNickname() == nickname)
+            if(Objects.equals(player.getNickname(), nickname))
                 return player;
         }
         return null;
