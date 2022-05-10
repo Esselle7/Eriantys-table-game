@@ -3,19 +3,24 @@ package it.polimi.ingsw.server.controller.expert;
 import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.network.messages.chooseStudentColourToMoveCMI;
 import it.polimi.ingsw.network.messages.chooseWhereToMove;
+import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
+import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
 import it.polimi.ingsw.server.controller.TurnHandler;
+
+import java.io.IOException;
 
 public class SwitchEntranceDiningCard extends CharacterCard{
 
-    public SwitchEntranceDiningCard(TurnHandler turnHandler){
-        super(turnHandler, 1);
+    public SwitchEntranceDiningCard(){
+        super(1);
+        setDescription("...");
     }
 
     @Override
-    public void useCard() throws Exception {
-        buyCard();
-        int[] diningRoom = currentPlayer.getPlayerBoard().getDiningRoom();
-        int[] entranceRoom = currentPlayer.getPlayerBoard().getEntranceRoom();
+    public void useCardImpl(TurnHandler turnHandler) throws chooseCharacterCardException, IOException, NotEnoughCoins {
+        buyCard(turnHandler);
+        int[] diningRoom = turnHandler.getCurrentPlayer().getPlayerBoard().getDiningRoom();
+        int[] entranceRoom = turnHandler.getCurrentPlayer().getPlayerBoard().getEntranceRoom();
         int studentsMoved = 0, chooseAnother, diningToMove, entranceToMove;
         do {
             turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());

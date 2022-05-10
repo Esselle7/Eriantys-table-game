@@ -3,31 +3,36 @@ package it.polimi.ingsw.server.controller.expert;
 import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.network.messages.chooseStudentColourToMoveCMI;
 import it.polimi.ingsw.network.messages.chooseWhereToMove;
+import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
+import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
 import it.polimi.ingsw.server.controller.TurnHandler;
 
-public class SwitchStudentsCard extends CharacterCard{
-    private int[] students;
+import java.io.IOException;
 
-    public SwitchStudentsCard(TurnHandler turnHandler){
-        super(turnHandler, 1);
-        this.students = gameMoves.generateStudents(6);
+public class SwitchStudentsCard extends CharacterCard{
+
+    public SwitchStudentsCard(){
+        super(1);
+        setDescription("...");
+
     }
 
     @Override
-    public void useCard() throws Exception {
-        buyCard();
+    public void useCardImpl(TurnHandler turnHandler) throws IOException, chooseCharacterCardException, NotEnoughCoins {
+        int[] students = turnHandler.getGameMoves().generateStudents(6);
+        buyCard(turnHandler);
         int studentsMoved = 0, chooseAnother, studentColourToDrop, studentColourToChoose;
         do {
             turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
             studentColourToDrop = turnHandler.getCurrentClient().receiveChooseInt();
             turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
             studentColourToChoose = turnHandler.getCurrentClient().receiveChooseInt();
-            if(this.students[studentColourToChoose] > 0 && currentPlayer.getPlayerBoard().getEntranceRoom()[studentColourToDrop] > 0){
+            if(students[studentColourToChoose] > 0 && turnHandler.getCurrentPlayer().getPlayerBoard().getEntranceRoom()[studentColourToDrop] > 0){
                 studentsMoved++;
-                this.students[studentColourToChoose]--;
-                this.students[studentColourToDrop]++;
-                currentPlayer.getPlayerBoard().getEntranceRoom()[studentColourToChoose]++;
-                currentPlayer.getPlayerBoard().getEntranceRoom()[studentColourToDrop]--;
+                students[studentColourToChoose]--;
+                students[studentColourToDrop]++;
+                turnHandler.getCurrentPlayer().getPlayerBoard().getEntranceRoom()[studentColourToChoose]++;
+                turnHandler.getCurrentPlayer().getPlayerBoard().getEntranceRoom()[studentColourToDrop]--;
             } else {
                 turnHandler.getCurrentClient().sendMessage(new NotificationCMI("No students available"));
             }

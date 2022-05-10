@@ -1,24 +1,25 @@
 package it.polimi.ingsw.server.controller.expert;
+import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
 import it.polimi.ingsw.server.controller.TurnHandler;
 import it.polimi.ingsw.server.model.*;
 
+import java.io.IOException;
+
 public class EqualProfessorCard extends CharacterCard{
-    PlayGround playGround;
 
-    public EqualProfessorCard(TurnHandler turnHandler){
-        super(turnHandler, 2);
-        playGround = turnHandler.getGameMoves().getCurrentGame();
+    public EqualProfessorCard(){
+        super(2);
+        setDescription("...");
     }
 
     @Override
-    public void useCard() throws Exception {
-        buyCard();
-        int colorCounter = 0;
-        turnHandler.getGameMoves().setPriorityPlayer(currentPlayer);
+    public void useCardImpl(TurnHandler turnHandler) throws IOException, NotEnoughCoins {
+        buyCard(turnHandler);
+        turnHandler.getGameMoves().setPriorityPlayer(turnHandler.getCurrentPlayer());
     }
 
     @Override
-    public void resetCard(){
+    public void resetCard(TurnHandler turnHandler){
         turnHandler.getGameMoves().setPriorityPlayer(null);
     }
 }

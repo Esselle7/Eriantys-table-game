@@ -1,17 +1,20 @@
 package it.polimi.ingsw.server.controller.expert;
 
+import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
 import it.polimi.ingsw.server.controller.TurnHandler;
+
+import java.io.IOException;
 
 public class ExtraStepsCard extends CharacterCard{
 
-    public ExtraStepsCard(TurnHandler turnHandler){
-        super(turnHandler, 1);
+    public ExtraStepsCard(){
+        super(1);
+        setDescription("...");
     }
 
     @Override
-    public void useCard() throws Exception {
-        buyCard();
-        super.useCard();
-        currentPlayer.setMotherNatureSteps(currentPlayer.getMotherNatureSteps() + 2);
+    public void useCardImpl(TurnHandler turnHandler) throws NotEnoughCoins, IOException {
+        buyCard(turnHandler);
+        turnHandler.getCurrentPlayer().setMotherNatureSteps(turnHandler.getCurrentPlayer().getMotherNatureSteps() + 2);
     }
 }

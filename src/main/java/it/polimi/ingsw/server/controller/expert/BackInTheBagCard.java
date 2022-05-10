@@ -3,18 +3,23 @@ package it.polimi.ingsw.server.controller.expert;
 import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.network.messages.chooseStudentColourToMoveCMI;
 import it.polimi.ingsw.server.controller.Exceptions.EmptyDiningRoom;
+import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
+import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
 import it.polimi.ingsw.server.controller.TurnHandler;
 import it.polimi.ingsw.server.model.*;
 
+import java.io.IOException;
+
 public class BackInTheBagCard extends CharacterCard{
 
-    public BackInTheBagCard(TurnHandler turnHandler){
-        super(turnHandler, 3);
+    public BackInTheBagCard(){
+        super(3);
+        setDescription("...");
     }
 
     @Override
-    public void useCard() throws Exception {
-        buyCard();
+    public void useCardImpl(TurnHandler turnHandler) throws IOException, chooseCharacterCardException, NotEnoughCoins {
+        buyCard(turnHandler);
         turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Select the colour of the student to pick"));
         turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
         int colour = turnHandler.getCurrentClient().receiveChooseInt();
@@ -28,4 +33,6 @@ public class BackInTheBagCard extends CharacterCard{
             }
         }
     }
+
+
 }

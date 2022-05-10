@@ -1,26 +1,23 @@
 package it.polimi.ingsw.server.controller.expert;
 import it.polimi.ingsw.server.controller.*;
-import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
+import it.polimi.ingsw.server.controller.Exceptions.*;
 import it.polimi.ingsw.server.model.Player;
 
 import java.io.IOException;
+import java.io.Serializable;
 
-public abstract class CharacterCard {
+public abstract class CharacterCard implements Serializable {
     int price;
     boolean hasBeenUsed;
-    protected TurnHandler turnHandler;
-    protected GameMoves gameMoves;
-    Player currentPlayer;
+    String description = "";
 
-    public CharacterCard(TurnHandler turnHandler, int price){
-        this.turnHandler = turnHandler;
+
+    public CharacterCard(int price){
         this.hasBeenUsed = false;
-        this.gameMoves = turnHandler.getGameMoves();
         this.price = price;
-        this.currentPlayer = turnHandler.getCurrentPlayer();
     }
 
-    public void buyCard() throws Exception {
+    public void buyCard(TurnHandler turnHandler) throws IOException, NotEnoughCoins {
         turnHandler.getCurrentPlayer().getPlayerBoard().decreaseCoins(price);
         if(!hasBeenUsed) {
             price++;
@@ -30,11 +27,27 @@ public abstract class CharacterCard {
         }
     }
 
-    public void useCard() throws Exception{
+    public abstract void useCardImpl(TurnHandler turnHandler) throws chooseCharacterCardException, IOException, NotEnoughCoins, EmptyTowerYard,UnableToUseCardException, GameWonException;
+
+    public void useCard(TurnHandler turnHandler) throws IOException, EmptyTowerYard, NotEnoughCoins, GameWonException, UnableToUseCardException {
+        try {
+            useCardImpl(turnHandler);
+        }catch (chooseCharacterCardException ignored){}
 
     }
 
-    public void resetCard(){
+    public int getPrice() {
+        return price;
+    }
 
+    public void resetCard(TurnHandler turnHandler) {}
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

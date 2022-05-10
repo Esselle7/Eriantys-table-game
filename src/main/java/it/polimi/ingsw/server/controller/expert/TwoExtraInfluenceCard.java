@@ -1,20 +1,24 @@
 package it.polimi.ingsw.server.controller.expert;
 
+import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
 import it.polimi.ingsw.server.controller.TurnHandler;
 
+import java.io.IOException;
+
 public class TwoExtraInfluenceCard extends CharacterCard{
-    public TwoExtraInfluenceCard(TurnHandler turnHandler){
-        super(turnHandler, 2);
+    public TwoExtraInfluenceCard(){
+        super(2);
+        setDescription("...");
     }
 
     @Override
-    public void useCard() throws Exception {
-        buyCard();
-        currentPlayer.setExtraInfluence(2);
+    public void useCardImpl(TurnHandler turnHandler) throws NotEnoughCoins, IOException {
+        buyCard(turnHandler);
+        turnHandler.getCurrentPlayer().setExtraInfluence(2);
     }
 
     @Override
-    public void resetCard(){
-        currentPlayer.setExtraInfluence(0);
+    public void resetCard(TurnHandler turnHandler){
+        turnHandler.getCurrentPlayer().setExtraInfluence(0);
     }
 }
