@@ -6,12 +6,11 @@ import it.polimi.ingsw.client.connection.ConnectionClientSide;
 import it.polimi.ingsw.server.model.PlayGround;
 
 public class UpdatePlayGroundCMI implements ClientMessageImplement {
-    private Object playGroundNew;
+    private final Object playGroundNew;
 
     @Override
     public void elaborateMessage(View userInterface, ConnectionClientSide socket){
        userInterface.update(getPlayGroundNew());
-       //userInterface.setPlayGround((PlayGround) getPlayGroundNew());
 
     }
     public UpdatePlayGroundCMI(Object playGroundNew) {
@@ -21,9 +20,5 @@ public class UpdatePlayGroundCMI implements ClientMessageImplement {
 
     public Object getPlayGroundNew() {
         return playGroundNew;
-    }
-
-    public void setPlayGroundNew(Object playGroundNew) {
-        this.playGroundNew = playGroundNew;
     }
 }
