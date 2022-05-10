@@ -2,12 +2,10 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.client.Client;
-import it.polimi.ingsw.network.messages.chooseNicknameCMI;
-import it.polimi.ingsw.network.messages.NotificationCMI;
-import it.polimi.ingsw.network.messages.chooseLobbySizeCMI;
-import it.polimi.ingsw.network.messages.chooseString;
+import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewTCPFactory;
+import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
 import it.polimi.ingsw.server.controller.TurnHandler;
 
 import java.io.IOException;
@@ -110,8 +108,8 @@ public class GameInstanceFactory implements Runnable{
             gamePlayers = new ArrayList<>();
             printConsole("Creating new lobby");
             printConsole("Waiting for lobby Leader ...");
-            setUpLobby();
-            TurnHandler th = new TurnHandler(getGamePlayers());
+            int gameMode = setUpLobby();
+            TurnHandler th = new TurnHandler(getGamePlayers(),gameMode);
             Thread gameManager = new Thread(th);
             gameManager.start();
         }
@@ -125,11 +123,12 @@ public class GameInstanceFactory implements Runnable{
      * @throws IOException If something in send or receiving messages fails
      */
 
-    private void setUpLobby() throws InterruptedException, IOException
+    private int setUpLobby() throws InterruptedException, IOException
     {
         List<String> users = new ArrayList<>();
+        List<Integer> result=findLeader();
         int lobbySize;
-        lobbySize = findLeader();
+        lobbySize = result.get(0);
 
         for(int countPlayer = 2; countPlayer <= lobbySize; countPlayer++) {
             findPlayer(countPlayer,lobbySize);
@@ -157,7 +156,7 @@ public class GameInstanceFactory implements Runnable{
         }
         for(VirtualViewConnection clients : getGamePlayers())
             clients.ping();
-
+        return result.get(1);
     }
 
     /**
@@ -167,16 +166,43 @@ public class GameInstanceFactory implements Runnable{
      * @throws InterruptedException  if something in taking a connection from the blocking queue fails (disconnection)
      * @throws IOException if there are problems with the socket connection
      */
-    private synchronized int findLeader() throws InterruptedException, IOException {
+    private synchronized List<Integer> findLeader() throws InterruptedException, IOException{
+        List<Integer> result = new ArrayList<>();
         getGamePlayers().add(getVirtualViewTCPFactory().getVirtualClientConnection());
         getGamePlayers().get(0).sendMessage(new NotificationCMI("Game found and you are the lobby leader!"));
         printConsole("Lobby leader found!");
         printConsole("Ask lobby size to lobby leader, waiting response...");
         getGamePlayers().get(0).sendMessage(new chooseLobbySizeCMI());
-        int lobbySize = getGamePlayers().get(0).receiveChooseInt();
+        int lobbySize;
+        while(true)
+        {
+            try
+            {
+                lobbySize = getGamePlayers().get(0).receiveChooseInt();
+                break;
+            }
+            catch (chooseCharacterCardException ignored)
+            {}
+        }
+
         printConsole("Lobby size is: "+ lobbySize + " players!");
+        result.add(lobbySize);
+        getGamePlayers().get(0).sendMessage(new chooseExpertModeCMI());
+        int gameMode;
+        while(true)
+        {
+            try
+            {
+                gameMode = getGamePlayers().get(0).receiveChooseInt();
+                break;
+            }
+            catch (chooseCharacterCardException ignored)
+            {}
+        }
+        result.add(gameMode);
         getGamePlayers().get(0).sendMessage(new NotificationCMI("Waiting remaining players..."));
-        return lobbySize;
+
+        return result;
     }
 
     /**

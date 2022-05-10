@@ -38,6 +38,10 @@ public class Board extends ManagerStudent implements Serializable {
         diningRoom = new int[Colour.colourCount];
     }
 
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
+
     public int getCoins() {
         return coins;
     }

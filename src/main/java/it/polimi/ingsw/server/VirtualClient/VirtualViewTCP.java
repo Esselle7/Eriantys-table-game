@@ -3,6 +3,7 @@ package it.polimi.ingsw.server.VirtualClient;
 import it.polimi.ingsw.network.connectionTCP.IncomingTCP;
 import it.polimi.ingsw.network.connectionTCP.OutcomingTCP;
 import it.polimi.ingsw.network.messages.*;
+import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -86,9 +87,17 @@ public class VirtualViewTCP implements VirtualViewConnection {
     }
 
     @Override
-    public int receiveChooseInt() throws IOException {
-        chooseInt choice = (chooseInt) receiveMessage();
-        return choice.getData();
+    public int receiveChooseInt() throws IOException,chooseCharacterCardException{
+        Message received = receiveMessage();
+        if(received instanceof wantToChooseCharacterCard)
+            throw new chooseCharacterCardException(((wantToChooseCharacterCard) received).getCharacterCard());
+        else
+        {
+            chooseInt choice = (chooseInt) received;
+            return choice.getData();
+        }
+
+
     }
 
     @Override
