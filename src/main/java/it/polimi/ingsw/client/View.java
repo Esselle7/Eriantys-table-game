@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
 import it.polimi.ingsw.server.model.*;
 
 /**
@@ -97,6 +98,13 @@ public interface View {
     int askGameMode();
 
     /**
+     * This method allows to play
+     * with expert variant or not
+     * @return 0 for normal game, 1 for expert
+     */
+    int chooseExpertMode();
+
+    /**
      * This method allows to show info about the player that uses that cli
      */
     void showMyInfo();
@@ -113,6 +121,12 @@ public interface View {
     void showCloudTilesInfo();
 
     /**
+     * This method allows to show the current character cards available
+     */
+    void showCharacterCardsInfo();
+
+
+    /**
      * This method allows to print al necessary information for player to
      * play a turn
      */
@@ -123,35 +137,35 @@ public interface View {
      * @return the value of the card to use
      *
      */
-    int chooseAssistantCard();
+    int chooseAssistantCard() throws chooseCharacterCardException;
 
     /**
      * This method allows to choose which student the player
      * want to move from the entrance room
      * @return the colour corresponding int to the colour chosen
      */
-    int chooseStudentColourToMove();
+    int chooseStudentColourToMove() throws chooseCharacterCardException;
 
     /**
      * This method allows the player to choose an island in order
      * to move a student or mother nature on it
      * @return the index of the selected island
      */
-    int chooseIsland();
+    int chooseIsland() throws chooseCharacterCardException;
 
     /**
      * This method allows to choose a cloud tile from
      * the play ground
      * @return the index of the selected cloud tile
      */
-    int chooseCloudTile();
+    int chooseCloudTile() throws chooseCharacterCardException;
 
     /**
      * This method allows the player to choose where to place
      * a student (if in the dining room or in an island)
      * @return 0 if island, 1 if dining
      */
-    int chooseWhereToMove();
+    int chooseWhereToMove() throws chooseCharacterCardException;
 
     /**
      * This method allows to update
@@ -160,7 +174,7 @@ public interface View {
      * @param myDeckNew updated client deck
      * @param myCurrentCardNew updated client current card
      */
-    void update(Board myBoardNew, Deck myDeckNew, Card myCurrentCardNew);
+    void update(Board myBoardNew, Deck myDeckNew, Card myCurrentCardNew, int myCoins);
 
     /**
      * This method allows to update

@@ -3,6 +3,8 @@ package it.polimi.ingsw.client.cli;
 import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.model.*;
+import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
+import it.polimi.ingsw.server.controller.expert.CharacterCard;
 import it.polimi.ingsw.server.model.*;
 
 import java.io.IOException;
@@ -22,13 +24,16 @@ public class Cli implements View {
     private Deck myDeck = null;
     private Card myCurrentCard = null;
     private final String defaultColour;
+    private final int expert;
 
     public Cli()
     {
         input = new Scanner(System.in);
         studentColour = new ClientColour();
         defaultColour = TextColours.PURPLE_BRIGHT;
+        expert = 1;
     }
+
 
     public String getDefaultColour() {
         return defaultColour;
@@ -226,12 +231,7 @@ public class Cli implements View {
     }
 
 
-    /**
-     * This method allows to insert the game
-     * number of players
-     *
-     * @return The number of players decided by the creator of the game
-     */
+
     public int askGameMode()
     {
        // ReFreshConsole();
@@ -252,6 +252,25 @@ public class Cli implements View {
                 getInput().next();
             }
         }
+    }
+
+    public int chooseExpertMode()
+    {
+        printText("Choose game mode between:");
+        printText("EXPERT MODE (It includes Character Card)");
+        printText("NORMAL MODE");
+        String choice;
+        while (true) {
+
+            choice = getInput().nextLine();
+            if (choice.equalsIgnoreCase("EXPERT") || choice.equalsIgnoreCase("EXPERT MODE"))
+                return 1;
+            if (choice.equalsIgnoreCase("NORMAL") || choice.equalsIgnoreCase("NORMAL MODE"))
+                return 0;
+            else
+                printText("Invalid input, please type expert or normal mode");
+        }
+
     }
 
     public void showInfoForDecisions()
@@ -376,6 +395,22 @@ public class Cli implements View {
         }
     }
 
+    @Override
+    public void showCharacterCardsInfo() {
+        printAction("Please type the index of which character card you want to use:");
+        printText("(Note: you have "+getMyBoard().getCoins()+" coins)");
+        int index = 1;
+        for(CharacterCard c : getPlayGround().getDrawnCards())
+        {
+            printText("Character card number "+index);
+            printText("    Description: "+c.getDescription());
+            printText("    Price: "+c.getPrice());
+            printText("");
+            index++;
+        }
+
+    }
+
     /**
      * This method allows to print all the professor controller
      */
@@ -418,50 +453,69 @@ public class Cli implements View {
     }
 
     @Override
-    public int chooseAssistantCard()
+    public int chooseAssistantCard() throws chooseCharacterCardException
     {
-
+        String in = "";
+        int choice;
         printAction("Please choose an assistant card between the remains assistant cards:");
         while(true)
         {
             try{
-                return Integer.parseInt(getInput().nextLine());
+                in = getInput().nextLine();
+                choice = Integer.parseInt(in);
+                return choice;
             }catch (NumberFormatException e)
             {
+                if(in.equalsIgnoreCase("CHARACTER CARD")) // qui inserisci la verifica della game mood
+                {
+                    chooseCharacterCard();
+                }
                 printText("ERROR: Please type a Card number!");
             }
         }
-
-
     }
 
     @Override
-    public int chooseStudentColourToMove()
+    public int chooseStudentColourToMove() throws chooseCharacterCardException
     {
         printAction("Please select a student from your entrance room to move");
         showMyInfo();
-        String studentColour = getInput().nextLine();
-        for (int index = 0; index < Colour.colourCount; index ++) {
-            if(getStudentColour().getStudentColours()[index].equals(studentColour.toUpperCase()))
-                return index;
+        while(true)
+        {
+            String studentColour = getInput().nextLine();
+            if(studentColour.equalsIgnoreCase("CHARACTER CARD"))
+            {
+                chooseCharacterCard();
+            }
+            for (int index = 0; index < Colour.colourCount; index ++) {
+                if(getStudentColour().getStudentColours()[index].equals(studentColour.toUpperCase()))
+                    return index;
+            }
+            printText("You insert an invalid student colour!");
         }
-        return 0;
     }
 
     @Override
-    public int chooseIsland()
+    public int chooseIsland() throws chooseCharacterCardException
     {
+        String in = "";
         printAction("Please type the Island index where you want to move:");
         while(true)
         {
             try{
-                int choice = Integer.parseInt(getInput().nextLine());
+                in = getInput().nextLine();
+                int choice = Integer.parseInt(in);
                 if(choice >0 && choice<=getPlayGround().getIslands().size())
                     return  choice;
                 else
                     printText("ERROR: You insert an invalid index!");
             }catch (NumberFormatException e)
             {
+                if(in.equalsIgnoreCase("CHARACTER CARD"))
+                {
+                    chooseCharacterCard();
+                }
+
                 printText("ERROR: Please type an Island number!");
             }
         }
@@ -470,20 +524,27 @@ public class Cli implements View {
     }
 
     @Override
-    public int chooseCloudTile()
+    public int chooseCloudTile()throws chooseCharacterCardException
     {
         printAction("Please type the Cloud Tile index:");
         showCloudTilesInfo();
+        String in="";
+        int choice;
         while(true)
         {
             try{
-                int choice = Integer.parseInt(getInput().nextLine());
+                in = getInput().nextLine();
+                choice = Integer.parseInt(in);
                 if(choice >0 && choice<=getPlayGround().getPlayersList().size())
-                    return  choice;
+                    return choice;
                 else
                     printText("ERROR: You insert an invalid index!");
             }catch (NumberFormatException e)
             {
+                if(in.equalsIgnoreCase("CHARACTER CARD"))
+                {
+                   chooseCharacterCard();
+                }
                 printText("ERROR: Please type a Cloud Tile number!");
             }
         }
@@ -491,41 +552,79 @@ public class Cli implements View {
     }
 
     @Override
-    public int chooseWhereToMove()
+    public int chooseWhereToMove() throws  chooseCharacterCardException
     {
         printAction("You want to move the selected student to the Dining Room or to an Island?");
         while(true)
         {
             String choice = getInput().nextLine();
-            if(choice.equalsIgnoreCase("DINING") || choice.equalsIgnoreCase("DINING ROOM"))
+            if(choice.equalsIgnoreCase("CHARACTER CARD"))
+            {
+                chooseCharacterCard();
+            }
+            else if(choice.equalsIgnoreCase("DINING") || choice.equalsIgnoreCase("DINING ROOM"))
                 return 0;
             else if(choice.equalsIgnoreCase("ISLAND"))
                 return 1;
+
+            printText("ERROR: Please type 'DINING ROOM' or 'ISLAND'");
+        }
+
+    }
+
+    private void chooseCharacterCard() throws chooseCharacterCardException
+    {
+        if(getPlayGround().getGameMode() != expert)
+        {
+            printText("You can't access expert mode menù!");
+            return;
+        }
+        printText("-------------------CHARACTER CARD MENU--------------");
+        boolean enoughCoins = false;
+        for (CharacterCard c: getPlayGround().getDrawnCards()
+             ) {
+            if (c.getPrice() <= getMyBoard().getCoins()) {
+                enoughCoins = true;
+                break;
+            }
+        }
+        if(!enoughCoins)
+        {
+            printText("You don't have enough money to buy a card, please try again later...");
+            throw new chooseCharacterCardException(-1);
+        }
+        showCharacterCardsInfo();
+        while(true)
+        {
+            int card = Integer.parseInt(getInput().nextLine());
+            if(getPlayGround().getDrawnCards().get(card).getPrice() <= getMyBoard().getCoins())
+                throw new chooseCharacterCardException(card);
             else
-                printText("ERROR: Please type 'DINING ROOM' or 'ISLAND'");
+                printText("Please, choose a character card with less than you coins board!!");
         }
 
     }
 
     @Override
-    public void update(Board myBoardNew, Deck myDeckNew, Card myCurrentCardNew)
+    public void update(Board myBoardNew, Deck myDeckNew, Card myCurrentCardNew,int myCoins)
     {
         setMyBoard(myBoardNew);
         setMyCurrentCard(myCurrentCardNew);
         setMyDeck(myDeckNew);
+        getMyBoard().setCoins(myCoins);
 
     }
+
 
     @Override
     public void update(Object playGroundNew)
     {
-
         PlayGround playGroundUpdate = (PlayGround) playGroundNew;
         setPlayGround(playGroundUpdate);
         for (Player p: playGroundUpdate.getPlayersList()) {
             if(p.getNickname().equals(getMyNickname()))
             {
-                update(p.getPlayerBoard(),p.getAssistantCards(),p.getCurrentCard());
+                update(p.getPlayerBoard(),p.getAssistantCards(),p.getCurrentCard(),p.getPlayerBoard().getCoins());
                 break;
             }
         }
