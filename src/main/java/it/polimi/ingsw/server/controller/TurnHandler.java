@@ -19,10 +19,34 @@ public class TurnHandler implements Runnable {
     private boolean gameOn;
     private boolean lastTurn = false;
     private String winner = null;
-    private ArrayList <CharacterCard> CharacterDeck = new ArrayList<>();
-    private List <CharacterCard> DrawnCards;
+    private List <CharacterCard> CharacterDeck;
+    private final int numberOfCharacterCards;
 
     private final List<VirtualViewConnection> gamePlayers;
+
+
+
+    public TurnHandler(List<VirtualViewConnection> gamePlayersOut, int gameMode) throws IOException {
+        gameOn = true;
+        gamePlayers = new ArrayList<>();
+        gamePlayers.addAll(gamePlayersOut);
+        gameMoves = new GameMoves();
+        getGameMoves().getCurrentGame().setGameMode(gameMode);
+        CharacterDeck = new ArrayList<>();
+        numberOfCharacterCards = 3;
+        for (VirtualViewConnection c: gamePlayers
+        ) {
+            c.ping();
+        }
+    }
+
+    public int getNumberOfCharacterCards() {
+        return numberOfCharacterCards;
+    }
+
+    public void setCharacterDeck(ArrayList<CharacterCard> characterDeck) {
+        CharacterDeck = characterDeck;
+    }
 
     private void setWinner(String playerNickname){ winner = playerNickname; }
 
@@ -38,41 +62,9 @@ public class TurnHandler implements Runnable {
 
     public void setLastTurn(boolean lastTurn){ this.lastTurn = lastTurn;}
 
-    public void setUpCharacterCards(){
-        CharacterDeck.add(new DrawStudentsIslandCard(this));
-        CharacterDeck.add(new EqualProfessorCard(this));
-        CharacterDeck.add(new InfluenceCalculateCard(this));
-        CharacterDeck.add(new ExtraStepsCard(this));
-        CharacterDeck.add(new NoInfluenceBanCard(this));
-        CharacterDeck.add(new NoInfluenceTowersCard(this));
-        CharacterDeck.add(new SwitchStudentsCard(this));
-        CharacterDeck.add(new TwoExtraInfluenceCard(this));
-        CharacterDeck.add(new NoColorInfluenceCard(this));
-        CharacterDeck.add(new SwitchEntranceDiningCard(this));
-        CharacterDeck.add(new DrawStudentsDiningCard(this));
-        CharacterDeck.add(new BackInTheBagCard(this));
+    public List<CharacterCard> getCharacterDeck() {
+        return CharacterDeck;
     }
-
-    public void drawRandomCharacterCards(){
-        for (int i = 0; i < 3; i++)
-        {
-            int index = (int)(Math.random() * CharacterDeck.size());
-            DrawnCards.add(CharacterDeck.get(index));
-            CharacterDeck.remove(index);
-        }
-    }
-
-    public TurnHandler(List<VirtualViewConnection> gamePlayersOut) throws IOException {
-        gameOn = true;
-        gamePlayers = new ArrayList<>();
-        gamePlayers.addAll(gamePlayersOut);
-        gameMoves = new GameMoves();
-        for (VirtualViewConnection c: gamePlayers
-             ) {
-            c.ping();
-        }
-    }
-
 
     public List<VirtualViewConnection> getGamePlayers() {
         return gamePlayers;
@@ -108,9 +100,41 @@ public class TurnHandler implements Runnable {
         //for the first turn, as per the rules
         getGameMoves().setUpGame(getGamePlayers().size(),getGamePlayers());
         setPlayerOrder(getGameMoves().getCurrentGame().getPlayersList());
+        setUpCharacterCards();
         setGameOn(true);
 
     }
+
+
+    private void setUpCharacterCards(){
+
+        getCharacterDeck().add(new DrawStudentsIslandCard());
+        getCharacterDeck().add(new EqualProfessorCard());
+        getCharacterDeck().add(new InfluenceCalculateCard());
+        getCharacterDeck().add(new ExtraStepsCard());
+        getCharacterDeck().add(new NoInfluenceBanCard());
+        getCharacterDeck().add(new NoInfluenceTowersCard());
+        getCharacterDeck().add(new SwitchStudentsCard());
+        getCharacterDeck().add(new TwoExtraInfluenceCard());
+        getCharacterDeck().add(new NoColorInfluenceCard());
+        getCharacterDeck().add(new SwitchEntranceDiningCard());
+        getCharacterDeck().add(new DrawStudentsDiningCard());
+        getCharacterDeck().add(new BackInTheBagCard());
+        drawRandomCharacterCards();
+    }
+
+    private void drawRandomCharacterCards(){
+        List<CharacterCard> toCopy = new ArrayList<>();
+        for (int i = 0; i < getNumberOfCharacterCards(); i++)
+        {
+            int index = (int)(Math.random() * getCharacterDeck().size());
+            toCopy.add(getCharacterDeck().get(index));
+            getCharacterDeck().remove(index);
+        }
+        getGameMoves().getCurrentGame().setDrawnCards(toCopy);
+        setCharacterDeck(null);
+    }
+
 
     /**
      * This method, as long as the game is going (gameOn = true) cycles through the planning phase and the action
@@ -121,7 +145,6 @@ public class TurnHandler implements Runnable {
     public void run(){
         printConsole("Setting up the game ...");
         setupGame();
-
         try {
             update();
             while (getGame()) {
@@ -232,7 +255,7 @@ public class TurnHandler implements Runnable {
      * it in the dining room or on an island (hence asking which island he wants to move it to). The process is repeated
      * until the player has moved the number of students he has to move as per gameSettings.
      */
-    private void moveStudents() throws IOException{
+    private void moveStudents() throws IOException, GameWonException, EmptyTowerYard{
         int studentColour;
         int whereToMove;
         int i = 0;
@@ -267,6 +290,10 @@ public class TurnHandler implements Runnable {
                 printConsole("Full dining room exception occurs!");
                 getCurrentClient().sendMessage(new NotificationCMI("You don't have enough space to move that student to the dining room!"));
             }
+            catch (chooseCharacterCardException e2)
+            {
+                useCharacterCard(e2.getCharacterCard());
+            }
         }
         printConsole("Student Moves finished for "+ getCurrentPlayer().getNickname());
     }
@@ -277,7 +304,7 @@ public class TurnHandler implements Runnable {
      * In case the player only has already drawn cards in his hands, an exception is made (as per the rules) and he is
      * allowed to draw an already drawn card of his choice
      */
-    private void chooseTurnAssistantCards() throws IOException
+    private void chooseTurnAssistantCards() throws IOException, GameWonException, EmptyTowerYard
     {
         List <Player> newPlayerOrder = getGameMoves().getCurrentGame().getPlayersList();
         List <Card> usedCards =  new ArrayList<>();
@@ -290,19 +317,19 @@ public class TurnHandler implements Runnable {
             setCurrentPlayer(player);
             getCurrentClient().sendMessage(new InfoMyDeckCMI());
             while(true){
-                //In case the player has only already drawn cards in his hands
-                if(usedCards.containsAll(getCurrentPlayer().getAssistantCards().getResidualCards())){
-                    do{
-                        getCurrentClient().sendMessage(new chooseAssistantCardCMI());
-                        selectedCardNumber = getCurrentClient().receiveChooseInt();
-                        selectedCard = getCurrentPlayer().useCard(selectedCardNumber);
-                    } while(!selectedCard);
-                    break;
-                }
-                //useAssistantCard checks whether the card has already been drawn or not by another player by using the
-                //gameMoves.checkValidity() method. If that's the case, the loop goes on until it breaks when the player
-                //selects a valid card
                 try{
+                    //In case the player has only already drawn cards in his hands
+                    //useAssistantCard checks whether the card has already been drawn or not by another player by using the
+                    //gameMoves.checkValidity() method. If that's the case, the loop goes on until it breaks when the player
+                    //selects a valid card
+                    if(usedCards.containsAll(getCurrentPlayer().getAssistantCards().getResidualCards())){
+                        do{
+                            getCurrentClient().sendMessage(new chooseAssistantCardCMI());
+                            selectedCardNumber = getCurrentClient().receiveChooseInt();
+                            selectedCard = getCurrentPlayer().useCard(selectedCardNumber);
+                        } while(!selectedCard);
+                        break;
+                    }
                     getCurrentClient().sendMessage(new chooseAssistantCardCMI());
                     getGameMoves().useAssistantCard(getCurrentClient().receiveChooseInt());
                     usedCards.add(getCurrentPlayer().getCurrentCard());
@@ -316,7 +343,13 @@ public class TurnHandler implements Runnable {
                     printConsole("Player fails to choose assistant card");
                     getCurrentClient().sendMessage(new NotificationCMI("Card not found in you deck!!"));
                 }
+                catch( chooseCharacterCardException e)
+                {
+                    useCharacterCard(e.getCharacterCard());
+                }
+
             }
+
             getCurrentClient().sendMessage(new NotificationCMI("Waiting for other players to choose assistant card ..."));
         }
         newPlayerOrder.sort(Comparator.comparing(player1 -> player1.getCurrentCard().getValue()));
@@ -331,7 +364,7 @@ public class TurnHandler implements Runnable {
      * This method asks the player which island he wants to move mother nature to. In case he asks to move mothernature
      * to an island where he can't move it to, he gets asked again until he asks for a valid number of steps.
      */
-    private void moveMotherNature()throws IOException{
+    private void moveMotherNature()throws IOException, GameWonException, EmptyTowerYard{
         getCurrentClient().sendMessage(new NotificationCMI("Now you have to move mother nature!"));
         while (true) {
             try {
@@ -342,6 +375,11 @@ public class TurnHandler implements Runnable {
                 printConsole("Mother nature steps exception");
                 getCurrentClient().sendMessage(new NotificationCMI("You exceeded mother nature steps"));
             }
+            catch (chooseCharacterCardException e1)
+            {
+                useCharacterCard(e1.getCharacterCard());
+            }
+
         }
         getCurrentPlayer().setMotherNatureSteps(0);
         // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
@@ -380,7 +418,7 @@ public class TurnHandler implements Runnable {
      * students from, in case the chosen cloudTile has been already taken, CloudTileAlreadyTakenException is handled
      * and the player is asked again.
      */
-    private void chooseCloudTiles() throws  IOException{
+    private void chooseCloudTiles() throws  IOException, GameWonException, EmptyTowerYard{
         while(!getLastTurn()){
             try {
                 getCurrentClient().sendMessage(new chooseCloudTileCMI());
@@ -390,14 +428,40 @@ public class TurnHandler implements Runnable {
                 printConsole("CloudTile already taken exception occurs!");
                 getCurrentClient().sendMessage(new NotificationCMI("The selected CloudTile is empty!"));
             }
+            catch (chooseCharacterCardException e1)
+            {
+                useCharacterCard(e1.getCharacterCard());
+            }
         }
+    }
+
+    private void useCharacterCard(int characterCard) throws IOException, GameWonException, EmptyTowerYard
+    {
+        int chosenCard;
+        chosenCard = characterCard;
+        if(chosenCard != -1)
+        {
+            while(true)
+            {
+                try {
+                    getGameMoves().getCurrentGame().getDrawnCards().get(chosenCard).useCard(this);
+                    break;
+                }catch (UnableToUseCardException e) {
+                    getCurrentClient().sendMessage(new NotificationCMI("Please select another character card!"));
+                } catch (NotEnoughCoins e) {
+                    getCurrentClient().sendMessage(new NotificationCMI("You don't have enough money to use that card, please select another one!"));
+                }
+            }
+        }
+
+
 
 
     }
 
     private void resetCards(){
-        for(CharacterCard drawnCard : DrawnCards)
-            drawnCard.resetCard();
+        for(CharacterCard drawnCard : getGameMoves().getCurrentGame().getDrawnCards())
+            drawnCard.resetCard(this);
     }
 
     private void update() throws IOException {

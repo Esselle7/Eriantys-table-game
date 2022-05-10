@@ -1,4 +1,6 @@
 package it.polimi.ingsw.server.model;
+import it.polimi.ingsw.server.controller.expert.CharacterCard;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,8 @@ public class PlayGround implements Serializable {
     private Island islandWithMotherNature;
     private final String[] professorsControl;
     private CloudTile[] cloudTiles;
+    private List <CharacterCard> drawnCards;
+    private int gameMode;
    // private static PlayGround instance = null;
 
     /**
@@ -23,6 +27,15 @@ public class PlayGround implements Serializable {
      */
     public PlayGround() {
         professorsControl = new String[Colour.colourCount];
+        drawnCards = new ArrayList<>();
+    }
+
+    public List<CharacterCard> getDrawnCards() {
+        return drawnCards;
+    }
+
+    public void setDrawnCards(List<CharacterCard> drawnCards) {
+        this.drawnCards = drawnCards;
     }
 
     /**
@@ -38,6 +51,8 @@ public class PlayGround implements Serializable {
            instance = new PlayGround();
         return instance;
     }*/
+
+
 
     public List<Player> getPlayersList() {
         return playersList;
@@ -59,6 +74,14 @@ public class PlayGround implements Serializable {
 
     public void setIslandWithMotherNature(Island islandWithMotherNature) {
         this.islandWithMotherNature = islandWithMotherNature;
+    }
+
+    public int getGameMode() {
+        return gameMode;
+    }
+
+    public void setGameMode(int gameMode) {
+        this.gameMode = gameMode;
     }
 
     public void setPlayersList(ArrayList<Player> playersList) {
