@@ -15,7 +15,7 @@ public class NoInfluenceBanCard extends CharacterCard{
     public NoInfluenceBanCard(){
         super(2);
         banCardNumber = 4;
-        setDescription("...");
+        setDescription("you can choose to ban an island so that the (only the) next time mothernature is on it, influence will not be calculated");
     }
 
     public void useCardImpl(TurnHandler turnHandler) throws IOException, chooseCharacterCardException, NotEnoughCoins, UnableToUseCardException {

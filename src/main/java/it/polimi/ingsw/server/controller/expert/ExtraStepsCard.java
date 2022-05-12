@@ -9,7 +9,7 @@ public class ExtraStepsCard extends CharacterCard{
 
     public ExtraStepsCard(){
         super(1);
-        setDescription("...");
+        setDescription("you can move mothernature two extra steps");
     }
 
     @Override

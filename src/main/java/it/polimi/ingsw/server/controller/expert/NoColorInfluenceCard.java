@@ -11,7 +11,7 @@ public class NoColorInfluenceCard extends CharacterCard{
 
     public NoColorInfluenceCard(){
         super(3);
-        setDescription("...");
+        setDescription("you can choose a color that won't be included in influence calculations for this round");
     }
 
     public void useCardImpl(TurnHandler turnHandler) throws IOException, chooseCharacterCardException, NotEnoughCoins {

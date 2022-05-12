@@ -12,7 +12,7 @@ public class DrawStudentsIslandCard extends CharacterCard {
 
     public DrawStudentsIslandCard(){
         super(1);
-        setDescription("...");
+        setDescription("you can choose to move 1 student from this card to an island of your choice");
     }
 
     @Override

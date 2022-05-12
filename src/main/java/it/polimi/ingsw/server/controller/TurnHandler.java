@@ -107,7 +107,6 @@ public class TurnHandler implements Runnable {
 
 
     private void setUpCharacterCards(){
-
         getCharacterDeck().add(new DrawStudentsIslandCard());
         getCharacterDeck().add(new EqualProfessorCard());
         getCharacterDeck().add(new InfluenceCalculateCard());
@@ -453,10 +452,14 @@ public class TurnHandler implements Runnable {
                 }
             }
         }
+    }
 
-
-
-
+    private void displayCharacterCards() throws IOException{
+        for(CharacterCard characterCard : getGameMoves().getCurrentGame().getDrawnCards()){
+            getCurrentClient().sendMessage(new NotificationCMI("There is " + characterCard.getClass().getName()));
+            getCurrentClient().sendMessage(new NotificationCMI("The effect is: " + characterCard.getDescription()));
+            getCurrentClient().sendMessage(new NotificationCMI("The price is " + characterCard.getPrice()));
+        }
     }
 
     private void resetCards(){
