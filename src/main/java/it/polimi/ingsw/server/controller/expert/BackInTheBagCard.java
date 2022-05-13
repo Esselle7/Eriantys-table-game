@@ -14,7 +14,7 @@ public class BackInTheBagCard extends CharacterCard{
 
     public BackInTheBagCard(){
         super(3);
-        setDescription("...");
+        setDescription("you can choose a color so that all players have to put back in the bag three or less (if they have less than three) students of that color");
     }
 
     @Override

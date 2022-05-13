@@ -9,7 +9,7 @@ public class EqualProfessorCard extends CharacterCard{
 
     public EqualProfessorCard(){
         super(2);
-        setDescription("...");
+        setDescription("during this turn you can take control of all the professors even if you have an equal amount of students compared to the player that controls them");
     }
 
     @Override

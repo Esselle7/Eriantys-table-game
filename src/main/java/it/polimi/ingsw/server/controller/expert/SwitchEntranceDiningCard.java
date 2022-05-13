@@ -13,7 +13,7 @@ public class SwitchEntranceDiningCard extends CharacterCard{
 
     public SwitchEntranceDiningCard(){
         super(1);
-        setDescription("...");
+        setDescription("you can switch a maximum of three students of your choice from your dining room with three students of your choice from this card");
     }
 
     @Override

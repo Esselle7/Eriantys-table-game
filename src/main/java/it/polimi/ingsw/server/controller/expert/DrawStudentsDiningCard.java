@@ -14,7 +14,7 @@ public class DrawStudentsDiningCard extends CharacterCard {
 
     public DrawStudentsDiningCard(){
         super(2);
-        setDescription("...");
+        setDescription("you can pick one student from this card and place it in your dining room");
     }
 
     @Override

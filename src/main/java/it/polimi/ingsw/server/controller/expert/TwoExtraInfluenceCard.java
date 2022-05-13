@@ -8,7 +8,7 @@ import java.io.IOException;
 public class TwoExtraInfluenceCard extends CharacterCard{
     public TwoExtraInfluenceCard(){
         super(2);
-        setDescription("...");
+        setDescription("you have two extra points in influence calculation during this round");
     }
 
     @Override

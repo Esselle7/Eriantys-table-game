@@ -14,7 +14,7 @@ public class InfluenceCalculateCard extends CharacterCard{
 
     public InfluenceCalculateCard(){
         super(3);
-        setDescription("...");
+        setDescription("you can choose an island on which influence can be calculated, however this round mothernature will move normally");
     }
 
     @Override
