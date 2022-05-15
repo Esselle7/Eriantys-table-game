@@ -2,8 +2,12 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.cli.Cli;
 import it.polimi.ingsw.client.connection.ConnectionClientSide;
-import it.polimi.ingsw.client.connection.TCPClientSideConnection;import java.io.IOException;
+import it.polimi.ingsw.client.connection.TCPClientSideConnection;
+import it.polimi.ingsw.client.gui.Gui;
+
+import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -27,7 +31,11 @@ public class Client{
                 if(getUi().isDefaultServer())
                     socket = new Socket(getDefaultAddress(),getDefaultPort());
                 else
-                    socket = new Socket(getUi().getServerAddress(),getUi().getServerPort());
+                {
+                    List<Object> serverInfo = getUi().getServerInfo();
+                    socket = new Socket((String) serverInfo.get(0), (Integer) serverInfo.get(1));
+                }
+
                 connected = true;
                 getUi().connectionOutcome(connected);
             } catch (IOException e) {
@@ -75,7 +83,9 @@ public class Client{
             choosenView = input.nextLine();
             if (choosenView.equalsIgnoreCase("CLI")) {
                 ui = new Cli();
-            } else
+            } else if(choosenView.equalsIgnoreCase("GUI"))
+                ui = new Gui();
+            else
                 System.out.println("Invalid input.\n");
         }while(ui == null);
     }
