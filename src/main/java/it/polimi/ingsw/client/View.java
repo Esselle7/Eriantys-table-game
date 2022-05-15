@@ -3,6 +3,8 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
 import it.polimi.ingsw.server.model.*;
 
+import java.util.List;
+
 /**
  * Interface that defines the methods of the interfaces (CLI and GUI)
  * that need to be implemented to guarantee a correct game flow.
@@ -42,19 +44,14 @@ public interface View {
      */
     boolean isDefaultServer();
 
-    /**
-     * This method get IP of the server where the client
-     * wants to connect to
-     * @return The IP of the server to connect to
-     */
-    String getServerAddress();
 
     /**
-     * This method allows to insert the server port
-     *
-     * @return The port of the server to connect to
+     * This method allows to retrieve server information
+     * (port and ip)
+     * @return a list containing server ip and port
      */
-    int getServerPort();
+    List<Object> getServerInfo();
+
 
     /**
      * This method allows to communicate to the

@@ -152,12 +152,31 @@ public class Cli implements View {
         }
     }
 
-    public String getServerAddress() {
+
+
+    public List<Object> getServerInfo()
+    {
+        List<Object> toReturn = new ArrayList<>();
+        toReturn.add(getServerAddress());
+        toReturn.add(getServerPort());
+        return toReturn;
+    }
+
+    /**
+     * This method get IP of the server where the client
+     * wants to connect to
+     * @return The IP of the server to connect to
+     */
+    private String getServerAddress() {
         printText("Please insert remote Server IP:");
         return getInput().nextLine();
     }
-
-    public int getServerPort(){
+    /**
+     * This method allows to insert the server port
+     *
+     * @return The port of the server to connect to
+     */
+    private int getServerPort(){
         printText("Please insert remote Server port:");
         return Integer.parseInt(getInput().nextLine());
     }
