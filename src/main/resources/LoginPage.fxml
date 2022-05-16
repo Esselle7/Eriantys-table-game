@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to bottom, #345687, #c19c78)linear-gradient(to bottom, #345687, #c19c78);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView layoutY="-5.0">
+         <image>
+            <Image url="@POLIMI/PROGETTO%20SOFTWARE/Icons/pngwing.com.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="80.0" layoutX="891.0" layoutY="681.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="10.0">
+         <image>
+            <Image url="@POLIMI/PROGETTO%20SOFTWARE/Icons/198-1980709_cranio-creations-logo-png-clipart.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="165.0" fitWidth="529.0" layoutX="234.0" layoutY="17.0" AnchorPane.rightAnchor="237.0" AnchorPane.topAnchor="20.0">
+         <image>
+            <Image url="@POLIMI/PROGETTO%20SOFTWARE/Icons/Schermata_2022-05-16_alle_19.24.09-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="399.0" layoutY="300.0" prefHeight="800.0" prefWidth="1000.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
+         <children>
+            <GridPane prefHeight="336.0" prefWidth="402.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="600.0" prefWidth="600.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="100.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="100.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="100.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="100.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label contentDisplay="BOTTOM" text="Nickname" textFill="WHITE" GridPane.halignment="CENTER">
+                     <graphic>
+                        <TextField fx:id="nicknameLabel" style="-fx-background-color: white;" />
+                     </graphic>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="BOTTOM" text="IP" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <graphic>
+                        <TextField fx:id="ipLabel" alignment="BOTTOM_LEFT" style="-fx-background-color: white;" />
+                     </graphic>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="BOTTOM" text="PORT" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <graphic>
+                        <TextField fx:id="portLabel" style="-fx-background-color: white;" />
+                     </graphic>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Button maxHeight="40.0" maxWidth="120.0" minHeight="40.0" minWidth="120.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="SUBMIT" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
