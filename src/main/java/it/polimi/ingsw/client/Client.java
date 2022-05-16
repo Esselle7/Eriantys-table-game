@@ -19,10 +19,14 @@ import java.util.Scanner;
 public class Client{
 
     private static View ui;
+    private static int notAllowedInt;
+    private static String notAllowedString;
 
     public static void main(String[] args){
         Socket socket = null;
         boolean connected = false;
+        notAllowedInt = -1;
+        notAllowedString = "none";
 
         chooseView();
         getUi().loadView();
@@ -67,6 +71,14 @@ public class Client{
 
     public static String getDefaultAddress() {
         return "127.0.0.1";
+    }
+
+    public static int getNotAllowedInt() {
+        return notAllowedInt;
+    }
+
+    public static String getNotAllowedString() {
+        return notAllowedString;
     }
 
     /**

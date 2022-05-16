@@ -134,35 +134,42 @@ public interface View {
      * @return the value of the card to use
      *
      */
-    int chooseAssistantCard() throws chooseCharacterCardException;
+    int chooseAssistantCard();
 
     /**
      * This method allows to choose which student the player
      * want to move from the entrance room
      * @return the colour corresponding int to the colour chosen
      */
-    int chooseStudentColourToMove() throws chooseCharacterCardException;
+    int chooseStudentColourToMove();
 
     /**
      * This method allows the player to choose an island in order
      * to move a student or mother nature on it
      * @return the index of the selected island
      */
-    int chooseIsland() throws chooseCharacterCardException;
+    int chooseIsland();
 
     /**
      * This method allows to choose a cloud tile from
      * the play ground
      * @return the index of the selected cloud tile
      */
-    int chooseCloudTile() throws chooseCharacterCardException;
+    int chooseCloudTile();
 
     /**
      * This method allows the player to choose where to place
      * a student (if in the dining room or in an island)
      * @return 0 if island, 1 if dining
      */
-    int chooseWhereToMove() throws chooseCharacterCardException;
+    int chooseWhereToMove();
+
+    /**
+     * This method allows the player to choose
+     * a character card to use in the current turn
+     * @return the index of the character card chosen
+     */
+    int chooseCharacterCard();
 
     /**
      * This method allows to update

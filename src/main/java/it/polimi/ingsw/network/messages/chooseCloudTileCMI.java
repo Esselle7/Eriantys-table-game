@@ -1,5 +1,6 @@
 package it.polimi.ingsw.network.messages;
 
+import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.connection.ClientMessageImplement;
 import it.polimi.ingsw.client.connection.ConnectionClientSide;
@@ -11,12 +12,13 @@ public class chooseCloudTileCMI implements ClientMessageImplement {
     @Override
     public void elaborateMessage(View userInterface, ConnectionClientSide socket) throws IOException, InterruptedException {
 
-        try{
-            socket.sendMessage(new chooseInt(userInterface.chooseCloudTile()));
+        int cloudTile = userInterface.chooseCloudTile();
+        if(cloudTile != Client.getNotAllowedInt()){
+            socket.sendMessage(new chooseInt(cloudTile));
         }
-        catch (chooseCharacterCardException e)
+        else
         {
-            socket.sendMessage(new wantToChooseCharacterCard(e.getCharacterCard()));
+            socket.sendMessage(new wantToChooseCharacterCard(userInterface.chooseCharacterCard()));
         }
     }
 }

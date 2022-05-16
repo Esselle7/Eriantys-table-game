@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.cli;
 
 import it.polimi.ingsw.TextColours;
+import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.model.*;
 import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
@@ -18,6 +19,7 @@ public class Cli implements View {
     private final Scanner input;
     private String myNickname = null;
     private final ClientColour studentColour;
+
 
     private PlayGround playGround = null;
     private Board myBoard = null;
@@ -472,7 +474,7 @@ public class Cli implements View {
     }
 
     @Override
-    public int chooseAssistantCard() throws chooseCharacterCardException
+    public int chooseAssistantCard()
     {
         String in = "";
         int choice;
@@ -487,7 +489,7 @@ public class Cli implements View {
             {
                 if(in.equalsIgnoreCase("CHARACTER CARD")) // qui inserisci la verifica della game mood
                 {
-                    chooseCharacterCard();
+                    return Client.getNotAllowedInt(); // modify that name
                 }
                 printText("ERROR: Please type a Card number!");
             }
@@ -495,7 +497,7 @@ public class Cli implements View {
     }
 
     @Override
-    public int chooseStudentColourToMove() throws chooseCharacterCardException
+    public int chooseStudentColourToMove()
     {
         printAction("Please select a student from your entrance room to move");
         showMyInfo();
@@ -504,7 +506,7 @@ public class Cli implements View {
             String studentColour = getInput().nextLine();
             if(studentColour.equalsIgnoreCase("CHARACTER CARD"))
             {
-                chooseCharacterCard();
+                return Client.getNotAllowedInt(); // modify that name
             }
             for (int index = 0; index < Colour.colourCount; index ++) {
                 if(getStudentColour().getStudentColours()[index].equals(studentColour.toUpperCase()))
@@ -515,7 +517,7 @@ public class Cli implements View {
     }
 
     @Override
-    public int chooseIsland() throws chooseCharacterCardException
+    public int chooseIsland()
     {
         String in = "";
         printAction("Please type the Island index where you want to move:");
@@ -532,7 +534,7 @@ public class Cli implements View {
             {
                 if(in.equalsIgnoreCase("CHARACTER CARD"))
                 {
-                    chooseCharacterCard();
+                    return Client.getNotAllowedInt(); // modify that name
                 }
 
                 printText("ERROR: Please type an Island number!");
@@ -543,7 +545,7 @@ public class Cli implements View {
     }
 
     @Override
-    public int chooseCloudTile()throws chooseCharacterCardException
+    public int chooseCloudTile()
     {
         printAction("Please type the Cloud Tile index:");
         showCloudTilesInfo();
@@ -562,7 +564,8 @@ public class Cli implements View {
             {
                 if(in.equalsIgnoreCase("CHARACTER CARD"))
                 {
-                   chooseCharacterCard();
+                    return Client.getNotAllowedInt(); // modify that name
+
                 }
                 printText("ERROR: Please type a Cloud Tile number!");
             }
@@ -571,7 +574,7 @@ public class Cli implements View {
     }
 
     @Override
-    public int chooseWhereToMove() throws  chooseCharacterCardException
+    public int chooseWhereToMove()
     {
         printAction("You want to move the selected student to the Dining Room or to an Island?");
         while(true)
@@ -579,7 +582,7 @@ public class Cli implements View {
             String choice = getInput().nextLine();
             if(choice.equalsIgnoreCase("CHARACTER CARD"))
             {
-                chooseCharacterCard();
+                return Client.getNotAllowedInt(); // modify that name
             }
             else if(choice.equalsIgnoreCase("DINING") || choice.equalsIgnoreCase("DINING ROOM"))
                 return 0;
@@ -591,12 +594,13 @@ public class Cli implements View {
 
     }
 
-    private void chooseCharacterCard() throws chooseCharacterCardException
+    @Override
+    public int chooseCharacterCard()
     {
         if(getPlayGround().getGameMode() != expert)
         {
             printText("You can't access expert mode menù!");
-            return;
+            return Client.getNotAllowedInt();
         }
         printText("-------------------CHARACTER CARD MENU--------------");
         boolean enoughCoins = false;
@@ -610,14 +614,14 @@ public class Cli implements View {
         if(!enoughCoins)
         {
             printText("You don't have enough money to buy a card, please try again later...");
-            throw new chooseCharacterCardException(-1);
+            return Client.getNotAllowedInt();
         }
         showCharacterCardsInfo();
         while(true)
         {
             int card = Integer.parseInt(getInput().nextLine());
             if(getPlayGround().getDrawnCards().get(card).getPrice() <= getMyBoard().getCoins())
-                throw new chooseCharacterCardException(card);
+                return card;
             else
                 printText("Please, choose a character card with less than you coins board!!");
         }
