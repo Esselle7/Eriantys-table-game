@@ -438,7 +438,7 @@ public class TurnHandler implements Runnable {
     {
         int chosenCard;
         chosenCard = characterCard;
-        if(chosenCard != -1)
+        if(chosenCard != -1) // maybe we can delete it
         {
             while(true)
             {

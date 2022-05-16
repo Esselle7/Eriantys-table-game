@@ -1,6 +1,5 @@
 package it.polimi.ingsw.server;
 
-import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewTCPFactory;
 import java.io.IOException;
 
@@ -13,8 +12,8 @@ import java.io.IOException;
 
 public class Server {
     public static void main(String[] args) throws IOException, InterruptedException {
-        VirtualViewTCPFactory clientTCPFatcory = new VirtualViewTCPFactory(5000);
-        GameInstanceFactory gameInstanceFactory = new GameInstanceFactory(clientTCPFatcory);
+        VirtualViewTCPFactory clientTCPFactory = new VirtualViewTCPFactory(5000);
+        GameInstanceFactory gameInstanceFactory = new GameInstanceFactory(clientTCPFactory);
         Thread main = new Thread(gameInstanceFactory);
         main.setName("gamesGenerator");
         main.start();
