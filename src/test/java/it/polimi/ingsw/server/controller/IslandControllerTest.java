@@ -21,14 +21,14 @@ class IslandControllerTest {
     Player player1 = new Player("Player1");
     Player player2 = new Player("Player2");
 
-    List< Player > playersList = new ArrayList<>();
+    ArrayList< Player > playersList = new ArrayList<>();
 
 
     int[] entranceRoom1 = {0, 0, 0, 0, 0};
     int[] entranceRoom2 = {0, 0, 0, 0, 0};
     Board player1board = new Board(entranceRoom1, 6, TColour.GRAY);
     Board player2board = new Board(entranceRoom2, 6, TColour.BLACK);
-    PlayGround playGround = PlayGround.createPlayground();
+    PlayGround playGround = new PlayGround();
     IslandController islandController = new IslandController();
 
     @BeforeEach
@@ -56,7 +56,7 @@ class IslandControllerTest {
         island1.setPlacedStudent(0);
         island1.setPlacedStudent(0);
         island1.setPlacedStudent(1);
-        assertEquals(player1, islandController.checkInfluence());
+        assertEquals(player1, islandController.checkInfluence(island1));
     }
 
     @Test
@@ -69,7 +69,7 @@ class IslandControllerTest {
         island1.setPlacedStudent(1);
         island1.setTowerColour(player1.getPlayerBoard().getTowerColour());
         island1.setInfluence();
-        assertEquals(player1, islandController.checkInfluence());
+        assertEquals(player1, islandController.checkInfluence(island1));
     }
 
     @Test
@@ -80,7 +80,7 @@ class IslandControllerTest {
         playGround.setIslandWithMotherNature(island1);
         island1.setPlacedStudent(0);
         island1.setPlacedStudent(1);
-        assertNull(islandController.checkInfluence());
+        assertNull(islandController.checkInfluence(island1));
     }
 
     @Test
@@ -95,7 +95,7 @@ class IslandControllerTest {
         nearby_islands.add(island4);
         island3.setNearbyIslands(nearby_islands);
         try {
-            islandController.islandUnification(island3);
+            islandController.islandUnification(island3, playGround);
         }
         catch(GameWonException e){
             e.printStackTrace();
@@ -119,7 +119,7 @@ class IslandControllerTest {
         nearby_islands.add(island2);
         island1.setNearbyIslands(nearby_islands);
         try {
-            islandController.islandUnification(island1);
+            islandController.islandUnification(island1, playGround);
         }
         catch(GameWonException e){
             e.printStackTrace();
@@ -143,7 +143,7 @@ class IslandControllerTest {
         nearby_islands.add(island4);
         island5.setNearbyIslands(nearby_islands);
         try {
-            islandController.islandUnification(island5);
+            islandController.islandUnification(island5, playGround);
         }
         catch(GameWonException e){
             e.printStackTrace();
@@ -157,7 +157,7 @@ class IslandControllerTest {
 
     @Test
     void updateNearbyIslandsTest(){
-        islandController.updateNearbyIslands(island3);
+        islandController.updateNearbyIslands(island3, playGround);
         assertEquals(island2, island3.getNearbyIslands().get(0));
         assertEquals(island4, island3.getNearbyIslands().get(1));
     }
