@@ -84,7 +84,6 @@ public class Gui implements View {
                 return null;
             }
         }
-        //runLaterSynchronized(new GUIServerInfoScene()); qui devo fare pltform run later della scena
         Platform.runLater(() -> new GuiGetServerInfoScene().run());
         try {
             List<Object> toReturn = new ArrayList<>();
@@ -182,27 +181,32 @@ public class Gui implements View {
     }
 
     @Override
-    public int chooseAssistantCard() throws chooseCharacterCardException {
+    public int chooseAssistantCard() {
         return 0;
     }
 
     @Override
-    public int chooseStudentColourToMove() throws chooseCharacterCardException {
+    public int chooseStudentColourToMove() {
         return 0;
     }
 
     @Override
-    public int chooseIsland() throws chooseCharacterCardException {
+    public int chooseIsland() {
         return 0;
     }
 
     @Override
-    public int chooseCloudTile() throws chooseCharacterCardException {
+    public int chooseCloudTile() {
         return 0;
     }
 
     @Override
-    public int chooseWhereToMove() throws chooseCharacterCardException {
+    public int chooseWhereToMove() {
+        return 0;
+    }
+
+    @Override
+    public int chooseCharacterCard() {
         return 0;
     }
 

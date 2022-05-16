@@ -12,14 +12,6 @@ public class GuiGetServerInfoScene implements Runnable{
 
     @Override
     public void run() { // qui creo solamente la scena e la attacco al root (sostituisco scena)
-      /*  try {
-            // carico nuova scena su gui main
-            GuiMain.getMainPane().setContent(root);
-
-            GuiMain.updateScene();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
         Parent root;
         try {
