@@ -1,9 +1,16 @@
 package it.polimi.ingsw.server.controller;
 
+import it.polimi.ingsw.server.VirtualClient.TestingVirtualViewConnection;
+import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.controller.Exceptions.*;
 import it.polimi.ingsw.server.model.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameMovesTest {
@@ -13,20 +20,37 @@ class GameMovesTest {
     void setup(){
         int numberOfPlayers = 2;
         GC = new GameMoves();
-        GC.setCurrentGame(PlayGround.createPlayground());
-        String[] players = new String[numberOfPlayers];
-        players[0] = "Francesco";
-        players[1] = "Marco";
-        GC.setUpGame(numberOfPlayers,players);
-        GC.setTurnHandler(new TurnHandler());
-        GC.getTurnHandler().setCurrentPlayer(GC.getCurrentGame().getPlayerByNickname("Francesco"));
+        GC.setCurrentGame(new PlayGround());
+        List<VirtualViewConnection> playersList = new ArrayList<>();
+        try {
+            playersList.add(new TestingVirtualViewConnection());
+            playersList.add(new TestingVirtualViewConnection());
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        playersList.get(0).setNickname("Player1");
+        playersList.get(1).setNickname("Player2");
+        GC.setUpGame(numberOfPlayers, playersList);
+        GC.setCurrentPlayer(GC.getPlayerByNickname("Player1"));
+    }
 
+    @Test
+    void moveStudentsEntranceToIslandTestNoStudentForColourExceptionTest() {
+        int[] entranceRoom = {0,0,0,0,0};
+        GC.getCurrentPlayer().getPlayerBoard().setEntranceRoom(entranceRoom);
+        int previousValue = GC.getCurrentGame().getIslandByIndex(1).numberOfStudentByColour(0);
+        try {
+            GC.moveStudentsEntranceToIsland(0, 1);
+        } catch (Exception e){
+            assertTrue(true);
+        }
+        fail();
     }
 
     @Test
     void moveStudentsEntranceToIslandTest() {
         int[] entranceRoom = {1,0,0,0,0};
-        GC.getTurnHandler().getCurrentPlayer().getPlayerBoard().setEntranceRoom(entranceRoom);
+        GC.getCurrentPlayer().getPlayerBoard().setEntranceRoom(entranceRoom);
         int previousValue = GC.getCurrentGame().getIslandByIndex(1).numberOfStudentByColour(0);
         try {
             GC.moveStudentsEntranceToIsland(0, 1);
@@ -40,7 +64,7 @@ class GameMovesTest {
     @Test
     void moveStudentEntranceToDiningTest() {
         int[] entranceRoom = {1,0,0,0,0};
-        GC.getTurnHandler().getCurrentPlayer().getPlayerBoard().setEntranceRoom(entranceRoom);
+        GC.getCurrentPlayer().getPlayerBoard().setEntranceRoom(entranceRoom);
         try{
             GC.moveStudentEntranceToDining(0);
         }
@@ -49,14 +73,14 @@ class GameMovesTest {
             fail();
         }
 
-        assertEquals(GC.getCurrentGame().getPlayerByNickname(GC.getTurnHandler().getCurrentPlayer().getNickname()).getPlayerBoard().getDiningRoom()[0],1);
-        assertEquals(GC.getCurrentGame().getPlayerByNickname(GC.getTurnHandler().getCurrentPlayer().getNickname()).getPlayerBoard().getDiningRoom()[0],1);
+        assertEquals(GC.getCurrentGame().getPlayerByNickname(GC.getCurrentPlayer().getNickname()).getPlayerBoard().getDiningRoom()[0],1);
+        assertEquals(GC.getCurrentGame().getPlayerByNickname(GC.getCurrentPlayer().getNickname()).getPlayerBoard().getDiningRoom()[0],1);
     }
     @Test
     void moveStudentEntranceToDiningFullDiningRoomTableExceptionTest() {
         for(int i = 0; i < GC.getCurrentSettings().getDiningRoomLenght(); i++)
         {
-            GC.getTurnHandler().getCurrentPlayerBoard().increaseNumberOfStudent(0);
+            GC.getCurrentPlayerBoard().increaseNumberOfStudent(0);
         }
 
         try{
@@ -122,7 +146,7 @@ class GameMovesTest {
     @Test
     void takeStudentsFromCloudTileTest() {
         int[] result = new int[Colour.colourCount];
-        int[] studentsEntranceRoom = GC.getTurnHandler().getCurrentPlayerBoard().getEntranceRoom();
+        int[] studentsEntranceRoom = GC.getCurrentPlayerBoard().getEntranceRoom();
         int chosenCloudTile = 0;
         for(int i = 0; i < Colour.colourCount; i++)
         {
@@ -137,7 +161,7 @@ class GameMovesTest {
             fail();
         }
 
-        assertArrayEquals(GC.getTurnHandler().getCurrentPlayer().getPlayerBoard().getEntranceRoom(),result);
+        assertArrayEquals(GC.getCurrentPlayer().getPlayerBoard().getEntranceRoom(),result);
 
     }
 
@@ -159,23 +183,23 @@ class GameMovesTest {
         try{
             GC.useAssistantCard(1);
         }
-        catch (UnableToUseCardException e)
+        catch (Exception e)
         {
             fail();
         }
-        assertEquals(GC.getTurnHandler().getCurrentPlayer().getAssistantCards().getResidualCards().get(0).getValue(),2);
-        assertEquals(GC.getTurnHandler().getCurrentPlayer().getCurrentCard().getValue(),1);
+        assertEquals(GC.getCurrentPlayer().getAssistantCards().getResidualCards().get(0).getValue(),2);
+        assertEquals(GC.getCurrentPlayer().getCurrentCard().getValue(),1);
 
     }
 
     @Test
     void useAssistantCardExceptionTest() {
-        GC.getTurnHandler().setCurrentPlayer(GC.getCurrentGame().getPlayerByNickname("Marco"));
+        GC.setCurrentPlayer(GC.getCurrentGame().getPlayerByNickname("Marco"));
         GC.getCurrentGame().getPlayersList().get(0).setCurrentCard(new Card(1,1));
         try{
             GC.useAssistantCard(1);
         }
-        catch (UnableToUseCardException e)
+        catch (Exception e)
         {
             assertTrue(true);
         }
@@ -261,7 +285,7 @@ class GameMovesTest {
     @Test
     void moveMotherNatureTest() {
         GC.getCurrentGame().setIslandWithMotherNature(GC.getCurrentGame().getIslandByIndex(11));
-        GC.getTurnHandler().getCurrentPlayer().useCard(4);
+        GC.getCurrentPlayer().useCard(4);
         try{
             GC.moveMotherNature(2);
             assertEquals(GC.getCurrentGame().getIslandWithMotherNature(), GC.getCurrentGame().getIslandByIndex(1));
@@ -273,7 +297,7 @@ class GameMovesTest {
 
     @Test
     void moveMotherNatureExceptionTest() {
-        GC.getTurnHandler().getCurrentPlayer().useCard(4);
+        GC.getCurrentPlayer().useCard(4);
         try{
             GC.moveMotherNature(5);
         }

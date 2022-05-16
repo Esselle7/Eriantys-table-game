@@ -100,7 +100,7 @@ public class IslandController {
      * compared to island while the second and last element is the island after/on the right
      * @param island whose nearby islands have to be updated
      */
-    private void updateNearbyIslands(Island island, PlayGround playGround){
+    public void updateNearbyIslands(Island island, PlayGround playGround){
         List<Island> newIslandsList = playGround.getIslands();
         List<Island> newNearbyIslands = new ArrayList<>();
         if(newIslandsList.indexOf(island) == 0){
