@@ -20,14 +20,17 @@ class IslandControllerTest {
 
     Player player1 = new Player("Player1");
     Player player2 = new Player("Player2");
+    Player player3 = new Player("Player3");
 
     ArrayList< Player > playersList = new ArrayList<>();
 
 
     int[] entranceRoom1 = {0, 0, 0, 0, 0};
     int[] entranceRoom2 = {0, 0, 0, 0, 0};
+    int[] entranceRoom3 = {0, 0, 0, 0, 0};
     Board player1board = new Board(entranceRoom1, 6, TColour.GRAY);
     Board player2board = new Board(entranceRoom2, 6, TColour.BLACK);
+    Board player3board = new Board(entranceRoom3, 6, TColour.WHITE);
     PlayGround playGround = new PlayGround();
     IslandController islandController = new IslandController();
 
@@ -40,10 +43,12 @@ class IslandControllerTest {
         islands.add(island5);
         playersList.add(player1);
         playersList.add(player2);
+        playersList.add(player3);
         playGround.setPlayersList(playersList);
         playGround.setIslands(islands);
         player1.setPlayerBoard(player1board);
         player2.setPlayerBoard(player2board);
+        player3.setPlayerBoard(player3board);
         islandController.setPlayGround(playGround);
     }
 
@@ -74,13 +79,14 @@ class IslandControllerTest {
 
     @Test
     void checkInfluence3Test(){
-        //Checking that null is returned in case 2 players have the same influence count on the island
+        //Checking that null is returned in case 2 players have the same influence count on the island,
+        //even though they have a higher amount of influence compared to the actual owner of the island
+        island1.setTowerColour(player3.getPlayerBoard().getTowerColour());
         playGround.setProfessorControlByColour(0, player1.getNickname());
         playGround.setProfessorControlByColour(1, player2.getNickname());
-        playGround.setIslandWithMotherNature(island1);
         island1.setPlacedStudent(0);
         island1.setPlacedStudent(1);
-        assertNull(islandController.checkInfluence(island1));
+        assertEquals(player3.getPlayerBoard().getTowerColour(), island1.getTowerColour());
     }
 
     @Test
@@ -96,6 +102,7 @@ class IslandControllerTest {
         island3.setNearbyIslands(nearby_islands);
         try {
             islandController.islandUnification(island3, playGround);
+            fail();
         }
         catch(GameWonException e){
             e.printStackTrace();
@@ -149,7 +156,8 @@ class IslandControllerTest {
             e.printStackTrace();
         }
         assertEquals(3, playGround.getIslands().size());
-        //Island4, Island1 and Island5 unify and the unified island is placed in Island5's former position
+        //island4, island1 and island5 all unify into an island which is placed in island5's former position
+        //since islandUnification was called on island5
         assertEquals(TColour.GRAY, playGround.getIslands().get(2).getTowerColour());
         assertEquals(island3, playGround.getIslands().get(2).getNearbyIslands().get(0));
         assertEquals(island2, playGround.getIslands().get(2).getNearbyIslands().get(1));

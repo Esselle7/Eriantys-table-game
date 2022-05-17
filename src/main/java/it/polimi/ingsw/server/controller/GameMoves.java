@@ -178,8 +178,6 @@ public class GameMoves extends ManagerStudent implements Serializable {
             }
         }
         island.setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
-
-
     }
 
     /**
@@ -232,7 +230,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
             if(player.getNickname().equals(getCurrentPlayer().getNickname()))
                 return true;
             if(player.getCurrentCard().getValue() == cardNumber)
-                return false;
+                break;
         }
         return false;
     }
@@ -259,10 +257,10 @@ public class GameMoves extends ManagerStudent implements Serializable {
             }
         }
         Player currentControlPlayer = getCurrentGame().getPlayerByNickname(getCurrentGame().getProfessorsControl()[professorColour]);
-        if(priorityPlayer.getPlayerBoard().getDiningRoom()[professorColour] == maximum){
+        if(priorityPlayer != null && priorityPlayer.getPlayerBoard().getDiningRoom()[professorColour] == maximum){
             return priorityPlayer.getNickname();
         }
-        else if(currentControlPlayer.getPlayerBoard().getDiningRoom()[professorColour] == maximum)
+        else if(currentControlPlayer!= null && currentControlPlayer.getPlayerBoard().getDiningRoom()[professorColour] == maximum)
         {
             return getCurrentGame().getProfessorsControl()[professorColour];
         }
@@ -284,20 +282,35 @@ public class GameMoves extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method check if there is a winner
-     * or if the game can resume
-     * @return nickname of the winner
-     * @throws noWinnerException if there is no winner
+     * This method search a winner
+     * by comparing the number of tower
+     * in each player board
+     * @return the nickname of the winner
      */
-    public String checkWin() throws noWinnerException
+    public Player findWinnerTower() throws noWinnerException
     {
-        if(checkForEmptyTowerYard() != null)
-            return checkForEmptyTowerYard().getNickname();
-        if(existDeckEmpty() || isBagEmpty())
-                return findWinnerTower();
+        boolean draw = false;
+        int minimum = 10, playerTowerYard;
+        Player minPlayer = null;
+        List <Player> equalTowerPlayers = new ArrayList<>();
+        for (Player player: getCurrentGame().getPlayersList()) {
+            playerTowerYard = player.getPlayerBoard().getTowerYard();
+            if(playerTowerYard < minimum)
+            {
+                minimum = playerTowerYard;
+                minPlayer = player;
+                equalTowerPlayers.add(minPlayer);
+                draw = false;
+            }
+            else if(playerTowerYard == minimum) {
+                    draw = true;
+                    equalTowerPlayers.add(player);
+            }
+        }
+        if(draw)
+            return findWinnerProfessors(equalTowerPlayers);
         else
-            throw new noWinnerException();
-
+            return minPlayer;
     }
 
     /**
@@ -305,47 +318,31 @@ public class GameMoves extends ManagerStudent implements Serializable {
      * by comparing the number of professor controlled
      * by each player
      * @return the nickname of the winner
+     * @param equalTowerPlayers
      */
-    private String findWinnerProfessors()
+    private Player findWinnerProfessors(List<Player> equalTowerPlayers) throws noWinnerException
     {
-        String nicknameWinner = null;
-        int occurrencesWinner = 0;
-        for (String nicknamePlayer: getCurrentGame().getProfessorsControl()) {
-            if(nicknamePlayer != null)
+        Player maxPlayer = null;
+        boolean draw = false;
+        int maxOccurrencies = 0, playerOccurrencies = 0;
+        checkProfessorsControl();
+        for(Player player: equalTowerPlayers){
+            playerOccurrencies = Collections.frequency(Arrays.asList(getCurrentGame().getProfessorsControl()), player.getNickname());
+            if(playerOccurrencies > maxOccurrencies)
             {
-                int occurrencesPlayer = Collections.frequency(Arrays.asList(getCurrentGame().getProfessorsControl()),nicknamePlayer);
-                if(occurrencesPlayer > occurrencesWinner)
-                {
-                    occurrencesWinner = occurrencesPlayer;
-                    nicknameWinner = nicknamePlayer;
-                }
+                maxOccurrencies = playerOccurrencies;
+                maxPlayer = getPlayerByNickname(player.getNickname());
+                draw = false;
+            } else if(playerOccurrencies == maxOccurrencies)
+            {
+                draw = true;
             }
         }
-        return nicknameWinner;
-    }
-
-    /**
-     * This method search a winner
-     * by comparing the number of tower
-     * in each player board
-     * @return the nickname of the winner
-     */
-    public String findWinnerTower()
-    {
-        int minimum = 10;
-        String nicknameWinner = null;
-        for (Player player: getCurrentGame().getPlayersList()) {
-            int playerTowerYard = player.getPlayerBoard().getTowerYard();
-            if(playerTowerYard < minimum)
-            {
-                minimum = playerTowerYard;
-                nicknameWinner = player.getNickname();
-            }
-            else
-                if(playerTowerYard == minimum)
-                    return findWinnerProfessors();
+        if(!draw) {
+            return maxPlayer;
+        } else {
+            throw new noWinnerException();
         }
-        return nicknameWinner;
     }
 
     /**
@@ -369,18 +366,6 @@ public class GameMoves extends ManagerStudent implements Serializable {
     public boolean existDeckEmpty()
     {
         return getCurrentGame().getPlayersList().stream().anyMatch(player -> player.getAssistantCards().getResidualCards().size() == 0);
-    }
-
-    /**
-     * This method check if there are
-     * no more students paw in the bag
-     * and allows proceeding with the calculus of
-     * the winner
-     * @return true if the bag is empty
-     */
-    private boolean isBagEmpty()
-    {
-        return getTotalStudentPaws() == 0;
     }
 
     /**

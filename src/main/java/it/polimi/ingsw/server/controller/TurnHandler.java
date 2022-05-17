@@ -202,7 +202,12 @@ public class TurnHandler implements Runnable {
             setWinner(getGameMoves().checkForEmptyTowerYard().getNickname());
             setGameOn(false);
         } catch (GameWonException e){
-            setWinner(getGameMoves().findWinnerTower());
+            try{
+                setWinner(getGameMoves().findWinnerTower().getNickname());
+            }
+            catch (noWinnerException f){
+                setWinner("Nobody won: equal amounts of towers and professors");
+            }
             setGameOn(false);
         }catch (IOException e)
         {

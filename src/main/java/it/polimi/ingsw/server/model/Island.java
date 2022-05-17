@@ -78,6 +78,8 @@ public class Island extends ManagerStudent implements Serializable {
         return towerCount;
     }
 
+    public void setTowerCount(int towerCount) { this.towerCount = towerCount; }
+
     public List<Island> getNearbyIslands() {
         return NearbyIslands;
     }

@@ -132,6 +132,13 @@ public class PlayGround implements Serializable {
         professorsControl[professorColour] =  professorController;
     }
 
+    public Player getPlayerByTowerColour(TColour colour){
+        for(Player player : getPlayersList()){
+            if(player.getPlayerBoard().getTowerColour().equals(colour))
+                return player;
+        }
+        return null;
+    }
 
     public CloudTile[] getCloudTiles() {
         return cloudTiles;

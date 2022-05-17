@@ -143,7 +143,6 @@ public class Board extends ManagerStudent implements Serializable {
             throw new EmptyDiningRoom();
     }
 
-
     /**
      * increase the number of tower by one, it means
      * that a tower return from
@@ -154,13 +153,14 @@ public class Board extends ManagerStudent implements Serializable {
 
     /**
      * Decrease the number of towers in the tower yard by one.
-     * @throws EmptyTowerYard in case, if the tower yard is empty AFTER subtracting one tower from it
+     * @throws EmptyTowerYard if the tower yard is empty AFTER subtracting one tower from it
      *
      */
     public void decreaseTowerYard() throws EmptyTowerYard {
-        towerYard--;
-        if(towerYard == 0)
+        this.towerYard = this.towerYard - 1;
+        if(towerYard == 0) {
             throw new EmptyTowerYard();
+        }
     }
 
 }
