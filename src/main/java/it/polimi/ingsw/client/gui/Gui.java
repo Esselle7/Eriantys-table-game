@@ -1,9 +1,11 @@
 package it.polimi.ingsw.client.gui;
 
+import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.client.View;
+import it.polimi.ingsw.client.gui.Scenes.GuiAskGameModeScene;
 import it.polimi.ingsw.client.gui.Scenes.GuiGetServerInfoScene;
-import it.polimi.ingsw.client.gui.Scenes.prova;
-import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
+import it.polimi.ingsw.client.gui.ScenesController.GuiController;
+import it.polimi.ingsw.client.model.ClientColour;
 import it.polimi.ingsw.server.model.Board;
 import it.polimi.ingsw.server.model.Card;
 import it.polimi.ingsw.server.model.Deck;
@@ -12,56 +14,82 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Gui implements View {
-    @Override
-    public Card getMyCurrentCard() {
-        return null;
+
+    private String myNickname = null;
+    private final ClientColour studentColour;
+
+
+    private PlayGround playGround = null;
+    private Board myBoard = null;
+    private Deck myDeck = null;
+    private Card myCurrentCard = null;
+    private final int expert;
+
+    public Gui()
+    {
+        studentColour = new ClientColour();
+        expert = 1;
     }
 
-    @Override
-    public void setMyCurrentCard(Card currentCard) {
-
+    public int getExpert() {
+        return expert;
     }
 
     @Override
     public String getMyNickname() {
-        return null;
-    }
-
-    @Override
-    public PlayGround getPlayGround() {
-        return null;
-    }
-
-    @Override
-    public void setPlayGround(PlayGround playGround) {
-
-    }
-
-    @Override
-    public Board getMyBoard() {
-        return null;
-    }
-
-    @Override
-    public void setMyBoard(Board myBoard) {
-
-    }
-
-    @Override
-    public Deck getMyDeck() {
-        return null;
-    }
-
-    @Override
-    public void setMyDeck(Deck myDeck) {
-
+        return myNickname;
     }
 
     @Override
     public void setMyNickname(String myNickname) {
+        this.myNickname = myNickname;
+    }
 
+    public ClientColour getStudentColour() {
+        return studentColour;
+    }
+
+    @Override
+    public PlayGround getPlayGround() {
+        return playGround;
+    }
+
+    @Override
+    public void setPlayGround(PlayGround playGround) {
+        this.playGround = playGround;
+    }
+
+    @Override
+    public Board getMyBoard() {
+        return myBoard;
+    }
+
+    @Override
+    public void setMyBoard(Board myBoard) {
+        this.myBoard = myBoard;
+    }
+
+    @Override
+    public Deck getMyDeck() {
+        return myDeck;
+    }
+
+    @Override
+    public void setMyDeck(Deck myDeck) {
+        this.myDeck = myDeck;
+    }
+
+    @Override
+    public Card getMyCurrentCard() {
+        return myCurrentCard;
+    }
+
+    @Override
+    public void setMyCurrentCard(Card myCurrentCard) {
+        this.myCurrentCard = myCurrentCard;
     }
 
     @Override
@@ -117,7 +145,8 @@ public class Gui implements View {
 
     @Override
     public void connectionOutcome(boolean isConnected) {
-
+       // if(isConnected)
+           // GuiController.showNotificationReceivedByServer("Connected");
     }
 
     @Override
@@ -140,7 +169,7 @@ public class Gui implements View {
                 return -1;
             }
         }
-        Platform.runLater(() -> new prova().run());
+        Platform.runLater(() -> new GuiAskGameModeScene().run());
         try {
             return (int) GuiMain.getQueue().take();
         } catch (InterruptedException e) {
