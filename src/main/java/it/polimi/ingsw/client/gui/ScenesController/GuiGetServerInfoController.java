@@ -10,25 +10,29 @@ import javafx.scene.control.TextField;
 
 public class GuiGetServerInfoController {
 
-    // qui gestisco bottoni da fxml
 
-    public TextField serverIpBox;
-    public TextField serverPortBox;
-    public Button connectBtn;
+    public TextField ipLabel;
+    public TextField portLabel;
+    public Button submitButton;
 
-
-    public void function()
+    public void initialize()
     {
-        String ip = serverIpBox.getText();
+        ipLabel.setText("127.0.0.1");
+        portLabel.setText("5000");
+    }
+
+    public void openSocket()
+    {
+        String ip = ipLabel.getText();
         int port;
         try {
-            port = Integer.parseInt(serverPortBox.getText());
+            port = Integer.parseInt(portLabel.getText());
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "The port number is not valid!", ButtonType.OK);
             alert.showAndWait();
             return;
         }
-        connectBtn.setDisable(true);
+        submitButton.setDisable(true);
         GuiMain.getQueue().add(ip);
         GuiMain.getQueue().add(port);
 

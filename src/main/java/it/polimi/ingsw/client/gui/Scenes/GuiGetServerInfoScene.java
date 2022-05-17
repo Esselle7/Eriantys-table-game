@@ -15,12 +15,11 @@ public class GuiGetServerInfoScene implements Runnable{
 
         Parent root;
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/LoginScene.fxml"))); // load del fxml per sever info porta e ip
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/LoginPage.fxml"))); // load del fxml per sever info porta e ip
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
-        Scene newScene = new Scene(root);
-        GuiMain.updateScene(newScene,"Server IP/Port");
+        GuiMain.updateScene(root,"Server IP/Port");
     }
 }
