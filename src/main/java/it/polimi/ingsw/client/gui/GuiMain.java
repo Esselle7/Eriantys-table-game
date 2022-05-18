@@ -1,11 +1,15 @@
 package it.polimi.ingsw.client.gui;
 
+import it.polimi.ingsw.client.gui.ScenesController.GuiController;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -35,17 +39,17 @@ public class GuiMain extends Application {
     @Override
     public void start(Stage primaryStage) {
         initStage = primaryStage;
-        primaryStage.setResizable(false);
+        getStage().setResizable(false);
         getStage().setTitle("ERIANTIS");
-        queue.add(new Object());
-
-        // Exit the program when pressing X button
-        getStage().setOnCloseRequest(windowEvent -> {
-            if (windowEvent.getEventType().equals(WindowEvent.WINDOW_CLOSE_REQUEST)) {
-                System.exit(0);
-            }
-        });
-
+        getQueue().add(new Object());
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/LoadingPage.fxml")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert root != null;
+        getStage().setScene(new Scene(root));
         getStage().show();
     }
 
@@ -54,12 +58,15 @@ public class GuiMain extends Application {
     /**
      * Used by other threads to change the scene of the stage
      */
-    static public void updateScene(Scene newScene, String title) {
+    static public void updateScene(Parent root, String title) {
+        Scene newScene = new Scene(root,800,600);
         getStage().setScene(newScene);
+        getStage().centerOnScreen();
         getStage().setTitle(title);
         getStage().sizeToScene();
         getStage().show();
         getStage().setAlwaysOnTop(true);
         getStage().setAlwaysOnTop(false);
     }
+
 }

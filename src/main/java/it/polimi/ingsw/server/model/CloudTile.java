@@ -19,6 +19,10 @@ public class CloudTile  implements Serializable {
         isUsed = false;
     }
 
+    public void setStudents(int[] students) {
+        this.students = students;
+    }
+
     public int[] getStudents() {
         isUsed = true;
         return students;

@@ -8,18 +8,18 @@ import javafx.scene.Scene;
 import java.io.IOException;
 import java.util.Objects;
 
-public class GuiGetServerInfoScene implements Runnable{
-
+public class GuiAskGameModeScene implements Runnable{
     @Override
-    public void run() { // qui creo solamente la scena e la attacco al root (sostituisco scena)
+    public void run() {
 
         Parent root;
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/LoginPage.fxml"))); // load del fxml per sever info porta e ip
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ChoosePlayers.fxml"))); // load del fxml per sever info porta e ip
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
-        GuiMain.updateScene(root,"Server IP/Port");
+
+        GuiMain.updateScene(root,"Game Mode");
     }
 }
