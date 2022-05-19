@@ -9,18 +9,18 @@
    <children>
       <ImageView layoutY="-5.0">
          <image>
-            <Image url="@pngwing.com.png" />
+            <Image url="@Icons/spaceEffect.png" />
          </image>
       </ImageView>
       <ProgressBar fx:id="loadingBar" layoutX="340.0" layoutY="358.0" prefHeight="76.0" prefWidth="410.0" progress="0.3" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" />
       <ImageView fitHeight="129.0" fitWidth="99.0" layoutX="451.0" layoutY="556.0" AnchorPane.rightAnchor="450.0">
          <image>
-            <Image url="@198-1980709_cranio-creations-logo-png-clipart.png" />
+            <Image url="@Icons/logoCranio.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="200.0" fitWidth="592.0" layoutX="175.0" layoutY="58.0" AnchorPane.rightAnchor="200.0">
          <image>
-            <Image url="@Schermata_2022-05-16_alle_19.24.09-removebg-preview.png" />
+            <Image url="@Icons/logoEryantis.png" />
          </image>
       </ImageView>
    </children>

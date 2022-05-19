@@ -21,7 +21,7 @@
                      <graphic>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@Desktop/POLIMI/PROGETTO%20SOFTWARE/Icons/3416141.png" />
+                              <Image url="@Icons/iconReturn.png" />
                            </image>
                            <cursor>
                               <Cursor fx:constant="OPEN_HAND" />
@@ -69,7 +69,7 @@
                                                 <Font size="28.0" />
                                              </font>
                                              <graphic>
-                                                <Label text="You are now on settings menu!" textAlignment="CENTER">
+                                                <Label fx:id="notificationLabel" text="You are now on settings menu!" textAlignment="CENTER">
                                                    <font>
                                                       <Font size="24.0" />
                                                    </font>
@@ -100,7 +100,7 @@
                                  <graphic>
                                     <ImageView fitHeight="200.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@Desktop/POLIMI/PROGETTO%20SOFTWARE/Icons/456212.png" />
+                                          <Image url="@Icons/iconUser.png" />
                                        </image>
                                        <viewport>
                                           <Rectangle2D />

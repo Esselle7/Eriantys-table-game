@@ -20,13 +20,13 @@
         <items>
           <AnchorPane maxHeight="400.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="160.0" style="-fx-background-color: skyblue;">
                <children>
-                  <ButtonBar buttonMinWidth="90.0" layoutX="400.0" layoutY="126.0" maxHeight="300.0" maxWidth="300.0" minHeight="160.0" minWidth="90.0" rotate="90.0" AnchorPane.rightAnchor="-110.0" AnchorPane.topAnchor="65.0">
+                  <ButtonBar buttonMinWidth="90.0" layoutX="400.0" layoutY="126.0" maxHeight="300.0" maxWidth="300.0" minHeight="160.0" minWidth="90.0" rotate="90.0" AnchorPane.rightAnchor="-110.0" AnchorPane.topAnchor="110.0">
                      <buttons>
                         <Button fx:id="playgroundButton" accessibleText="Playground" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                                  <image>
-                                    <Image url="@3743233.png" />
+                                    <Image url="@Icons/iconGame.png" />
                                  </image>
                                  <cursor>
                                     <Cursor fx:constant="OPEN_HAND" />
@@ -41,7 +41,7 @@
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                                  <image>
-                                    <Image url="@3286005.png" />
+                                    <Image url="@Icons/iconBoard.png" />
                                  </image>
                                  <cursor>
                                     <Cursor fx:constant="OPEN_HAND" />
@@ -53,7 +53,7 @@
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                                  <image>
-                                    <Image url="@2567943.png" />
+                                    <Image url="@Icons/iconStats.png" />
                                  </image>
                                  <cursor>
                                     <Cursor fx:constant="OPEN_HAND" />
@@ -65,7 +65,7 @@
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                                  <image>
-                                    <Image url="@503849.png" />
+                                    <Image url="@Icons/iconSettings.png" />
                                  </image>
                                  <cursor>
                                     <Cursor fx:constant="OPEN_HAND" />
@@ -157,7 +157,7 @@
                         </SplitPane>
                         <ImageView fitHeight="432.0" fitWidth="920.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <image>
-                              <Image url="@../Graphical_Assets/Plancia/Plancia_DEF.png" />
+                              <Image url="@Icons/Board.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -208,9 +208,9 @@
                            <children>
                               <Button fx:id="userButton" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #8e7970#8e7970;" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
                                  <graphic>
-                                    <ImageView fitHeight="200.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="200.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@456212.png" />
+                                          <Image url="@Icons/iconUser.png" />
                                        </image>
                                        <viewport>
                                           <Rectangle2D />
