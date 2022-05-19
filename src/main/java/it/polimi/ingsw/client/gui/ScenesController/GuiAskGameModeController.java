@@ -1,9 +1,13 @@
 package it.polimi.ingsw.client.gui.ScenesController;
 
 import it.polimi.ingsw.client.gui.GuiMain;
-import javafx.scene.input.MouseEvent;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 
 public class GuiAskGameModeController{
+
+    public Button twoPlayers;
+    public Button threePlayers;
 
     public void choseGameMode(int lobbySize)
     {
@@ -11,11 +15,11 @@ public class GuiAskGameModeController{
         System.out.println("Size"+lobbySize);
     }
 
-    public void choseTwoGameMode(MouseEvent mouseEvent) {
+    public void choseTwoGameMode(ActionEvent mouseEvent) {
         choseGameMode(2);
     }
 
-    public void choseThreeGameMode(MouseEvent mouseEvent) {
+    public void choseThreeGameMode(ActionEvent mouseEvent) {
         choseGameMode(3);
     }
 }

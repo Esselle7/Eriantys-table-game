@@ -1,10 +1,8 @@
 package it.polimi.ingsw.client.gui;
 
-import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.gui.Scenes.GuiAskGameModeScene;
 import it.polimi.ingsw.client.gui.Scenes.GuiGetServerInfoScene;
-import it.polimi.ingsw.client.gui.ScenesController.GuiController;
 import it.polimi.ingsw.client.model.ClientColour;
 import it.polimi.ingsw.server.model.Board;
 import it.polimi.ingsw.server.model.Card;
@@ -14,7 +12,6 @@ import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Gui implements View {
 
@@ -94,7 +91,7 @@ public class Gui implements View {
 
     @Override
     public void showNotification(String text) {
-
+        printNotification(text);
     }
 
     @Override
@@ -128,7 +125,7 @@ public class Gui implements View {
 
     @Override
     public void printNotification(String notification) {
-
+        System.out.println(notification);
     }
 
     @Override

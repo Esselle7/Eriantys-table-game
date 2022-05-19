@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to bottom, #345687, #c19c78)linear-gradient(to bottom, #345687, #c19c78);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to bottom, #345687, #c19c78)linear-gradient(to bottom, #345687, #c19c78);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.ScenesController.GuiGetServerInfoController">
    <children>
       <ImageView layoutY="-5.0">
          <image>
@@ -44,7 +44,7 @@
                <children>
                   <Label contentDisplay="BOTTOM" text="Nickname" textFill="WHITE" GridPane.halignment="CENTER">
                      <graphic>
-                        <TextField fx:id="nicknameLabel" style="-fx-background-color: white;" />
+                        <TextField style="-fx-background-color: white;" />
                      </graphic>
                      <font>
                         <Font size="24.0" />
@@ -66,7 +66,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Button maxHeight="40.0" maxWidth="120.0" minHeight="40.0" minWidth="120.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="SUBMIT" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                  <Button fx:id="submitButton" maxHeight="40.0" maxWidth="120.0" minHeight="40.0" minWidth="120.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="SUBMIT" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" onAction="#openSocket">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
