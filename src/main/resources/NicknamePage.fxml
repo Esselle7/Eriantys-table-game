@@ -37,27 +37,18 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="100.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="100.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="100.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="notificationLabel" contentDisplay="BOTTOM" text="IP" textFill="WHITE" GridPane.halignment="CENTER">
+                  <Label fx:id="notificationLabel" contentDisplay="BOTTOM" text="notificationLabel" textFill="WHITE" GridPane.halignment="CENTER">
                      <graphic>
-                        <TextField fx:id="ipLabel" alignment="BOTTOM_LEFT" style="-fx-background-color: white;" />
+                        <TextField style="-fx-background-color: white;" />
                      </graphic>
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="notificationLabel2" contentDisplay="BOTTOM" text="PORT" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                     <graphic>
-                        <TextField fx:id="portLabel" style="-fx-background-color: white;" />
-                     </graphic>
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="submitButton" maxHeight="40.0" maxWidth="120.0" minHeight="40.0" minWidth="120.0" mnemonicParsing="false" onAction="#openSocket" prefHeight="40.0" prefWidth="120.0" text="SUBMIT" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                  <Button fx:id="submitButton" maxHeight="40.0" maxWidth="120.0" minHeight="40.0" minWidth="120.0" mnemonicParsing="false" onAction="#openSocket" prefHeight="40.0" prefWidth="120.0" text="SUBMIT" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
