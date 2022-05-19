@@ -1,13 +1,10 @@
 package it.polimi.ingsw.client.gui;
 
-import it.polimi.ingsw.client.gui.ScenesController.GuiController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.Objects;
