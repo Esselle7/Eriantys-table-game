@@ -49,7 +49,6 @@ class IslandControllerTest {
         player1.setPlayerBoard(player1board);
         player2.setPlayerBoard(player2board);
         player3.setPlayerBoard(player3board);
-        islandController.setPlayGround(playGround);
     }
 
     @Test
@@ -61,7 +60,7 @@ class IslandControllerTest {
         island1.setPlacedStudent(0);
         island1.setPlacedStudent(0);
         island1.setPlacedStudent(1);
-        assertEquals(player1, islandController.checkInfluence(island1));
+        assertEquals(player1, islandController.checkInfluence(island1,playGround));
     }
 
     @Test
@@ -74,7 +73,7 @@ class IslandControllerTest {
         island1.setPlacedStudent(1);
         island1.setTowerColour(player1.getPlayerBoard().getTowerColour());
         island1.setInfluence();
-        assertEquals(player1, islandController.checkInfluence(island1));
+        assertEquals(player1, islandController.checkInfluence(island1,playGround));
     }
 
     @Test

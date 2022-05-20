@@ -51,7 +51,6 @@ public class CharacterCardsTest {
         player2 = GC.getCurrentGame().getPlayersList().get(1);
         player3 = GC.getCurrentGame().getPlayersList().get(2);
         playGround = GC.getCurrentGame();
-        GC.getIslandController().setPlayGround(GC.getCurrentGame());
         GC.setCurrentPlayer(player1);
         player1.getPlayerBoard().setCoins(5);
     }
@@ -112,10 +111,10 @@ public class CharacterCardsTest {
         player1.getPlayerBoard().increaseNumberOfStudent(0);
         player2.getPlayerBoard().increaseNumberOfStudent(1);
         GC.checkProfessorsControl();
-        assertEquals(player2, GC.getIslandController().checkInfluence(island1));
+        assertEquals(player2, GC.getIslandController().checkInfluence(island1,GC.getCurrentGame()));
         island1.setPlacedStudent(0);
         island1.setPlacedStudent(0);
-        assertEquals(player1, GC.getIslandController().checkInfluence(island1));
+        assertEquals(player1, GC.getIslandController().checkInfluence(island1,GC.getCurrentGame()));
         assertEquals(3, player1.getPlayerBoard().getCoins());
     }
 }

@@ -19,14 +19,12 @@ import java.util.Scanner;
 public class Client{
 
     private static View ui;
-    private static int notAllowedInt;
-    private static String notAllowedString;
+    private static final int notAllowedInt = -1;
+    private static final String notAllowedString = "none";
 
     public static void main(String[] args){
         Socket socket = null;
         boolean connected = false;
-        notAllowedInt = -1;
-        notAllowedString = "none";
 
         chooseView();
         getUi().loadView();

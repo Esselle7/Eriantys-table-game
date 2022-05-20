@@ -14,7 +14,7 @@ public class chooseWhereToMove implements ClientMessageImplement {
     public void elaborateMessage(View userInterface, ConnectionClientSide socket) throws IOException, InterruptedException {
         int whereToMove = userInterface.chooseWhereToMove();
         if(whereToMove != Client.getNotAllowedInt()){
-            socket.sendMessage(new chooseInt(userInterface.chooseWhereToMove()));
+            socket.sendMessage(new chooseInt(whereToMove));
         }
         else
         {

@@ -163,7 +163,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
      */
     public void setInfluenceToIsland(Island island) throws EmptyTowerYard
     {
-        Player playerInfluence = getIslandController().checkInfluence(island);
+        Player playerInfluence = getIslandController().checkInfluence(island, getCurrentGame());
         playerInfluence.getPlayerBoard().decreaseTowerYard();
         island.setInfluence();
         island.setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
@@ -176,7 +176,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
      */
     public void changeInfluenceToIsland(Island island) throws EmptyTowerYard
     {
-        Player playerInfluence = getIslandController().checkInfluence(island);
+        Player playerInfluence = getIslandController().checkInfluence(island,getCurrentGame());
         Player previousInfluence = getCurrentGame().getPlayerByTowerColour(island.getTowerColour());
         for(int i = 0; i < island.getTowerCount(); i++)
             playerInfluence.getPlayerBoard().decreaseTowerYard();
@@ -328,16 +328,16 @@ public class GameMoves extends ManagerStudent implements Serializable {
     {
         Player maxPlayer = null;
         boolean draw = false;
-        int maxOccurrencies = 0, playerOccurrencies = 0;
+        int maxOccurrences = 0, playerOccurrences = 0;
         checkProfessorsControl();
         for(Player player: equalTowerPlayers){
-            playerOccurrencies = Collections.frequency(Arrays.asList(getCurrentGame().getProfessorsControl()), player.getNickname());
-            if(playerOccurrencies > maxOccurrencies)
+            playerOccurrences = Collections.frequency(Arrays.asList(getCurrentGame().getProfessorsControl()), player.getNickname());
+            if(playerOccurrences > maxOccurrences)
             {
-                maxOccurrencies = playerOccurrencies;
+                maxOccurrences = playerOccurrences;
                 maxPlayer = getPlayerByNickname(player.getNickname());
                 draw = false;
-            } else if(playerOccurrencies == maxOccurrencies)
+            } else if(playerOccurrences == maxOccurrences)
             {
                 draw = true;
             }

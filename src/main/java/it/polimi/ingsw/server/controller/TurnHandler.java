@@ -411,7 +411,7 @@ public class TurnHandler implements Runnable {
         //Updating influence in case checkInfluence() is not null and if motherNatureIsland's towerColour is different from
         //the new influence-calculated player's towerColour
         if(!motherNatureIsland.isBanned()) {
-            Player islandPlayer = getGameMoves().getIslandController().checkInfluence(motherNatureIsland);
+            Player islandPlayer = getGameMoves().getIslandController().checkInfluence(motherNatureIsland,getGameMoves().getCurrentGame());
             if (islandPlayer != null && islandPlayer.getPlayerBoard().getTowerColour() != motherNatureIsland.getTowerColour()) {
                 if (motherNatureIsland.getTowerCount() == 0)
                     getGameMoves().setInfluenceToIsland(motherNatureIsland);

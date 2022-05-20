@@ -43,7 +43,6 @@ class GameMovesTest {
         playGround = GC.getCurrentGame();
         island1 = playGround.getIslandByIndex(1);
         island2 = playGround.getIslandByIndex(2);
-        GC.getIslandController().setPlayGround(GC.getCurrentGame());
     }
 
     @Test
@@ -163,7 +162,7 @@ class GameMovesTest {
         } catch(EmptyTowerYard e){
             fail();
         }
-        assertEquals(GC.getIslandController().checkInfluence(island6), player2);
+        assertEquals(GC.getIslandController().checkInfluence(island6,GC.getCurrentGame()), player2);
         assertEquals(player2.getPlayerBoard().getTowerColour(), island6.getTowerColour());
         assertEquals(4, player2.getPlayerBoard().getTowerYard());
         assertEquals(6, player1.getPlayerBoard().getTowerYard());

@@ -16,20 +16,11 @@ import java.util.List;
  */
 
 public class IslandController {
-    private PlayGround playGround = null;
     private int bannedColour;
 
     public IslandController()
     {
         bannedColour = Colour.colourCount +1;
-    }
-
-    public void setPlayGround(PlayGround playGround) {
-        this.playGround = playGround;
-    }
-
-    public PlayGround getPlayGround() {
-        return this.playGround;
     }
 
     public void setBannedColour(int bannedColour) {
@@ -44,7 +35,7 @@ public class IslandController {
      * This method calculates the influence count for an island
      * @return the player that has the highest influence
      */
-    public Player checkInfluence(Island inputIsland){
+    public Player checkInfluence(Island inputIsland, PlayGround playGround){
         int counter = 0;
         int maxCounter = 0;
         boolean draw = false;
