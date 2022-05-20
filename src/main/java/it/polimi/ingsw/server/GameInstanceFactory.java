@@ -200,6 +200,10 @@ public class GameInstanceFactory implements Runnable{
             {}
         }
         result.add(gameMode);
+        if(gameMode == 1)
+            printConsole("Expert Mode Chosen!");
+        else
+            printConsole("Normal Mode Chosen!");
         getGamePlayers().get(0).sendMessage(new NotificationCMI("Waiting remaining players..."));
 
         return result;
