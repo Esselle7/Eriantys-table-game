@@ -49,7 +49,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="twoPlayers1" alignment="CENTER" mnemonicParsing="false" onAction="#choseTwoGameMode" style="-fx-background-color: transparent;" GridPane.halignment="CENTER" GridPane.valignment="BASELINE">
+                        <Button fx:id="easyMode" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.halignment="CENTER" GridPane.valignment="BASELINE" onMouseClicked="#choseNormalMode">
                            <graphic>
                               <ImageView fitHeight="190.0" fitWidth="210.0">
                                  <image>
@@ -58,18 +58,16 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="threePlayers1" contentDisplay="CENTER" mnemonicParsing="false" onAction="#choseThreeGameMode" style="-fx-background-color: transparenttransparent;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                        <Button fx:id="advanceMode" contentDisplay="CENTER" mnemonicParsing="false" onAction="#choseExpertMode" style="-fx-background-color: transparent-transparent;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                            <graphic>
                               <ImageView fitHeight="200.0" fitWidth="200.0">
-                                 <image>
-                                    <Image url="@Icons/iconAdvancedMode.png" />
-                                 </image>
+                                 <Image url="@Icons/iconAdvancedMode.png"/>
                               </ImageView>
                            </graphic>
                         </Button>
                      </children>
                   </GridPane>
-                  <Label fx:id="notificationLabel" contentDisplay="BOTTOM" text="label1" textFill="WHITE" GridPane.halignment="CENTER">
+                  <Label fx:id="notificationLabel" contentDisplay="BOTTOM" text="Choose two or three players" textFill="WHITE" GridPane.halignment="CENTER">
                      <font>
                         <Font size="48.0" />
                      </font>
@@ -83,7 +81,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="twoPlayers" alignment="CENTER" mnemonicParsing="false" onAction="#choseTwoGameMode" style="-fx-background-color: transparent;" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Button fx:id="twoPlayers" alignment="CENTER" mnemonicParsing="false" onAction="#choseTwoGameMode" style="-fx-background-color: transparent;" GridPane.halignment="CENTER" GridPane.valignment="CENTER" >
                            <graphic>
                               <ImageView fitHeight="190.0" fitWidth="262.0">
                                  <image>
@@ -92,7 +90,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="threePlayers" contentDisplay="CENTER" mnemonicParsing="false" onAction="#choseThreeGameMode" style="-fx-background-color: transparenttransparent;" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <Button fx:id="threePlayers" contentDisplay="CENTER" mnemonicParsing="false" onAction="#choseThreeGameMode" style="-fx-background-color: transparent-transparent;" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <graphic>
                               <ImageView fitHeight="200.0" fitWidth="200.0">
                                  <image>
@@ -103,7 +101,7 @@
                         </Button>
                      </children>
                   </GridPane>
-                  <Label fx:id="notificationLabel2" contentDisplay="BOTTOM" text="label2" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                  <Label fx:id="notificationLabel2" contentDisplay="BOTTOM" text="Choose normal or expert mode" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <font>
                         <Font size="48.0" />
                      </font>

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to bottom, #345687, #c19c78)linear-gradient(to bottom, #345687, #c19c78);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.ScenesController.GuiGetServerInfoController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to bottom, #345687, #c19c78)linear-gradient(to bottom, #345687, #c19c78);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.ScenesController.GuiChooseNicknameController">
    <children>
       <ImageView layoutY="-5.0">
          <image>
@@ -40,15 +40,15 @@
                   <RowConstraints minHeight="100.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="notificationLabel" contentDisplay="BOTTOM" text="notificationLabel" textFill="WHITE" GridPane.halignment="CENTER">
+                  <Label fx:id="notificationLabel" contentDisplay="BOTTOM" text="Please insert a nickname" textFill="WHITE" GridPane.halignment="CENTER">
                      <graphic>
-                        <TextField style="-fx-background-color: white;" />
+                        <TextField fx:id="textFieldNickname" style="-fx-background-color: white;" />
                      </graphic>
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Button fx:id="submitButton" maxHeight="40.0" maxWidth="120.0" minHeight="40.0" minWidth="120.0" mnemonicParsing="false" onAction="#openSocket" prefHeight="40.0" prefWidth="120.0" text="SUBMIT" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Button fx:id="submitButton" maxHeight="40.0" maxWidth="120.0" minHeight="40.0" minWidth="120.0" mnemonicParsing="false" onAction="#submitNickname" prefHeight="40.0" prefWidth="120.0" text="SUBMIT" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
