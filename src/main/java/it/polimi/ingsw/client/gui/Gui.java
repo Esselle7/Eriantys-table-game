@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.gui.Scenes.GuiAskGameModeScene;
+import it.polimi.ingsw.client.gui.Scenes.GuiChooseNicknameScene;
 import it.polimi.ingsw.client.gui.Scenes.GuiGetServerInfoScene;
 import it.polimi.ingsw.client.model.ClientColour;
 import it.polimi.ingsw.server.model.Board;
@@ -148,7 +149,21 @@ public class Gui implements View {
 
     @Override
     public String choseNickname() {
-        return null;
+        while (!GuiMain.getQueue().isEmpty()) {
+            try {
+                GuiMain.getQueue().take();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        Platform.runLater(() -> new GuiChooseNicknameScene().run());
+        try {
+            return (String) GuiMain.getQueue().take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -178,7 +193,12 @@ public class Gui implements View {
 
     @Override
     public int chooseExpertMode() {
-        return 0;
+        try {
+            return (int) GuiMain.getQueue().take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     @Override
