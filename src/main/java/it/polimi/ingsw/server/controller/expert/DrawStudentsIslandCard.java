@@ -39,5 +39,6 @@ public class DrawStudentsIslandCard extends CharacterCard {
         int islandIndex = turnHandler.getCurrentClient().receiveChooseInt();
         turnHandler.getGameMoves().getCurrentGame().getIslandByIndex(islandIndex).setPlacedStudent(colour);
         turnHandler.getGameMoves().addStudentsToTarget(students, turnHandler.getGameMoves().generateStudents(1));
+        turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Student successfully moved to the island"));
     }
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.controller.expert;
 
+import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
 import it.polimi.ingsw.server.controller.TurnHandler;
 
@@ -22,5 +23,6 @@ public class ExtraStepsCard extends CharacterCard{
     public void useCardImpl(TurnHandler turnHandler) throws NotEnoughCoins, IOException {
         buyCard(turnHandler);
         turnHandler.getCurrentPlayer().setMotherNatureSteps(turnHandler.getCurrentPlayer().getMotherNatureSteps() + 2);
+        turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Mothernature steps available increased by 2"));
     }
 }

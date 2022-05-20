@@ -1,4 +1,5 @@
 package it.polimi.ingsw.server.controller.expert;
+import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.server.controller.*;
 import it.polimi.ingsw.server.controller.Exceptions.*;
 import it.polimi.ingsw.server.model.Player;
@@ -26,12 +27,14 @@ public abstract class CharacterCard implements Serializable {
      * @param turnHandler
      */
     public void buyCard(TurnHandler turnHandler) throws IOException, NotEnoughCoins {
+        turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Card successfully acquired"));
         turnHandler.getCurrentPlayer().getPlayerBoard().decreaseCoins(price);
         if(!hasBeenUsed) {
             price++;
             //When the card is bought the first time, its price is increased and one coin is put on it
             turnHandler.getCurrentPlayer().getPlayerBoard().decreaseCoinReserve();
             hasBeenUsed = true;
+            turnHandler.getCurrentClient().sendMessage(new NotificationCMI("The card price has been increased to " + price));
         }
     }
 

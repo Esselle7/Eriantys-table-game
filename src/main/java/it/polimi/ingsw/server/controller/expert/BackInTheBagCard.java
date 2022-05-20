@@ -22,8 +22,10 @@ public class BackInTheBagCard extends CharacterCard{
         buyCard(turnHandler);
         turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Select the colour of the student to pick"));
         turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
+        turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Alright, moving all the students back to the bag"));
         int colour = turnHandler.getCurrentClient().receiveChooseInt();
         for (Player player: turnHandler.getGameMoves().getCurrentGame().getPlayersList()){
+            turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Moving students from " + player.getNickname() + "'s board"));
             for(int i = 0; i < 3; i++){
                 try {
                     player.getPlayerBoard().decreaseDiningRoom(colour);
@@ -31,6 +33,7 @@ public class BackInTheBagCard extends CharacterCard{
                     break;
                 }
             }
+            turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Finished moving students"));
         }
     }
 

@@ -13,7 +13,7 @@ public class SwitchEntranceDiningCard extends CharacterCard{
 
     public SwitchEntranceDiningCard(){
         super(1);
-        setDescription("you can switch a maximum of three students of your choice from your dining room with three students of your choice from this card");
+        setDescription("you can choose to switch a maximum of two students of your choice from your dining room to the entrance room");
     }
 
     @Override
@@ -23,8 +23,10 @@ public class SwitchEntranceDiningCard extends CharacterCard{
         int[] entranceRoom = turnHandler.getCurrentPlayer().getPlayerBoard().getEntranceRoom();
         int studentsMoved = 0, chooseAnother, diningToMove, entranceToMove;
         do {
+            turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Dining"));
             turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
             diningToMove = turnHandler.getCurrentClient().receiveChooseInt();
+            turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Entrance"));
             turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
             entranceToMove = turnHandler.getCurrentClient().receiveChooseInt();
             if(entranceRoom[entranceToMove] > 0 && diningRoom[diningToMove] > 0){
@@ -36,8 +38,11 @@ public class SwitchEntranceDiningCard extends CharacterCard{
             } else {
                 turnHandler.getCurrentClient().sendMessage(new NotificationCMI("No students available"));
             }
+            turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Students successfully switched"));
+            turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Do you want to keep moving: 1 for yes, 0 for no"));
             turnHandler.getCurrentClient().sendMessage(new chooseWhereToMove());
             chooseAnother = turnHandler.getCurrentClient().receiveChooseInt();
         } while (chooseAnother == 1 && studentsMoved < 2);
+        turnHandler.getCurrentClient().sendMessage(new NotificationCMI("No more switches allowed"));
     }
 }

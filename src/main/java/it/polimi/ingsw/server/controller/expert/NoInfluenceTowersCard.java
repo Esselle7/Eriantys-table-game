@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.controller.expert;
 
+import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.network.messages.chooseIslandCMI;
 import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
 import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
@@ -24,6 +25,7 @@ public class NoInfluenceTowersCard extends CharacterCard{
         int islandIndex = turnHandler.getCurrentClient().receiveChooseInt();
         noInfluenceIsland = turnHandler.getGameMoves().getCurrentGame().getIslandByIndex(islandIndex);
         noInfluenceIsland.setTowersBanned(true);
+        turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Towers won't be computed in the influence calculation for this island"));
     }
 
     @Override

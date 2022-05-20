@@ -620,7 +620,7 @@ public class Cli implements View {
         while(true)
         {
             int card = Integer.parseInt(getInput().nextLine());
-            if(getPlayGround().getDrawnCards().get(card).getPrice() <= getMyBoard().getCoins())
+            if(getPlayGround().getDrawnCards().get(card - 1).getPrice() <= getMyBoard().getCoins())
                 return card;
             else
                 printText("Please, choose a character card with less than you coins board!!");

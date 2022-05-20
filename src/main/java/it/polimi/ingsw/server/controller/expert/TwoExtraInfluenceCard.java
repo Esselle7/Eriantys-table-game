@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.controller.expert;
 
+import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
 import it.polimi.ingsw.server.controller.TurnHandler;
 
@@ -15,6 +16,7 @@ public class TwoExtraInfluenceCard extends CharacterCard{
     public void useCardImpl(TurnHandler turnHandler) throws NotEnoughCoins, IOException {
         buyCard(turnHandler);
         turnHandler.getCurrentPlayer().setExtraInfluence(2);
+        turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Two extra influence points acquired"));
     }
 
     @Override

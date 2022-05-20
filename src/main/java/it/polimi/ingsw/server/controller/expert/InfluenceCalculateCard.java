@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.controller.expert;
 
+import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.network.messages.chooseIslandCMI;
 import it.polimi.ingsw.server.controller.Exceptions.EmptyTowerYard;
 import it.polimi.ingsw.server.controller.Exceptions.GameWonException;
@@ -24,5 +25,6 @@ public class InfluenceCalculateCard extends CharacterCard{
         int islandIndex = turnHandler.getCurrentClient().receiveChooseInt();
         Island island = turnHandler.getGameMoves().getCurrentGame().getIslandByIndex(islandIndex);
         turnHandler.influenceUpdate(island);
+        turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Influence will be calculated on this island"));
     }
 }

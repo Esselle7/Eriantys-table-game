@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.controller.expert;
 
+import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.network.messages.chooseStudentColourToMoveCMI;
 import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
 import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
@@ -19,6 +20,7 @@ public class NoColorInfluenceCard extends CharacterCard{
         turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
         int bannedColour = turnHandler.getCurrentClient().receiveChooseInt();
         turnHandler.getGameMoves().getIslandController().setBannedColour(bannedColour);
+        turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Colour " + bannedColour + " successfully excluded from the influence count"));
     }
 
     public void resetCard(TurnHandler turnHandler){

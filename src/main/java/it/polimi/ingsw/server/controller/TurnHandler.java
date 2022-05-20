@@ -358,7 +358,6 @@ public class TurnHandler implements Runnable {
                 }
                 catch( chooseCharacterCardException e)
                 {
-                    displayCharacterCards();
                     useCharacterCard(e.getCharacterCard());
                 }
 
@@ -382,6 +381,7 @@ public class TurnHandler implements Runnable {
         getCurrentClient().sendMessage(new NotificationCMI("Now you have to move mother nature!"));
         while (true) {
             try {
+                getCurrentClient().sendMessage(new NotificationCMI("You can only move a max of " + getCurrentPlayer().getMotherNatureSteps() + " steps"));
                 getCurrentClient().sendMessage(new chooseIslandCMI());
                 getGameMoves().moveMotherNature(getCurrentClient().receiveChooseInt());
                 break;
@@ -411,7 +411,7 @@ public class TurnHandler implements Runnable {
         //Updating influence in case checkInfluence() is not null and if motherNatureIsland's towerColour is different from
         //the new influence-calculated player's towerColour
         if(!motherNatureIsland.isBanned()) {
-            Player islandPlayer = getGameMoves().getIslandController().checkInfluence(motherNatureIsland,getGameMoves().getCurrentGame());
+            Player islandPlayer = getGameMoves().getIslandController().checkInfluence(motherNatureIsland, getGameMoves().getCurrentGame());
             if (islandPlayer != null && islandPlayer.getPlayerBoard().getTowerColour() != motherNatureIsland.getTowerColour()) {
                 if (motherNatureIsland.getTowerCount() == 0)
                     getGameMoves().setInfluenceToIsland(motherNatureIsland);
@@ -458,12 +458,14 @@ public class TurnHandler implements Runnable {
             while(true)
             {
                 try {
-                    getGameMoves().getCurrentGame().getDrawnCards().get(chosenCard).useCard(this);
+                    getGameMoves().getCurrentGame().getDrawnCards().get(chosenCard - 1).useCard(this);
                     break;
                 }catch (UnableToUseCardException e) {
                     getCurrentClient().sendMessage(new NotificationCMI("Please select another character card!"));
                 } catch (NotEnoughCoins e) {
                     getCurrentClient().sendMessage(new NotificationCMI("You don't have enough money to use that card, please select another one!"));
+                } catch (IndexOutOfBoundsException e){
+                    getCurrentClient().sendMessage(new NotificationCMI("No available card with this number"));
                 }
             }
         }
@@ -472,14 +474,6 @@ public class TurnHandler implements Runnable {
     private void initializeCharacterCards(){
         for(CharacterCard drawnCard : getGameMoves().getCurrentGame().getDrawnCards())
             drawnCard.initializeCard(this);
-    }
-
-    private void displayCharacterCards() throws IOException{
-        for(CharacterCard characterCard : getGameMoves().getCurrentGame().getDrawnCards()){
-            getCurrentClient().sendMessage(new NotificationCMI("There is " + characterCard.getClass().getName()));
-            getCurrentClient().sendMessage(new NotificationCMI("The effect is: " + characterCard.getDescription()));
-            getCurrentClient().sendMessage(new NotificationCMI("The price is " + characterCard.getPrice()));
-        }
     }
 
     private void resetCards(){
