@@ -25,7 +25,11 @@ public class TurnHandler implements Runnable {
     private final List<VirtualViewConnection> gamePlayers;
 
 
-
+    /**
+     * This method initializes TurnHandler
+     * @param gamePlayersOut is the array of Players waiting to start playing
+     * @param gameMode is the gameMode in which you want to play: 0 if standard, 1 if expert (and 2 for testing)
+     */
     public TurnHandler(List<VirtualViewConnection> gamePlayersOut, int gameMode) throws IOException {
         gameOn = true;
         gamePlayers = new ArrayList<>();
@@ -34,9 +38,11 @@ public class TurnHandler implements Runnable {
         getGameMoves().getCurrentGame().setGameMode(gameMode);
         CharacterDeck = new ArrayList<>();
         numberOfCharacterCards = 3;
-        for (VirtualViewConnection c: gamePlayers
-        ) {
-            c.ping();
+        if(gameMode != 2){
+            for (VirtualViewConnection c: gamePlayers
+            ) {
+                c.ping();
+            }
         }
     }
 
@@ -144,6 +150,8 @@ public class TurnHandler implements Runnable {
     public void run(){
         printConsole("Setting up the game ...");
         setupGame();
+        if(getGameMoves().getCurrentGame().getGameMode() == 1)
+            initializeCharacterCards();
         try {
             update();
             while (getGame()) {
@@ -193,7 +201,8 @@ public class TurnHandler implements Runnable {
                     getCurrentClient().sendMessage(new NotificationCMI("Your turn is finished, wait for other player to play their turn ..."));
                     update();
                 }
-
+                if(getGameMoves().getCurrentGame().getGameMode() == 1)
+                    resetCards();
                 //In case there's an empty deck or the student bag is empty, this has to be the last turn
                 if (getLastTurn())
                     throw new GameWonException();
@@ -349,6 +358,7 @@ public class TurnHandler implements Runnable {
                 }
                 catch( chooseCharacterCardException e)
                 {
+                    displayCharacterCards();
                     useCharacterCard(e.getCharacterCard());
                 }
 
@@ -359,7 +369,7 @@ public class TurnHandler implements Runnable {
         newPlayerOrder.sort(Comparator.comparing(player1 -> player1.getCurrentCard().getValue()));
         setPlayerOrder(newPlayerOrder);
         setCurrentPlayer(getPlayerOrder().get(0));
-        if(getGameMoves().existDeckEmpty())
+        if(getCurrentPlayer().getAssistantCards().getResidualCards().size() == 0)
             setLastTurn(true);
         update();
     }
@@ -457,6 +467,11 @@ public class TurnHandler implements Runnable {
                 }
             }
         }
+    }
+
+    private void initializeCharacterCards(){
+        for(CharacterCard drawnCard : getGameMoves().getCurrentGame().getDrawnCards())
+            drawnCard.initializeCard(this);
     }
 
     private void displayCharacterCards() throws IOException{

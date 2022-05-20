@@ -157,6 +157,10 @@ public class GameMoves extends ManagerStudent implements Serializable {
 
     }
 
+    /**
+     * This method allows to set the influence of an island which has had no influence control up until now
+     * @param island is the island whose influence has to be set
+     */
     public void setInfluenceToIsland(Island island) throws EmptyTowerYard
     {
         Player playerInfluence = getIslandController().checkInfluence(island);
@@ -165,18 +169,18 @@ public class GameMoves extends ManagerStudent implements Serializable {
         island.setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
     }
 
+    /**
+     * This method allows to change the influence of an island
+     * @param island is the island whose influence has to be changed, it can also be an island on which
+     *               multiple towers reside
+     */
     public void changeInfluenceToIsland(Island island) throws EmptyTowerYard
     {
         Player playerInfluence = getIslandController().checkInfluence(island);
+        Player previousInfluence = getCurrentGame().getPlayerByTowerColour(island.getTowerColour());
         for(int i = 0; i < island.getTowerCount(); i++)
             playerInfluence.getPlayerBoard().decreaseTowerYard();
-        for(Player p : getCurrentGame().getPlayersList())
-        {
-            if(p.getPlayerBoard().getTowerColour().equals(island.getTowerColour()))
-            {
-                p.getPlayerBoard().setTowerYard(p.getPlayerBoard().getTowerYard()+island.getTowerCount());
-            }
-        }
+        previousInfluence.getPlayerBoard().setTowerYard(previousInfluence.getPlayerBoard().getTowerYard()+island.getTowerCount());
         island.setTowerColour(playerInfluence.getPlayerBoard().getTowerColour());
     }
 
@@ -354,18 +358,6 @@ public class GameMoves extends ManagerStudent implements Serializable {
     public Player checkForEmptyTowerYard()
     {
         return getCurrentGame().getPlayersList().stream().filter(player -> player.getPlayerBoard().getTowerYard() == 0).findFirst().orElse(null);
-    }
-
-    /**
-     * This method check if a player
-     * have finished the assistant card and
-     * allows proceeding with the calculus of
-     * the winner
-     * @return true if there is at least an empty deck
-     */
-    public boolean existDeckEmpty()
-    {
-        return getCurrentGame().getPlayersList().stream().anyMatch(player -> player.getAssistantCards().getResidualCards().size() == 0);
     }
 
     /**

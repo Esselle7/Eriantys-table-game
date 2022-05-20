@@ -17,7 +17,7 @@ class GameMovesTest {
     GameMoves GC;
     Player player1, player2, player3;
     PlayGround playGround;
-    Island island1, island2, island3;
+    Island island1, island2, island6;
 
     @BeforeEach
     void setup(){
@@ -43,7 +43,6 @@ class GameMovesTest {
         playGround = GC.getCurrentGame();
         island1 = playGround.getIslandByIndex(1);
         island2 = playGround.getIslandByIndex(2);
-        island3 = playGround.getIslandByIndex(3);
         GC.getIslandController().setPlayGround(GC.getCurrentGame());
     }
 
@@ -144,26 +143,28 @@ class GameMovesTest {
 
     @Test
     void changeInfluenceToIslandTest() {
-        island3.setTowerCount(2);
-        island3.setTowerColour(player1.getPlayerBoard().getTowerColour());
+        island6 = playGround.getIslandByIndex(6);
+        island6.setTowerCount(2);
+        island6.setTowerColour(player1.getPlayerBoard().getTowerColour());
         player1.getPlayerBoard().increaseNumberOfStudent(0);
         player1.getPlayerBoard().setTowerYard(4);
-        island3.setPlacedStudent(0);
-        island3.setPlacedStudent(0);
+        island6.setPlacedStudent(0);
+        island6.setPlacedStudent(0);
         player2.getPlayerBoard().setTowerYard(6);
         player2.getPlayerBoard().increaseNumberOfStudent(1);
-        island3.setPlacedStudent(1);
-        island3.setPlacedStudent(1);
-        island3.setPlacedStudent(1);
-        island3.setPlacedStudent(1);
-        island3.setPlacedStudent(1);
+        island6.setPlacedStudent(1);
+        island6.setPlacedStudent(1);
+        island6.setPlacedStudent(1);
+        island6.setPlacedStudent(1);
+        island6.setPlacedStudent(1);
         GC.checkProfessorsControl();
         try{
-            GC.changeInfluenceToIsland(island3);
+            GC.changeInfluenceToIsland(island6);
         } catch(EmptyTowerYard e){
-            e.printStackTrace();
+            fail();
         }
-        assertEquals(player2.getPlayerBoard().getTowerColour(), island3.getTowerColour());
+        assertEquals(GC.getIslandController().checkInfluence(island6), player2);
+        assertEquals(player2.getPlayerBoard().getTowerColour(), island6.getTowerColour());
         assertEquals(4, player2.getPlayerBoard().getTowerYard());
         assertEquals(6, player1.getPlayerBoard().getTowerYard());
     }

@@ -105,13 +105,12 @@ class IslandControllerTest {
             fail();
         }
         catch(GameWonException e){
-            e.printStackTrace();
+            assertEquals(3, playGround.getIslands().size());
+            //Island2, island3 and island4 unify under the same island, the third one in playGround.getIslands()
+            assertEquals(TColour.WHITE, playGround.getIslands().get(1).getTowerColour());
+            assertEquals(island1, playGround.getIslands().get(1).getNearbyIslands().get(0));
+            assertEquals(island5, playGround.getIslands().get(1).getNearbyIslands().get(1));
         }
-        assertEquals(3, playGround.getIslands().size());
-        //Island2, island3 and island4 unify under the same island, the third one in playGround.getIslands()
-        assertEquals(TColour.WHITE, playGround.getIslands().get(1).getTowerColour());
-        assertEquals(island1, playGround.getIslands().get(1).getNearbyIslands().get(0));
-        assertEquals(island5, playGround.getIslands().get(1).getNearbyIslands().get(1));
     }
 
     @Test
@@ -153,14 +152,13 @@ class IslandControllerTest {
             islandController.islandUnification(island5, playGround);
         }
         catch(GameWonException e){
-            e.printStackTrace();
+            assertEquals(3, playGround.getIslands().size());
+            //island4, island1 and island5 all unify into an island which is placed in island5's former position
+            //since islandUnification was called on island5
+            assertEquals(TColour.GRAY, playGround.getIslands().get(2).getTowerColour());
+            assertEquals(island3, playGround.getIslands().get(2).getNearbyIslands().get(0));
+            assertEquals(island2, playGround.getIslands().get(2).getNearbyIslands().get(1));
         }
-        assertEquals(3, playGround.getIslands().size());
-        //island4, island1 and island5 all unify into an island which is placed in island5's former position
-        //since islandUnification was called on island5
-        assertEquals(TColour.GRAY, playGround.getIslands().get(2).getTowerColour());
-        assertEquals(island3, playGround.getIslands().get(2).getNearbyIslands().get(0));
-        assertEquals(island2, playGround.getIslands().get(2).getNearbyIslands().get(1));
     }
 
     @Test

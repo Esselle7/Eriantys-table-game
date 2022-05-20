@@ -45,7 +45,9 @@ public class IslandController {
      * @return the player that has the highest influence
      */
     public Player checkInfluence(Island inputIsland){
-        int counter = 0, maxCounter = 0;
+        int counter = 0;
+        int maxCounter = 0;
+        boolean draw = false;
         Player maxPlayer = null;
         for (Player player : playGround.getPlayersList()){
             for(int index = 0; index < playGround.getProfessorsControl().length; index++){
@@ -59,11 +61,16 @@ public class IslandController {
             if (counter > maxCounter){
                 maxPlayer = player;
                 maxCounter = counter;
-            } else if(counter == maxCounter)
-                return playGround.getPlayerByTowerColour(inputIsland.getTowerColour());
+                draw = false;
+            } else if(counter == maxCounter){
+                draw = true;
+            }
             counter = 0;
         }
-        return maxPlayer;
+        if(draw)
+            return null;
+        else
+            return maxPlayer;
     }
 
 

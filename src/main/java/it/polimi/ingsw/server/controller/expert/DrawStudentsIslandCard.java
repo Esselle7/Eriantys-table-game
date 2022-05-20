@@ -9,6 +9,7 @@ import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException
 import java.io.IOException;
 
 public class DrawStudentsIslandCard extends CharacterCard {
+    int[] students;
 
     public DrawStudentsIslandCard(){
         super(1);
@@ -16,8 +17,12 @@ public class DrawStudentsIslandCard extends CharacterCard {
     }
 
     @Override
+    public void initializeCard(TurnHandler turnHandler) {
+        this.students = turnHandler.getGameMoves().generateStudents(4);
+    }
+
+    @Override
     public void useCardImpl(TurnHandler turnHandler) throws IOException, chooseCharacterCardException, NotEnoughCoins {
-        int[] students = turnHandler.getGameMoves().generateStudents(4);
         buyCard(turnHandler);
         int colour=0;
         do {
