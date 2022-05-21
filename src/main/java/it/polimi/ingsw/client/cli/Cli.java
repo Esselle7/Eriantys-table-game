@@ -139,7 +139,7 @@ public class Cli implements View {
 
     @Override
     public boolean isDefaultServer() {
-        printText("Please type 'NEW' to insert new Server IP/PORT, else type 'DEF'");
+        printText("Please type 'NEW' to insert a new Server IP/PORT otherwise, if you want to go with the default settings, type 'DEF'");
         String chose;
         while(true)
         {
@@ -149,7 +149,7 @@ public class Cli implements View {
             else if(chose.equals("NEW"))
                 return false;
             else{
-                printText("Please follow the instructions! You insert an invalid input");
+                printText("Please follow the instructions! You sent an invalid input");
             }
         }
     }
@@ -170,7 +170,7 @@ public class Cli implements View {
      * @return The IP of the server to connect to
      */
     private String getServerAddress() {
-        printText("Please insert remote Server IP:");
+        printText("Please insert a remote Server IP:");
         return getInput().nextLine();
     }
     /**
@@ -179,7 +179,7 @@ public class Cli implements View {
      * @return The port of the server to connect to
      */
     private int getServerPort(){
-        printText("Please insert remote Server port:");
+        printText("Please insert a remote Server port:");
         return Integer.parseInt(getInput().nextLine());
     }
 
@@ -197,7 +197,7 @@ public class Cli implements View {
      */
     public void connectionOutcome(boolean isConnected) {
         if (isConnected)
-            printText("Connection established. Waiting for a game...\n");
+            printText("Connection established. Waiting...\n");
         else
             printText("Error: Server unreachable, please try again lather\n");
     }
@@ -247,8 +247,8 @@ public class Cli implements View {
      */
     public void nicknameFormatError()
     {
-        printText("Nickname chosen is invalid:");
-        printText("you must insert nickname between 2 and 8 characters");
+        printText("Invalid Nickname:");
+        printText("you must insert a nickname from 2 to 8 characters long");
     }
 
 
@@ -257,14 +257,14 @@ public class Cli implements View {
     {
        // ReFreshConsole();
         int numberOfPlayers;
-        printText("Choose game mode between:");
+        printText("Choose a game mode between:");
         printText("2 players Game Mode");
         printText("3 players Game Mode");
         while (true) {
             try {
                 numberOfPlayers = Integer.parseInt(getInput().nextLine());
                 if (numberOfPlayers != 2 && numberOfPlayers != 3)
-                    printText("Please insert 2 or 3 players Game Mode.");
+                    printText("Please choose between 2 or 3 players mode");
                 else
                     return numberOfPlayers;
 
@@ -277,8 +277,8 @@ public class Cli implements View {
 
     public int chooseExpertMode()
     {
-        printText("Choose game mode between:");
-        printText("EXPERT MODE (It includes Character Card)");
+        printText("Choose your game mode between:");
+        printText("EXPERT MODE (Character cards)");
         printText("NORMAL MODE");
         String choice;
         while (true) {
@@ -289,22 +289,22 @@ public class Cli implements View {
             if (choice.equalsIgnoreCase("NORMAL") || choice.equalsIgnoreCase("NORMAL MODE"))
                 return 0;
             else
-                printText("Invalid input, please type expert or normal mode");
+                printText("Invalid input, please type expert or normal");
         }
 
     }
 
     public void showInfoForDecisions()
     {
-        printText("------------OTHERS PLAYER INFO------------");
+        printText("------------OTHER PLAYERS' INFO------------");
         printPlayersInfo();
         printText("----------------------------------");
         System.out.println();
-        printText("------------ISLANDS INFO------------");
+        printText("------------ISLAND CONTROL INFO------------");
         printIslandsInfo();
         printText("----------------------------------");
         System.out.println();
-        printText("------------PROFESSORS CONTROL INFO------------");
+        printText("------------PROFESSOR CONTROL INFO------------");
         printProfessorsControl();
         printText("----------------------------------");
         System.out.println();
@@ -312,14 +312,14 @@ public class Cli implements View {
 
     public void showMyInfo()
     {
-        printText("------------THESE ARE YOUR INFO------------");
+        printText("------------THIS IS YOUR INFO------------");
         printMyCurrentCard();
         printMyBoard();
 
     }
     public void showMyDeck()
     {
-        printText(getMyNickname()+"'s remains assistant card: ");
+        printText(getMyNickname() + "'s remaining Assistant cards: ");
         for (Card card: getMyDeck().getResidualCards()) {
             printText("Card Value: "+card.getValue()+", Mother Nature Steps: "+card.getMotherNatureSteps());
         }
@@ -363,13 +363,13 @@ public class Cli implements View {
                 String playerColour = TextColours.playerColours[indexPlayerColour];
                 printTextWithColour("> Nickname: " + p.getNickname().toUpperCase(),playerColour);
                 printTextWithColour("> Current card value: " + p.getCurrentCard().getValue(), playerColour);
-                printTextWithColour("> Current MotherNature Steps: " + p.getCurrentCard().getMotherNatureSteps(), playerColour);
+                printTextWithColour("> Current MotherNature Steps: " + p.getMotherNatureSteps(), playerColour);
                 printTextWithColour("------------ENTRANCE ROOM----------",playerColour);
                 printStudentsInfo(p.getPlayerBoard().getEntranceRoom(),playerColour);
                 printTextWithColour("------------DINING ROOM------------",playerColour);
                 printStudentsInfo(p.getPlayerBoard().getDiningRoom(),playerColour);
                 printTextWithColour("------------TOWER YARD-------------",playerColour);
-                printTextWithColour(p.getPlayerBoard().getTowerYard()+" remains "+p.getPlayerBoard().getTowerColour()+ " tower in the Tower Yard", playerColour);
+                printTextWithColour(p.getPlayerBoard().getTowerYard() +" "+ p.getPlayerBoard().getTowerColour()+ " remaining tower(s) in the Tower Yard", playerColour);
             }
             indexPlayerColour++;
 
@@ -389,7 +389,7 @@ public class Cli implements View {
             printText("ISLAND "+indexIsland+": ");
             printStudentsInfo(island.getPlacedStudent(),getDefaultColour());
             if(island.getTowerColour() != null)
-                printText("Number of "+island.getTowerColour()+" tower on it: "+ island.getTowerCount());
+                printText("Number of "+island.getTowerColour()+" tower(s) on it: "+ island.getTowerCount());
             else
                 printText("No tower on this island");
             if(island == getPlayGround().getIslandWithMotherNature())
@@ -413,17 +413,18 @@ public class Cli implements View {
                 printStudentsInfo(cloudTile.getStudents(),getDefaultColour());
             }
             indexCloudTiles++;
+            printText(" ");
         }
     }
 
     @Override
     public void showCharacterCardsInfo() {
-        printAction("Please type the index of which character card you want to use:");
-        printText("(Note: you have "+getMyBoard().getCoins()+" coins)");
+        printAction("Please type the index of the Character card of your choice:");
+        printText("(You have "+getMyBoard().getCoins()+" coins available");
         int index = 1;
         for(CharacterCard c : getPlayGround().getDrawnCards())
         {
-            printText("Character card number "+index);
+            printText("Character card number " + index);
             printText("    Description: "+c.getDescription());
             printText("    Price: "+c.getPrice());
             printText("");
@@ -441,7 +442,7 @@ public class Cli implements View {
             String nickname = getPlayGround().getProfessorsControl()[indexProfessor];
             String currentProfessor = getStudentColour().getStudentColours()[indexProfessor];
             if(nickname != null)
-                printText(currentProfessor+" professor is controlled by: "+nickname);
+                printText(currentProfessor + " professor is controlled by: "+nickname);
             else
                 printText(currentProfessor + " professor is not controlled by anyone");
         }
@@ -455,7 +456,7 @@ public class Cli implements View {
      */
     private void printMyCurrentCard()
     {
-        printText(getMyNickname()+"'s current card:");
+        printText(getMyNickname()+"'s current card: ");
         printText("Card value: "+ getMyCurrentCard().getValue()+", Mother nature Steps "+ getMyCurrentCard().getMotherNatureSteps());
     }
 
@@ -470,7 +471,7 @@ public class Cli implements View {
         printText("------------MY DINING ROOM------------");
         printStudentsInfo(getMyBoard().getDiningRoom(),getDefaultColour());
         printText("------------MY TOWER YARD-------------");
-        printText(getMyBoard().getTowerYard()+" remains "+getMyBoard().getTowerColour()+ " tower in the Tower Yard");
+        printText(getMyBoard().getTowerYard() +" "+ getMyBoard().getTowerColour()+ " remaining tower(s) in the Tower Yard");
     }
 
     @Override
@@ -478,7 +479,7 @@ public class Cli implements View {
     {
         String in = "";
         int choice;
-        printAction("Please choose an assistant card between the remains assistant cards:");
+        printAction("Please choose an assistant card between the remaining assistant cards:");
         while(true)
         {
             try{
@@ -512,7 +513,7 @@ public class Cli implements View {
                 if(getStudentColour().getStudentColours()[index].equals(studentColour.toUpperCase()))
                     return index;
             }
-            printText("You insert an invalid student colour!");
+            printText("Invalid student colour!");
         }
     }
 
@@ -520,7 +521,7 @@ public class Cli implements View {
     public int chooseIsland()
     {
         String in = "";
-        printAction("Please type the Island index where you want to move:");
+        printAction("Please type the Island index:");
         while(true)
         {
             try{
@@ -529,7 +530,7 @@ public class Cli implements View {
                 if(choice >0 && choice<=getPlayGround().getIslands().size())
                     return  choice;
                 else
-                    printText("ERROR: You insert an invalid index!");
+                    printText("ERROR: Invalid index!");
             }catch (NumberFormatException e)
             {
                 if(in.equalsIgnoreCase("CHARACTER CARD"))
@@ -559,7 +560,7 @@ public class Cli implements View {
                 if(choice >0 && choice<=getPlayGround().getPlayersList().size())
                     return choice;
                 else
-                    printText("ERROR: You insert an invalid index!");
+                    printText("ERROR: Invalid index!");
             }catch (NumberFormatException e)
             {
                 if(in.equalsIgnoreCase("CHARACTER CARD"))
@@ -599,11 +600,11 @@ public class Cli implements View {
     {
         if(getPlayGround().getGameMode() != expert)
         {
-            printText("You can't access expert mode menù!");
+            printText("You cannot access the expert mode menu because you're not playing in expert mode!");
             return Client.getNotAllowedInt();
         }
         printText("-------------------CHARACTER CARD MENU--------------");
-        printText("*Type BACK to exit menù*");
+        printText("*Type BACK to exit menu");
         boolean enoughCoins = false;
         for (CharacterCard c: getPlayGround().getDrawnCards()
              ) {
@@ -614,7 +615,7 @@ public class Cli implements View {
         }
         if(!enoughCoins)
         {
-            printText("You don't have enough money to buy a card, please try again later...");
+            printText("You don't have enough coins to buy a card, please try again later...");
             return Client.getNotAllowedInt();
         }
         showCharacterCardsInfo();
@@ -623,14 +624,17 @@ public class Cli implements View {
             String in = getInput().nextLine();
             if(in.equalsIgnoreCase("BACK"))
             {
-                printText("Exiting character card menù...");
+                printText("Exiting character card menu...");
                 return -1;
             }
             int card = Integer.parseInt(in);
-            if(getPlayGround().getDrawnCards().get(card - 1).getPrice() <= getMyBoard().getCoins())
-                return card;
-            else
-                printText("Please, choose a character card with less than you coins board!!");
+            if(card < getPlayGround().getDrawnCards().size() + 1 && card > 0) {
+                if (getPlayGround().getDrawnCards().get(card - 1).getPrice() <= getMyBoard().getCoins())
+                    return card;
+                else
+                    printText("Please choose a character card you can afford!");
+            } else
+                printText("Please choose a valid character card index!");
         }
 
     }
@@ -685,14 +689,14 @@ public class Cli implements View {
     {
         if(winner.equals(getMyNickname()))
         {
-            printText("Congratulations, you have won the game !");
-            printText("Thanks to participate, see you soon .");
+            printText("Congratulations, you won the game !");
+            printText("Thanks for playing, see you soon...");
         }
         else
         {
-            printText("We are sorry, you lost the game ...");
+            printText("Unfortunately you lost the game, maybe next time!");
             printText("The winner is " + winner);
-            printText("Join or create another game, you will be more lucky");
+            printText("Join or create another game, you'll be luckier");
         }
     }
 
