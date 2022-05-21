@@ -1,9 +1,7 @@
 package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.View;
-import it.polimi.ingsw.client.gui.Scenes.GuiAskGameModeScene;
-import it.polimi.ingsw.client.gui.Scenes.GuiChooseNicknameScene;
-import it.polimi.ingsw.client.gui.Scenes.GuiGetServerInfoScene;
+import it.polimi.ingsw.client.gui.Scenes.*;
 import it.polimi.ingsw.client.model.ClientColour;
 import it.polimi.ingsw.server.model.Board;
 import it.polimi.ingsw.server.model.Card;
@@ -102,15 +100,8 @@ public class Gui implements View {
 
     @Override
     public List<Object> getServerInfo() {
-        while (!GuiMain.getQueue().isEmpty()) {
-            try {
-                GuiMain.getQueue().take();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-        Platform.runLater(() -> new GuiGetServerInfoScene().run());
+        resetGuiQueue();
+        Platform.runLater(() -> new GuiLoadScene("LoginPage").run());
         try {
             List<Object> toReturn = new ArrayList<>();
             toReturn.add(GuiMain.getQueue().take());
@@ -149,20 +140,20 @@ public class Gui implements View {
 
     @Override
     public int wantToBeLeader() {
-        return 0;
+        resetGuiQueue();
+        Platform.runLater(() -> new GuiLoadScene("ChooseLobby").run());
+        try {
+            return (Integer) GuiMain.getQueue().take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     @Override
     public String choseNickname() {
-        while (!GuiMain.getQueue().isEmpty()) {
-            try {
-                GuiMain.getQueue().take();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-        Platform.runLater(() -> new GuiChooseNicknameScene().run());
+        resetGuiQueue();
+        Platform.runLater(() -> new GuiLoadScene("NicknamePage").run());
         try {
             return (String) GuiMain.getQueue().take();
         } catch (InterruptedException e) {
@@ -178,15 +169,8 @@ public class Gui implements View {
 
     @Override
     public int askGameMode() {
-        while (!GuiMain.getQueue().isEmpty()) {
-            try {
-                GuiMain.getQueue().take();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                return -1;
-            }
-        }
-        Platform.runLater(() -> new GuiAskGameModeScene().run());
+        resetGuiQueue();
+        Platform.runLater(() -> new GuiLoadScene("ChoosePlayers").run());
         try {
             return (int) GuiMain.getQueue().take();
         } catch (InterruptedException e) {
@@ -279,5 +263,17 @@ public class Gui implements View {
     @Override
     public void displayWinner(String winner) {
 
+    }
+
+    private void resetGuiQueue()
+    {
+        while (!GuiMain.getQueue().isEmpty()) {
+            try {
+                GuiMain.getQueue().take();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                System.exit(-1);
+            }
+        }
     }
 }

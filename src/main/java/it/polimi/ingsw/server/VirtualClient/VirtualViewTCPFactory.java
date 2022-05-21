@@ -66,8 +66,7 @@ public class VirtualViewTCPFactory implements Runnable {
                     }
 
                 } catch (InterruptedException | IOException e) {
-                    e.printStackTrace();
-                    System.exit(-1);
+                    System.out.println("Bad connection... Discarded");
                 }
             } catch (IOException ignored) {}
 
