@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to bottom, #345687, #c19c78)linear-gradient(to bottom, #345687, #c19c78);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.ScenesController.GuiAskGameModeController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to bottom, #345687, #c19c78)linear-gradient(to bottom, #345687, #c19c78);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.ScenesController.GuiCreateOrJoinGameController">
    <children>
       <ImageView layoutY="-5.0">
          <image>
@@ -43,10 +38,11 @@
                         <Font size="48.0" />
                      </font>
                   </Label>
-                  <ChoiceBox fx:id="choiceBox" prefHeight="80.0" prefWidth="300.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                </children>
             </GridPane>
          </children>
       </AnchorPane>
+      <Button fx:id="leader" layoutX="267.0" layoutY="653.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="133.0" text="Leader" onAction="#returnLeader"/>
+      <Button fx:id="newGame" layoutX="532.0" layoutY="653.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="133.0" text="Button" onAction="#returnNewGame" />
    </children>
 </AnchorPane>
