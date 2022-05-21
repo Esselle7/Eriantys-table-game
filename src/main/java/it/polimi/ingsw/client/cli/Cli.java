@@ -283,7 +283,7 @@ public class Cli implements View {
                 else
                     return numberOfPlayers;
 
-            } catch (InputMismatchException ex) {
+            } catch (InputMismatchException | NumberFormatException ex) {
                 printText("Error: input not valid, type '2' or '3'");
                 getInput().next();
             }
@@ -297,7 +297,6 @@ public class Cli implements View {
         printText("NORMAL MODE");
         String choice;
         while (true) {
-
             choice = getInput().nextLine();
             if (choice.equalsIgnoreCase("EXPERT") || choice.equalsIgnoreCase("EXPERT MODE"))
                 return 1;
@@ -403,6 +402,10 @@ public class Cli implements View {
         for (Island island: getPlayGround().getIslands()) {
             printText("ISLAND "+indexIsland+": ");
             printStudentsInfo(island.getPlacedStudent(),getDefaultColour());
+            if(island.isBanned())
+                printText("Influence Ban Present on this Island");
+            if(island.isTowersBanned())
+                printText("Towers banned from influence calculation on this island");
             if(island.getTowerColour() != null)
                 printText("Number of "+island.getTowerColour()+" tower(s) on it: "+ island.getTowerCount());
             else
@@ -435,13 +438,17 @@ public class Cli implements View {
     @Override
     public void showCharacterCardsInfo() {
         printAction("Please type the index of the Character card of your choice:");
-        printText("(You have "+getMyBoard().getCoins()+" coins available");
+        printText("You have "+getMyBoard().getCoins()+" coins available");
         int index = 1;
         for(CharacterCard c : getPlayGround().getDrawnCards())
         {
             printText("Character card number " + index);
-            printText("    Description: "+c.getDescription());
-            printText("    Price: "+c.getPrice());
+            printText("Description: "+c.getDescription());
+            if(c.getStudents() != null) {
+                printText("The students on this card are: ");
+                printStudentsInfo(c.getStudents(), TextColours.YELLOW);
+            }
+            printText("Price: "+c.getPrice());
             printText("");
             index++;
         }
@@ -453,6 +460,7 @@ public class Cli implements View {
      */
     private void printProfessorsControl()
     {
+        printPlayersInfo();
         for (int indexProfessor = 0; indexProfessor<getPlayGround().getProfessorsControl().length;indexProfessor++) {
             String nickname = getPlayGround().getProfessorsControl()[indexProfessor];
             String currentProfessor = getStudentColour().getStudentColours()[indexProfessor];
@@ -517,6 +525,23 @@ public class Cli implements View {
     {
         printAction("Please select a student from your entrance room to move");
         showMyInfo();
+        while(true)
+        {
+            String studentColour = getInput().nextLine();
+            if(studentColour.equalsIgnoreCase("CHARACTER CARD"))
+            {
+                return Client.getNotAllowedInt(); // modify that name
+            }
+            for (int index = 0; index < Colour.colourCount; index ++) {
+                if(getStudentColour().getStudentColours()[index].equals(studentColour.toUpperCase()))
+                    return index;
+            }
+            printText("Invalid student colour!");
+        }
+    }
+
+    public int chooseStudentColour(){
+        printAction("Please select a colour: ");
         while(true)
         {
             String studentColour = getInput().nextLine();
@@ -642,14 +667,18 @@ public class Cli implements View {
                 printText("Exiting character card menu...");
                 return -1;
             }
-            int card = Integer.parseInt(in);
-            if(card < getPlayGround().getDrawnCards().size() + 1 && card > 0) {
-                if (getPlayGround().getDrawnCards().get(card - 1).getPrice() <= getMyBoard().getCoins())
-                    return card;
-                else
-                    printText("Please choose a character card you can afford!");
-            } else
+            try {
+                int card = Integer.parseInt(in);
+                if (card < getPlayGround().getDrawnCards().size() + 1 && card > 0) {
+                    if (getPlayGround().getDrawnCards().get(card - 1).getPrice() <= getMyBoard().getCoins())
+                        return card;
+                    else
+                        printText("Please choose a character card you can afford!");
+                } else
+                    throw new NumberFormatException();
+            } catch (NumberFormatException e){
                 printText("Please choose a valid character card index!");
+            }
         }
 
     }
@@ -661,7 +690,6 @@ public class Cli implements View {
         setMyCurrentCard(myCurrentCardNew);
         setMyDeck(myDeckNew);
         getMyBoard().setCoins(myCoins);
-
     }
 
 

@@ -1,12 +1,11 @@
 package it.polimi.ingsw.server.controller.expert;
 
 import it.polimi.ingsw.network.messages.NotificationCMI;
-import it.polimi.ingsw.network.messages.chooseStudentColourToMoveCMI;
+import it.polimi.ingsw.network.messages.chooseStudentColourCMI;
 import it.polimi.ingsw.network.messages.chooseWhereToMove;
 import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
 import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
 import it.polimi.ingsw.server.controller.TurnHandler;
-
 import java.io.IOException;
 
 public class SwitchEntranceDiningCard extends CharacterCard{
@@ -24,10 +23,10 @@ public class SwitchEntranceDiningCard extends CharacterCard{
         int studentsMoved = 0, chooseAnother, diningToMove, entranceToMove;
         do {
             turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Dining"));
-            turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
+            turnHandler.getCurrentClient().sendMessage(new chooseStudentColourCMI());
             diningToMove = turnHandler.getCurrentClient().receiveChooseInt();
             turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Entrance"));
-            turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
+            turnHandler.getCurrentClient().sendMessage(new chooseStudentColourCMI());
             entranceToMove = turnHandler.getCurrentClient().receiveChooseInt();
             if(entranceRoom[entranceToMove] > 0 && diningRoom[diningToMove] > 0){
                 studentsMoved++;

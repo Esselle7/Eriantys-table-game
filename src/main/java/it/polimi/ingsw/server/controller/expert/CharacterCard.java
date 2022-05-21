@@ -1,8 +1,9 @@
 package it.polimi.ingsw.server.controller.expert;
+import it.polimi.ingsw.TextColours;
+import it.polimi.ingsw.client.model.ClientColour;
 import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.server.controller.*;
 import it.polimi.ingsw.server.controller.Exceptions.*;
-import it.polimi.ingsw.server.model.Player;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -15,10 +16,14 @@ public abstract class CharacterCard implements Serializable {
     int price;
     boolean hasBeenUsed;
     String description = "";
+    String specificDescription;
+    int[] students;
 
     public CharacterCard(int price){
         this.hasBeenUsed = false;
         this.price = price;
+        this.specificDescription = null;
+        this.students = null;
     }
 
     /**
@@ -31,7 +36,6 @@ public abstract class CharacterCard implements Serializable {
         turnHandler.getCurrentPlayer().getPlayerBoard().decreaseCoins(price);
         if(!hasBeenUsed) {
             price++;
-            //When the card is bought the first time, its price is increased and one coin is put on it
             turnHandler.getCurrentPlayer().getPlayerBoard().decreaseCoinReserve();
             hasBeenUsed = true;
             turnHandler.getCurrentClient().sendMessage(new NotificationCMI("The card price has been increased to " + price));
@@ -72,5 +76,13 @@ public abstract class CharacterCard implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setStudents(int[] students) {
+        this.students = students;
+    }
+
+    public int[] getStudents() {
+        return students;
     }
 }
