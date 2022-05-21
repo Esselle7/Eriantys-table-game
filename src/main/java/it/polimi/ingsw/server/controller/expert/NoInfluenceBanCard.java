@@ -23,7 +23,7 @@ public class NoInfluenceBanCard extends CharacterCard{
             buyCard(turnHandler);
             turnHandler.getCurrentClient().sendMessage(new chooseIslandCMI());
             int islandIndex = turnHandler.getCurrentClient().receiveChooseInt();
-            turnHandler.getGameMoves().getCurrentGame().getIslandByIndex(islandIndex).setBanned(true);
+            turnHandler.getGameMoves().getCurrentGame().getIslandByIndex(islandIndex - 1).setBanned(true);
             turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Influence Banner successfully set to the island"));
             banCardNumber--;
         } else

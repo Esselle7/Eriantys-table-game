@@ -1,7 +1,7 @@
 package it.polimi.ingsw.server.controller.expert;
 
 import it.polimi.ingsw.network.messages.NotificationCMI;
-import it.polimi.ingsw.network.messages.chooseStudentColourToMoveCMI;
+import it.polimi.ingsw.network.messages.chooseStudentColourCMI;
 import it.polimi.ingsw.network.messages.chooseWhereToMove;
 import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
 import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
@@ -18,15 +18,14 @@ public class SwitchStudentsCard extends CharacterCard{
 
     @Override
     public void useCardImpl(TurnHandler turnHandler) throws IOException, chooseCharacterCardException, NotEnoughCoins {
-        int[] students = turnHandler.getGameMoves().generateStudents(6);
         buyCard(turnHandler);
         int studentsMoved = 0, chooseAnother, studentColourToDrop, studentColourToChoose;
         do {
             turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Colour to drop"));
-            turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
+            turnHandler.getCurrentClient().sendMessage(new chooseStudentColourCMI());
             studentColourToDrop = turnHandler.getCurrentClient().receiveChooseInt();
             turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Colour to get from the card"));
-            turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
+            turnHandler.getCurrentClient().sendMessage(new chooseStudentColourCMI());
             studentColourToChoose = turnHandler.getCurrentClient().receiveChooseInt();
             if(students[studentColourToChoose] > 0 && turnHandler.getCurrentPlayer().getPlayerBoard().getEntranceRoom()[studentColourToDrop] > 0){
                 studentsMoved++;
@@ -43,5 +42,10 @@ public class SwitchStudentsCard extends CharacterCard{
             chooseAnother = turnHandler.getCurrentClient().receiveChooseInt();
         } while (chooseAnother == 1 && studentsMoved < 3);
         turnHandler.getCurrentClient().sendMessage(new NotificationCMI("No more switches allowed"));
+    }
+
+    @Override
+    public void initializeCard(TurnHandler turnHandler) {
+        students = turnHandler.getGameMoves().generateStudents(6);
     }
 }

@@ -35,6 +35,10 @@ public class Board extends ManagerStudent implements Serializable {
         this.towerYard = towerYard;
         this.towerColour = towerColour;
         this.addCoin();
+        this.addCoin();
+        this.addCoin();
+        this.addCoin();
+        this.addCoin();
         diningRoom = new int[Colour.colourCount];
     }
 

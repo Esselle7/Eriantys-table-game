@@ -152,6 +152,12 @@ public interface View {
     int chooseStudentColourToMove();
 
     /**
+     * This method allows to choose a colour, it is used especially for cards
+     * @return the colour corresponding int to the colour chosen
+     */
+    int chooseStudentColour();
+
+    /**
      * This method allows the player to choose an island in order
      * to move a student or mother nature on it
      * @return the index of the selected island

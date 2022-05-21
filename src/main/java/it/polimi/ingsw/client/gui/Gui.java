@@ -242,6 +242,11 @@ public class Gui implements View {
     }
 
     @Override
+    public int chooseStudentColour() {
+        return 0;
+    }
+
+    @Override
     public int chooseIsland() {
         return 0;
     }

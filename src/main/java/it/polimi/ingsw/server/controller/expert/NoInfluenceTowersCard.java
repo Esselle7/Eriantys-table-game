@@ -23,7 +23,7 @@ public class NoInfluenceTowersCard extends CharacterCard{
         buyCard(turnHandler);
         turnHandler.getCurrentClient().sendMessage(new chooseIslandCMI());
         int islandIndex = turnHandler.getCurrentClient().receiveChooseInt();
-        noInfluenceIsland = turnHandler.getGameMoves().getCurrentGame().getIslandByIndex(islandIndex);
+        noInfluenceIsland = turnHandler.getGameMoves().getCurrentGame().getIslandByIndex(islandIndex - 1);
         noInfluenceIsland.setTowersBanned(true);
         turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Towers won't be computed in the influence calculation for this island"));
     }
