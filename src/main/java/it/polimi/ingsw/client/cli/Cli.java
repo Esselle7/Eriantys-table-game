@@ -603,6 +603,7 @@ public class Cli implements View {
             return Client.getNotAllowedInt();
         }
         printText("-------------------CHARACTER CARD MENU--------------");
+        printText("*Type BACK to exit menù*");
         boolean enoughCoins = false;
         for (CharacterCard c: getPlayGround().getDrawnCards()
              ) {
@@ -619,7 +620,13 @@ public class Cli implements View {
         showCharacterCardsInfo();
         while(true)
         {
-            int card = Integer.parseInt(getInput().nextLine());
+            String in = getInput().nextLine();
+            if(in.equalsIgnoreCase("BACK"))
+            {
+                printText("Exiting character card menù...");
+                return -1;
+            }
+            int card = Integer.parseInt(in);
             if(getPlayGround().getDrawnCards().get(card - 1).getPrice() <= getMyBoard().getCoins())
                 return card;
             else
