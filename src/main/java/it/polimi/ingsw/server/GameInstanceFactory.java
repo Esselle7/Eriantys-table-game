@@ -168,7 +168,7 @@ public class GameInstanceFactory implements Runnable{
      */
     private synchronized List<Integer> findLeader() throws InterruptedException, IOException{
         List<Integer> result = new ArrayList<>();
-        getGamePlayers().add(getVirtualViewTCPFactory().getVirtualClientConnection());
+        getGamePlayers().add(getVirtualViewTCPFactory().getVirtualLeaderConnection());
         getGamePlayers().get(0).sendMessage(new NotificationCMI("Game found and you are the lobby leader!"));
         printConsole("Lobby leader found!");
         printConsole("Ask lobby size to lobby leader, waiting response...");

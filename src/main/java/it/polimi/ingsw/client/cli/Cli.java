@@ -183,6 +183,21 @@ public class Cli implements View {
         return Integer.parseInt(getInput().nextLine());
     }
 
+    public int wantToBeLeader()
+    {
+        printAction("You want to create a new game or you want to be added to an existing one? (please type LEADER or ADD TO EXISTING)");
+        String input;
+        while(true)
+        {
+            input = getInput().nextLine();
+            if(input.equalsIgnoreCase("LEADER"))
+                return 1;
+            if(input.equalsIgnoreCase("ADD TO EXISTING"))
+                return 0;
+            printText("Please follow the instruction above!!");
+        }
+    }
+
     @Override
     public void printNotification(String notification)
     {

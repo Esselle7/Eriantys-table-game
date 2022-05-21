@@ -148,6 +148,11 @@ public class Gui implements View {
     }
 
     @Override
+    public int wantToBeLeader() {
+        return 0;
+    }
+
+    @Override
     public String choseNickname() {
         while (!GuiMain.getQueue().isEmpty()) {
             try {

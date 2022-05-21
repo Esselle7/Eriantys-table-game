@@ -75,6 +75,14 @@ public interface View {
     void connectionOutcome(boolean isConnected);
 
     /**
+     * This method allows the player to choose if
+     * they want to create a new game or to be added to an
+     * existing one
+     * @return 1 if the player ant to create a new game, else 0
+     */
+    int wantToBeLeader();
+
+    /**
      * This method allows to choose a valid nickname for the game
      */
     String choseNickname();
