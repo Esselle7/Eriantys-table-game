@@ -125,7 +125,6 @@ public class GameInstanceFactory implements Runnable{
 
     private int setUpLobby() throws InterruptedException, IOException
     {
-        List<String> users = new ArrayList<>();
         List<Integer> result=findLeader();
         int lobbySize;
         lobbySize = result.get(0);
@@ -136,26 +135,6 @@ public class GameInstanceFactory implements Runnable{
                 getGamePlayers().get(countPlayer-1).sendMessage(new NotificationCMI("Waiting for remaining player ..."));
         }
 
-        for(VirtualViewConnection clients : getGamePlayers())
-            clients.sendMessage(new NotificationCMI("Starting game ..."));
-        printConsole("Creating game ...");
-        printConsole("Asking nicknames to players");
-        printConsole("Nicknames received:");
-        for(VirtualViewConnection clients : getGamePlayers()) {
-            clients.sendMessage(new chooseNicknameCMI());
-            String nickname = clients.receiveChooseString();
-            while (users.contains(nickname)) {
-                clients.sendMessage(new NotificationCMI("The nickname chosen is already taken"));
-                clients.sendMessage(new chooseNicknameCMI());
-                nickname = clients.receiveChooseString();
-            }
-            clients.sendMessage(new NotificationCMI("Waiting for other players to choose nickname ..."));
-            clients.setNickname(nickname);
-            printConsole(nickname);
-            users.add(nickname);
-        }
-        for(VirtualViewConnection clients : getGamePlayers())
-            clients.ping();
         return result.get(1);
     }
 

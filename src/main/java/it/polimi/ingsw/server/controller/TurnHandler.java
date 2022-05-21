@@ -148,11 +148,33 @@ public class TurnHandler implements Runnable {
      * the winner is printed, otherwise "New Turn" is printed and the game goes on.
      */
     public void run(){
+        List<String> users = new ArrayList<>();
         printConsole("Setting up the game ...");
-        setupGame();
-        if(getGameMoves().getCurrentGame().getGameMode() == 1)
-            initializeCharacterCards();
+
         try {
+            for(VirtualViewConnection clients : getGamePlayers())
+                clients.sendMessage(new NotificationCMI("Starting game ..."));
+            printConsole("Creating game ...");
+            printConsole("Asking nicknames to players");
+            printConsole("Nicknames received:");
+            for(VirtualViewConnection clients : getGamePlayers()) {
+                clients.sendMessage(new chooseNicknameCMI());
+                String nickname = clients.receiveChooseString();
+                while (users.contains(nickname)) {
+                    clients.sendMessage(new NotificationCMI("The nickname chosen is already taken"));
+                    clients.sendMessage(new chooseNicknameCMI());
+                    nickname = clients.receiveChooseString();
+                }
+                clients.sendMessage(new NotificationCMI("Waiting for other players to choose nickname ..."));
+                clients.setNickname(nickname);
+                printConsole(nickname);
+                users.add(nickname);
+            }
+            for(VirtualViewConnection clients : getGamePlayers())
+                clients.ping();
+            setupGame();
+            if(getGameMoves().getCurrentGame().getGameMode() == 1)
+                initializeCharacterCards();
             update();
             while (getGame()) {
                 printConsole("------------------NEW TURN----------------------");

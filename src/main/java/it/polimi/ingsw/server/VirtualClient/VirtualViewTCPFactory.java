@@ -29,6 +29,10 @@ public class VirtualViewTCPFactory implements Runnable {
         serverSocket = new ServerSocket(hostPort);
     }
 
+    public BlockingQueue<VirtualViewConnection> getVirtualLeaderQueue() {
+        return virtualLeaderQueue;
+    }
+
     public BlockingQueue<VirtualViewConnection> getVirtualClientQueue() {
         return virtualClientQueue;
     }
@@ -54,12 +58,13 @@ public class VirtualViewTCPFactory implements Runnable {
                     } catch (chooseCharacterCardException ignored) {
                     }
                     if(leader == 1)
-                    {
                         virtualLeaderQueue.put(newConnection);
-                        newConnection.sendMessage(new NotificationCMI("Since you choice you will be added to a game as soon as possible ..."));
-                    }
                     else
+                    {
+                        newConnection.sendMessage(new NotificationCMI("Since your choice you will be added to a game as soon as possible ..."));
                         virtualClientQueue.put(newConnection);
+                    }
+
                 } catch (InterruptedException | IOException e) {
                     e.printStackTrace();
                     System.exit(-1);
