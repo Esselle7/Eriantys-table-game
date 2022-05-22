@@ -217,7 +217,15 @@ public class Gui implements View {
 
     @Override
     public int chooseAssistantCard() {
-        return 0;
+        resetGuiQueue();
+        Platform.runLater(() -> new GuiLoadScene("Playground").run());
+        try {
+            return (int) GuiMain.getQueue().take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return -1;
+        }
+
     }
 
     @Override
