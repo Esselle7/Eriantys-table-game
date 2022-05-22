@@ -21,7 +21,7 @@
         <items>
           <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="160.0" style="-fx-background-color: skyblue;">
                <children>
-                  <GridPane layoutX="-2.0" layoutY="-1.0" maxHeight="600.0" maxWidth="850.0" minHeight="600.0" minWidth="850.0" prefHeight="600.0" prefWidth="850.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="10.0">
+                  <GridPane layoutX="-2.0" layoutY="-1.0" maxHeight="600.0" maxWidth="850.0" minHeight="600.0" minWidth="850.0" prefHeight="600.0" prefWidth="850.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="15.0">
                      <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="105.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="105.0" />

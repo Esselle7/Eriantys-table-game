@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to bottom, #345687, #c19c78)linear-gradient(to bottom, #345687, #c19c78);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.ScenesController.GuiAskGameModeController">
+<AnchorPane maxHeight="600.0" maxWidth="850.0" minHeight="600.0" minWidth="850.0" prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: linear-gradient(to bottom, #345687, #c19c78)linear-gradient(to bottom, #345687, #c19c78);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.ScenesController.GuiAskGameModeController">
    <children>
       <ImageView layoutY="-5.0">
          <image>
@@ -22,14 +22,14 @@
             <Image url="@Icons/logoCranio.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="165.0" fitWidth="529.0" layoutX="234.0" layoutY="17.0" AnchorPane.rightAnchor="237.0" AnchorPane.topAnchor="20.0">
+      <ImageView fitHeight="165.0" fitWidth="529.0" layoutX="161.0" layoutY="-1.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="-1.0">
          <image>
             <Image url="@Icons/logoEryantis.png" />
          </image>
       </ImageView>
       <AnchorPane layoutX="399.0" layoutY="300.0" prefHeight="800.0" prefWidth="1000.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
          <children>
-            <GridPane prefHeight="457.0" prefWidth="1000.0" AnchorPane.bottomAnchor="-57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane prefHeight="457.0" prefWidth="1000.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-70.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="600.0" prefWidth="600.0" />
               </columnConstraints>
@@ -49,9 +49,9 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="easyMode" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.halignment="CENTER" GridPane.valignment="BASELINE" onMouseClicked="#choseNormalMode">
+                        <Button fx:id="easyMode" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#choseNormalMode" style="-fx-background-color: transparent;" GridPane.halignment="CENTER" GridPane.valignment="BASELINE">
                            <graphic>
-                              <ImageView fitHeight="190.0" fitWidth="210.0">
+                              <ImageView fitHeight="140.0" fitWidth="160.0">
                                  <image>
                                     <Image url="@Icons/iconEasyMode.png" />
                                  </image>
@@ -60,8 +60,8 @@
                         </Button>
                         <Button fx:id="advanceMode" contentDisplay="CENTER" mnemonicParsing="false" onAction="#choseExpertMode" style="-fx-background-color: transparent-transparent;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                            <graphic>
-                              <ImageView fitHeight="200.0" fitWidth="200.0">
-                                 <Image url="@Icons/iconAdvancedMode.png"/>
+                              <ImageView fitHeight="150.0" fitWidth="150.0">
+                                 <Image url="@Icons/iconAdvancedMode.png" />
                               </ImageView>
                            </graphic>
                         </Button>
@@ -69,7 +69,7 @@
                   </GridPane>
                   <Label fx:id="notificationLabel" contentDisplay="BOTTOM" text="Choose two or three players" textFill="WHITE" GridPane.halignment="CENTER">
                      <font>
-                        <Font size="48.0" />
+                        <Font size="40.0" />
                      </font>
                   </Label>
                   <GridPane prefHeight="274.0" prefWidth="1000.0" GridPane.rowIndex="1">
@@ -81,9 +81,9 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="twoPlayers" alignment="CENTER" mnemonicParsing="false" onAction="#choseTwoGameMode" style="-fx-background-color: transparent;" GridPane.halignment="CENTER" GridPane.valignment="CENTER" >
+                        <Button fx:id="twoPlayers" alignment="CENTER" mnemonicParsing="false" onAction="#choseTwoGameMode" style="-fx-background-color: transparent;" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <graphic>
-                              <ImageView fitHeight="190.0" fitWidth="262.0">
+                              <ImageView fitHeight="140.0" fitWidth="212.0">
                                  <image>
                                     <Image url="@Icons/iconTwoPlayers.png" />
                                  </image>
@@ -92,7 +92,7 @@
                         </Button>
                         <Button fx:id="threePlayers" contentDisplay="CENTER" mnemonicParsing="false" onAction="#choseThreeGameMode" style="-fx-background-color: transparent-transparent;" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <graphic>
-                              <ImageView fitHeight="200.0" fitWidth="200.0">
+                              <ImageView fitHeight="150.0" fitWidth="150.0">
                                  <image>
                                     <Image url="@Icons/iconThreePlayers.png" />
                                  </image>
@@ -103,7 +103,7 @@
                   </GridPane>
                   <Label fx:id="notificationLabel2" contentDisplay="BOTTOM" text="Choose normal or expert mode" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                      <font>
-                        <Font size="48.0" />
+                        <Font size="40.0" />
                      </font>
                   </Label>
                </children>

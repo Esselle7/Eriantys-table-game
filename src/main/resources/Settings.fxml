@@ -11,15 +11,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="420.0" maxWidth="420.0" minHeight="508.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d #e7bd8d#e7bd8d #e7bd8d#e7bd8d;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="600.0" maxWidth="850.0" minHeight="600.0" minWidth="850.0" prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d #e7bd8d#e7bd8d #e7bd8d#e7bd8d;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.5" layoutX="89.0" layoutY="81.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane maxHeight="400.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="160.0" style="-fx-background-color: #8e7970#8e7970 #8e7970#8e7970 #8e7970#8e7970 #8e7970#8e7970;">
+          <AnchorPane maxHeight="600.0" maxWidth="850.0" minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="160.0" style="-fx-background-color: #8e7970#8e7970 #8e7970#8e7970 #8e7970#8e7970 #8e7970#8e7970;">
                <children>
-                  <Button fx:id="returnButton" accessibleText="Playground" layoutX="904.0" layoutY="20.0" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;">
+                  <Button contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;" text="Button" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
                      <graphic>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="returnButton" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@Icons/iconReturn.png" />
                            </image>
@@ -28,9 +28,6 @@
                            </cursor>
                         </ImageView>
                      </graphic>
-                     <cursor>
-                        <Cursor fx:constant="TEXT" />
-                     </cursor>
                   </Button>
                   <AnchorPane layoutX="56.0" layoutY="40.0" prefHeight="96.0" prefWidth="346.0">
                      <children>
@@ -98,7 +95,7 @@
                            <children>
                               <Button fx:id="userButton" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #8e7970#8e7970;" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
                                  <graphic>
-                                    <ImageView fitHeight="200.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="200.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@Icons/iconUser.png" />
                                        </image>
