@@ -2,6 +2,8 @@ package it.polimi.ingsw.server.controller.expert;
 import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.client.model.ClientColour;
 import it.polimi.ingsw.network.messages.NotificationCMI;
+import it.polimi.ingsw.network.messages.UpdatePlayGroundCMI;
+import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.controller.*;
 import it.polimi.ingsw.server.controller.Exceptions.*;
 
@@ -57,6 +59,10 @@ public abstract class CharacterCard implements Serializable {
         try {
             useCardImpl(turnHandler);
         }catch (chooseCharacterCardException ignored){}
+        for(VirtualViewConnection c : turnHandler.getGamePlayers())
+        {
+            c.sendMessage(new UpdatePlayGroundCMI(turnHandler.getGameMoves().getCurrentGame()));
+        }
 
     }
 
