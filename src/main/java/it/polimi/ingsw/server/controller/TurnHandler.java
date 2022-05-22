@@ -173,7 +173,7 @@ public class TurnHandler implements Runnable {
             for(VirtualViewConnection clients : getGamePlayers())
                 clients.ping();
             setupGame();
-            if(getGameMoves().getCurrentGame().getGameMode() == 1)
+            if(getGameMoves().getCurrentGame().getGameMode() != 0)
                 initializeCharacterCards();
             update();
             while (getGame()) {

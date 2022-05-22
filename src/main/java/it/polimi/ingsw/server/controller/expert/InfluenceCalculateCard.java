@@ -25,6 +25,6 @@ public class InfluenceCalculateCard extends CharacterCard{
         int islandIndex = turnHandler.getCurrentClient().receiveChooseInt();
         Island island = turnHandler.getGameMoves().getCurrentGame().getIslandByIndex(islandIndex - 1);
         turnHandler.influenceUpdate(island);
-        turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Influence has been calculated on island "+ (islandIndex - 1)));
+        turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Influence has been calculated on island "+ islandIndex));
     }
 }

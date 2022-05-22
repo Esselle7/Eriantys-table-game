@@ -26,8 +26,9 @@ public class NoInfluenceBanCard extends CharacterCard{
             turnHandler.getGameMoves().getCurrentGame().getIslandByIndex(islandIndex - 1).setBanned(true);
             turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Influence Banner successfully set to the island"));
             banCardNumber--;
-        } else
+        } else {
             turnHandler.getCurrentClient().sendMessage(new NotificationCMI("No ban cards available"));
             throw new UnableToUseCardException();
+        }
     }
 }

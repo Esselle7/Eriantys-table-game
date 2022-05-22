@@ -24,20 +24,28 @@ public class DrawStudentsIslandCard extends CharacterCard {
     public void useCardImpl(TurnHandler turnHandler) throws IOException, chooseCharacterCardException, NotEnoughCoins {
         buyCard(turnHandler);
         int colour=0;
-        do {
+        while(true){
             turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Select the colour of the student to pick"));
             turnHandler.getCurrentClient().sendMessage(new chooseStudentColourCMI());
             try
             {
                 colour = turnHandler.getCurrentClient().receiveChooseInt();
             }
-            catch (chooseCharacterCardException ignored) {}
-        } while(students[colour] <= 0);
+            catch (chooseCharacterCardException ignored) {
+
+            }
+            if(students[colour] > 0){
+                turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Colour successfully submitted"));
+                break;
+            }
+            else
+                turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Choose the right colour, no students for this colour"));
+        }
         students[colour] = students[colour] - 1;
         turnHandler.getCurrentClient().sendMessage(new chooseIslandCMI());
         int islandIndex = turnHandler.getCurrentClient().receiveChooseInt() - 1;
-        turnHandler.getGameMoves().getCurrentGame().getIslandByIndex(islandIndex).setPlacedStudent(colour);
-        turnHandler.getGameMoves().addStudentsToTarget(students, turnHandler.getGameMoves().generateStudents(1));
+        turnHandler.getGameMoves().getCurrentGame().getIslandByIndex(islandIndex).increasePlacedStudent(colour);
+        turnHandler.getGameMoves().addStudentsToTarget(this.students, turnHandler.getGameMoves().generateStudents(1));
         turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Student successfully moved to the island"));
     }
 }

@@ -31,7 +31,7 @@ class IslandTest {
 
     @Test
     public void testSetPlacedStudent(){
-        island.setPlacedStudent(0);
+        island.increasePlacedStudent(0);
         assertEquals(1, island.getPlacedStudent()[0]);
     }
 

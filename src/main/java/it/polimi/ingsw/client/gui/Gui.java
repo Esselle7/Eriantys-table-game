@@ -236,6 +236,11 @@ public class Gui implements View {
     }
 
     @Override
+    public int chooseYesOrNo() {
+        return 0;
+    }
+
+    @Override
     public int chooseCloudTile() {
         return 0;
     }

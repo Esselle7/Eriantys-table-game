@@ -15,7 +15,9 @@ public class EqualProfessorCard extends CharacterCard{
 
     @Override
     public void useCardImpl(TurnHandler turnHandler) throws IOException, NotEnoughCoins {
-        buyCard(turnHandler);
+        if(turnHandler.getGameMoves().getCurrentGame().getGameMode() != 2) {
+            buyCard(turnHandler);
+        }
         turnHandler.getGameMoves().setPriorityPlayer(turnHandler.getCurrentPlayer());
         turnHandler.getGameMoves().checkProfessorsControl();
         turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Professor control updated accordingly"));

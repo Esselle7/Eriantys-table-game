@@ -1,13 +1,11 @@
 package it.polimi.ingsw.server.controller;
 import it.polimi.ingsw.server.VirtualClient.TestingVirtualViewConnection;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
-import it.polimi.ingsw.server.controller.Exceptions.*;
 import it.polimi.ingsw.server.controller.expert.CharacterCard;
 import it.polimi.ingsw.server.controller.expert.EqualProfessorCard;
 import it.polimi.ingsw.server.controller.expert.ExtraStepsCard;
 import it.polimi.ingsw.server.controller.expert.TwoExtraInfluenceCard;
 import it.polimi.ingsw.server.model.*;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
@@ -72,6 +70,7 @@ public class CharacterCardsTest {
         player1.getPlayerBoard().increaseNumberOfStudent(0);
         player1.getPlayerBoard().increaseNumberOfStudent(0);
         GC.checkProfessorsControl();
+        assertEquals(2, turnHandler.getGameMoves().getCurrentGame().getGameMode());
         assertEquals(player1, GC.getPlayerByNickname(playGround.getProfessorControlByColour(0)));
         assertEquals(player1, GC.getPriorityPlayer());
         assertEquals(3, player1.getPlayerBoard().getCoins());
@@ -105,15 +104,15 @@ public class CharacterCardsTest {
             e.printStackTrace();
         }
         assertEquals(2, player1.getExtraInfluence());
-        island1.setPlacedStudent(1);
-        island1.setPlacedStudent(1);
-        island1.setPlacedStudent(1);
+        island1.increasePlacedStudent(1);
+        island1.increasePlacedStudent(1);
+        island1.increasePlacedStudent(1);
         player1.getPlayerBoard().increaseNumberOfStudent(0);
         player2.getPlayerBoard().increaseNumberOfStudent(1);
         GC.checkProfessorsControl();
         assertEquals(player2, GC.getIslandController().checkInfluence(island1,GC.getCurrentGame()));
-        island1.setPlacedStudent(0);
-        island1.setPlacedStudent(0);
+        island1.increasePlacedStudent(0);
+        island1.increasePlacedStudent(0);
         assertEquals(player1, GC.getIslandController().checkInfluence(island1,GC.getCurrentGame()));
         assertEquals(3, player1.getPlayerBoard().getCoins());
     }

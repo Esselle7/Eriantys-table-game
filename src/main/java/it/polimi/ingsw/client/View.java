@@ -165,6 +165,13 @@ public interface View {
     int chooseIsland();
 
     /**
+     * This method allows the player to choose a number in order
+     * to make a simple choice between 2 or more things
+     * @return the choice number
+     */
+    int chooseYesOrNo();
+
+    /**
      * This method allows to choose a cloud tile from
      * the play ground
      * @return the index of the selected cloud tile
