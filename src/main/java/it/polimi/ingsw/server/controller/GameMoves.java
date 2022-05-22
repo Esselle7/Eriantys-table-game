@@ -133,7 +133,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
     public void moveStudentsEntranceToIsland(int studentColour, int selectedIsland) throws noStudentForColour
     {
         getCurrentPlayerBoard().removeStudentEntrance(studentColour);
-        getCurrentGame().getIslandByIndex(selectedIsland).setPlacedStudent(studentColour);
+        getCurrentGame().getIslandByIndex(selectedIsland).increasePlacedStudent(studentColour);
     }
 
     /**

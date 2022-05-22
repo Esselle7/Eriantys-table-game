@@ -57,9 +57,9 @@ class IslandControllerTest {
         playGround.setProfessorControlByColour(0, player1.getNickname());
         playGround.setProfessorControlByColour(1, player2.getNickname());
         playGround.setIslandWithMotherNature(island1);
-        island1.setPlacedStudent(0);
-        island1.setPlacedStudent(0);
-        island1.setPlacedStudent(1);
+        island1.increasePlacedStudent(0);
+        island1.increasePlacedStudent(0);
+        island1.increasePlacedStudent(1);
         assertEquals(player1, islandController.checkInfluence(island1,playGround));
     }
 
@@ -69,8 +69,8 @@ class IslandControllerTest {
         playGround.setProfessorControlByColour(0, player1.getNickname());
         playGround.setProfessorControlByColour(1, player2.getNickname());
         playGround.setIslandWithMotherNature(island1);
-        island1.setPlacedStudent(0);
-        island1.setPlacedStudent(1);
+        island1.increasePlacedStudent(0);
+        island1.increasePlacedStudent(1);
         island1.setTowerColour(player1.getPlayerBoard().getTowerColour());
         island1.setInfluence();
         assertEquals(player1, islandController.checkInfluence(island1,playGround));
@@ -83,8 +83,8 @@ class IslandControllerTest {
         island1.setTowerColour(player3.getPlayerBoard().getTowerColour());
         playGround.setProfessorControlByColour(0, player1.getNickname());
         playGround.setProfessorControlByColour(1, player2.getNickname());
-        island1.setPlacedStudent(0);
-        island1.setPlacedStudent(1);
+        island1.increasePlacedStudent(0);
+        island1.increasePlacedStudent(1);
         assertEquals(player3.getPlayerBoard().getTowerColour(), island1.getTowerColour());
     }
 

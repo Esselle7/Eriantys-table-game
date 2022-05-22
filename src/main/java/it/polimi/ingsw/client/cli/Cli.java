@@ -337,7 +337,7 @@ public class Cli implements View {
     {
         printText(getMyNickname() + "'s remaining Assistant cards: ");
         for (Card card: getMyDeck().getResidualCards()) {
-            printText("Card Value: "+card.getValue()+", Mother Nature Steps: "+card.getMotherNatureSteps());
+            printText("Card Value: "+card.getValue()+", Card Mother Nature Steps: "+card.getMotherNatureSteps());
         }
     }
 
@@ -379,7 +379,7 @@ public class Cli implements View {
                 String playerColour = TextColours.playerColours[indexPlayerColour];
                 printTextWithColour("> Nickname: " + p.getNickname().toUpperCase(),playerColour);
                 printTextWithColour("> Current card value: " + p.getCurrentCard().getValue(), playerColour);
-                printTextWithColour("> Current MotherNature Steps: " + p.getMotherNatureSteps(), playerColour);
+                printTextWithColour("> Current Mothernature Steps: " + p.getMotherNatureSteps(), playerColour);
                 printTextWithColour("------------ENTRANCE ROOM----------",playerColour);
                 printStudentsInfo(p.getPlayerBoard().getEntranceRoom(),playerColour);
                 printTextWithColour("------------DINING ROOM------------",playerColour);
@@ -430,7 +430,7 @@ public class Cli implements View {
                 printText("Already used...");
             else
             {
-                printStudentsInfo(cloudTile.getStudents(),getDefaultColour());
+                printStudentsInfo(cloudTile.showStudents(), getDefaultColour());
             }
             indexCloudTiles++;
             printText(" ");
@@ -466,7 +466,7 @@ public class Cli implements View {
             String nickname = getPlayGround().getProfessorsControl()[indexProfessor];
             String currentProfessor = getStudentColour().getStudentColours()[indexProfessor];
             if(nickname != null)
-                printText(currentProfessor + " professor is controlled by: "+nickname);
+                printText(currentProfessor + " professor is controlled by: " + nickname);
             else
                 printText(currentProfessor + " professor is not controlled by anyone");
         }
@@ -481,7 +481,7 @@ public class Cli implements View {
     private void printMyCurrentCard()
     {
         printText(getMyNickname()+"'s current card: ");
-        printText("Card value: "+ getMyCurrentCard().getValue()+", Mother nature Steps "+ getMyCurrentCard().getMotherNatureSteps());
+        printText("Card value: "+ getMyCurrentCard().getValue()+", Card Mother nature Steps "+ getMyCurrentCard().getMotherNatureSteps());
     }
 
     /**
@@ -582,8 +582,32 @@ public class Cli implements View {
                 printText("ERROR: Please type an Island number!");
             }
         }
+    }
 
+    @Override
+    public int chooseYesOrNo()
+    {
+        String in = "";
+        printAction("Please type your choice number:");
+        while(true)
+        {
+            try{
+                in = getInput().nextLine();
+                int choice = Integer.parseInt(in);
+                if(choice == 0 || choice == 1)
+                    return  choice;
+                else
+                    printText("ERROR: Invalid input!");
+            }catch (NumberFormatException e)
+            {
+                if(in.equalsIgnoreCase("CHARACTER CARD"))
+                {
+                    return Client.getNotAllowedInt(); // modify that name
+                }
 
+                printText("ERROR: Please type a valid number!");
+            }
+        }
     }
 
     @Override
@@ -607,7 +631,6 @@ public class Cli implements View {
                 if(in.equalsIgnoreCase("CHARACTER CARD"))
                 {
                     return Client.getNotAllowedInt(); // modify that name
-
                 }
                 printText("ERROR: Please type a Cloud Tile number!");
             }

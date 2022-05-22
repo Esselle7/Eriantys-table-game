@@ -2,7 +2,7 @@ package it.polimi.ingsw.server.controller.expert;
 
 import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.network.messages.chooseStudentColourCMI;
-import it.polimi.ingsw.network.messages.chooseWhereToMove;
+import it.polimi.ingsw.network.messages.chooseYesOrNoCMI;
 import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
 import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
 import it.polimi.ingsw.server.controller.TurnHandler;
@@ -34,14 +34,17 @@ public class SwitchEntranceDiningCard extends CharacterCard{
                 diningRoom[entranceToMove]++;
                 entranceRoom[diningToMove]++;
                 entranceRoom[entranceToMove]--;
+                turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Students successfully switched"));
             } else {
-                turnHandler.getCurrentClient().sendMessage(new NotificationCMI("No students available"));
+                turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Invalid dining room or entrance room colours selected"));
             }
-            turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Students successfully switched"));
+            if(studentsMoved == 2){
+                turnHandler.getCurrentClient().sendMessage(new NotificationCMI("No more switches allowed"));
+                break;
+            }
             turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Do you want to keep moving: 1 for yes, 0 for no"));
-            turnHandler.getCurrentClient().sendMessage(new chooseWhereToMove());
+            turnHandler.getCurrentClient().sendMessage(new chooseYesOrNoCMI());
             chooseAnother = turnHandler.getCurrentClient().receiveChooseInt();
-        } while (chooseAnother == 1 && studentsMoved < 2);
-        turnHandler.getCurrentClient().sendMessage(new NotificationCMI("No more switches allowed"));
+        } while (chooseAnother == 1);
     }
 }

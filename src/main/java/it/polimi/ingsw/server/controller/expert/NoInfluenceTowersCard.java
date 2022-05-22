@@ -30,6 +30,7 @@ public class NoInfluenceTowersCard extends CharacterCard{
 
     @Override
     public void resetCard(TurnHandler turnHandler){
-        noInfluenceIsland.setTowersBanned(false);
+        if(noInfluenceIsland != null && noInfluenceIsland.isTowersBanned())
+            noInfluenceIsland.setTowersBanned(false);
     }
 }

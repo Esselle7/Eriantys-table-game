@@ -100,7 +100,7 @@ public class Island extends ManagerStudent implements Serializable {
 
     }
 
-    public void setPlacedStudent(int studentColour) {
+    public void increasePlacedStudent(int studentColour) {
         placedStudent[studentColour]++;
     }
 

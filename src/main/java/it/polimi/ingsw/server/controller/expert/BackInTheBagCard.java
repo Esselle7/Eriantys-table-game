@@ -1,7 +1,7 @@
 package it.polimi.ingsw.server.controller.expert;
 
 import it.polimi.ingsw.network.messages.NotificationCMI;
-import it.polimi.ingsw.network.messages.chooseStudentColourToMoveCMI;
+import it.polimi.ingsw.network.messages.chooseStudentColourCMI;
 import it.polimi.ingsw.server.controller.Exceptions.EmptyDiningRoom;
 import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
 import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
@@ -21,7 +21,7 @@ public class BackInTheBagCard extends CharacterCard{
     public void useCardImpl(TurnHandler turnHandler) throws IOException, chooseCharacterCardException, NotEnoughCoins {
         buyCard(turnHandler);
         turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Select the colour of the student to pick"));
-        turnHandler.getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
+        turnHandler.getCurrentClient().sendMessage(new chooseStudentColourCMI());
         turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Alright, moving all the students back to the bag"));
         int colour = turnHandler.getCurrentClient().receiveChooseInt();
         for (Player player: turnHandler.getGameMoves().getCurrentGame().getPlayersList()){

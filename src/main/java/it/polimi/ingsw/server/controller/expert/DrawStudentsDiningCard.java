@@ -19,16 +19,27 @@ public class DrawStudentsDiningCard extends CharacterCard {
     @Override
     public void useCardImpl(TurnHandler turnHandler) throws IOException, chooseCharacterCardException, NotEnoughCoins {
         buyCard(turnHandler);
-        int colour;
-        do {
+        int colour = 0;
+        while(true){
             turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Select the colour of the student to pick"));
             turnHandler.getCurrentClient().sendMessage(new chooseStudentColourCMI());
-            colour = turnHandler.getCurrentClient().receiveChooseInt();
+            try
+            {
+                colour = turnHandler.getCurrentClient().receiveChooseInt();
+            }
+            catch (chooseCharacterCardException ignored) {
 
-        } while(students[colour] <= 0);
+            }
+            if(students[colour] > 0){
+                turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Colour successfully submitted"));
+                break;
+            }
+            else
+                turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Choose the right colour, no students for this colour"));
+        }
         students[colour]--;
         turnHandler.getCurrentPlayer().getPlayerBoard().getDiningRoom()[colour]++;
-        turnHandler.getGameMoves().addStudentsToTarget(students,turnHandler.getGameMoves().generateStudents(1));
+        turnHandler.getGameMoves().addStudentsToTarget(this.students,turnHandler.getGameMoves().generateStudents(1));
         turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Student successfully moved"));
     }
 

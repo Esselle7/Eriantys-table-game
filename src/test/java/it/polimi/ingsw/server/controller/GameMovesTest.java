@@ -127,7 +127,7 @@ class GameMovesTest {
     }
     @Test
     void setInfluenceToIslandTest() {
-        island1.setPlacedStudent(0);
+        island1.increasePlacedStudent(0);
         player1.getPlayerBoard().increaseNumberOfStudent(0);
         player1.getPlayerBoard().setTowerYard(6);
         GC.checkProfessorsControl();
@@ -147,15 +147,15 @@ class GameMovesTest {
         island6.setTowerColour(player1.getPlayerBoard().getTowerColour());
         player1.getPlayerBoard().increaseNumberOfStudent(0);
         player1.getPlayerBoard().setTowerYard(4);
-        island6.setPlacedStudent(0);
-        island6.setPlacedStudent(0);
+        island6.increasePlacedStudent(0);
+        island6.increasePlacedStudent(0);
         player2.getPlayerBoard().setTowerYard(6);
         player2.getPlayerBoard().increaseNumberOfStudent(1);
-        island6.setPlacedStudent(1);
-        island6.setPlacedStudent(1);
-        island6.setPlacedStudent(1);
-        island6.setPlacedStudent(1);
-        island6.setPlacedStudent(1);
+        island6.increasePlacedStudent(1);
+        island6.increasePlacedStudent(1);
+        island6.increasePlacedStudent(1);
+        island6.increasePlacedStudent(1);
+        island6.increasePlacedStudent(1);
         GC.checkProfessorsControl();
         try{
             GC.changeInfluenceToIsland(island6);
