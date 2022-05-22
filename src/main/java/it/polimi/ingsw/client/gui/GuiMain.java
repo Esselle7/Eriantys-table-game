@@ -27,7 +27,6 @@ public class GuiMain extends Application {
         return initStage;
     }
 
-
     /**
      * Entry point of JavaFX
      *
@@ -56,7 +55,7 @@ public class GuiMain extends Application {
      * Used by other threads to change the scene of the stage
      */
     static public void updateScene(Parent root, String title) {
-        Scene newScene = new Scene(root,800,650);
+        Scene newScene = new Scene(root,850,600);
         getStage().setScene(newScene);
         getStage().centerOnScreen();
         getStage().setTitle(title);
