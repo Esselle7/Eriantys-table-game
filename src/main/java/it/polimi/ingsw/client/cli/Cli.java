@@ -322,6 +322,8 @@ public class Cli implements View {
         printProfessorsControl();
         printText("----------------------------------");
         System.out.println();
+        showMyInfo();
+        System.out.println();
     }
 
     public void showMyInfo()
@@ -460,7 +462,6 @@ public class Cli implements View {
      */
     private void printProfessorsControl()
     {
-        printPlayersInfo();
         for (int indexProfessor = 0; indexProfessor<getPlayGround().getProfessorsControl().length;indexProfessor++) {
             String nickname = getPlayGround().getProfessorsControl()[indexProfessor];
             String currentProfessor = getStudentColour().getStudentColours()[indexProfessor];
