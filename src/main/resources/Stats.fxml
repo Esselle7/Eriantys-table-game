@@ -91,7 +91,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ImageView fitHeight="200.0" fitWidth="136.0" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                        <ImageView fitHeight="200.0" fitWidth="136.0" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" onMouseClicked="#cardOne">
                            <image>
                               <Image url="@Icons/Assistente (1).png" />
                            </image>
