@@ -2,11 +2,9 @@ package it.polimi.ingsw.client.gui;
 
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.gui.Scenes.*;
+import it.polimi.ingsw.client.gui.ScenesController.GuiPlaygroundController;
 import it.polimi.ingsw.client.model.ClientColour;
-import it.polimi.ingsw.server.model.Board;
-import it.polimi.ingsw.server.model.Card;
-import it.polimi.ingsw.server.model.Deck;
-import it.polimi.ingsw.server.model.PlayGround;
+import it.polimi.ingsw.server.model.*;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
@@ -14,78 +12,70 @@ import java.util.List;
 
 public class Gui implements View {
 
-    private String myNickname = null;
-    private final ClientColour studentColour;
 
 
-    private PlayGround playGround = null;
-    private Board myBoard = null;
-    private Deck myDeck = null;
-    private Card myCurrentCard = null;
-    private final int expert;
+    private static String gamePhase;
 
     public Gui()
     {
-        studentColour = new ClientColour();
-        expert = 1;
     }
 
-    public int getExpert() {
-        return expert;
+    public static void setGamePhase(String gamePhase) {
+        Gui.gamePhase = gamePhase;
     }
 
-    @Override
-    public String getMyNickname() {
-        return myNickname;
-    }
-
-    @Override
-    public void setMyNickname(String myNickname) {
-        this.myNickname = myNickname;
-    }
-
-    public ClientColour getStudentColour() {
-        return studentColour;
-    }
-
-    @Override
-    public PlayGround getPlayGround() {
-        return playGround;
-    }
-
-    @Override
-    public void setPlayGround(PlayGround playGround) {
-        this.playGround = playGround;
-    }
-
-    @Override
-    public Board getMyBoard() {
-        return myBoard;
-    }
-
-    @Override
-    public void setMyBoard(Board myBoard) {
-        this.myBoard = myBoard;
-    }
-
-    @Override
-    public Deck getMyDeck() {
-        return myDeck;
-    }
-
-    @Override
-    public void setMyDeck(Deck myDeck) {
-        this.myDeck = myDeck;
+    public static String getGamePhase() {
+        return gamePhase;
     }
 
     @Override
     public Card getMyCurrentCard() {
-        return myCurrentCard;
+        return null;
     }
 
     @Override
-    public void setMyCurrentCard(Card myCurrentCard) {
-        this.myCurrentCard = myCurrentCard;
+    public void setMyCurrentCard(Card currentCard) {
+
+    }
+
+    @Override
+    public String getMyNickname() {
+        return null;
+    }
+
+    @Override
+    public PlayGround getPlayGround() {
+        return null;
+    }
+
+    @Override
+    public void setPlayGround(PlayGround playGround) {
+
+    }
+
+    @Override
+    public Board getMyBoard() {
+        return null;
+    }
+
+    @Override
+    public void setMyBoard(Board myBoard) {
+
+    }
+
+    @Override
+    public Deck getMyDeck() {
+        return null;
+    }
+
+    @Override
+    public void setMyDeck(Deck myDeck) {
+
+    }
+
+    @Override
+    public void setMyNickname(String myNickname) {
+
     }
 
     @Override
@@ -155,7 +145,9 @@ public class Gui implements View {
         resetGuiQueue();
         Platform.runLater(() -> new GuiLoadScene("NicknamePage").run());
         try {
-            return (String) GuiMain.getQueue().take();
+            String nickname = (String) GuiMain.getQueue().take();
+            GuiPlaygroundController.setMyNickname(nickname);
+            return nickname;
         } catch (InterruptedException e) {
             e.printStackTrace();
             return null;
@@ -217,8 +209,9 @@ public class Gui implements View {
 
     @Override
     public int chooseAssistantCard() {
+        Gui.setGamePhase("assistantCard");
         resetGuiQueue();
-        Platform.runLater(() -> new GuiLoadScene("Playground").run());
+        Platform.runLater(() -> new GuiLoadScene("Stats").run());
         try {
             return (int) GuiMain.getQueue().take();
         } catch (InterruptedException e) {
@@ -230,6 +223,7 @@ public class Gui implements View {
 
     @Override
     public int chooseStudentColourToMove() {
+        Gui.setGamePhase("movePhase");
         return 0;
     }
 
@@ -250,6 +244,7 @@ public class Gui implements View {
 
     @Override
     public int chooseCloudTile() {
+        Gui.setGamePhase("cloudTiles");
         return 0;
     }
 
@@ -260,6 +255,7 @@ public class Gui implements View {
 
     @Override
     public int chooseCharacterCard() {
+        Gui.setGamePhase("characterCard");
         return 0;
     }
 
@@ -270,6 +266,8 @@ public class Gui implements View {
 
     @Override
     public void update(Object playGroundNew) {
+        PlayGround playGroundUpdate = (PlayGround) playGroundNew;
+        GuiPlaygroundController.update(playGroundUpdate);
 
     }
 
