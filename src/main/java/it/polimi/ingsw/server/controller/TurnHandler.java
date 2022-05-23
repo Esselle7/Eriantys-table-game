@@ -190,6 +190,7 @@ public class TurnHandler implements Runnable {
                 printConsole("Cloud Tile refilled with success!");
                 printConsole("Choose turn assistant card for each player");
                 chooseTurnAssistantCards();
+                update();
                 //Action phase
                 for(VirtualViewConnection c : getGamePlayers())
                 {

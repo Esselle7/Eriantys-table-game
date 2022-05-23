@@ -512,7 +512,7 @@ public class Cli implements View {
                 return choice;
             }catch (NumberFormatException e)
             {
-                if(in.equalsIgnoreCase("CHARACTER CARD")) // qui inserisci la verifica della game mood
+                if(in.equalsIgnoreCase("CHARACTER CARD"))
                 {
                     return Client.getNotAllowedInt(); // modify that name
                 }
