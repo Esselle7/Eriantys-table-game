@@ -33,54 +33,54 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ImageView fitHeight="166.0" fitWidth="110.0" onMouseClicked="#cardOne" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                        <ImageView fx:id="assistantOne" fitHeight="166.0" fitWidth="110.0" onMouseClicked="#cardOne" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@Icons/Assistente (1).png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="166.0" fitWidth="110.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+                        <ImageView fx:id="assistantTwo" fitHeight="166.0" fitWidth="110.0" onMouseClicked="#cardTwo" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@Icons/Assistente (2).png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="166.0" fitWidth="110.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                        <ImageView fx:id="assistantThree" fitHeight="166.0" fitWidth="110.0" onMouseClicked="#cardThree" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                            <image>
                               <Image url="@Icons/Assistente (3).png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="166.0" fitWidth="110.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
+                        <ImageView fx:id="assistantFour" fitHeight="166.0" fitWidth="110.0" onMouseClicked="#cardFour" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
                            <image>
                               <Image url="@Icons/Assistente (4).png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="166.0" fitWidth="110.0" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
+                        <ImageView fx:id="assistantFive" fitHeight="166.0" fitWidth="110.0" onMouseClicked="#cardFive" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
                            <image>
                               <Image url="@Icons/Assistente (5).png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="166.0" fitWidth="110.0" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                        <ImageView fx:id="assistantSix" fitHeight="166.0" fitWidth="110.0" onMouseClicked="#cardSix" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                            <image>
                               <Image url="@Icons/Assistente (6).png" />
                            </image>
                         </ImageView>
-                        <ImageView disable="true" fitHeight="166.0" fitWidth="110.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                        <ImageView fx:id="assistantSeven" fitHeight="166.0" onMouseClicked="#cardSeven" fitWidth="110.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                            <image>
                               <Image url="@Icons/Assistente (7).png" />
                            </image>
                         </ImageView>
-                        <ImageView disable="true" fitHeight="166.0" fitWidth="110.0" opacity="0.5" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                        <ImageView fx:id="assistantEight" fitHeight="166.0" onMouseClicked="#cardEight" fitWidth="110.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                            <image>
                               <Image url="@Icons/Assistente (8).png" />
                            </image>
                         </ImageView>
-                        <ImageView disable="true" fitHeight="166.0" fitWidth="110.0" opacity="0.5" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="1">
-                           <image>
-                              <Image url="@Icons/Assistente%20(10).png" />
-                           </image>
-                        </ImageView>
-                        <ImageView disable="true" fitHeight="166.0" fitWidth="110.0" opacity="0.5" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                        <ImageView fx:id="assistantNine" fitHeight="166.0" onMouseClicked="#cardNine" fitWidth="110.0" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                            <image>
                               <Image url="@Icons/Assistente (9).png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="assistantTen" fitHeight="166.0" onMouseClicked="#cardTen" fitWidth="110.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@Icons/Assistente (10).png" />
                            </image>
                         </ImageView>
                      </children>
@@ -101,7 +101,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="player1">
+                                    <Label fx:id="blueProfessor" text="NoOne">
                                        <graphic>
                                           <ImageView fitHeight="50.0" fitWidth="70.0">
                                              <image>
@@ -113,7 +113,7 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label text="player1" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <Label fx:id="redProfessor" text="NoOne" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <graphic>
                                           <ImageView fitHeight="50.0" fitWidth="65.0">
                                              <image>
@@ -125,7 +125,7 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label text="player2" GridPane.rowIndex="2">
+                                    <Label fx:id="yellowProfessor" text="NoOne" GridPane.rowIndex="2">
                                        <graphic>
                                           <ImageView fitHeight="50.0" fitWidth="70.0">
                                              <image>
@@ -137,7 +137,7 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label text="player2" GridPane.columnIndex="2">
+                                    <Label fx:id="greenProfessor" text="NoOne" GridPane.columnIndex="2">
                                        <graphic>
                                           <ImageView fitHeight="50.0" fitWidth="65.0">
                                              <image>
@@ -149,7 +149,7 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label text="player3" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                    <Label fx:id="pinkProfessor" text="NoOne" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                        <graphic>
                                           <ImageView fitHeight="50.0" fitWidth="70.0">
                                              <image>
@@ -180,8 +180,8 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <Button fx:id="nickname1" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;" text="nickname1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                                                <Button fx:id="nickname2" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;" text="nickname2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                <Button fx:id="nickname1" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;" text="None" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                <Button fx:id="nickname2" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;" text="None" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                              </children>
                                           </GridPane>
                                           <Label layoutX="154.0" layoutY="17.0" text="Other players' board" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="10.0">
@@ -202,7 +202,7 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Label alignment="CENTER" text="3" GridPane.halignment="CENTER">
+                                          <Label fx:id="towerWhite" alignment="CENTER" text="None" GridPane.halignment="CENTER">
                                              <graphic>
                                                 <ImageView fitHeight="65.0" fitWidth="43.0">
                                                    <image>
@@ -214,7 +214,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label text="2" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                          <Label fx:id="towerBlack" text="None" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                                              <graphic>
                                                 <ImageView fitHeight="65.0" fitWidth="43.0">
                                                    <image>
@@ -226,7 +226,7 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </Label>
-                                          <Label text="3" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                                          <Label fx:id="towerGray" text="None" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                                              <graphic>
                                                 <ImageView fitHeight="65.0" fitWidth="43.0">
                                                    <image>
