@@ -121,7 +121,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentRed2" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -130,7 +130,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
+                              <Label fx:id="studentGreen2" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -139,7 +139,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentBlue2" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -148,7 +148,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow2" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -157,7 +157,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink2" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -181,7 +181,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentRed1" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -190,7 +190,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentGreen1" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -199,7 +199,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentBlue1" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -208,7 +208,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow1" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -217,7 +217,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink1" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -226,7 +226,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <ImageView fitHeight="60.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                              <ImageView fx:id="motherNature" fitHeight="60.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                  <image>
                                     <Image url="@Icons/motherNature.png" />
                                  </image>
@@ -246,7 +246,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentRed3" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -255,7 +255,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
+                              <Label fx:id="studentGreen3" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -264,7 +264,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentBlue3" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -273,7 +273,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow3" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -282,7 +282,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink3" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -306,7 +306,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentRed11" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -315,7 +315,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
+                              <Label fx:id="studentGreen11" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -324,7 +324,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentBlue11" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -333,7 +333,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow11" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -342,7 +342,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink11" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -366,7 +366,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentRed5" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -375,7 +375,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
+                              <Label fx:id="studentGreen5" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -384,7 +384,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentBlue5" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -393,7 +393,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow5" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -402,7 +402,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink5" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -426,7 +426,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentRed4" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -435,7 +435,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                              <Label fx:id="studentGreen4" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -444,7 +444,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentBlue4" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -453,7 +453,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow4" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -462,7 +462,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink4" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -486,7 +486,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentRed9" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -495,7 +495,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
+                              <Label fx:id="studentGreen9" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -504,7 +504,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentBlue9" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -513,7 +513,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow9" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -522,7 +522,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink9" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -546,7 +546,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentRed12" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -555,7 +555,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
+                              <Label fx:id="studentGreen12" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -564,7 +564,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentBlue12" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -573,7 +573,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow12" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -582,7 +582,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink12" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -606,7 +606,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentRed8" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -615,7 +615,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
+                              <Label fx:id="studentGreen8" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -624,7 +624,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentBlue8" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -633,7 +633,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYello8" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -642,7 +642,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink8" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -666,7 +666,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentRed7" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -675,7 +675,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
+                              <Label fx:id="studentGreen7" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -684,7 +684,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentBlue7" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -693,7 +693,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow7" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -702,7 +702,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink7" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -726,7 +726,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentRed6" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -735,7 +735,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
+                              <Label fx:id="studentGreen6" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -744,7 +744,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentBlue6" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -753,7 +753,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow6" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -762,7 +762,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink6" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -786,7 +786,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentRed10" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -795,7 +795,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                              <Label fx:id="studentGreen10" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -804,7 +804,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentBlue10" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -813,7 +813,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow10" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -822,7 +822,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink10" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -837,7 +837,7 @@
                   </GridPane>
                   <ButtonBar buttonMinWidth="90.0" layoutX="400.0" layoutY="126.0" maxHeight="300.0" maxWidth="300.0" minHeight="160.0" minWidth="90.0" rotate="90.0" AnchorPane.rightAnchor="-110.0" AnchorPane.topAnchor="110.0">
                      <buttons>
-                        <Button fx:id="playgroundButton" accessibleText="Playground" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;" onAction="#switchToPlayground">
+                        <Button fx:id="playgroundButton" accessibleText="Playground" mnemonicParsing="false" onAction="#switchToPlayground" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                                  <image>
@@ -852,7 +852,7 @@
                               <Cursor fx:constant="TEXT" />
                            </cursor>
                         </Button>
-                        <Button fx:id="boardButton" alignment="TOP_CENTER" graphicTextGap="3.0" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;" onAction="#switchToBoard">
+                        <Button fx:id="boardButton" alignment="TOP_CENTER" graphicTextGap="3.0" mnemonicParsing="false" onAction="#switchToBoard" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                                  <image>
@@ -864,7 +864,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="statsButton" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;" onAction="#switchToStats">
+                        <Button fx:id="statsButton" mnemonicParsing="false" onAction="#switchToStats" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                                  <image>
@@ -876,7 +876,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="settingsButton" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;" onAction="#switchToSettings">
+                        <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#switchToSettings" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                                  <image>

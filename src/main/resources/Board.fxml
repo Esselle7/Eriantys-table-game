@@ -80,88 +80,439 @@
                   </ButtonBar>
                   <AnchorPane prefHeight="691.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <SplitPane dividerPositions="0.29797979797979796, 0.5, 0.5" prefHeight="399.0" prefWidth="918.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <items>
-                              <AnchorPane maxHeight="250.0" maxWidth="140.0" minHeight="250.0" minWidth="140.0" prefHeight="250.0" prefWidth="140.0">
-                                 <children>
-                                    <GridPane prefHeight="250.0" prefWidth="140.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-10.0">
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                    </GridPane>
-                                 </children></AnchorPane>
-                            <AnchorPane maxHeight="300.0" maxWidth="500.0" minHeight="300.0" minWidth="455.0" prefHeight="300.0" prefWidth="455.0">
-                                 <children>
-                                    <GridPane prefHeight="300.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
-                                      <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                    </GridPane>
-                                 </children>
-                              </AnchorPane>
-                            <AnchorPane maxHeight="300.0" maxWidth="80.0" minHeight="300.0" minWidth="80.0" prefHeight="300.0" prefWidth="80.0">
-                                 <children>
-                                    <GridPane prefHeight="300.0" prefWidth="80.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                    </GridPane>
-                                 </children></AnchorPane>
-                              <AnchorPane maxHeight="200.0" maxWidth="200.0" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                    <GridPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                    </GridPane>
-                                 </children></AnchorPane>
-                          </items>
-                        </SplitPane>
-                        <ImageView fitHeight="400.0" fitWidth="770.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ImageView fitHeight="400.0" fitWidth="770.0" focusTraversable="true" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@Icons/Board.png" />
                            </image>
                         </ImageView>
                      </children>
                   </AnchorPane>
+                  <GridPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="610.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="40.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ImageView fx:id="towerBoard1" fitHeight="70.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                           <image>
+                              <Image url="@Icons/towerWhite.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="towerBoard2" fitHeight="70.0" fitWidth="120.0" layoutX="20.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                           <image>
+                              <Image url="@Icons/towerWhite.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="towerBoard3" fitHeight="70.0" fitWidth="120.0" layoutX="89.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@Icons/towerWhite.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="towerBoard4" fitHeight="70.0" fitWidth="120.0" layoutX="10.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@Icons/towerWhite.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="towerBoard5" fitHeight="70.0" fitWidth="120.0" layoutX="79.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@Icons/towerWhite.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="towerBoard6" fitHeight="70.0" fitWidth="120.0" layoutX="29.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@Icons/towerWhite.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="towerBoard7" fitHeight="70.0" fitWidth="120.0" layoutX="98.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@Icons/towerWhite.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="towerBoard8" fitHeight="70.0" fitWidth="120.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@Icons/towerWhite.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+                  <GridPane prefHeight="250.0" prefWidth="140.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="730.0" AnchorPane.topAnchor="-10.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/studentGreen.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <Label contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/studentYellow.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <Label contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/studentRed.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <Label contentDisplay="CENTER" text="0" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/studentBlue.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <Label contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/studentPink.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                     </children>
+                  </GridPane>
+                  <GridPane prefHeight="300.0" prefWidth="500.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="30.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ImageView fx:id="studentBoardGreen1" fitHeight="30.0" fitWidth="50.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                           <image>
+                              <Image url="@Icons/studentGreen.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardGreen1studentBoardGreen2" fitHeight="30.0" fitWidth="50.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <image>
+                              <Image url="@Icons/studentGreen.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardGreen3" fitHeight="30.0" fitWidth="50.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                           <image>
+                              <Image url="@Icons/studentGreen.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardGreen4" fitHeight="30.0" fitWidth="50.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER">
+                           <image>
+                              <Image url="@Icons/studentGreen.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardGreen5" fitHeight="30.0" fitWidth="50.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER">
+                           <image>
+                              <Image url="@Icons/studentGreen.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardGreen6" fitHeight="30.0" fitWidth="50.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.halignment="LEFT">
+                           <image>
+                              <Image url="@Icons/studentGreen.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardGreen7" fitHeight="30.0" fitWidth="50.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.halignment="CENTER">
+                           <image>
+                              <Image url="@Icons/studentGreen.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardGreen8" fitHeight="30.0" fitWidth="50.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.halignment="CENTER">
+                           <image>
+                              <Image url="@Icons/studentGreen.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardGreen9" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.halignment="LEFT">
+                           <image>
+                              <Image url="@Icons/studentGreen.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardGreen10" fitHeight="30.0" fitWidth="50.0" layoutX="312.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.halignment="LEFT">
+                           <image>
+                              <Image url="@Icons/studentGreen.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardRed1" fitHeight="30.0" fitWidth="50.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                           <image>
+                              <Image url="@Icons/studentRed.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardRed2" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="77.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@Icons/studentRed.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardRed3" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@Icons/studentRed.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardRed4" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@Icons/studentRed.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardRed5" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@Icons/studentRed.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardRed6" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@Icons/studentRed.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardRed7" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@Icons/studentRed.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardRed8" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@Icons/studentRed.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardRed9" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@Icons/studentRed.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardRed10" fitHeight="30.0" fitWidth="50.0" layoutX="304.0" layoutY="77.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@Icons/studentRed.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardYellow1" fitHeight="30.0" fitWidth="50.0" layoutX="341.0" layoutY="77.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@Icons/studentYellow.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardYellow2" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="131.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@Icons/studentYellow.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardYellow3" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@Icons/studentYellow.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardYellow4" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@Icons/studentYellow.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardYellow5" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@Icons/studentYellow.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardYellow6" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@Icons/studentYellow.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardYellow7" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@Icons/studentYellow.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardYellow8" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@Icons/studentYellow.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardYellow9" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@Icons/studentYellow.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardYellow10" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@Icons/studentYellow.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardPink1" fitHeight="30.0" fitWidth="50.0" layoutX="341.0" layoutY="131.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@Icons/studentPink.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardPink2" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="185.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@Icons/studentPink.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardPink3" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@Icons/studentPink.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardPink4" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@Icons/studentPink.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardPink5" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@Icons/studentPink.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardPink6" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@Icons/studentPink.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardPink7" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@Icons/studentPink.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardPink8" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@Icons/studentPink.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardPink9" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@Icons/studentPink.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardPink10" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@Icons/studentPink.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardBlue1" fitHeight="30.0" fitWidth="50.0" layoutX="341.0" layoutY="185.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@Icons/studentBlue.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardBlue2" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="239.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@Icons/studentBlue.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardBlue3" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@Icons/studentBlue.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardBlue4" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@Icons/studentBlue.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardBlue5" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@Icons/studentBlue.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardBlue6" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@Icons/studentBlue.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardBlue7" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@Icons/studentBlue.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardBlue8" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@Icons/studentBlue.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardBlue9" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="8" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@Icons/studentBlue.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="studentBoardBlue10" fitHeight="30.0" fitWidth="50.0" layoutX="10.0" layoutY="23.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="9" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@Icons/studentBlue.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+                  <GridPane prefHeight="300.0" prefWidth="80.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="540.0" AnchorPane.rightAnchor="265.0" AnchorPane.topAnchor="30.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ImageView fx:id="professorBoardGreen" fitHeight="40.0" fitWidth="60.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                           <image>
+                              <Image url="@Icons/professorGreen.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="professorBoardRed" fitHeight="40.0" fitWidth="60.0" layoutX="12.0" layoutY="18.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@Icons/professorred.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="professorBoardYellow" fitHeight="40.0" fitWidth="60.0" layoutX="10.0" layoutY="18.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@Icons/professorYellow.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="professorBoardPink" fitHeight="40.0" fitWidth="60.0" layoutX="10.0" layoutY="18.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@Icons/professorPink.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="professorBoardBlue" fitHeight="40.0" fitWidth="60.0" layoutX="10.0" layoutY="18.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                           <image>
+                              <Image url="@Icons/professorBlue.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
                </children>
             </AnchorPane>
           <AnchorPane maxHeight="100.0" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="50.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #e7bd8d#e7bd8d;">
