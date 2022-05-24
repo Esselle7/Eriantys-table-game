@@ -367,6 +367,7 @@ public class TurnHandler implements Runnable {
                         break;
                     }
                     getCurrentClient().sendMessage(new chooseAssistantCardCMI());
+                    update();
                     getGameMoves().useAssistantCard(getCurrentClient().receiveChooseInt());
                     usedCards.add(getCurrentPlayer().getCurrentCard());
                     break;
