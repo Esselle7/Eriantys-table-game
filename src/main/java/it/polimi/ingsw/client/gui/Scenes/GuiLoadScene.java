@@ -1,6 +1,8 @@
 package it.polimi.ingsw.client.gui.Scenes;
 
+import it.polimi.ingsw.client.gui.Gui;
 import it.polimi.ingsw.client.gui.GuiMain;
+import it.polimi.ingsw.client.gui.ScenesController.GuiPlaygroundController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
@@ -15,15 +17,19 @@ public class GuiLoadScene implements Runnable{
     }
     @Override
     public void run() {
-        Parent root;
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/"+xml+".fxml")));
+        Parent root = null;
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/"+xml+".fxml"))); // load del fxml per sever info porta e ip
+            root = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
-            return;
         }
-
         GuiMain.updateScene(root,xml);
+        if(Gui.getGamePhase().equals("assistantCard")) {
+            GuiPlaygroundController controller = loader.getController();
+            controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
+            controller.updateStats();
+        }
     }
 }
 
