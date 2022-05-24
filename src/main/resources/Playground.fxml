@@ -633,7 +633,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentYello8" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow8" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>

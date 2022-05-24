@@ -544,7 +544,7 @@
                                     </AnchorPane>
                                   <AnchorPane maxWidth="150.0" minWidth="150.0" prefWidth="100.0" style="-fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;">
                                        <children>
-                                          <Label fx:id="genericStatsLabel" alignment="CENTER" prefHeight="96.0" prefWidth="150.0" text="genericStats" textAlignment="CENTER" textFill="RED" wrapText="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                          <Label fx:id="notificationLabel" alignment="CENTER" prefHeight="96.0" prefWidth="150.0" text="genericStats" textAlignment="CENTER" textFill="RED" wrapText="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
