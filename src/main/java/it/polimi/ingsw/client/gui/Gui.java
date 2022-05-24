@@ -18,6 +18,7 @@ public class Gui implements View {
 
     public Gui()
     {
+        setGamePhase("none");
     }
 
     public static void setGamePhase(String gamePhase) {
@@ -107,7 +108,7 @@ public class Gui implements View {
 
     @Override
     public void printNotification(String notification) {
-        System.out.println(notification);
+        GuiPlaygroundController.setNotification(notification);
     }
 
     @Override
@@ -195,6 +196,7 @@ public class Gui implements View {
     @Override
     public void showCloudTilesInfo() {
 
+
     }
 
     @Override
@@ -211,14 +213,13 @@ public class Gui implements View {
     public int chooseAssistantCard() {
         Gui.setGamePhase("assistantCard");
         resetGuiQueue();
-        Platform.runLater(() -> new GuiLoadScene("Stats").run());
+        Platform.runLater(() -> new GuiLoadScene("Playground").run());
         try {
             return (int) GuiMain.getQueue().take();
         } catch (InterruptedException e) {
             e.printStackTrace();
             return -1;
         }
-
     }
 
     @Override
