@@ -297,20 +297,22 @@ public class TurnHandler implements Runnable {
         int i = 0;
         while(i < getGameMoves().getCurrentSettings().getStudentsToMove()) {
             try{
+                getCurrentClient().sendMessage(new NotificationCMI("Please select a student from your entrance room to move"));
                 getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
                 studentColour = getCurrentClient().receiveChooseInt();
                 if(getGameMoves().getCurrentPlayerBoard().getEntranceRoom()[studentColour] == 0)
                     throw new noStudentForColour();
+                getCurrentClient().sendMessage(new NotificationCMI("Select where to move the student:"));
                 getCurrentClient().sendMessage(new chooseWhereToMove());
                 whereToMove = getCurrentClient().receiveChooseInt();
                 if (whereToMove == 0) {
                     getGameMoves().moveStudentEntranceToDining(studentColour);
-                    getCurrentClient().sendMessage(new NotificationCMI("You move a student from entrance room to the dining room"));
+                    getCurrentClient().sendMessage(new NotificationCMI("Correct student move, Dining"));
                 } else{
                     getCurrentClient().sendMessage(new chooseIslandCMI());
                     int island = getCurrentClient().receiveChooseInt();
                     getGameMoves().moveStudentsEntranceToIsland(studentColour, island-1);
-                    getCurrentClient().sendMessage(new NotificationCMI("You move a student from entrance room to Island "+ island));
+                    getCurrentClient().sendMessage(new NotificationCMI("Correct student move, to island "+ island));
                 }
                 i++;
                 printConsole("Correct student move!");
@@ -360,12 +362,14 @@ public class TurnHandler implements Runnable {
                     //selects a valid card
                     if(usedCards.containsAll(getCurrentPlayer().getAssistantCards().getResidualCards())){
                         do{
+                            getCurrentClient().sendMessage(new NotificationCMI("Please choose an assistant card between the remaining assistant cards:"));
                             getCurrentClient().sendMessage(new chooseAssistantCardCMI());
                             selectedCardNumber = getCurrentClient().receiveChooseInt();
                             selectedCard = getCurrentPlayer().useCard(selectedCardNumber);
                         } while(!selectedCard);
                         break;
                     }
+                    getCurrentClient().sendMessage(new NotificationCMI("Please choose an assistant card:"));
                     getCurrentClient().sendMessage(new chooseAssistantCardCMI());
                     update();
                     getGameMoves().useAssistantCard(getCurrentClient().receiveChooseInt());
@@ -459,6 +463,7 @@ public class TurnHandler implements Runnable {
     private void chooseCloudTiles() throws  IOException, GameWonException, EmptyTowerYard{
         while(!getLastTurn()){
             try {
+                getCurrentClient().sendMessage(new NotificationCMI("Choose a cloud tile to pick"));
                 getCurrentClient().sendMessage(new chooseCloudTileCMI());
                 getGameMoves().takeStudentsFromCloudTile(getCurrentClient().receiveChooseInt());
                 break;

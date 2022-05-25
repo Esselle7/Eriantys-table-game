@@ -524,7 +524,6 @@ public class Cli implements View {
     @Override
     public int chooseStudentColourToMove()
     {
-        printAction("Please select a student from your entrance room to move");
         showMyInfo();
         while(true)
         {
@@ -641,7 +640,7 @@ public class Cli implements View {
     @Override
     public int chooseWhereToMove()
     {
-        printAction("You want to move the selected student to the Dining Room or to an Island?");
+        printText("Type Dining or Island");
         while(true)
         {
             String choice = getInput().nextLine();
