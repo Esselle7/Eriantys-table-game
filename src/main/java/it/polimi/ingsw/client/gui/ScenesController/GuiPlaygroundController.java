@@ -386,6 +386,7 @@ public class GuiPlaygroundController {
 
     public void updateStats() {
         // Update general info in Stats scene
+
         for(Player p : getPlayGround().getPlayersList())
         {
             if(!p.getNickname().equals(getMyNickname()))

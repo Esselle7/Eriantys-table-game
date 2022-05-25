@@ -25,7 +25,13 @@ public class GuiLoadScene implements Runnable{
             e.printStackTrace();
         }
         GuiMain.updateScene(root,xml);
-        if(Gui.getGamePhase().equals("assistantCard")) {
+        if(xml.equals("Playground")) {
+            GuiPlaygroundController controller = loader.getController();
+            controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
+            controller.updatePlayground();
+        }
+        else if(xml.equals("Stats"))
+        {
             GuiPlaygroundController controller = loader.getController();
             controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
             controller.updateStats();

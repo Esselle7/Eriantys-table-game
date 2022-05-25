@@ -227,7 +227,7 @@
                               <Image url="@Icons/studentGreen.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="studentBoardGreen1studentBoardGreen2" fitHeight="30.0" fitWidth="50.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <ImageView fx:id="studentBoardGreen2" fitHeight="30.0" fitWidth="50.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@Icons/studentGreen.png" />
                            </image>
