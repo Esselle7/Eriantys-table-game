@@ -225,7 +225,14 @@ public class Gui implements View {
     @Override
     public int chooseStudentColourToMove() {
         Gui.setGamePhase("movePhase");
-        return 0;
+        resetGuiQueue();
+        Platform.runLater(() -> new GuiLoadScene("Board").run());
+        try {
+            return (int) GuiMain.getQueue().take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     @Override
@@ -235,7 +242,18 @@ public class Gui implements View {
 
     @Override
     public int chooseIsland() {
-        return 0;
+        if(Gui.getGamePhase().equals("whereToMove"))
+        {
+            try {
+                return (int) GuiMain.getQueue().take();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                return -1;
+            }
+        }
+        else
+            return 0;
+
     }
 
     @Override
@@ -251,7 +269,15 @@ public class Gui implements View {
 
     @Override
     public int chooseWhereToMove() {
-        return 0;
+        Gui.setGamePhase("whereToMove");
+        resetGuiQueue();
+        Platform.runLater(() -> new GuiLoadScene("Board").run());
+        try {
+            return (int) GuiMain.getQueue().take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     @Override

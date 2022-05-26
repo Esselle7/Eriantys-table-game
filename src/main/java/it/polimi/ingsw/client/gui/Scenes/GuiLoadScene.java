@@ -25,16 +25,25 @@ public class GuiLoadScene implements Runnable{
             e.printStackTrace();
         }
         GuiMain.updateScene(root,xml);
-        if(xml.equals("Playground")) {
-            GuiPlaygroundController controller = loader.getController();
-            controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
-            controller.updatePlayground();
-        }
-        else if(xml.equals("Stats"))
-        {
-            GuiPlaygroundController controller = loader.getController();
-            controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
-            controller.updateStats();
+        switch (xml) {
+            case "Playground": {
+                GuiPlaygroundController controller = loader.getController();
+                controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
+                controller.updatePlayground();
+                break;
+            }
+            case "Stats": {
+                GuiPlaygroundController controller = loader.getController();
+                controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
+                controller.updateStats();
+                break;
+            }
+            case "Board": {
+                GuiPlaygroundController controller = loader.getController();
+                controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
+                controller.updateBoard();
+                break;
+            }
         }
     }
 }

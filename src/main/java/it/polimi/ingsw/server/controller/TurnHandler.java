@@ -369,7 +369,7 @@ public class TurnHandler implements Runnable {
                         } while(!selectedCard);
                         break;
                     }
-                    getCurrentClient().sendMessage(new NotificationCMI("Please choose an assistant card:"));
+                    getCurrentClient().sendMessage(new NotificationCMI("Please choose an assistant card"));
                     getCurrentClient().sendMessage(new chooseAssistantCardCMI());
                     update();
                     getGameMoves().useAssistantCard(getCurrentClient().receiveChooseInt());

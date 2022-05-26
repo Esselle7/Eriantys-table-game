@@ -155,6 +155,103 @@ public class GuiPlaygroundController {
     public List<Label> studentIsland12;
     public List<List<Label>> isl;
 
+    //Entrance Room
+    public Label entranceStudentPink;
+    public Label entranceStudentBlue;
+    public Label entranceStudentRed;
+    public Label entranceStudentYellow;
+    public Label entranceStudentGreen;
+    public List<Label> entranceRoom;
+
+    //Dining room green
+    public ImageView studentBoardGreen1;
+    public ImageView studentBoardGreen2;
+    public ImageView studentBoardGreen3;
+    public ImageView studentBoardGreen4;
+    public ImageView studentBoardGreen5;
+    public ImageView studentBoardGreen6;
+    public ImageView studentBoardGreen7;
+    public ImageView studentBoardGreen8;
+    public ImageView studentBoardGreen9;
+    public ImageView studentBoardGreen10;
+    public List<ImageView> diningGreenStudent;
+
+    //Dining room red
+    public ImageView studentBoardRed1;
+    public ImageView studentBoardRed2;
+    public ImageView studentBoardRed3;
+    public ImageView studentBoardRed4;
+    public ImageView studentBoardRed5;
+    public ImageView studentBoardRed6;
+    public ImageView studentBoardRed7;
+    public ImageView studentBoardRed8;
+    public ImageView studentBoardRed9;
+    public ImageView studentBoardRed10;
+    public List<ImageView> diningRedStudent;
+
+
+    //Dining room yellow
+    public ImageView studentBoardYellow1;
+    public ImageView studentBoardYellow2;
+    public ImageView studentBoardYellow3;
+    public ImageView studentBoardYellow4;
+    public ImageView studentBoardYellow5;
+    public ImageView studentBoardYellow6;
+    public ImageView studentBoardYellow7;
+    public ImageView studentBoardYellow8;
+    public ImageView studentBoardYellow9;
+    public ImageView studentBoardYellow10;
+    public List<ImageView> diningYellowStudent;
+
+    //Dining room pink
+    public ImageView studentBoardPink1;
+    public ImageView studentBoardPink2;
+    public ImageView studentBoardPink3;
+    public ImageView studentBoardPink4;
+    public ImageView studentBoardPink5;
+    public ImageView studentBoardPink6;
+    public ImageView studentBoardPink7;
+    public ImageView studentBoardPink8;
+    public ImageView studentBoardPink9;
+    public ImageView studentBoardPink10;
+    public List<ImageView> diningPinkStudent;
+
+    //Dining room blue
+    public ImageView studentBoardBlue1;
+    public ImageView studentBoardBlue2;
+    public ImageView studentBoardBlue3;
+    public ImageView studentBoardBlue4;
+    public ImageView studentBoardBlue5;
+    public ImageView studentBoardBlue6;
+    public ImageView studentBoardBlue7;
+    public ImageView studentBoardBlue8;
+    public ImageView studentBoardBlue9;
+    public ImageView studentBoardBlue10;
+    public List<ImageView> diningBlueStudent;
+
+    List<List<ImageView>> diningRoom;
+
+
+    //Professors room
+    public ImageView professorBoardGreen;
+    public ImageView professorBoardRed;
+    public ImageView professorBoardYellow;
+    public ImageView professorBoardPink;
+    public ImageView professorBoardBlue;
+    List<ImageView> professorsRoom;
+
+    //Tower Yard
+    public ImageView towerBoard1;
+    public ImageView towerBoard2;
+    public ImageView towerBoard3;
+    public ImageView towerBoard4;
+    public ImageView towerBoard5;
+    public ImageView towerBoard6;
+    public ImageView towerBoard7;
+    public ImageView towerBoard8;
+    List<ImageView> towerYard;
+
+
     public GuiPlaygroundController()
     {
 
@@ -285,6 +382,100 @@ public class GuiPlaygroundController {
         isl.add(studentIsland10);
         isl.add(studentIsland11);
         isl.add(studentIsland12);
+
+
+        entranceRoom = new ArrayList<>();
+        entranceRoom.add(entranceStudentBlue);
+        entranceRoom.add(entranceStudentGreen);
+        entranceRoom.add(entranceStudentPink);
+        entranceRoom.add(entranceStudentRed);
+        entranceRoom.add(entranceStudentYellow);
+
+        diningGreenStudent = new ArrayList<>();
+        diningPinkStudent = new ArrayList<>();
+        diningRedStudent = new ArrayList<>();
+        diningBlueStudent = new ArrayList<>();
+        diningYellowStudent = new ArrayList<>();
+        diningRoom = new ArrayList<>();
+
+        diningBlueStudent.add(studentBoardBlue1);
+        diningBlueStudent.add(studentBoardBlue2);
+        diningBlueStudent.add(studentBoardBlue3);
+        diningBlueStudent.add(studentBoardBlue4);
+        diningBlueStudent.add(studentBoardBlue5);
+        diningBlueStudent.add(studentBoardBlue6);
+        diningBlueStudent.add(studentBoardBlue7);
+        diningBlueStudent.add(studentBoardBlue8);
+        diningBlueStudent.add(studentBoardBlue9);
+        diningBlueStudent.add(studentBoardBlue10);
+
+        diningRedStudent.add(studentBoardRed1);
+        diningRedStudent.add(studentBoardRed2);
+        diningRedStudent.add(studentBoardRed3);
+        diningRedStudent.add(studentBoardRed4);
+        diningRedStudent.add(studentBoardRed5);
+        diningRedStudent.add(studentBoardRed6);
+        diningRedStudent.add(studentBoardRed7);
+        diningRedStudent.add(studentBoardRed8);
+        diningRedStudent.add(studentBoardRed9);
+        diningRedStudent.add(studentBoardRed10);
+
+        diningYellowStudent.add(studentBoardYellow1);
+        diningYellowStudent.add(studentBoardYellow2);
+        diningYellowStudent.add(studentBoardYellow3);
+        diningYellowStudent.add(studentBoardYellow4);
+        diningYellowStudent.add(studentBoardYellow5);
+        diningYellowStudent.add(studentBoardYellow6);
+        diningYellowStudent.add(studentBoardYellow7);
+        diningYellowStudent.add(studentBoardYellow8);
+        diningYellowStudent.add(studentBoardYellow9);
+        diningYellowStudent.add(studentBoardYellow10);
+
+        diningGreenStudent.add(studentBoardGreen1);
+        diningGreenStudent.add(studentBoardGreen2);
+        diningGreenStudent.add(studentBoardGreen3);
+        diningGreenStudent.add(studentBoardGreen4);
+        diningGreenStudent.add(studentBoardGreen5);
+        diningGreenStudent.add(studentBoardGreen6);
+        diningGreenStudent.add(studentBoardGreen7);
+        diningGreenStudent.add(studentBoardGreen8);
+        diningGreenStudent.add(studentBoardGreen9);
+        diningGreenStudent.add(studentBoardGreen10);
+
+        diningPinkStudent.add(studentBoardPink1);
+        diningPinkStudent.add(studentBoardPink2);
+        diningPinkStudent.add(studentBoardPink3);
+        diningPinkStudent.add(studentBoardPink4);
+        diningPinkStudent.add(studentBoardPink5);
+        diningPinkStudent.add(studentBoardPink6);
+        diningPinkStudent.add(studentBoardPink7);
+        diningPinkStudent.add(studentBoardPink8);
+        diningPinkStudent.add(studentBoardPink9);
+        diningPinkStudent.add(studentBoardPink10);
+
+        diningRoom.add(diningRedStudent);
+        diningRoom.add(diningGreenStudent);
+        diningRoom.add(diningBlueStudent);
+        diningRoom.add(diningPinkStudent);
+        diningRoom.add(diningYellowStudent);
+
+        professorsRoom = new ArrayList<>();
+        professorsRoom.add(professorBoardRed);
+        professorsRoom.add(professorBoardGreen);
+        professorsRoom.add(professorBoardBlue);
+        professorsRoom.add(professorBoardPink);
+        professorsRoom.add(professorBoardYellow);
+
+        towerYard = new ArrayList<>();
+        towerYard.add(towerBoard1);
+        towerYard.add(towerBoard2);
+        towerYard.add(towerBoard3);
+        towerYard.add(towerBoard4);
+        towerYard.add(towerBoard5);
+        towerYard.add(towerBoard6);
+        towerYard.add(towerBoard7);
+        towerYard.add(towerBoard8);
+
 
 
 
@@ -424,6 +615,45 @@ public class GuiPlaygroundController {
 
     }
 
+    public void updateBoard()
+    {
+        // entrance room
+        for(int student = 0; student < Colour.colourCount; student++)
+        {
+            entranceRoom.get(0).setText(String.valueOf(getMyBoard().getEntranceRoom()[student]));
+        }
+
+        //dining room
+        for(int student = 0; student < Colour.colourCount; student++)
+        {
+            for(int index = 0; index < getMyBoard().getDiningRoom()[student]; index++)
+            {
+                diningRoom.get(student).get(index).setOpacity(1.0);
+            }
+        }
+
+        //professors room
+        for(int colour = 0; colour < Colour.colourCount; colour++)
+        {
+            if(getPlayGround().getProfessorsControl()[colour] != null)
+            {
+                if(getPlayGround().getProfessorsControl()[colour].equals(getMyNickname()))
+                    professorsRoom.get(colour).setOpacity(1.0);
+                else
+                    professorsRoom.get(colour).setOpacity(0.0);
+            }
+            else
+                professorsRoom.get(colour).setOpacity(0.0);
+        }
+
+        //tower yard
+        for(int index = 0; index < getMyBoard().getTowerYard(); index++)
+            towerYard.get(index).setOpacity(1.0);
+        for(int index = getMyBoard().getTowerYard(); index < towerYard.size(); index++)
+            towerYard.get(index).setOpacity(0.0);
+
+    }
+
     public void switchToBoard()
     {
         Platform.runLater(() ->
@@ -449,6 +679,7 @@ public class GuiPlaygroundController {
     private void assistantCardToUse(int card){
         if(Gui.getGamePhase().equals("assistantCard"))
             GuiMain.getQueue().add(card);
+        switchToPlayground();
     }
 
     public void cardOne(MouseEvent mouseEvent) {
@@ -481,6 +712,109 @@ public class GuiPlaygroundController {
     public void cardTen(MouseEvent mouseEvent) {
         assistantCardToUse(10);
     }
+    public void moveToDining()
+    {
+        if(Gui.getGamePhase().equals("whereToMove"))
+            GuiMain.getQueue().add(0);
+        switchToPlayground();
+    }
+
+    public void moveStudent(int colour)
+    {
+        if(Gui.getGamePhase().equals("movePhase"))
+            GuiMain.getQueue().add(colour);
+        switchToPlayground();
+    }
+    public void moveGreen()
+    {
+        moveStudent(Colour.GREEN);
+    }
+
+    public void moveRed()
+    {
+        moveStudent(Colour.RED);
+    }
+
+    public void movePink()
+    {
+        moveStudent(Colour.PINK);
+    }
+
+    public void moveBlue()
+    {
+        moveStudent(Colour.BLUE);
+    }
+
+    public void moveYellow()
+    {
+        moveStudent(Colour.YELLOW);
+    }
+
+    public void moveToIsland(int island)
+    {
+        if(Gui.getGamePhase().equals("movePhase"))
+        {
+            GuiMain.getQueue().add(1);
+            GuiMain.getQueue().add(island);
+        }
+
+        switchToPlayground();
+    }
+
+    public void moveIsland1()
+    {
+        moveToIsland(0);
+    }
+
+    public void moveIsland2()
+    {
+        moveToIsland(1);
+    }
+    public void moveIsland3()
+    {
+        moveToIsland(2);
+    }
+    public void moveIsland4()
+    {
+        moveToIsland(3);
+    }
+    public void moveIsland5()
+    {
+        moveToIsland(4);
+    }
+    public void moveIsland6()
+    {
+        moveToIsland(5);
+    }
+    public void moveIsland7()
+    {
+        moveToIsland(6);
+    }
+    public void moveIsland8()
+    {
+        moveToIsland(7);
+    }
+    public void moveIsland9()
+    {
+        moveToIsland(8);
+    }
+    public void moveIsland10()
+    {
+        moveToIsland(9);
+    }
+    public void moveIsland11()
+    {
+        moveToIsland(10);
+    }
+    public void moveIsland12()
+    {
+        moveToIsland(11);
+    }
+
+
+
+
+
 
 
 
