@@ -620,7 +620,7 @@ public class GuiPlaygroundController {
         // entrance room
         for(int student = 0; student < Colour.colourCount; student++)
         {
-            entranceRoom.get(0).setText(String.valueOf(getMyBoard().getEntranceRoom()[student]));
+            entranceRoom.get(student).setText(String.valueOf(getMyBoard().getEntranceRoom()[student]));
         }
 
         //dining room
@@ -716,14 +716,14 @@ public class GuiPlaygroundController {
     {
         if(Gui.getGamePhase().equals("whereToMove"))
             GuiMain.getQueue().add(0);
-        switchToPlayground();
+        //switchToPlayground();
     }
 
     public void moveStudent(int colour)
     {
         if(Gui.getGamePhase().equals("movePhase"))
             GuiMain.getQueue().add(colour);
-        switchToPlayground();
+       // switchToPlayground();
     }
     public void moveGreen()
     {
@@ -752,13 +752,19 @@ public class GuiPlaygroundController {
 
     public void moveToIsland(int island)
     {
-        if(Gui.getGamePhase().equals("movePhase"))
+        System.out.println("Almeno sono no qui");
+        if(Gui.getGamePhase().equals("motherNature"))
+        {
+            GuiMain.getQueue().add(island);
+        }
+        if(Gui.getGamePhase().equals("whereToMove"))
         {
             GuiMain.getQueue().add(1);
             GuiMain.getQueue().add(island);
+            Gui.setGamePhase("motherNature");
         }
 
-        switchToPlayground();
+        //switchToPlayground();
     }
 
     public void moveIsland1()
