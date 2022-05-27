@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Rectangle2D?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="600.0" maxWidth="850.0" minHeight="600.0" minWidth="850.0" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.ScenesController.GuiPlaygroundController">
+<AnchorPane maxHeight="600.0" maxWidth="850.0" minHeight="600.0" minWidth="850.0" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.ScenesController.GuiPlaygroundController">
    <children>
       <SplitPane dividerPositions="0.5" layoutX="89.0" layoutY="81.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -38,16 +31,16 @@
                         <RowConstraints minHeight="75.0" valignment="CENTER" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="island12" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland12" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Button minHeight="100.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <graphic>
-                              <ImageView fx:id="island12" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#moveIsland12">
+                              <ImageView fitHeight="150.0" fitWidth="150.0" >
                                  <image>
                                     <Image url="@Icons/Island3.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="island1" contentDisplay="GRAPHIC_ONLY" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland1" style="-fx-background-color: transparent;" GridPane.rowIndex="2">
+                        <Button contentDisplay="GRAPHIC_ONLY" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.rowIndex="2">
                            <graphic>
                               <ImageView fitHeight="160.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -56,7 +49,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="island2" contentDisplay="GRAPHIC_ONLY" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland2" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button contentDisplay="GRAPHIC_ONLY" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <graphic>
                               <ImageView fitHeight="160.0" fitWidth="185.0">
                                  <image>
@@ -65,7 +58,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="island4" contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland4" style="-fx-background-color: transparent;" GridPane.columnIndex="3">
+                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="3">
                            <graphic>
                               <ImageView fitHeight="150.0" fitWidth="150.0">
                                  <image>
@@ -74,7 +67,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="island7" contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland7" style="-fx-background-color: transparent;" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="6" GridPane.rowIndex="2">
                            <graphic>
                               <ImageView fitHeight="150.0" fitWidth="150.0">
                                  <image>
@@ -83,7 +76,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="island11" contentDisplay="GRAPHIC_ONLY" layoutX="370.0" layoutY="414.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland11" style="-fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="370.0" layoutY="414.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.rowIndex="4">
                            <graphic>
                               <ImageView fitHeight="160.0" fitWidth="185.0">
                                  <image>
@@ -92,7 +85,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="island3" contentDisplay="GRAPHIC_ONLY" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland3" style="-fx-background-color: transparent;" GridPane.columnIndex="2">
+                        <Button contentDisplay="GRAPHIC_ONLY" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="2">
                            <graphic>
                               <ImageView fitHeight="160.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -101,7 +94,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="island8" contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland8" style="-fx-background-color: transparent;" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="5" GridPane.rowIndex="3">
                            <graphic>
                               <ImageView fitHeight="160.0" fitWidth="185.0">
                                  <image>
@@ -110,7 +103,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="island5" contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland5" style="-fx-background-color: transparent;" GridPane.columnIndex="4">
+                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="4">
                            <graphic>
                               <ImageView fitHeight="155.0" fitWidth="185.0">
                                  <image>
@@ -119,7 +112,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="island10" contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland10" style="-fx-background-color: transparent;" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="3" GridPane.rowIndex="4">
                            <graphic>
                               <ImageView fitHeight="150.0" fitWidth="150.0">
                                  <image>
@@ -128,7 +121,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="island9" contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland9" style="-fx-background-color: transparent;" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="4" GridPane.rowIndex="4">
                            <graphic>
                               <ImageView fitHeight="160.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -137,7 +130,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="islan6" contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland6" style="-fx-background-color: transparent;" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                        <Button contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="5" GridPane.rowIndex="1">
                            <graphic>
                               <ImageView fitHeight="160.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -149,7 +142,7 @@
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                        <GridPane layoutX="135.0" layoutY="394.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <GridPane fx:id="island2" layoutX="135.0" layoutY="394.0" onMouseClicked="#moveToIsland2" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -209,7 +202,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <GridPane layoutX="135.0" layoutY="148.0" GridPane.rowIndex="2">
+                        <GridPane fx:id="island1" layoutX="135.0" layoutY="148.0" onMouseClicked="#moveToIsland1" GridPane.rowIndex="2">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -274,7 +267,7 @@
                               </ImageView>
                            </children>
                         </GridPane>
-                        <GridPane layoutX="115.0" layoutY="119.0" GridPane.columnIndex="2">
+                        <GridPane fx:id="island3" layoutX="115.0" layoutY="119.0" onMouseClicked="#moveToIsland3" GridPane.columnIndex="2">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -334,7 +327,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <GridPane layoutX="220.0" layoutY="10.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                        <GridPane fx:id="island11" layoutX="220.0" layoutY="10.0" onMouseClicked="#moveToIsland11" GridPane.columnIndex="2" GridPane.rowIndex="4">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -394,7 +387,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="4">
+                        <GridPane fx:id="island5" layoutX="10.0" layoutY="10.0" onMouseClicked="#moveToIsland5" GridPane.columnIndex="4">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -454,7 +447,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="3">
+                        <GridPane fx:id="island4" layoutX="10.0" layoutY="10.0" onMouseClicked="#moveToIsland4" GridPane.columnIndex="3">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -514,7 +507,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <GridPane layoutX="220.0" layoutY="389.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                        <GridPane fx:id="island9" layoutX="220.0" layoutY="389.0" onMouseClicked="#moveToIsland9" GridPane.columnIndex="4" GridPane.rowIndex="4">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -574,7 +567,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <GridPane layoutX="467.0" layoutY="389.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <GridPane fx:id="island12" layoutX="467.0" layoutY="389.0" onMouseClicked="#moveToIsland12" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -634,7 +627,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <GridPane layoutX="325.0" layoutY="10.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                        <GridPane fx:id="island8" layoutX="325.0" layoutY="10.0" onMouseClicked="#moveToIsland8" GridPane.columnIndex="5" GridPane.rowIndex="3">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -694,7 +687,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <GridPane layoutX="572.0" layoutY="298.0" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                        <GridPane fx:id="island7" layoutX="572.0" layoutY="298.0" onMouseClicked="#moveToIsland7" GridPane.columnIndex="6" GridPane.rowIndex="2">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -754,7 +747,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <GridPane layoutX="677.0" layoutY="210.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                        <GridPane fx:id="island6" layoutX="677.0" layoutY="210.0" onMouseClicked="#moveToIsland6" GridPane.columnIndex="5" GridPane.rowIndex="1">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -814,7 +807,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <GridPane layoutX="325.0" layoutY="10.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                        <GridPane fx:id="island10" layoutX="325.0" layoutY="10.0" onMouseClicked="#moveToIsland10" GridPane.columnIndex="3" GridPane.rowIndex="4">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

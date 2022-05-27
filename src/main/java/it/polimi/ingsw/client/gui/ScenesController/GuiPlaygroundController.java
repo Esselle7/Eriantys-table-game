@@ -3,17 +3,17 @@ package it.polimi.ingsw.client.gui.ScenesController;
 import it.polimi.ingsw.client.gui.Gui;
 import it.polimi.ingsw.client.gui.GuiMain;
 import it.polimi.ingsw.client.gui.Scenes.GuiLoadScene;
-import it.polimi.ingsw.client.model.ClientColour;
 import it.polimi.ingsw.server.model.*;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 public class GuiPlaygroundController {
@@ -55,19 +55,19 @@ public class GuiPlaygroundController {
     public ImageView assistantTen;
     public List<ImageView> assistantCards;
 
-    public ImageView island1;
-    public ImageView island2;
-    public ImageView island3;
-    public ImageView island4;
-    public ImageView island5;
-    public ImageView island6;
-    public ImageView island7;
-    public ImageView island8;
-    public ImageView island9;
-    public ImageView island10;
-    public ImageView island11;
-    public ImageView island12;
-    public List<ImageView> islands;
+    public GridPane island1;
+    public GridPane island2;
+    public GridPane island3;
+    public GridPane island4;
+    public GridPane island5;
+    public GridPane island6;
+    public GridPane island7;
+    public GridPane island8;
+    public GridPane island9;
+    public GridPane island10;
+    public GridPane island11;
+    public GridPane island12;
+    public List<GridPane> islands;
 
     public Label studentRed1;
     public Label studentGreen1;
@@ -385,10 +385,10 @@ public class GuiPlaygroundController {
 
 
         entranceRoom = new ArrayList<>();
-        entranceRoom.add(entranceStudentBlue);
-        entranceRoom.add(entranceStudentGreen);
-        entranceRoom.add(entranceStudentPink);
         entranceRoom.add(entranceStudentRed);
+        entranceRoom.add(entranceStudentGreen);
+        entranceRoom.add(entranceStudentBlue);
+        entranceRoom.add(entranceStudentPink);
         entranceRoom.add(entranceStudentYellow);
 
         diningGreenStudent = new ArrayList<>();
@@ -621,6 +621,10 @@ public class GuiPlaygroundController {
         for(int student = 0; student < Colour.colourCount; student++)
         {
             entranceRoom.get(student).setText(String.valueOf(getMyBoard().getEntranceRoom()[student]));
+            if(getMyBoard().getEntranceRoom()[student] == 0)
+                entranceRoom.get(student).setOpacity(0.5);
+            else
+                entranceRoom.get(student).setOpacity(1.0);
         }
 
         //dining room
@@ -712,6 +716,7 @@ public class GuiPlaygroundController {
     public void cardTen(MouseEvent mouseEvent) {
         assistantCardToUse(10);
     }
+
     public void moveToDining()
     {
         if(Gui.getGamePhase().equals("whereToMove"))
@@ -725,34 +730,33 @@ public class GuiPlaygroundController {
             GuiMain.getQueue().add(colour);
        // switchToPlayground();
     }
-    public void moveGreen()
+    public void moveGreen(MouseEvent mouseEvent)
     {
         moveStudent(Colour.GREEN);
     }
 
-    public void moveRed()
+    public void moveRed(MouseEvent mouseEvent)
     {
         moveStudent(Colour.RED);
     }
 
-    public void movePink()
+    public void movePink(MouseEvent mouseEvent)
     {
         moveStudent(Colour.PINK);
     }
 
-    public void moveBlue()
+    public void moveBlue(MouseEvent mouseEvent)
     {
         moveStudent(Colour.BLUE);
     }
 
-    public void moveYellow()
+    public void moveYellow(MouseEvent mouseEvent)
     {
         moveStudent(Colour.YELLOW);
     }
 
     public void moveToIsland(int island)
     {
-        System.out.println("Almeno sono no qui");
         if(Gui.getGamePhase().equals("motherNature"))
         {
             GuiMain.getQueue().add(island);
@@ -767,62 +771,53 @@ public class GuiPlaygroundController {
         //switchToPlayground();
     }
 
-    public void moveIsland1()
+    public void moveToIsland1(ActionEvent mouseEvent)
     {
         moveToIsland(0);
     }
 
-    public void moveIsland2()
+    public void moveToIsland2(MouseEvent mouseEvent)
     {
         moveToIsland(1);
     }
-    public void moveIsland3()
+    public void moveToIsland3(ActionEvent mouseEvent)
     {
         moveToIsland(2);
     }
-    public void moveIsland4()
+    public void moveToIsland4(ActionEvent mouseEvent)
     {
         moveToIsland(3);
     }
-    public void moveIsland5()
+    public void moveToIsland5(ActionEvent mouseEvent)
     {
         moveToIsland(4);
     }
-    public void moveIsland6()
+    public void moveToIsland6(ActionEvent mouseEvent)
     {
         moveToIsland(5);
     }
-    public void moveIsland7()
+    public void moveToIsland7(ActionEvent mouseEvent)
     {
         moveToIsland(6);
     }
-    public void moveIsland8()
+    public void moveToIsland8(ActionEvent mouseEvent)
     {
         moveToIsland(7);
     }
-    public void moveIsland9()
+    public void moveToIsland9(ActionEvent mouseEvent)
     {
         moveToIsland(8);
     }
-    public void moveIsland10()
+    public void moveToIsland10(ActionEvent mouseEvent)
     {
         moveToIsland(9);
     }
-    public void moveIsland11()
+    public void moveToIsland11(ActionEvent mouseEvent)
     {
         moveToIsland(10);
     }
-    public void moveIsland12()
+    public void moveToIsland12(ActionEvent mouseEvent)
     {
         moveToIsland(11);
     }
-
-
-
-
-
-
-
-
-
 }
