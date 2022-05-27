@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -39,72 +38,114 @@
                         <RowConstraints minHeight="75.0" valignment="CENTER" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <ImageView fx:id="island1" onMouseClicked="#moveIsland1" fitHeight="160.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
-                           <image>
-                              <Image url="@Icons/Island1.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="island9" onMouseClicked="#moveIsland9" fitHeight="160.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
-                           <image>
-                              <Image url="@Icons/Island1.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="island6" onMouseClicked="#moveIsland6" fitHeight="160.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1">
-                           <image>
-                              <Image url="@Icons/Island1.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="island3" onMouseClicked="#moveIsland3" fitHeight="160.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                           <image>
-                              <Image url="@Icons/Island1.png" />
-                           </image>
-                           <GridPane.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </GridPane.margin>
-                        </ImageView>
-                        <ImageView fx:id="island5" onMouseClicked="#moveIsland5" fitHeight="155.0" fitWidth="185.0" GridPane.columnIndex="4">
-                           <image>
-                              <Image url="@Icons/Island2.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="island4" onMouseClicked="#moveIsland4" fitHeight="150.0" fitWidth="150.0" GridPane.columnIndex="3">
-                           <image>
-                              <Image url="@Icons/Island3.png" />
-                           </image>
-                           <GridPane.margin>
-                              <Insets bottom="10.0" left="30.0" right="30.0" top="10.0" />
-                           </GridPane.margin>
-                        </ImageView>
-                        <ImageView fx:id="island2" onMouseClicked="#moveIsland2" fitHeight="160.0" fitWidth="185.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <image>
-                              <Image url="@Icons/Island2.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="island8" onMouseClicked="#moveIsland8" fitHeight="160.0" fitWidth="185.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
-                           <image>
-                              <Image url="@Icons/Island2.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="island11" onMouseClicked="#moveIsland11" fitHeight="160.0" fitWidth="185.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                           <image>
-                              <Image url="@Icons/Island2.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="island10" onMouseClicked="#moveIsland10" fitHeight="150.0" fitWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
-                           <image>
-                              <Image url="@Icons/Island3.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="island12"  onMouseClicked="#moveIsland12" fitHeight="150.0" fitWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <image>
-                              <Image url="@Icons/Island3.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fx:id="island7" onMouseClicked="#moveIsland7" fitHeight="150.0" fitWidth="150.0" GridPane.columnIndex="6" GridPane.rowIndex="2">
-                           <image>
-                              <Image url="@Icons/Island3.png" />
-                           </image>
-                        </ImageView>
+                        <Button fx:id="island12" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland12" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <graphic>
+                              <ImageView fx:id="island12" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#moveIsland12">
+                                 <image>
+                                    <Image url="@Icons/Island3.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="island1" contentDisplay="GRAPHIC_ONLY" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland1" style="-fx-background-color: transparent;" GridPane.rowIndex="2">
+                           <graphic>
+                              <ImageView fitHeight="160.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/Island1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="island2" contentDisplay="GRAPHIC_ONLY" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland2" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <graphic>
+                              <ImageView fitHeight="160.0" fitWidth="185.0">
+                                 <image>
+                                    <Image url="@Icons/Island2.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="island4" contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland4" style="-fx-background-color: transparent;" GridPane.columnIndex="3">
+                           <graphic>
+                              <ImageView fitHeight="150.0" fitWidth="150.0">
+                                 <image>
+                                    <Image url="@Icons/Island3.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="island7" contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland7" style="-fx-background-color: transparent;" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                           <graphic>
+                              <ImageView fitHeight="150.0" fitWidth="150.0">
+                                 <image>
+                                    <Image url="@Icons/Island3.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="island11" contentDisplay="GRAPHIC_ONLY" layoutX="370.0" layoutY="414.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland11" style="-fx-background-color: transparent;" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                           <graphic>
+                              <ImageView fitHeight="160.0" fitWidth="185.0">
+                                 <image>
+                                    <Image url="@Icons/Island2.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="island3" contentDisplay="GRAPHIC_ONLY" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland3" style="-fx-background-color: transparent;" GridPane.columnIndex="2">
+                           <graphic>
+                              <ImageView fitHeight="160.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/Island1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="island8" contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland8" style="-fx-background-color: transparent;" GridPane.columnIndex="5" GridPane.rowIndex="3">
+                           <graphic>
+                              <ImageView fitHeight="160.0" fitWidth="185.0">
+                                 <image>
+                                    <Image url="@Icons/Island2.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="island5" contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland5" style="-fx-background-color: transparent;" GridPane.columnIndex="4">
+                           <graphic>
+                              <ImageView fitHeight="155.0" fitWidth="185.0">
+                                 <image>
+                                    <Image url="@Icons/Island2.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="island10" contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland10" style="-fx-background-color: transparent;" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                           <graphic>
+                              <ImageView fitHeight="150.0" fitWidth="150.0">
+                                 <image>
+                                    <Image url="@Icons/Island3.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="island9" contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland9" style="-fx-background-color: transparent;" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                           <graphic>
+                              <ImageView fitHeight="160.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/Island1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="islan6" contentDisplay="GRAPHIC_ONLY" layoutX="36.0" layoutY="50.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#moveIsland6" style="-fx-background-color: transparent;" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                           <graphic>
+                              <ImageView fitHeight="160.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/Island1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
