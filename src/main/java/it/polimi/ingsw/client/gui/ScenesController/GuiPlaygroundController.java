@@ -286,88 +286,96 @@ public class GuiPlaygroundController {
         islands.add(island12);
 
         studentIsland1 = new ArrayList<>();
+        studentIsland1.add(studentRed1);
+        studentIsland1.add(studentGreen1);
+        studentIsland1.add(studentBlue1);
         studentIsland1.add(studentPink1);
         studentIsland1.add(studentYellow1);
-        studentIsland1.add(studentBlue1);
-        studentIsland1.add(studentGreen1);
-        studentIsland1.add(studentRed1);
 
         studentIsland2 = new ArrayList<>();
+        studentIsland2.add(studentRed2);
+        studentIsland2.add(studentGreen2);
+        studentIsland2.add(studentBlue2);
         studentIsland2.add(studentPink2);
         studentIsland2.add(studentYellow2);
-        studentIsland2.add(studentBlue2);
-        studentIsland2.add(studentGreen2);
-        studentIsland2.add(studentRed2);
 
         studentIsland3 = new ArrayList<>();
+        studentIsland3.add(studentRed3);
+        studentIsland3.add(studentGreen3);
+        studentIsland3.add(studentBlue3);
         studentIsland3.add(studentPink3);
         studentIsland3.add(studentYellow3);
-        studentIsland3.add(studentBlue3);
-        studentIsland3.add(studentGreen3);
-        studentIsland3.add(studentRed3);
 
         studentIsland4 = new ArrayList<>();
+        studentIsland4.add(studentRed4);
+        studentIsland4.add(studentGreen4);
+        studentIsland4.add(studentBlue4);
         studentIsland4.add(studentPink4);
         studentIsland4.add(studentYellow4);
-        studentIsland4.add(studentBlue4);
-        studentIsland4.add(studentGreen4);
-        studentIsland4.add(studentRed4);
 
         studentIsland5 = new ArrayList<>();
+        studentIsland5.add(studentRed5);
+        studentIsland5.add(studentGreen5);
+        studentIsland5.add(studentBlue5);
         studentIsland5.add(studentPink5);
         studentIsland5.add(studentYellow5);
-        studentIsland5.add(studentBlue5);
-        studentIsland5.add(studentGreen5);
-        studentIsland5.add(studentRed5);
 
         studentIsland6 = new ArrayList<>();
+        studentIsland6.add(studentRed6);
+        studentIsland6.add(studentGreen6);
+        studentIsland6.add(studentBlue6);
         studentIsland6.add(studentPink6);
         studentIsland6.add(studentYellow6);
-        studentIsland6.add(studentBlue6);
-        studentIsland6.add(studentGreen6);
-        studentIsland6.add(studentRed6);
 
         studentIsland7 = new ArrayList<>();
+        studentIsland7.add(studentGreen7);
+        studentIsland7.add(studentBlue7);
+        studentIsland7.add(studentRed7);
         studentIsland7.add(studentPink7);
         studentIsland7.add(studentYellow7);
-        studentIsland7.add(studentBlue7);
-        studentIsland7.add(studentGreen7);
-        studentIsland7.add(studentRed7);
 
         studentIsland8 = new ArrayList<>();
+        studentIsland8.add(studentRed8);
+        studentIsland8.add(studentGreen8);
+        studentIsland8.add(studentBlue8);
         studentIsland8.add(studentPink8);
         studentIsland8.add(studentYellow8);
-        studentIsland8.add(studentBlue8);
-        studentIsland8.add(studentGreen8);
-        studentIsland8.add(studentRed8);
+
+
+
 
         studentIsland9 = new ArrayList<>();
+        studentIsland9.add(studentRed9);
+        studentIsland9.add(studentGreen9);
+        studentIsland9.add(studentBlue9);
         studentIsland9.add(studentPink9);
         studentIsland9.add(studentYellow9);
-        studentIsland9.add(studentBlue9);
-        studentIsland9.add(studentGreen9);
-        studentIsland9.add(studentRed9);
 
         studentIsland10 = new ArrayList<>();
-        studentIsland10.add(studentPink10);
-        studentIsland10.add(studentYellow10);
+        studentIsland10.add(studentRed10);
         studentIsland10.add(studentBlue10);
         studentIsland10.add(studentGreen10);
-        studentIsland10.add(studentRed10);
+        studentIsland10.add(studentPink10);
+        studentIsland10.add(studentYellow10);
 
         studentIsland11 = new ArrayList<>();
+        studentIsland11.add(studentRed11);
+        studentIsland11.add(studentGreen11);
+        studentIsland11.add(studentBlue11);
         studentIsland11.add(studentPink11);
         studentIsland11.add(studentYellow11);
-        studentIsland11.add(studentBlue11);
-        studentIsland11.add(studentGreen11);
-        studentIsland11.add(studentRed11);
+
+
 
         studentIsland12 = new ArrayList<>();
+        studentIsland12.add(studentRed12);
+        studentIsland12.add(studentGreen12);
+        studentIsland12.add(studentBlue12);
         studentIsland12.add(studentPink12);
         studentIsland12.add(studentYellow12);
-        studentIsland12.add(studentBlue12);
-        studentIsland12.add(studentGreen12);
-        studentIsland12.add(studentRed12);
+
+
+
 
         isl = new ArrayList<>();
         isl.add(studentIsland1);
@@ -570,6 +578,8 @@ public class GuiPlaygroundController {
             for(int student=0; student<i.getPlacedStudent().length;student++)
             {
                 isl.get(index).get(student).setText(String.valueOf(i.getPlacedStudent()[student]));
+                if(i.getPlacedStudent()[student] > 0)
+                    isl.get(index).get(student).setOpacity(1.0);
             }
 
         }
@@ -765,7 +775,6 @@ public class GuiPlaygroundController {
         {
             GuiMain.getQueue().add(1);
             GuiMain.getQueue().add(island);
-            Gui.setGamePhase("motherNature");
         }
 
         //switchToPlayground();
@@ -773,51 +782,51 @@ public class GuiPlaygroundController {
 
     public void moveToIsland1(ActionEvent mouseEvent)
     {
-        moveToIsland(0);
+        moveToIsland(1);
     }
 
     public void moveToIsland2(MouseEvent mouseEvent)
     {
-        moveToIsland(1);
+        moveToIsland(2);
     }
     public void moveToIsland3(ActionEvent mouseEvent)
     {
-        moveToIsland(2);
+        moveToIsland(3);
     }
     public void moveToIsland4(ActionEvent mouseEvent)
     {
-        moveToIsland(3);
+        moveToIsland(4);
     }
     public void moveToIsland5(ActionEvent mouseEvent)
     {
-        moveToIsland(4);
+        moveToIsland(5);
     }
     public void moveToIsland6(ActionEvent mouseEvent)
     {
-        moveToIsland(5);
+        moveToIsland(6);
     }
     public void moveToIsland7(ActionEvent mouseEvent)
     {
-        moveToIsland(6);
+        moveToIsland(7);
     }
     public void moveToIsland8(ActionEvent mouseEvent)
     {
-        moveToIsland(7);
+        moveToIsland(8);
     }
     public void moveToIsland9(ActionEvent mouseEvent)
     {
-        moveToIsland(8);
+        moveToIsland(9);
     }
     public void moveToIsland10(ActionEvent mouseEvent)
     {
-        moveToIsland(9);
+        moveToIsland(10);
     }
     public void moveToIsland11(ActionEvent mouseEvent)
     {
-        moveToIsland(10);
+        moveToIsland(11);
     }
     public void moveToIsland12(ActionEvent mouseEvent)
     {
-        moveToIsland(11);
+        moveToIsland(12);
     }
 }

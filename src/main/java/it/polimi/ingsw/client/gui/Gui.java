@@ -253,7 +253,6 @@ public class Gui implements View {
         }
         else
             return 0;
-
     }
 
     @Override
@@ -264,7 +263,7 @@ public class Gui implements View {
     @Override
     public int chooseCloudTile() {
         Gui.setGamePhase("cloudTiles");
-        return 0;
+        return 1;
     }
 
     @Override
