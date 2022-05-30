@@ -424,7 +424,7 @@ public class TurnHandler implements Runnable {
 
         }
         getCurrentPlayer().setMotherNatureSteps(0);
-        // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
+        update();
     }
 
     /**

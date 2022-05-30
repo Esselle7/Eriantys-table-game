@@ -570,7 +570,7 @@ public class GuiPlaygroundController {
         //Update Islands
         for(int index = getPlayGround().getIslands().size(); index <islands.size();index++)
         {
-            islands.get(index).setOpacity(0.0);
+            islands.get(index).setOpacity(0.0); // delete islands that have been unified
         }
         for(int index = 0; index < getPlayGround().getIslands().size(); index++)
         {
@@ -580,6 +580,8 @@ public class GuiPlaygroundController {
                 isl.get(index).get(student).setText(String.valueOf(i.getPlacedStudent()[student]));
                 if(i.getPlacedStudent()[student] > 0)
                     isl.get(index).get(student).setOpacity(1.0);
+                else
+                    isl.get(index).get(student).setOpacity(0.0);
             }
 
         }

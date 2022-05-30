@@ -65,5 +65,15 @@ public class GuiMain extends Application {
         getStage().setAlwaysOnTop(true);
         getStage().setAlwaysOnTop(false);
     }
+    static public void updateSceneBoard(Parent root, String title,int h, int w) {
+        Scene newScene = new Scene(root,w,h);
+        getStage().setScene(newScene);
+        getStage().centerOnScreen();
+        getStage().setTitle(title);
+        getStage().sizeToScene();
+        getStage().show();
+        getStage().setAlwaysOnTop(true);
+        getStage().setAlwaysOnTop(false);
+    }
 
 }

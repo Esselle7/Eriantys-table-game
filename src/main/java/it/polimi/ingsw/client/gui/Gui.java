@@ -242,17 +242,18 @@ public class Gui implements View {
 
     @Override
     public int chooseIsland() {
-        if(Gui.getGamePhase().equals("whereToMove") || Gui.getGamePhase().equals("motherNature")) // evitabile?
-        {
+
+       // if(Gui.getGamePhase().equals("whereToMove") || Gui.getGamePhase().equals("motherNature"))
+       // {
             try {
                 return (int) GuiMain.getQueue().take();
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 return -1;
             }
-        }
-        else
-            return 0;
+      //  }
+       // else
+         //   return 0;
     }
 
     @Override

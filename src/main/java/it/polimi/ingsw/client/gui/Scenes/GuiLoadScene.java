@@ -24,26 +24,31 @@ public class GuiLoadScene implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        GuiMain.updateScene(root,xml);
         switch (xml) {
             case "Playground": {
+                GuiMain.updateScene(root,xml);
                 GuiPlaygroundController controller = loader.getController();
                 controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
                 controller.updatePlayground();
                 break;
             }
             case "Stats": {
+                GuiMain.updateScene(root,xml);
                 GuiPlaygroundController controller = loader.getController();
                 controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
                 controller.updateStats();
                 break;
             }
             case "Board": {
+                GuiMain.updateSceneBoard(root,xml,440,850);
                 GuiPlaygroundController controller = loader.getController();
                 controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
                 controller.updateBoard();
                 break;
             }
+            default:
+                GuiMain.updateScene(root,xml);
+                break;
         }
     }
 }
