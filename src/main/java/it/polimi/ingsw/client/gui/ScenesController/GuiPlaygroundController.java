@@ -5,7 +5,6 @@ import it.polimi.ingsw.client.gui.GuiMain;
 import it.polimi.ingsw.client.gui.Scenes.GuiLoadScene;
 import it.polimi.ingsw.server.model.*;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -38,6 +37,7 @@ public class GuiPlaygroundController {
     public Label greenProfessor;
     public Label yellowProfessor;
     public Label blueProfessor;
+    public List<Label> professorsControl;
     // number of tower per colour
     public Label towerGray;
     public Label towerBlack;
@@ -259,6 +259,13 @@ public class GuiPlaygroundController {
 
     public void initialize()
     {
+        professorsControl = new ArrayList<>();
+        professorsControl.add(redProfessor);
+        professorsControl.add(greenProfessor);
+        professorsControl.add(blueProfessor);
+        professorsControl.add(pinkProfessor);
+        professorsControl.add(yellowProfessor);
+
         assistantCards = new ArrayList<>();
         assistantCards.add(assistantOne);
         assistantCards.add(assistantTwo);
@@ -625,6 +632,15 @@ public class GuiPlaygroundController {
 
         }
 
+        //Update professors control
+        for(int colour = 0; colour < Colour.colourCount; colour++)
+        {
+            if(getPlayGround().getProfessorsControl()[colour] != null)
+            {
+                professorsControl.get(colour).setText(getPlayGround().getProfessorsControl()[colour]);
+            }
+        }
+
     }
 
     public void updateBoard()
@@ -782,7 +798,7 @@ public class GuiPlaygroundController {
         //switchToPlayground();
     }
 
-    public void moveToIsland1(ActionEvent mouseEvent)
+    public void moveToIsland1(MouseEvent mouseEvent)
     {
         moveToIsland(1);
     }
@@ -791,43 +807,43 @@ public class GuiPlaygroundController {
     {
         moveToIsland(2);
     }
-    public void moveToIsland3(ActionEvent mouseEvent)
+    public void moveToIsland3(MouseEvent mouseEvent)
     {
         moveToIsland(3);
     }
-    public void moveToIsland4(ActionEvent mouseEvent)
+    public void moveToIsland4(MouseEvent mouseEvent)
     {
         moveToIsland(4);
     }
-    public void moveToIsland5(ActionEvent mouseEvent)
+    public void moveToIsland5(MouseEvent mouseEvent)
     {
         moveToIsland(5);
     }
-    public void moveToIsland6(ActionEvent mouseEvent)
+    public void moveToIsland6(MouseEvent mouseEvent)
     {
         moveToIsland(6);
     }
-    public void moveToIsland7(ActionEvent mouseEvent)
+    public void moveToIsland7(MouseEvent mouseEvent)
     {
         moveToIsland(7);
     }
-    public void moveToIsland8(ActionEvent mouseEvent)
+    public void moveToIsland8(MouseEvent mouseEvent)
     {
         moveToIsland(8);
     }
-    public void moveToIsland9(ActionEvent mouseEvent)
+    public void moveToIsland9(MouseEvent mouseEvent)
     {
         moveToIsland(9);
     }
-    public void moveToIsland10(ActionEvent mouseEvent)
+    public void moveToIsland10(MouseEvent mouseEvent)
     {
         moveToIsland(10);
     }
-    public void moveToIsland11(ActionEvent mouseEvent)
+    public void moveToIsland11(MouseEvent mouseEvent)
     {
         moveToIsland(11);
     }
-    public void moveToIsland12(ActionEvent mouseEvent)
+    public void moveToIsland12(MouseEvent mouseEvent)
     {
         moveToIsland(12);
     }
