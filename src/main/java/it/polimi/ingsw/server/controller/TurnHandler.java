@@ -409,8 +409,8 @@ public class TurnHandler implements Runnable {
         getCurrentClient().sendMessage(new NotificationCMI("Now you have to move mother nature!"));
         while (true) {
             try {
-                getCurrentClient().sendMessage(new NotificationCMI("You can only move a max of " + getCurrentPlayer().getMotherNatureSteps() + " steps"));
-                getCurrentClient().sendMessage(new chooseIslandCMI());
+                getCurrentClient().sendMessage(new NotificationCMI("Move mother nature,max steps:" + getCurrentPlayer().getMotherNatureSteps() + " steps"));
+                getCurrentClient().sendMessage(new chooseMotherNatureCMI());
                 getGameMoves().moveMotherNature(getCurrentClient().receiveChooseInt());
                 break;
             } catch (ExceededMotherNatureStepsException e) {

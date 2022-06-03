@@ -115,6 +115,12 @@ public interface View {
     void showMyInfo();
 
     /**
+     * This method allows to move mother nature
+     * @return the island index on which th player want to move mother nature
+     */
+    int moveMotherNature();
+
+    /**
      * This method allows to print the remaining assistant card
      * in the player deck
      */

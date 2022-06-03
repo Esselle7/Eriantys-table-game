@@ -638,6 +638,13 @@ public class Cli implements View {
     }
 
     @Override
+    public int moveMotherNature()
+    {
+        return chooseIsland();
+
+    }
+
+    @Override
     public int chooseWhereToMove()
     {
         printText("Type Dining or Island");
