@@ -280,6 +280,22 @@ public class GuiPlaygroundController {
     public ImageView towerBoard8;
     List<ImageView> towerYard;
 
+    public ImageView motherNature1;
+    public ImageView motherNature2;
+    public ImageView motherNature3;
+    public ImageView motherNature4;
+    public ImageView motherNature5;
+    public ImageView motherNature6;
+    public ImageView motherNature7;
+    public ImageView motherNature8;
+    public ImageView motherNature9;
+    public ImageView motherNature10;
+    public ImageView motherNature11;
+    public ImageView motherNature12;
+    public List<ImageView> motherNature;
+
+
+
 
     public GuiPlaygroundController()
     {
@@ -541,6 +557,7 @@ public class GuiPlaygroundController {
         firstCloudTile.add(studentCloudPink3);
         firstCloudTile.add(studentCloudYellow3);
 
+        cloudTiles = new ArrayList<>();
         cloudTiles.add(firstCloudTile);
         cloudTiles.add(secondCloudTile);
         cloudTiles.add(thirdCloudTile);
@@ -549,6 +566,23 @@ public class GuiPlaygroundController {
         paneCloudTiles.add(cloudTile1);
         paneCloudTiles.add(cloudTile2);
         paneCloudTiles.add(cloudTile3);
+
+        motherNature = new ArrayList<>();
+        motherNature.add(motherNature1);
+        motherNature.add(motherNature2);
+        motherNature.add(motherNature3);
+        motherNature.add(motherNature4);
+        motherNature.add(motherNature5);
+        motherNature.add(motherNature6);
+        motherNature.add(motherNature7);
+        motherNature.add(motherNature8);
+        motherNature.add(motherNature9);
+        motherNature.add(motherNature10);
+        motherNature.add(motherNature11);
+        motherNature.add(motherNature12);
+
+
+
 
 
 
@@ -637,9 +671,14 @@ public class GuiPlaygroundController {
         {
             islands.get(index).setOpacity(0.0); // delete islands that have been unified
         }
+        int motherNatureIsland = getPlayGround().getIslands().indexOf(getPlayGround().getIslandWithMotherNature());
         for(int index = 0; index < getPlayGround().getIslands().size(); index++)
         {
             Island i = getPlayGround().getIslandByIndex(index);
+            if(index != motherNatureIsland)
+                motherNature.get(index).setOpacity(0.0);
+            else
+                motherNature.get(index).setOpacity(1.0);
             for(int student=0; student<i.getPlacedStudent().length;student++)
             {
                 isl.get(index).get(student).setText(String.valueOf(i.getPlacedStudent()[student]));
@@ -648,8 +687,9 @@ public class GuiPlaygroundController {
                 else
                     isl.get(index).get(student).setOpacity(0.0);
             }
-
         }
+
+
     }
 
     public void updateStats() {
@@ -884,7 +924,6 @@ public class GuiPlaygroundController {
     {
         moveToIsland(1);
     }
-
     public void moveToIsland2(MouseEvent mouseEvent)
     {
         moveToIsland(2);
@@ -929,4 +968,5 @@ public class GuiPlaygroundController {
     {
         moveToIsland(12);
     }
+
 }

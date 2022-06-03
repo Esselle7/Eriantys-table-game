@@ -33,7 +33,7 @@
                      <children>
                         <Button minHeight="100.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <graphic>
-                              <ImageView fitHeight="150.0" fitWidth="150.0" >
+                              <ImageView fitHeight="150.0" fitWidth="150.0">
                                  <image>
                                     <Image url="@Icons/Island3.png" />
                                  </image>
@@ -147,6 +147,7 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -155,7 +156,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label fx:id="studentRed2" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                              <Label fx:id="studentRed2" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -164,7 +165,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentGreen2" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1">
+                              <Label fx:id="studentGreen2" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="2">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -191,7 +192,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentPink2" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink2" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -200,6 +201,11 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
+                              <ImageView fx:id="motherNature2" fitHeight="60.0" fitWidth="120.0" onMouseClicked="#moveToIsland2" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <image>
+                                    <Image url="@Icons/motherNature.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island1" layoutX="135.0" layoutY="148.0" onMouseClicked="#moveToIsland1" GridPane.rowIndex="2">
@@ -260,7 +266,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <ImageView fx:id="motherNature" fitHeight="60.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                              <ImageView fx:id="motherNature1" fitHeight="60.0" fitWidth="120.0" onMouseClicked="#moveToIsland1" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                  <image>
                                     <Image url="@Icons/motherNature.png" />
                                  </image>
@@ -274,6 +280,7 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -307,7 +314,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentYellow3" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow3" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -316,7 +323,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentPink3" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink3" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -325,6 +332,11 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
+                              <ImageView fx:id="motherNature3" fitHeight="60.0" fitWidth="120.0" onMouseClicked="#moveToIsland3" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <image>
+                                    <Image url="@Icons/motherNature.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island11" layoutX="220.0" layoutY="10.0" onMouseClicked="#moveToIsland11" GridPane.columnIndex="2" GridPane.rowIndex="4">
@@ -385,6 +397,11 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
+                              <ImageView fx:id="motherNature11" fitHeight="60.0" fitWidth="120.0" onMouseClicked="#moveToIsland11" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <image>
+                                    <Image url="@Icons/motherNature.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island5" layoutX="10.0" layoutY="10.0" onMouseClicked="#moveToIsland5" GridPane.columnIndex="4">
@@ -394,6 +411,7 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -427,7 +445,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentYellow5" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow5" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -436,7 +454,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentPink5" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink5" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -445,6 +463,11 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
+                              <ImageView fx:id="motherNature5" fitHeight="60.0" fitWidth="120.0" onMouseClicked="#moveToIsland5" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <image>
+                                    <Image url="@Icons/motherNature.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island4" layoutX="10.0" layoutY="10.0" onMouseClicked="#moveToIsland4" GridPane.columnIndex="3">
@@ -454,6 +477,7 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -487,7 +511,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentYellow4" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow4" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -496,7 +520,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentPink4" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink4" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -505,6 +529,11 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
+                              <ImageView fx:id="motherNature4" fitHeight="60.0" fitWidth="120.0" onMouseClicked="#moveToIsland4" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <image>
+                                    <Image url="@Icons/motherNature.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island9" layoutX="220.0" layoutY="389.0" onMouseClicked="#moveToIsland9" GridPane.columnIndex="4" GridPane.rowIndex="4">
@@ -514,6 +543,8 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -547,7 +578,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentYellow9" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow9" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -556,7 +587,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentPink9" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink9" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -565,6 +596,11 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
+                              <ImageView fx:id="motherNature9" fitHeight="60.0" fitWidth="120.0" onMouseClicked="#moveToIsland9" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <image>
+                                    <Image url="@Icons/motherNature.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island12" layoutX="467.0" layoutY="389.0" onMouseClicked="#moveToIsland12" GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -625,6 +661,11 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
+                              <ImageView fx:id="motherNature12" fitHeight="60.0" fitWidth="120.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <image>
+                                    <Image url="@Icons/motherNature.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island8" layoutX="325.0" layoutY="10.0" onMouseClicked="#moveToIsland8" GridPane.columnIndex="5" GridPane.rowIndex="3">
@@ -634,6 +675,8 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -667,7 +710,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentYellow8" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow8" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -676,7 +719,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentPink8" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink8" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -685,6 +728,11 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
+                              <ImageView fx:id="motherNature8" fitHeight="60.0" fitWidth="120.0" onMouseClicked="#moveToIsland8" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <image>
+                                    <Image url="@Icons/motherNature.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island7" layoutX="572.0" layoutY="298.0" onMouseClicked="#moveToIsland7" GridPane.columnIndex="6" GridPane.rowIndex="2">
@@ -694,6 +742,7 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -727,7 +776,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentYellow7" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow7" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -736,7 +785,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentPink7" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink7" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -745,6 +794,11 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
+                              <ImageView fx:id="motherNature7" fitHeight="60.0" fitWidth="120.0" onMouseClicked="#moveToIsland7" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <image>
+                                    <Image url="@Icons/motherNature.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island6" layoutX="677.0" layoutY="210.0" onMouseClicked="#moveToIsland6" GridPane.columnIndex="5" GridPane.rowIndex="1">
@@ -754,6 +808,7 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -787,7 +842,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentYellow6" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentYellow6" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -796,7 +851,7 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
-                              <Label fx:id="studentPink6" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                              <Label fx:id="studentPink6" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP">
                                  <graphic>
                                     <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -805,6 +860,11 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
+                              <ImageView fx:id="motherNature6" fitHeight="60.0" fitWidth="120.0" onMouseClicked="#moveToIsland6" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <image>
+                                    <Image url="@Icons/motherNature.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island10" layoutX="325.0" layoutY="10.0" onMouseClicked="#moveToIsland10" GridPane.columnIndex="3" GridPane.rowIndex="4">
@@ -865,6 +925,11 @@
                                     </ImageView>
                                  </graphic>
                               </Label>
+                              <ImageView fx:id="motherNature10" fitHeight="60.0" fitWidth="120.0" onMouseClicked="#moveToIsland10" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <image>
+                                    <Image url="@Icons/motherNature.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </GridPane>
                      </children>
