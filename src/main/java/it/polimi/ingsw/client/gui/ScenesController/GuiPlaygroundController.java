@@ -229,7 +229,36 @@ public class GuiPlaygroundController {
     public ImageView studentBoardBlue10;
     public List<ImageView> diningBlueStudent;
 
+
     List<List<ImageView>> diningRoom;
+
+    public GridPane cloudTile1;
+    public GridPane cloudTile2;
+    public GridPane cloudTile3;
+    List<GridPane> paneCloudTiles;
+
+    public Label studentCloudRed1;
+    public Label studentCloudGreen1;
+    public Label studentCloudBlue1;
+    public Label studentCloudYellow1;
+    public Label studentCloudPink1;
+
+    public Label studentCloudRed2;
+    public Label studentCloudGreen2;
+    public Label studentCloudBlue2;
+    public Label studentCloudYellow2;
+    public Label studentCloudPink2;
+
+    public Label studentCloudRed3;
+    public Label studentCloudGreen3;
+    public Label studentCloudBlue3;
+    public Label studentCloudYellow3;
+    public Label studentCloudPink3;
+
+    List<Label> firstCloudTile;
+    List<Label> secondCloudTile;
+    List<Label> thirdCloudTile;
+    List<List<Label>> cloudTiles;
 
 
     //Professors room
@@ -491,6 +520,35 @@ public class GuiPlaygroundController {
         towerYard.add(towerBoard7);
         towerYard.add(towerBoard8);
 
+        firstCloudTile = new ArrayList<>();
+        firstCloudTile.add(studentCloudRed1);
+        firstCloudTile.add(studentCloudBlue1);
+        firstCloudTile.add(studentCloudGreen1);
+        firstCloudTile.add(studentCloudPink1);
+        firstCloudTile.add(studentCloudYellow1);
+
+        secondCloudTile = new ArrayList<>();
+        firstCloudTile.add(studentCloudRed2);
+        firstCloudTile.add(studentCloudBlue2);
+        firstCloudTile.add(studentCloudGreen2);
+        firstCloudTile.add(studentCloudPink2);
+        firstCloudTile.add(studentCloudYellow2);
+
+        thirdCloudTile = new ArrayList<>();
+        firstCloudTile.add(studentCloudRed3);
+        firstCloudTile.add(studentCloudBlue3);
+        firstCloudTile.add(studentCloudGreen3);
+        firstCloudTile.add(studentCloudPink3);
+        firstCloudTile.add(studentCloudYellow3);
+
+        cloudTiles.add(firstCloudTile);
+        cloudTiles.add(secondCloudTile);
+        cloudTiles.add(thirdCloudTile);
+
+        paneCloudTiles = new ArrayList<>();
+        paneCloudTiles.add(cloudTile1);
+        paneCloudTiles.add(cloudTile2);
+        paneCloudTiles.add(cloudTile3);
 
 
 
@@ -641,6 +699,30 @@ public class GuiPlaygroundController {
             }
         }
 
+    }
+
+    public void updateCloudTiles()
+    {
+        for(int cloud = 0; cloud<getPlayGround().getCloudTiles().length; cloud++)
+        {
+            paneCloudTiles.get(cloud).opacityProperty().set(1.0);
+            for(int student=0; student<Colour.colourCount;student++)
+            {
+                cloudTiles.get(cloud).get(student).setText(String.valueOf(getPlayGround().getCloudTiles()[cloud].getStudents()[student]));
+                if(getPlayGround().getCloudTiles()[cloud].getStudents()[student] > 0)
+                    cloudTiles.get(cloud).get(student).setOpacity(1.0);
+                else
+                    cloudTiles.get(cloud).get(student).setOpacity(0.5);
+            }
+        }
+        if(getPlayGround().getPlayersList().size() == 2)
+        {
+            paneCloudTiles.get(3).opacityProperty().set(1.0);
+            for(int student=0; student<Colour.colourCount;student++)
+            {
+                cloudTiles.get(3).get(student).setOpacity(0.0);
+            }
+        }
     }
 
     public void updateBoard()

@@ -272,7 +272,14 @@ public class Gui implements View {
     @Override
     public int chooseCloudTile() {
         Gui.setGamePhase("cloudTiles");
-        return 1;
+        resetGuiQueue();
+        Platform.runLater(() -> new GuiLoadScene("CloudTilesPlayers").run());
+        try {
+            return (int) GuiMain.getQueue().take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     @Override
