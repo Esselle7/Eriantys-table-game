@@ -63,22 +63,22 @@
                               <Image url="@Icons/Assistente (6).png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="assistantSeven" fitHeight="166.0" onMouseClicked="#cardSeven" fitWidth="110.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                        <ImageView fx:id="assistantSeven" fitHeight="166.0" fitWidth="110.0" onMouseClicked="#cardSeven" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                            <image>
                               <Image url="@Icons/Assistente (7).png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="assistantEight" fitHeight="166.0" onMouseClicked="#cardEight" fitWidth="110.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                        <ImageView fx:id="assistantEight" fitHeight="166.0" fitWidth="110.0" onMouseClicked="#cardEight" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                            <image>
                               <Image url="@Icons/Assistente (8).png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="assistantNine" fitHeight="166.0" onMouseClicked="#cardNine" fitWidth="110.0" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                        <ImageView fx:id="assistantNine" fitHeight="166.0" fitWidth="110.0" onMouseClicked="#cardNine" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                            <image>
                               <Image url="@Icons/Assistente (9).png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="assistantTen" fitHeight="166.0" onMouseClicked="#cardTen" fitWidth="110.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                        <ImageView fx:id="assistantTen" fitHeight="166.0" fitWidth="110.0" onMouseClicked="#cardTen" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <image>
                               <Image url="@Icons/Assistente (10).png" />
                            </image>
@@ -246,7 +246,7 @@
                         </AnchorPane>
                     </items>
                   </SplitPane>
-                  <ButtonBar buttonMinWidth="90.0" layoutX="400.0" layoutY="126.0" maxHeight="300.0" maxWidth="300.0" minHeight="160.0" minWidth="90.0" rotate="90.0" AnchorPane.rightAnchor="-110.0" AnchorPane.topAnchor="110.0">
+                  <ButtonBar buttonMinWidth="65.0" layoutX="400.0" layoutY="126.0" maxHeight="300.0" maxWidth="300.0" minHeight="160.0" minWidth="90.0" rotate="90.0" AnchorPane.rightAnchor="-110.0" AnchorPane.topAnchor="105.0">
                      <buttons>
                         <Button accessibleText="Playground" mnemonicParsing="false" onAction="#switchToPlayground" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;">
                            <graphic>
@@ -280,6 +280,18 @@
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                                  <image>
                                     <Image url="@Icons/iconStats.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="OPEN_HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+                                 <image>
+                                    <Image url="@Icons/iconCards.png" />
                                  </image>
                                  <cursor>
                                     <Cursor fx:constant="OPEN_HAND" />
