@@ -47,7 +47,7 @@ public class GuiLoadScene implements Runnable{
                 break;
             }
             case "CloudTilesPlayers":{
-                GuiMain.updateScene(root,xml);
+                GuiMain.updateCloudTile(root,xml);
                 GuiPlaygroundController controller = loader.getController();
                 controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
                 controller.updateCloudTiles();

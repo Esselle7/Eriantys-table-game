@@ -11,7 +11,7 @@ import java.io.IOException;
 public class SwitchEntranceDiningCard extends CharacterCard{
 
     public SwitchEntranceDiningCard(){
-        super(1);
+        super(1,10);
         setDescription("you can choose to switch a maximum of two students of your choice from your dining room to the entrance room");
     }
 

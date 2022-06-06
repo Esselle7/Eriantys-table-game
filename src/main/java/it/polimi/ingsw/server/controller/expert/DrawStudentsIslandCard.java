@@ -11,7 +11,7 @@ import java.io.IOException;
 public class DrawStudentsIslandCard extends CharacterCard {
 
     public DrawStudentsIslandCard(){
-        super(1);
+        super(1,1);
         setDescription("you can choose to move 1 student from this card to an island of your choice");
     }
 

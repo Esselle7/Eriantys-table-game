@@ -3,8 +3,10 @@ package it.polimi.ingsw.client.gui.ScenesController;
 import it.polimi.ingsw.client.gui.Gui;
 import it.polimi.ingsw.client.gui.GuiMain;
 import it.polimi.ingsw.client.gui.Scenes.GuiLoadScene;
+import it.polimi.ingsw.server.controller.expert.CharacterCard;
 import it.polimi.ingsw.server.model.*;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -260,7 +262,6 @@ public class GuiPlaygroundController {
     List<Label> thirdCloudTile;
     List<List<Label>> cloudTiles;
 
-
     //Professors room
     public ImageView professorBoardGreen;
     public ImageView professorBoardRed;
@@ -293,6 +294,22 @@ public class GuiPlaygroundController {
     public ImageView motherNature11;
     public ImageView motherNature12;
     public List<ImageView> motherNature;
+
+    public ImageView character1;
+    public ImageView character2;
+    public ImageView character3;
+    public ImageView character4;
+    public ImageView character5;
+    public ImageView character6;
+    public ImageView character7;
+    public ImageView character8;
+    public ImageView character9;
+    public ImageView character10;
+    List<ImageView> characterCards;
+
+
+
+
 
 
 
@@ -538,24 +555,24 @@ public class GuiPlaygroundController {
 
         firstCloudTile = new ArrayList<>();
         firstCloudTile.add(studentCloudRed1);
-        firstCloudTile.add(studentCloudBlue1);
         firstCloudTile.add(studentCloudGreen1);
+        firstCloudTile.add(studentCloudBlue1);
         firstCloudTile.add(studentCloudPink1);
         firstCloudTile.add(studentCloudYellow1);
 
         secondCloudTile = new ArrayList<>();
-        firstCloudTile.add(studentCloudRed2);
-        firstCloudTile.add(studentCloudBlue2);
-        firstCloudTile.add(studentCloudGreen2);
-        firstCloudTile.add(studentCloudPink2);
-        firstCloudTile.add(studentCloudYellow2);
+        secondCloudTile.add(studentCloudRed2);
+        secondCloudTile.add(studentCloudGreen2);
+        secondCloudTile.add(studentCloudBlue2);
+        secondCloudTile.add(studentCloudPink2);
+        secondCloudTile.add(studentCloudYellow2);
 
         thirdCloudTile = new ArrayList<>();
-        firstCloudTile.add(studentCloudRed3);
-        firstCloudTile.add(studentCloudBlue3);
-        firstCloudTile.add(studentCloudGreen3);
-        firstCloudTile.add(studentCloudPink3);
-        firstCloudTile.add(studentCloudYellow3);
+        thirdCloudTile.add(studentCloudRed3);
+        thirdCloudTile.add(studentCloudGreen3);
+        thirdCloudTile.add(studentCloudBlue3);
+        thirdCloudTile.add(studentCloudPink3);
+        thirdCloudTile.add(studentCloudYellow3);
 
         cloudTiles = new ArrayList<>();
         cloudTiles.add(firstCloudTile);
@@ -581,9 +598,17 @@ public class GuiPlaygroundController {
         motherNature.add(motherNature11);
         motherNature.add(motherNature12);
 
-
-
-
+        characterCards = new ArrayList<>();
+        characterCards.add(character1);
+        characterCards.add(character2);
+        characterCards.add(character3);
+        characterCards.add(character4);
+        characterCards.add(character5);
+        characterCards.add(character6);
+        characterCards.add(character7);
+        characterCards.add(character8);
+        characterCards.add(character9);
+        characterCards.add(character10);
 
 
     }
@@ -755,12 +780,12 @@ public class GuiPlaygroundController {
                     cloudTiles.get(cloud).get(student).setOpacity(0.5);
             }
         }
-        if(getPlayGround().getPlayersList().size() == 2)
+        if(getPlayGround().getPlayersList().size() == 3)
         {
-            paneCloudTiles.get(3).opacityProperty().set(1.0);
+            paneCloudTiles.get(2).opacityProperty().set(0.0);
             for(int student=0; student<Colour.colourCount;student++)
             {
-                cloudTiles.get(3).get(student).setOpacity(0.0);
+                cloudTiles.get(2).get(student).setOpacity(0.0);
             }
         }
     }
@@ -808,11 +833,36 @@ public class GuiPlaygroundController {
 
     }
 
+    public void updateCharacter()
+    {
+        for (ImageView characterCard : characterCards) {
+            characterCard.setOpacity(0.3);
+        }
+        for(CharacterCard card : getPlayGround().getDrawnCards())
+        {
+            characterCards.get(card.getId()).setOpacity(1.0);
+        }
+    }
+
     public void switchToBoard()
     {
         Platform.runLater(() ->
                 new GuiLoadScene("Board").run());
 
+    }
+
+    public void switchToCharacter()
+    {
+        if(getExpert() == 1)
+        {
+            Platform.runLater(() ->
+                    new GuiLoadScene("CharacterCard").run());
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Character Cards not allowed in normal mode!");
+            alert.showAndWait();
+        }
     }
 
     public void switchToPlayground()
@@ -967,6 +1017,28 @@ public class GuiPlaygroundController {
     public void moveToIsland12(MouseEvent mouseEvent)
     {
         moveToIsland(12);
+    }
+
+    public void chooseCloudTile(int cloudTile)
+    {
+        if(Gui.getGamePhase().equals("cloudTiles"))
+        {
+            GuiMain.getQueue().add(cloudTile);
+        }
+    }
+
+    public void cloudTileOne()
+    {
+        chooseCloudTile(1);
+    }
+    public void cloudTileTwo()
+    {
+        chooseCloudTile(2);
+    }
+    public void cloudTileThree()
+    {
+        if(getPlayGround().getPlayersList().size() == 3)
+            chooseCloudTile(3);
     }
 
 }

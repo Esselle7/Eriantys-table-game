@@ -13,7 +13,7 @@ public class NoInfluenceTowersCard extends CharacterCard{
     private Island noInfluenceIsland;
 
     public NoInfluenceTowersCard(){
-        super(3);
+        super(3,5);
         noInfluenceIsland = null;
         setDescription("you can choose an island on which, during this round, towers won't be included in influence calculation");
     }

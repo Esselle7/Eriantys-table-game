@@ -275,7 +275,9 @@ public class Gui implements View {
         resetGuiQueue();
         Platform.runLater(() -> new GuiLoadScene("CloudTilesPlayers").run());
         try {
-            return (int) GuiMain.getQueue().take();
+            int toReturn = (int) GuiMain.getQueue().take();
+            GuiMain.getNewWindow().close();
+            return toReturn;
         } catch (InterruptedException e) {
             e.printStackTrace();
             return -1;

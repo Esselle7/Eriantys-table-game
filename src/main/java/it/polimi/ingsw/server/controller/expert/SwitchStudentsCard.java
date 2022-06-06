@@ -12,7 +12,7 @@ import java.io.IOException;
 public class SwitchStudentsCard extends CharacterCard{
 
     public SwitchStudentsCard(){
-        super(1);
+        super(1,6);
         setDescription("you can switch a maximum of three students of your choice from your entrance room with three students of your choice from this card");
     }
 

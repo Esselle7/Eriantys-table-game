@@ -30,7 +30,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <GridPane fx:id="cloudTile1" prefHeight="200.0" prefWidth="250.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="40.0">
+                  <GridPane fx:id="cloudTile1" onMouseClicked="#cloudTileOne" prefHeight="200.0" prefWidth="250.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="40.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -44,7 +44,7 @@
                      <children>
                         <Label fx:id="studentCloudRed1" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="redCT1" fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Icons/studentRed.png" />
                                  </image>
@@ -53,7 +53,7 @@
                         </Label>
                         <Label fx:id="studentCloudGreen1" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="greenCT1" fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Icons/studentGreen.png" />
                                  </image>
@@ -62,7 +62,7 @@
                         </Label>
                         <Label fx:id="studentCloudBlue1" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="blueCT1" fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Icons/studentBlue.png" />
                                  </image>
@@ -71,7 +71,7 @@
                         </Label>
                         <Label fx:id="studentCloudYellow1" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="yellowCT1" fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Icons/studentYellow.png" />
                                  </image>
@@ -80,7 +80,7 @@
                         </Label>
                         <Label fx:id="studentCloudPink1" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="pinkCT1" fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Icons/studentPink.png" />
                                  </image>
@@ -102,7 +102,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <GridPane fx:id="cloudTile3" prefHeight="200.0" prefWidth="250.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="40.0">
+                  <GridPane fx:id="cloudTile3" onMouseClicked="#cloudTileThree" opacity="0.0" prefHeight="200.0" prefWidth="250.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="40.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -114,45 +114,45 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label fx:id="studentCloudRed2" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <Label fx:id="studentCloudRed3" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="redCT3" fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Icons/studentRed.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Label>
-                        <Label fx:id="studentCloudGreen2" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <Label fx:id="studentCloudGreen3" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="greenCT3" fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Icons/studentGreen.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Label>
-                        <Label fx:id="studentCloudBlue2" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <Label fx:id="studentCloudBlue3" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="blueCT3" fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Icons/studentBlue.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Label>
-                        <Label fx:id="studentCloudYellow2" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                        <Label fx:id="studentCloudYellow3" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="yellowCT3" fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Icons/studentYellow.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Label>
-                        <Label fx:id="studentCloudPink2" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                        <Label fx:id="studentCloudPink3" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="pinkCT3" fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Icons/studentPink.png" />
                                  </image>
@@ -174,7 +174,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <GridPane fx:id="cloudTile2" prefHeight="200.0" prefWidth="250.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="40.0">
+                  <GridPane fx:id="cloudTile2" onMouseClicked="#cloudTileTwo" prefHeight="200.0" prefWidth="250.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="40.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -186,45 +186,45 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label fx:id="studentCloudRed3" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <Label fx:id="studentCloudRed2" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="redCT2" fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Icons/studentRed.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Label>
-                        <Label fx:id="studentCloudGreen3" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                        <Label fx:id="studentCloudGreen2" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="greenCT2" fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Icons/studentGreen.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Label>
-                        <Label fx:id="studentCloudBlue3" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <Label fx:id="studentCloudBlue2" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="blueCT2" fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Icons/studentBlue.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Label>
-                        <Label fx:id="studentCloudYellow3" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                        <Label fx:id="studentCloudYellow2" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="yellowCT2" fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Icons/studentYellow.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Label>
-                        <Label fx:id="studentCloudPink3" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                        <Label fx:id="studentCloudPink2" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                            <graphic>
-                              <ImageView fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="pinkCT2" fitHeight="40.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@Icons/studentPink.png" />
                                  </image>

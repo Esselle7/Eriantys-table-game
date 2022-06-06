@@ -19,6 +19,7 @@ public class GuiMain extends Application {
 
     private static final BlockingQueue<Object> queue = new LinkedBlockingDeque<>();
     private static Stage initStage;
+    private static Stage newWindow;
 
     public static BlockingQueue<Object> getQueue() {
         return queue;
@@ -28,6 +29,10 @@ public class GuiMain extends Application {
         return initStage;
     }
 
+    public static Stage getNewWindow() {
+        return newWindow;
+    }
+
     /**
      * Entry point of JavaFX
      *
@@ -35,6 +40,7 @@ public class GuiMain extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
+        newWindow = new Stage();
         initStage = primaryStage;
         getStage().setResizable(false);
         getStage().setTitle("ERIANTIS");
@@ -74,6 +80,18 @@ public class GuiMain extends Application {
         getStage().show();
         getStage().setAlwaysOnTop(true);
         getStage().setAlwaysOnTop(false);
+    }
+
+    static public  void updateCloudTile(Parent root, String title)
+    {
+        Scene newScene = new Scene(root,850,650);
+        getNewWindow().setScene(newScene);
+        getNewWindow().centerOnScreen();
+        getNewWindow().setTitle(title);
+        getNewWindow().sizeToScene();
+        getNewWindow().show();
+        getNewWindow().setAlwaysOnTop(true);
+        getNewWindow().setAlwaysOnTop(false);
     }
 
 }

@@ -12,7 +12,7 @@ import java.io.IOException;
 public class DrawStudentsDiningCard extends CharacterCard {
 
     public DrawStudentsDiningCard(){
-        super(2);
+        super(2,9);
         setDescription("you can pick one student from this card and place it in your dining room");
     }
 

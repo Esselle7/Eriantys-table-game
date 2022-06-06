@@ -9,8 +9,8 @@ import java.io.IOException;
 public class ExtraStepsCard extends CharacterCard{
 
     public ExtraStepsCard(){
-        super(1);
-        setDescription("you can move mothernature two extra steps");
+        super(1,3);
+        setDescription("you can move mother nature two extra steps");
     }
 
     /**
