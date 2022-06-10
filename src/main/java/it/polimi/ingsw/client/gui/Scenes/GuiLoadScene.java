@@ -53,6 +53,13 @@ public class GuiLoadScene implements Runnable{
                 controller.updateCloudTiles();
                 break;
             }
+            case "CharacterCard":{
+                GuiMain.updateScene(root,xml);
+                GuiPlaygroundController controller = loader.getController();
+                controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
+                controller.updateCharacter();
+                break;
+            }
             default:
                 GuiMain.updateScene(root,xml);
                 break;

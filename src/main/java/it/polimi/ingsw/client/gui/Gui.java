@@ -300,7 +300,12 @@ public class Gui implements View {
     @Override
     public int chooseCharacterCard() {
         Gui.setGamePhase("characterCard");
-        return 0;
+        try {
+            return (int) GuiMain.getQueue().take(); // prima di ritornare verifica se la carta te la puoi permettere con i coins che hai
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     @Override

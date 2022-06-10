@@ -388,7 +388,6 @@ public class TurnHandler implements Runnable {
                 {
                     useCharacterCard(e.getCharacterCard());
                 }
-
             }
 
             getCurrentClient().sendMessage(new NotificationCMI("Waiting for other players to choose assistant card ..."));
@@ -482,7 +481,7 @@ public class TurnHandler implements Runnable {
     {
         int chosenCard;
         chosenCard = characterCard;
-        if(chosenCard != -1) // maybe we can delete it
+        if(chosenCard != -1)
         {
             while(true)
             {
@@ -498,6 +497,7 @@ public class TurnHandler implements Runnable {
                 }
             }
         }
+        System.out.println("Non Ha scelto una character");
     }
 
     private void initializeCharacterCards(){

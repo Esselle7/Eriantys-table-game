@@ -305,7 +305,10 @@ public class GuiPlaygroundController {
     public ImageView character8;
     public ImageView character9;
     public ImageView character10;
+    public ImageView character11;
+    public ImageView character12;
     List<ImageView> characterCards;
+    List<ImageView> drawnCards;
 
 
 
@@ -609,6 +612,9 @@ public class GuiPlaygroundController {
         characterCards.add(character8);
         characterCards.add(character9);
         characterCards.add(character10);
+        characterCards.add(character11);
+        characterCards.add(character12);
+
 
 
     }
@@ -835,12 +841,14 @@ public class GuiPlaygroundController {
 
     public void updateCharacter()
     {
+        drawnCards = new ArrayList<>();
         for (ImageView characterCard : characterCards) {
             characterCard.setOpacity(0.3);
         }
         for(CharacterCard card : getPlayGround().getDrawnCards())
         {
-            characterCards.get(card.getId()).setOpacity(1.0);
+            characterCards.get(card.getId()-1).setOpacity(1.0);
+            drawnCards.add(characterCards.get(card.getId()));
         }
     }
 
@@ -848,36 +856,46 @@ public class GuiPlaygroundController {
     {
         Platform.runLater(() ->
                 new GuiLoadScene("Board").run());
+        if(Gui.getGamePhase().equals("CharacterCard"))
+            GuiMain.getQueue().add(-1);
 
     }
 
     public void switchToCharacter()
     {
-        if(getExpert() == 1)
+        if(getPlayGround().getGameMode() == 1 && !Gui.getGamePhase().equals("Other"))
         {
             Platform.runLater(() ->
                     new GuiLoadScene("CharacterCard").run());
+            GuiMain.getQueue().add(-1);
         }
         else
         {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Character Cards not allowed in normal mode!");
             alert.showAndWait();
         }
+
     }
 
     public void switchToPlayground()
     {
         Platform.runLater(() -> new GuiLoadScene("Playground").run());
+        if(Gui.getGamePhase().equals("CharacterCard"))
+            GuiMain.getQueue().add(-1);
     }
 
     public void switchToSettings()
     {
         Platform.runLater(() -> new GuiLoadScene("Settings").run());
+        if(Gui.getGamePhase().equals("CharacterCard"))
+            GuiMain.getQueue().add(-1);
     }
 
     public void switchToStats()
     {
         Platform.runLater(() -> new GuiLoadScene("Stats").run());
+        if(Gui.getGamePhase().equals("CharacterCard"))
+            GuiMain.getQueue().add(-1);
     }
 
     private void assistantCardToUse(int card){
@@ -1024,6 +1042,7 @@ public class GuiPlaygroundController {
         if(Gui.getGamePhase().equals("cloudTiles"))
         {
             GuiMain.getQueue().add(cloudTile);
+            Gui.setGamePhase("Other");
         }
     }
 
@@ -1040,5 +1059,75 @@ public class GuiPlaygroundController {
         if(getPlayGround().getPlayersList().size() == 3)
             chooseCloudTile(3);
     }
+
+    public void chooseCharacter(int character)
+    {
+        if(Gui.getGamePhase().equals("CharacterCard"))
+        {
+            GuiMain.getQueue().add(character);
+        }
+    }
+    public void characterOne()
+    {
+        if(drawnCards.contains(character1))
+            chooseCharacter(drawnCards.indexOf(character1));
+    }
+    public void characterTwo()
+    {
+        if(drawnCards.contains(character2))
+            chooseCharacter(drawnCards.indexOf(character2));
+    }
+    public void characterThree()
+    {
+        if(drawnCards.contains(character3))
+            chooseCharacter(drawnCards.indexOf(character3));
+    }
+    public void characterFour()
+    {
+        if(drawnCards.contains(character4))
+            chooseCharacter(drawnCards.indexOf(character4));
+    }
+    public void characterFive()
+    {
+        if(drawnCards.contains(character5))
+            chooseCharacter(drawnCards.indexOf(character5));
+    }
+    public void characterSix()
+    {
+        if(drawnCards.contains(character6))
+            chooseCharacter(drawnCards.indexOf(character6));
+    }
+    public void characterSeven()
+    {
+        if(drawnCards.contains(character7))
+            chooseCharacter(drawnCards.indexOf(character7));
+    }
+    public void characterEight()
+    {
+        if(drawnCards.contains(character8))
+            chooseCharacter(drawnCards.indexOf(character8));
+    }
+    public void characterNine()
+    {
+        if(drawnCards.contains(character9))
+            chooseCharacter(drawnCards.indexOf(character9));
+    }
+    public void characterTen()
+    {
+        if(drawnCards.contains(character10))
+            chooseCharacter(drawnCards.indexOf(character10));
+    }
+    public void characterEleven()
+    {
+        if(drawnCards.contains(character11))
+            chooseCharacter(drawnCards.indexOf(character11));
+    }
+    public void characterTwelve()
+    {
+        if(drawnCards.contains(character12))
+            chooseCharacter(drawnCards.indexOf(character12));
+    }
+
+
 
 }

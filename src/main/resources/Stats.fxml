@@ -280,7 +280,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;">
+                        <Button mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;" onAction="#switchToCharacter">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="35.0" nodeOrientation="INHERIT" onMouseClicked="#switchToCharacter" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                                  <image>
