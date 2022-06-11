@@ -14,12 +14,18 @@ public class GuiAskGameModeController{
     public Button advanceMode;
     public Label notificationLabel;
     public Label notificationLabel2;
+    public Label waiting;
+    private boolean firstPass = false;
+    private boolean secondPass = false;
+
 
     public void chosePlayersMode(int lobbySize)
     {
         GuiMain.getQueue().add(lobbySize);
         System.out.println("Size"+lobbySize);
-        notificationLabel.setText("2 Players Mode");
+        notificationLabel.setText(lobbySize+" Players Mode");
+        firstPass = true;
+        waiting();
     }
 
     public void choseGameMode(int mode)
@@ -35,8 +41,14 @@ public class GuiAskGameModeController{
             notificationLabel2.setText("Normal Mode");
             System.out.println("Normal Mode");
         }
+        secondPass = true;
+        waiting();
+    }
 
-
+    private void waiting()
+    {
+        if(firstPass && secondPass)
+            waiting.setText("Wait for other players...");
     }
 
     public void choseTwoGameMode() {

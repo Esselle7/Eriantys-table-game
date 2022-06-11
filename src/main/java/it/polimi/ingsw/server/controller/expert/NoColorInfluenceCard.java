@@ -17,6 +17,7 @@ public class NoColorInfluenceCard extends CharacterCard{
 
     public void useCardImpl(TurnHandler turnHandler) throws IOException, chooseCharacterCardException, NotEnoughCoins {
         buyCard(turnHandler);
+        turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Choose a student colour"));
         turnHandler.getCurrentClient().sendMessage(new chooseStudentColourCMI());
         int bannedColour = turnHandler.getCurrentClient().receiveChooseInt();
         turnHandler.getGameMoves().getIslandController().setBannedColour(bannedColour);

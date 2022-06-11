@@ -82,7 +82,7 @@ public class GuiMain extends Application {
         getStage().setAlwaysOnTop(false);
     }
 
-    static public  void updateCloudTile(Parent root, String title)
+    static public  void updateNewWindow(Parent root, String title)
     {
         Scene newScene = new Scene(root,850,650);
         getNewWindow().setScene(newScene);

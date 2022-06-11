@@ -22,10 +22,10 @@ public class SwitchEntranceDiningCard extends CharacterCard{
         int[] entranceRoom = turnHandler.getCurrentPlayer().getPlayerBoard().getEntranceRoom();
         int studentsMoved = 0, chooseAnother, diningToMove, entranceToMove;
         do {
-            turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Dining"));
+            turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Dining choose colour"));
             turnHandler.getCurrentClient().sendMessage(new chooseStudentColourCMI());
             diningToMove = turnHandler.getCurrentClient().receiveChooseInt();
-            turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Entrance"));
+            turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Entrance choose colour"));
             turnHandler.getCurrentClient().sendMessage(new chooseStudentColourCMI());
             entranceToMove = turnHandler.getCurrentClient().receiveChooseInt();
             if(entranceRoom[entranceToMove] > 0 && diningRoom[diningToMove] > 0){

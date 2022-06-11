@@ -21,6 +21,7 @@ public class NoInfluenceTowersCard extends CharacterCard{
     @Override
     public void useCardImpl(TurnHandler turnHandler) throws IOException, chooseCharacterCardException, NotEnoughCoins {
         buyCard(turnHandler);
+        turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Please choose which Island"));
         turnHandler.getCurrentClient().sendMessage(new chooseIslandCMI());
         int islandIndex = turnHandler.getCurrentClient().receiveChooseInt();
         noInfluenceIsland = turnHandler.getGameMoves().getCurrentGame().getIslandByIndex(islandIndex - 1);

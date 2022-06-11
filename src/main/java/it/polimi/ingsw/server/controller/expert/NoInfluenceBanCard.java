@@ -21,6 +21,7 @@ public class NoInfluenceBanCard extends CharacterCard{
     public void useCardImpl(TurnHandler turnHandler) throws IOException, chooseCharacterCardException, NotEnoughCoins, UnableToUseCardException {
         if(banCardNumber > 0){
             buyCard(turnHandler);
+            turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Please choose which Island"));
             turnHandler.getCurrentClient().sendMessage(new chooseIslandCMI());
             int islandIndex = turnHandler.getCurrentClient().receiveChooseInt();
             turnHandler.getGameMoves().getCurrentGame().getIslandByIndex(islandIndex - 1).setBanned(true);

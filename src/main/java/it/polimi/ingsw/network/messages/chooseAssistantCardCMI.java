@@ -17,6 +17,7 @@ public class chooseAssistantCardCMI implements ClientMessageImplement {
         }
         else
         {
+            System.out.println("Siamo nella scelta della carta personaggio");
             socket.sendMessage(new wantToChooseCharacterCard(userInterface.chooseCharacterCard()));
         }
     }

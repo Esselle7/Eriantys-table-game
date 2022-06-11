@@ -19,5 +19,6 @@ public class GuiCreateOrJoinGameController {
     {
         GuiMain.getQueue().add(0);
         System.out.println("You will be add to a game asap");
+        notificationLabel.setText("You will be added to a game...");
     }
 }

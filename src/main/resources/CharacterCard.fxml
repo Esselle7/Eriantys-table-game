@@ -18,76 +18,6 @@
                         <Image url="@Icons/cloudsEffect2.png" />
                      </image>
                   </ImageView>
-                  <ButtonBar layoutX="400.0" layoutY="126.0" maxHeight="300.0" maxWidth="300.0" minHeight="160.0" minWidth="70.0" rotate="90.0" AnchorPane.rightAnchor="-110.0" AnchorPane.topAnchor="120.0">
-                     <buttons>
-                        <Button accessibleText="Playground" mnemonicParsing="false" onAction="#switchToPlayground" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#switchToPlayground" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-                                 <image>
-                                    <Image url="@Icons/iconGame.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="OPEN_HAND" />
-                                 </cursor>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </Button>
-                        <Button alignment="TOP_CENTER" graphicTextGap="3.0" mnemonicParsing="false" onAction="#switchToBoard" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#switchToBoard" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-                                 <image>
-                                    <Image url="@Icons/iconBoard.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="OPEN_HAND" />
-                                 </cursor>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button layoutX="230.0" layoutY="71.0" mnemonicParsing="false" onAction="#switchToStats" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" onMouseClicked="#switchToStats" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-                                 <image>
-                                    <Image url="@Icons/iconStats.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="OPEN_HAND" />
-                                 </cursor>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;">
-                           <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="35.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-                                 <image>
-                                    <Image url="@Icons/iconCards.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="OPEN_HAND" />
-                                 </cursor>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#switchToSettings" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-                                 <image>
-                                    <Image url="@Icons/iconSettings.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="OPEN_HAND" />
-                                 </cursor>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </buttons>
-                     <cursor>
-                        <Cursor fx:constant="OPEN_HAND" />
-                     </cursor>
-                  </ButtonBar>
                   <GridPane prefHeight="491.0" prefWidth="848.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -107,7 +37,7 @@
                               <Image url="@Icons/Character1.jpg" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="character7" fitHeight="175.0" fitWidth="225.0" layoutX="16.0" layoutY="46.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <ImageView fx:id="character7" fitHeight="175.0" fitWidth="225.0" layoutX="16.0" layoutY="46.0" onMouseClicked="#characterSeven" opacity="0.3" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@Icons/Character7.jpg" />
                            </image>
@@ -162,8 +92,22 @@
                               <Image url="@Icons/Character12.jpg" />
                            </image>
                         </ImageView>
+                        <ButtonBar maxHeight="300.0" maxWidth="300.0" minHeight="160.0" minWidth="70.0" onMouseClicked="#characterSix" GridPane.columnIndex="5">
+                           <cursor>
+                              <Cursor fx:constant="OPEN_HAND" />
+                           </cursor>
+                        </ButtonBar>
                      </children>
                   </GridPane>
+                  <Button alignment="TOP_CENTER" graphicTextGap="3.0" layoutX="791.0" layoutY="141.0" mnemonicParsing="false" onAction="#switchToBoard" onMouseClicked="#backFromCharacterMenu" prefHeight="51.0" prefWidth="47.0" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;" />
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="800.0" layoutY="152.0" onMouseClicked="#backFromCharacterMenu" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Icons/iconReturn.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor>
+                  </ImageView>
                </children>
             </AnchorPane>
           <AnchorPane maxHeight="100.0" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="50.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #e7bd8d#e7bd8d;">

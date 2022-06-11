@@ -242,6 +242,8 @@ public class Gui implements View {
 
     @Override
     public int chooseIsland() {
+        if(Gui.getGamePhase().equals("characterCard"))
+            resetGuiQueue();
         try {
             return (int) GuiMain.getQueue().take();
         } catch (InterruptedException e) {
@@ -275,9 +277,8 @@ public class Gui implements View {
         resetGuiQueue();
         Platform.runLater(() -> new GuiLoadScene("CloudTilesPlayers").run());
         try {
-            int toReturn = (int) GuiMain.getQueue().take();
-            GuiMain.getNewWindow().close();
-            return toReturn;
+            //GuiMain.getNewWindow().close();
+            return (int) GuiMain.getQueue().take();
         } catch (InterruptedException e) {
             e.printStackTrace();
             return -1;
@@ -299,7 +300,6 @@ public class Gui implements View {
 
     @Override
     public int chooseCharacterCard() {
-        Gui.setGamePhase("characterCard");
         try {
             return (int) GuiMain.getQueue().take(); // prima di ritornare verifica se la carta te la puoi permettere con i coins che hai
         } catch (InterruptedException e) {

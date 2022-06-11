@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.gui.ScenesController;
 
+import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.client.gui.Gui;
 import it.polimi.ingsw.client.gui.GuiMain;
 import it.polimi.ingsw.client.gui.Scenes.GuiLoadScene;
@@ -848,7 +849,7 @@ public class GuiPlaygroundController {
         for(CharacterCard card : getPlayGround().getDrawnCards())
         {
             characterCards.get(card.getId()-1).setOpacity(1.0);
-            drawnCards.add(characterCards.get(card.getId()));
+            drawnCards.add(characterCards.get(card.getId()-1));
         }
     }
 
@@ -856,8 +857,6 @@ public class GuiPlaygroundController {
     {
         Platform.runLater(() ->
                 new GuiLoadScene("Board").run());
-        if(Gui.getGamePhase().equals("CharacterCard"))
-            GuiMain.getQueue().add(-1);
 
     }
 
@@ -867,11 +866,10 @@ public class GuiPlaygroundController {
         {
             Platform.runLater(() ->
                     new GuiLoadScene("CharacterCard").run());
-            GuiMain.getQueue().add(-1);
         }
         else
         {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Character Cards not allowed in normal mode!");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Character Cards not allowed now");
             alert.showAndWait();
         }
 
@@ -880,22 +878,23 @@ public class GuiPlaygroundController {
     public void switchToPlayground()
     {
         Platform.runLater(() -> new GuiLoadScene("Playground").run());
-        if(Gui.getGamePhase().equals("CharacterCard"))
-            GuiMain.getQueue().add(-1);
     }
 
     public void switchToSettings()
     {
         Platform.runLater(() -> new GuiLoadScene("Settings").run());
-        if(Gui.getGamePhase().equals("CharacterCard"))
-            GuiMain.getQueue().add(-1);
+
     }
 
     public void switchToStats()
     {
         Platform.runLater(() -> new GuiLoadScene("Stats").run());
-        if(Gui.getGamePhase().equals("CharacterCard"))
-            GuiMain.getQueue().add(-1);
+    }
+
+    public void backFromCharacterMenu()
+    {
+        //GuiMain.getQueue().add(-1);
+        Platform.runLater(() -> new GuiLoadScene("Playground").run());
     }
 
     private void assistantCardToUse(int card){
@@ -985,7 +984,7 @@ public class GuiPlaygroundController {
             GuiMain.getQueue().add(island);
         }
 
-        //switchToPlayground();
+        switchToPlayground();
     }
 
     public void moveToIsland1(MouseEvent mouseEvent)
@@ -1062,67 +1061,72 @@ public class GuiPlaygroundController {
 
     public void chooseCharacter(int character)
     {
-        if(Gui.getGamePhase().equals("CharacterCard"))
+        GuiMain.getQueue().add(Client.getNotAllowedInt());
+        if(getPlayGround().getDrawnCards().get(character).getPrice() <= getMyBoard().getCoins())
+            GuiMain.getQueue().add(character+1);
+        else
         {
-            GuiMain.getQueue().add(character);
+            GuiMain.getQueue().add(-1);
+            setNotification("Not enough coins");
         }
+
     }
-    public void characterOne()
+    public void characterOne(MouseEvent mouseEvent)
     {
         if(drawnCards.contains(character1))
             chooseCharacter(drawnCards.indexOf(character1));
     }
-    public void characterTwo()
+    public void characterTwo(MouseEvent mouseEvent)
     {
         if(drawnCards.contains(character2))
             chooseCharacter(drawnCards.indexOf(character2));
     }
-    public void characterThree()
+    public void characterThree(MouseEvent mouseEvent)
     {
         if(drawnCards.contains(character3))
             chooseCharacter(drawnCards.indexOf(character3));
     }
-    public void characterFour()
+    public void characterFour(MouseEvent mouseEvent)
     {
         if(drawnCards.contains(character4))
             chooseCharacter(drawnCards.indexOf(character4));
     }
-    public void characterFive()
+    public void characterFive(MouseEvent mouseEvent)
     {
         if(drawnCards.contains(character5))
             chooseCharacter(drawnCards.indexOf(character5));
     }
-    public void characterSix()
+    public void characterSix(MouseEvent mouseEvent)
     {
         if(drawnCards.contains(character6))
             chooseCharacter(drawnCards.indexOf(character6));
     }
-    public void characterSeven()
+    public void characterSeven(MouseEvent mouseEvent)
     {
         if(drawnCards.contains(character7))
             chooseCharacter(drawnCards.indexOf(character7));
     }
-    public void characterEight()
+    public void characterEight(MouseEvent mouseEvent)
     {
         if(drawnCards.contains(character8))
             chooseCharacter(drawnCards.indexOf(character8));
     }
-    public void characterNine()
+    public void characterNine(MouseEvent mouseEvent)
     {
         if(drawnCards.contains(character9))
             chooseCharacter(drawnCards.indexOf(character9));
     }
-    public void characterTen()
+    public void characterTen(MouseEvent mouseEvent)
     {
         if(drawnCards.contains(character10))
             chooseCharacter(drawnCards.indexOf(character10));
     }
-    public void characterEleven()
+    public void characterEleven(MouseEvent mouseEvent)
     {
         if(drawnCards.contains(character11))
             chooseCharacter(drawnCards.indexOf(character11));
     }
-    public void characterTwelve()
+    public void characterTwelve(MouseEvent mouseEvent)
     {
         if(drawnCards.contains(character12))
             chooseCharacter(drawnCards.indexOf(character12));

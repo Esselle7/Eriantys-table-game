@@ -387,6 +387,7 @@ public class TurnHandler implements Runnable {
                 catch( chooseCharacterCardException e)
                 {
                     useCharacterCard(e.getCharacterCard());
+                    System.out.println("Apposto dai, carta usata!");
                 }
             }
 
@@ -481,23 +482,17 @@ public class TurnHandler implements Runnable {
     {
         int chosenCard;
         chosenCard = characterCard;
-        if(chosenCard != -1)
-        {
-            while(true)
-            {
-                try {
-                    getGameMoves().getCurrentGame().getDrawnCards().get(chosenCard - 1).useCard(this);
-                    break;
-                }catch (UnableToUseCardException e) {
-                    getCurrentClient().sendMessage(new NotificationCMI("Please select another character card!"));
-                } catch (NotEnoughCoins e) {
-                    getCurrentClient().sendMessage(new NotificationCMI("You don't have enough money to use that card, please select another one!"));
-                } catch (IndexOutOfBoundsException e){
-                    getCurrentClient().sendMessage(new NotificationCMI("No available card with this number"));
-                }
+        if(chosenCard != -1) {
+            try {
+                getGameMoves().getCurrentGame().getDrawnCards().get(chosenCard - 1).useCard(this);
+            }catch (UnableToUseCardException e) {
+                getCurrentClient().sendMessage(new NotificationCMI("Please select another character card!"));
+            } catch (NotEnoughCoins e) {
+                getCurrentClient().sendMessage(new NotificationCMI("You don't have enough money to use that card, please select another one!"));
+            } catch (IndexOutOfBoundsException e){
+                getCurrentClient().sendMessage(new NotificationCMI("No available card with this number"));
             }
         }
-        System.out.println("Non Ha scelto una character");
     }
 
     private void initializeCharacterCards(){
