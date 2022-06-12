@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="600.0" maxWidth="850.0" minHeight="600.0" minWidth="850.0" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.ScenesController.GuiPlaygroundController">
+<AnchorPane maxHeight="600.0" maxWidth="850.0" minHeight="600.0" minWidth="850.0" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.ScenesController.GuiPlaygroundController">
    <children>
       <SplitPane dividerPositions="0.5" layoutX="89.0" layoutY="81.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -97,6 +105,339 @@
                               <Cursor fx:constant="OPEN_HAND" />
                            </cursor>
                         </ButtonBar>
+                        <GridPane onMouseClicked="#moveToIsland2">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label fx:id="character1Red" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/studentRed.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="character1Green" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/studentGreen.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="character1Blue" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/studentBlue.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="character1Yellow" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/studentYellow.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="character1Pink" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/studentPink.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </GridPane>
+                        <GridPane onMouseClicked="#moveToIsland2" GridPane.columnIndex="5">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label fx:id="character6Red" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/studentRed.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="character6Green" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/studentGreen.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="character6Blue" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/studentBlue.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="character6Yellow" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/studentYellow.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="character6Pink" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/studentPink.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </GridPane>
+                        <GridPane onMouseClicked="#moveToIsland2" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label fx:id="character9Red" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/studentRed.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="character9Green" contentDisplay="CENTER" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/studentGreen.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="character9Blue" contentDisplay="CENTER" text="2" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/studentBlue.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="character9Yellow" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/studentYellow.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="character9Pink" contentDisplay="CENTER" opacity="0.5" text="0" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/studentPink.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Label>
+                           </children>
+                        </GridPane>
+                        <Label fx:id="character4NoEntry" contentDisplay="CENTER" text="0" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/noEntryTile.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <GridPane.margin>
+                              <Insets right="8.0" top="40.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="character1Coin" contentDisplay="CENTER" text="1" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/coin.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <GridPane.margin>
+                              <Insets left="7.0" top="35.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="character2Coin" contentDisplay="CENTER" layoutX="17.0" layoutY="45.0" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/coin.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <GridPane.margin>
+                              <Insets left="7.0" top="35.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="character3Coin" contentDisplay="CENTER" layoutX="144.0" layoutY="45.0" text="1" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/coin.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <GridPane.margin>
+                              <Insets left="7.0" top="35.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="character4Coin" contentDisplay="CENTER" layoutX="271.0" layoutY="45.0" text="2" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/coin.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <GridPane.margin>
+                              <Insets left="7.0" top="35.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="character5Coin" contentDisplay="CENTER" layoutX="397.0" layoutY="45.0" text="3" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/coin.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="7.0" top="35.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="character6Coin" contentDisplay="CENTER" layoutX="516.0" layoutY="10.0" text="1" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/coin.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="7.0" top="35.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="character7Coin" contentDisplay="CENTER" layoutX="642.0" layoutY="10.0" text="2" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/coin.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="7.0" top="35.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="character8Coin" contentDisplay="CENTER" layoutX="10.0" layoutY="256.0" text="3" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/coin.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="7.0" top="35.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="character9Coin" contentDisplay="CENTER" layoutX="137.0" layoutY="256.0" text="2" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/coin.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="7.0" top="35.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="character10Coin" contentDisplay="CENTER" layoutX="264.0" layoutY="256.0" text="1" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/coin.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="7.0" top="35.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="character11Coin" contentDisplay="CENTER" layoutX="390.0" layoutY="256.0" text="3" textFill="WHITE" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/coin.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="7.0" top="35.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="character12Coin" contentDisplay="CENTER" layoutX="516.0" layoutY="256.0" text="2" textFill="WHITE" GridPane.columnIndex="5" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/coin.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <padding>
+                              <Insets left="7.0" top="35.0" />
+                           </padding>
+                        </Label>
                      </children>
                   </GridPane>
                   <Button alignment="TOP_CENTER" graphicTextGap="3.0" layoutX="791.0" layoutY="141.0" mnemonicParsing="false" onAction="#switchToBoard" onMouseClicked="#backFromCharacterMenu" prefHeight="51.0" prefWidth="47.0" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;" />
