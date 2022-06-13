@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
+import javax.management.monitor.MonitorSettingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +72,51 @@ public class GuiPlaygroundController {
     public GridPane island11;
     public GridPane island12;
     public List<GridPane> islands;
+
+    public ImageView towerBlackIsland1;
+    public ImageView towerBlackIsland2;
+    public ImageView towerBlackIsland3;
+    public ImageView towerBlackIsland4;
+    public ImageView towerBlackIsland5;
+    public ImageView towerBlackIsland6;
+    public ImageView towerBlackIsland7;
+    public ImageView towerBlackIsland8;
+    public ImageView towerBlackIsland9;
+    public ImageView towerBlackIsland10;
+    public ImageView towerBlackIsland11;
+    public ImageView towerBlackIsland12;
+
+
+    List<ImageView> towerBlackIsland;
+
+    public ImageView towerGreyIsland1;
+    public ImageView towerGreyIsland2;
+    public ImageView towerGreyIsland3;
+    public ImageView towerGreyIsland4;
+    public ImageView towerGreyIsland5;
+    public ImageView towerGreyIsland6;
+    public ImageView towerGreyIsland7;
+    public ImageView towerGreyIsland8;
+    public ImageView towerGreyIsland9;
+    public ImageView towerGreyIsland10;
+    public ImageView towerGreyIsland11;
+    public ImageView towerGreyIsland12;
+
+    List<ImageView> towerGreyIsland;
+
+    public ImageView towerWhiteIsland1;
+    public ImageView towerWhiteIsland2;
+    public ImageView towerWhiteIsland3;
+    public ImageView towerWhiteIsland4;
+    public ImageView towerWhiteIsland5;
+    public ImageView towerWhiteIsland6;
+    public ImageView towerWhiteIsland7;
+    public ImageView towerWhiteIsland8;
+    public ImageView towerWhiteIsland9;
+    public ImageView towerWhiteIsland10;
+    public ImageView towerWhiteIsland11;
+    public ImageView towerWhiteIsland12;
+    List<ImageView> towerWhiteIsland;
 
     public Label studentRed1;
     public Label studentGreen1;
@@ -231,6 +277,7 @@ public class GuiPlaygroundController {
     public ImageView studentBoardBlue9;
     public ImageView studentBoardBlue10;
     public List<ImageView> diningBlueStudent;
+
 
     List<List<ImageView>> diningRoom;
 
@@ -498,6 +545,48 @@ public class GuiPlaygroundController {
         isl.add(studentIsland10);
         isl.add(studentIsland11);
         isl.add(studentIsland12);
+
+        towerGreyIsland = new ArrayList<>();
+        towerGreyIsland.add(towerGreyIsland1);
+        towerGreyIsland.add(towerGreyIsland2);
+        towerGreyIsland.add(towerGreyIsland3);
+        towerGreyIsland.add(towerGreyIsland4);
+        towerGreyIsland.add(towerGreyIsland5);
+        towerGreyIsland.add(towerGreyIsland6);
+        towerGreyIsland.add(towerGreyIsland7);
+        towerGreyIsland.add(towerGreyIsland8);
+        towerGreyIsland.add(towerGreyIsland9);
+        towerGreyIsland.add(towerGreyIsland10);
+        towerGreyIsland.add(towerGreyIsland11);
+        towerGreyIsland.add(towerGreyIsland12);
+
+        towerBlackIsland = new ArrayList<>();
+        towerBlackIsland.add(towerBlackIsland1);
+        towerBlackIsland.add(towerBlackIsland2);
+        towerBlackIsland.add(towerBlackIsland3);
+        towerBlackIsland.add(towerBlackIsland4);
+        towerBlackIsland.add(towerBlackIsland5);
+        towerBlackIsland.add(towerBlackIsland6);
+        towerBlackIsland.add(towerBlackIsland7);
+        towerBlackIsland.add(towerBlackIsland8);
+        towerBlackIsland.add(towerBlackIsland9);
+        towerBlackIsland.add(towerBlackIsland10);
+        towerBlackIsland.add(towerBlackIsland11);
+        towerBlackIsland.add(towerBlackIsland12);
+
+        towerWhiteIsland = new ArrayList<>();
+        towerWhiteIsland.add(towerWhiteIsland1);
+        towerWhiteIsland.add(towerWhiteIsland2);
+        towerWhiteIsland.add(towerWhiteIsland3);
+        towerWhiteIsland.add(towerWhiteIsland4);
+        towerWhiteIsland.add(towerWhiteIsland5);
+        towerWhiteIsland.add(towerWhiteIsland6);
+        towerWhiteIsland.add(towerWhiteIsland7);
+        towerWhiteIsland.add(towerWhiteIsland8);
+        towerWhiteIsland.add(towerWhiteIsland9);
+        towerWhiteIsland.add(towerWhiteIsland10);
+        towerWhiteIsland.add(towerWhiteIsland11);
+        towerWhiteIsland.add(towerWhiteIsland12);
 
 
         entranceRoom = new ArrayList<>();
@@ -778,6 +867,13 @@ public class GuiPlaygroundController {
         for(int index = getPlayGround().getIslands().size(); index <islands.size();index++)
         {
             islands.get(index).setOpacity(0.0); // delete islands that have been unified
+            for(int colour = 0; colour < Colour.colourCount; colour ++)
+            {
+                isl.get(index).get(colour).setOpacity(0.0);
+            }
+            towerWhiteIsland.get(index).setOpacity(0.0);
+            towerBlackIsland.get(index).setOpacity(0.0);
+            towerGreyIsland.get(index).setOpacity(0.0);
         }
         int motherNatureIsland = getPlayGround().getIslands().indexOf(getPlayGround().getIslandWithMotherNature());
         for(int index = 0; index < getPlayGround().getIslands().size(); index++)
@@ -794,6 +890,27 @@ public class GuiPlaygroundController {
                     isl.get(index).get(student).setOpacity(1.0);
                 else
                     isl.get(index).get(student).setOpacity(0.0);
+            }
+            if(i.getTowerCount()>0)
+            {
+                towerWhiteIsland.get(index).setOpacity(0.0);
+                towerBlackIsland.get(index).setOpacity(0.0);
+                towerGreyIsland.get(index).setOpacity(0.0);
+                switch (i.getTowerColour())
+                {
+                    case GRAY:
+                        towerGreyIsland.get(index).setOpacity(1.0);
+                        //towerGreyIsland.get(index). QUI FARE SET TEXT
+                        break;
+                    case BLACK:
+                        towerBlackIsland.get(index).setOpacity(1.0);
+                        //towerGreyIsland.get(index). QUI FARE SET TEXT
+                        break;
+                    case WHITE:
+                        towerWhiteIsland.get(index).setOpacity(1.0);
+                        //towerGreyIsland.get(index). QUI FARE SET TEXT
+                        break;
+                }
             }
         }
 
@@ -1183,6 +1300,7 @@ public class GuiPlaygroundController {
 
     public void chooseCharacter(int character)
     {
+        Gui.setGamePhase("Character");
         GuiMain.getQueue().add(Client.getNotAllowedInt());
         if(getPlayGround().getDrawnCards().get(character).getPrice() <= getMyBoard().getCoins())
             GuiMain.getQueue().add(character+1);
@@ -1190,6 +1308,7 @@ public class GuiPlaygroundController {
         {
             GuiMain.getQueue().add(-1);
             setNotification("Not enough coins");
+            System.out.println("Not enough coins");
         }
 
     }
@@ -1254,6 +1373,31 @@ public class GuiPlaygroundController {
             chooseCharacter(drawnCards.indexOf(character12));
     }
 
+    public void chooseBlue(MouseEvent mouseEvent)
+    {
+        if(Gui.getGamePhase().equals("Character"))
+            GuiMain.getQueue().add(2);
+    }
+    public void chooseRed(MouseEvent mouseEvent)
+    {
+        if(Gui.getGamePhase().equals("Character"))
+            GuiMain.getQueue().add(0);
+    }
+    public void chooseGreen(MouseEvent mouseEvent)
+    {
+        if(Gui.getGamePhase().equals("Character"))
+            GuiMain.getQueue().add(1);
+    }
+    public void choosePink(MouseEvent mouseEvent)
+    {
+        if(Gui.getGamePhase().equals("Character"))
+            GuiMain.getQueue().add(3);
+    }
+    public void chooseYellow(MouseEvent mouseEvent)
+    {
+        if(Gui.getGamePhase().equals("Character"))
+            GuiMain.getQueue().add(4);
+    }
 
 
 }

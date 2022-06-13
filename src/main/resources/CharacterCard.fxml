@@ -156,7 +156,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <GridPane onMouseClicked="#moveToIsland2" GridPane.columnIndex="5">
+                        <GridPane onMouseClicked="#characterSix" GridPane.columnIndex="5">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -274,7 +274,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <Label fx:id="character4NoEntry" contentDisplay="CENTER" text="0" opacity="0.3" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                        <Label fx:id="character4NoEntry" contentDisplay="CENTER" opacity="0.3" text="0" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                            <graphic>
                               <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

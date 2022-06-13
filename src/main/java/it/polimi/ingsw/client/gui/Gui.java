@@ -109,6 +109,7 @@ public class Gui implements View {
     @Override
     public void printNotification(String notification) {
         GuiPlaygroundController.setNotification(notification);
+        System.out.println(notification);
     }
 
     @Override
@@ -237,7 +238,16 @@ public class Gui implements View {
 
     @Override
     public int chooseStudentColour() {
-        return 0;
+        resetGuiQueue();
+        Platform.runLater(() -> new GuiLoadScene("ChoseStudent").run());
+        try {
+            int toReturn = (int) GuiMain.getQueue().take();
+            GuiMain.getNewWindow().close();
+            return toReturn;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     @Override

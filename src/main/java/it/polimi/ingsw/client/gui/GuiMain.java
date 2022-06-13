@@ -82,9 +82,9 @@ public class GuiMain extends Application {
         getStage().setAlwaysOnTop(false);
     }
 
-    static public  void updateNewWindow(Parent root, String title)
+    static public  void updateNewWindow(Parent root, String title,int h, int w)
     {
-        Scene newScene = new Scene(root,850,650);
+        Scene newScene = new Scene(root,h,w);
         getNewWindow().setScene(newScene);
         getNewWindow().centerOnScreen();
         getNewWindow().setTitle(title);

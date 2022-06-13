@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="600.0" maxWidth="850.0" minHeight="600.0" minWidth="850.0" prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: skyblue;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.ScenesController.GuiPlaygroundController">
+<AnchorPane maxHeight="600.0" maxWidth="850.0" minHeight="600.0" minWidth="850.0" prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: skyblue;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.ScenesController.GuiPlaygroundController">
    <children>
       <GridPane layoutX="346.0" layoutY="267.0" prefHeight="600.0" prefWidth="850.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="200.0">
         <columnConstraints>
@@ -26,7 +21,7 @@
          <children>
             <Button fx:id="chooseBlueStudent" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="100.0" fitWidth="150.0" onMouseClicked="#chooseBlue" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Icons/studentBlue.png" />
                      </image>
@@ -35,7 +30,7 @@
             </Button>
             <Button fx:id="chooseGreenStudent" contentDisplay="GRAPHIC_ONLY" layoutX="25.0" layoutY="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="100.0" fitWidth="150.0" onMouseClicked="#chooseGreen" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Icons/studentGreen.png" />
                      </image>
@@ -44,7 +39,7 @@
             </Button>
             <Button fx:id="choosePinkStudent" contentDisplay="GRAPHIC_ONLY" layoutX="25.0" layoutY="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="100.0" fitWidth="150.0" onMouseClicked="#choosePink" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Icons/studentPink.png" />
                      </image>
@@ -53,7 +48,7 @@
             </Button>
             <Button fx:id="chooseRedStudent" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="100.0" fitWidth="150.0" onMouseClicked="#chooseRed" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Icons/studentRed.png" />
                      </image>
@@ -62,7 +57,7 @@
             </Button>
             <Button fx:id="chooseYellowStudent" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="100.0" fitWidth="150.0" onMouseClicked="#chooseYellow" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Icons/studentYellow.png" />
                      </image>

@@ -47,7 +47,7 @@ public class GuiLoadScene implements Runnable{
                 break;
             }
             case "CloudTilesPlayers":{
-                GuiMain.updateNewWindow(root,xml);
+                GuiMain.updateNewWindow(root,xml,600,850);
                 GuiPlaygroundController controller = loader.getController();
                 controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
                 controller.updateCloudTiles();
@@ -58,6 +58,12 @@ public class GuiLoadScene implements Runnable{
                 GuiPlaygroundController controller = loader.getController();
                 controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
                 controller.updateCharacter();
+                break;
+            }
+            case "ChooseStudent":{
+                GuiMain.updateNewWindow(root,xml,400,600);
+                GuiPlaygroundController controller = loader.getController();
+                controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
                 break;
             }
             default:
