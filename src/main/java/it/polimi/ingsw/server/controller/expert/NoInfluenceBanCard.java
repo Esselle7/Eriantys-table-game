@@ -10,7 +10,6 @@ import it.polimi.ingsw.server.controller.TurnHandler;
 import java.io.IOException;
 
 public class NoInfluenceBanCard extends CharacterCard{
-    int banCardNumber;
 
     public NoInfluenceBanCard(){
         super(2,4);

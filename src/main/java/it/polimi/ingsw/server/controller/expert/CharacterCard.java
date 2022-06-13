@@ -21,6 +21,7 @@ public abstract class CharacterCard implements Serializable {
     String specificDescription;
     int[] students;
     int id;
+    int banCardNumber;
 
     public CharacterCard(int price, int id){
         this.hasBeenUsed = false;
@@ -28,6 +29,7 @@ public abstract class CharacterCard implements Serializable {
         this.specificDescription = null;
         this.students = null;
         this.id = id;
+        banCardNumber = 0;
     }
 
     /**
@@ -96,5 +98,9 @@ public abstract class CharacterCard implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public int getBanCardNumber() {
+        return banCardNumber;
     }
 }

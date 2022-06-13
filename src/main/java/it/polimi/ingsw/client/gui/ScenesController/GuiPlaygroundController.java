@@ -232,7 +232,6 @@ public class GuiPlaygroundController {
     public ImageView studentBoardBlue10;
     public List<ImageView> diningBlueStudent;
 
-
     List<List<ImageView>> diningRoom;
 
     public GridPane cloudTile1;
@@ -272,15 +271,10 @@ public class GuiPlaygroundController {
     List<ImageView> professorsRoom;
 
     //Tower Yard
-    public ImageView towerBoard1;
-    public ImageView towerBoard2;
-    public ImageView towerBoard3;
-    public ImageView towerBoard4;
-    public ImageView towerBoard5;
-    public ImageView towerBoard6;
-    public ImageView towerBoard7;
-    public ImageView towerBoard8;
-    List<ImageView> towerYard;
+    public Label towerBoardBlack;
+    public Label towerBoardWhite;
+    public Label towerBoardGrey;
+    List<Label> towerYard;
 
     public ImageView motherNature1;
     public ImageView motherNature2;
@@ -310,6 +304,47 @@ public class GuiPlaygroundController {
     public ImageView character12;
     List<ImageView> characterCards;
     List<ImageView> drawnCards;
+
+    public Label character1Coin;
+    public Label character2Coin;
+    public Label character3Coin;
+    public Label character4Coin;
+    public Label character5Coin;
+    public Label character6Coin;
+    public Label character7Coin;
+    public Label character8Coin;
+    public Label character9Coin;
+    public Label character10Coin;
+    public Label character11Coin;
+    public Label character12Coin;
+    List<Label> characterCoin;
+
+    public Label character1Red;
+    public Label character1Green;
+    public Label character1Blue;
+    public Label character1Yellow;
+    public Label character1Pink;
+    List<Label> elementCharacterOne;
+
+    public Label character4NoEntry;
+    List<Label> elementCharacterFour;
+
+    public Label character6Red;
+    public Label character6Green;
+    public Label character6Blue;
+    public Label character6Yellow;
+    public Label character6Pink;
+    List<Label> elementCharacterSix;
+
+    public Label character9Red;
+    public Label character9Green;
+    public Label character9Blue;
+    public Label character9Yellow;
+    public Label character9Pink;
+    List<Label> elementCharacterNine;
+
+    List<List<Label>> elements;
+
 
 
 
@@ -548,14 +583,10 @@ public class GuiPlaygroundController {
         professorsRoom.add(professorBoardYellow);
 
         towerYard = new ArrayList<>();
-        towerYard.add(towerBoard1);
-        towerYard.add(towerBoard2);
-        towerYard.add(towerBoard3);
-        towerYard.add(towerBoard4);
-        towerYard.add(towerBoard5);
-        towerYard.add(towerBoard6);
-        towerYard.add(towerBoard7);
-        towerYard.add(towerBoard8);
+        towerYard.add(towerBoardWhite);
+        towerYard.add(towerBoardGrey);
+        towerYard.add(towerBoardBlack);
+
 
         firstCloudTile = new ArrayList<>();
         firstCloudTile.add(studentCloudRed1);
@@ -615,6 +646,51 @@ public class GuiPlaygroundController {
         characterCards.add(character10);
         characterCards.add(character11);
         characterCards.add(character12);
+
+        characterCoin = new ArrayList<>();
+        characterCoin.add(character1Coin);
+        characterCoin.add(character2Coin);
+        characterCoin.add(character3Coin);
+        characterCoin.add(character4Coin);
+        characterCoin.add(character5Coin);
+        characterCoin.add(character6Coin);
+        characterCoin.add(character7Coin);
+        characterCoin.add(character8Coin);
+        characterCoin.add(character9Coin);
+        characterCoin.add(character10Coin);
+        characterCoin.add(character11Coin);
+        characterCoin.add(character12Coin);
+
+        elementCharacterOne = new ArrayList<>();
+        elementCharacterOne.add(character1Red);
+        elementCharacterOne.add(character1Green);
+        elementCharacterOne.add(character1Blue);
+        elementCharacterOne.add(character1Pink);
+        elementCharacterOne.add(character1Yellow);
+
+        elementCharacterFour = new ArrayList<>();
+        elementCharacterFour.add(character4NoEntry);
+
+        elementCharacterSix = new ArrayList<>();
+        elementCharacterSix.add(character6Red);
+        elementCharacterSix.add(character6Green);
+        elementCharacterSix.add(character6Blue);
+        elementCharacterSix.add(character6Pink);
+        elementCharacterSix.add(character6Yellow);
+
+        elementCharacterNine = new ArrayList<>();
+        elementCharacterNine.add(character9Red);
+        elementCharacterNine.add(character9Green);
+        elementCharacterNine.add(character9Blue);
+        elementCharacterNine.add(character9Pink);
+        elementCharacterNine.add(character9Yellow);
+
+        elements = new ArrayList<>();
+        elements.add(elementCharacterOne);
+        elements.add(elementCharacterFour);
+        elements.add(elementCharacterSix);
+        elements.add(elementCharacterNine);
+
 
 
 
@@ -833,10 +909,24 @@ public class GuiPlaygroundController {
         }
 
         //tower yard
-        for(int index = 0; index < getMyBoard().getTowerYard(); index++)
-            towerYard.get(index).setOpacity(1.0);
-        for(int index = getMyBoard().getTowerYard(); index < towerYard.size(); index++)
-            towerYard.get(index).setOpacity(0.0);
+        int index=-1;
+        switch (getMyBoard().getTowerColour())
+        {
+            case WHITE:
+                index = 0;
+                break;
+            case GRAY:
+                index = 1;
+                break;
+            case BLACK:
+                index = 2;
+                break;
+            default:
+                break;
+
+        }
+        towerYard.get(index).setOpacity(1.0);
+        towerYard.get(index).setText(String.valueOf(getMyBoard().getTowerYard()));
 
     }
 
@@ -845,12 +935,44 @@ public class GuiPlaygroundController {
         drawnCards = new ArrayList<>();
         for (ImageView characterCard : characterCards) {
             characterCard.setOpacity(0.3);
+            characterCoin.get(characterCards.indexOf(characterCard)).setText("0");
+            characterCoin.get(characterCards.indexOf(characterCard)).setOpacity(0.5);
         }
+
         for(CharacterCard card : getPlayGround().getDrawnCards())
         {
             characterCards.get(card.getId()-1).setOpacity(1.0);
+            characterCoin.get(card.getId()-1).setOpacity(1.0);
+            characterCoin.get(card.getId()-1).setText(String.valueOf(card.getPrice()));
             drawnCards.add(characterCards.get(card.getId()-1));
+            int index =-1;
+            switch (card.getId()-1){
+                case 0:
+                    index = 0;
+                    break;
+                case 5:
+                    index = 2;
+                    break;
+                case 8:
+                    index = 3;
+                    break;
+            }
+            if(index != -1)
+                for(int colour = 0; colour<Colour.colourCount;colour++)
+                {
+                    elements.get(index).get(colour).setOpacity(1.0);
+                    elements.get(index).get(colour).setText(String.valueOf(card.getStudents()[colour]));
+                }
+            else
+            {
+                if(card.getId()-1 == 3)
+                {
+                    elements.get(1).get(0).setText(String.valueOf(card.getBanCardNumber()));
+                }
+            }
         }
+
+
     }
 
     public void switchToBoard()
