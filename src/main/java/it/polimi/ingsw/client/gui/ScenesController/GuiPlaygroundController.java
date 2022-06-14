@@ -1130,6 +1130,16 @@ public class GuiPlaygroundController {
         Platform.runLater(() -> new GuiLoadScene("Stats").run());
     }
 
+    public void switchToBoardPlayerOne()
+    {
+        Platform.runLater(() -> new GuiLoadScene("BoardOtherPlayerOne").run());
+    }
+
+    public void switchToBoardPlayerTwo()
+    {
+        Platform.runLater(() -> new GuiLoadScene("BoardOtherPlayerTwo").run());
+    }
+
     public void backFromCharacterMenu()
     {
         //GuiMain.getQueue().add(-1);
