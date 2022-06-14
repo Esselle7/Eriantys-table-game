@@ -97,7 +97,7 @@
                               <Cursor fx:constant="OPEN_HAND" />
                            </cursor>
                         </ButtonBar>
-                        <GridPane onMouseClicked="#moveToIsland2">
+                        <GridPane onMouseClicked="#characterOne">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -215,7 +215,7 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <GridPane onMouseClicked="#moveToIsland2" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <GridPane onMouseClicked="#characterNine" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

@@ -207,12 +207,12 @@
                                     <Image url="@Icons/towerWhite.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="towerBlackIsland2" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                              <ImageView fx:id="towerBlackIsland2" fitHeight="60.0" fitWidth="75.0" onMouseClicked="#moveToIsland2" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="motherNature2" fitHeight="60.0" fitWidth="120.0" onMouseClicked="#moveToIsland3" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <ImageView fx:id="motherNature2" fitHeight="60.0" fitWidth="120.0" onMouseClicked="#moveToIsland2" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <image>
                                     <Image url="@Icons/motherNature.png" />
                                  </image>
@@ -373,7 +373,7 @@
                                     <Image url="@Icons/towerWhite.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="towerGreyIsland3" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                              <ImageView fx:id="towerGreyIsland3" fitHeight="60.0" fitWidth="75.0" onMouseClicked="#moveToIsland3" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                  <image>
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
@@ -453,7 +453,7 @@
                                     <Image url="@Icons/towerWhite.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="towerBlackIsland11" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                              <ImageView fx:id="towerBlackIsland11" fitHeight="60.0" fitWidth="75.0" onMouseClicked="#moveToIsland11" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
@@ -534,7 +534,7 @@
                                     <Image url="@Icons/towerWhite.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="towerGreyIsland5" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                              <ImageView fx:id="towerGreyIsland5" fitHeight="60.0" fitWidth="75.0" onMouseClicked="#moveToIsland5" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                  <image>
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
@@ -609,12 +609,12 @@
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="towerBlackIsland4" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                              <ImageView fx:id="towerBlackIsland4" fitHeight="60.0" fitWidth="75.0" onMouseClicked="#moveToIsland4" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="motherNature4" fitHeight="60.0" fitWidth="120.0" onMouseClicked="#moveToIsland3" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <ImageView fx:id="motherNature4" fitHeight="60.0" fitWidth="120.0" onMouseClicked="#moveToIsland4" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <image>
                                     <Image url="@Icons/motherNature.png" />
                                  </image>
@@ -695,7 +695,7 @@
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="towerBlackIsland9" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+                              <ImageView fx:id="towerBlackIsland9" fitHeight="60.0" fitWidth="75.0" onMouseClicked="#moveToIsland9" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
@@ -775,7 +775,7 @@
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="towerBlackIsland12" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                              <ImageView fx:id="towerBlackIsland12" fitHeight="60.0" fitWidth="75.0" onMouseClicked="#moveToIsland12" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
@@ -856,7 +856,7 @@
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="towerGreyIsland8" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+                              <ImageView fx:id="towerGreyIsland8" fitHeight="60.0" fitWidth="75.0" onMouseClicked="#moveToIsland8" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
@@ -937,7 +937,7 @@
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="towerWhiteIsland7" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+                              <ImageView fx:id="towerWhiteIsland7" fitHeight="60.0" fitWidth="75.0" onMouseClicked="#moveToIsland7" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerWhite.png" />
                                  </image>
@@ -1018,7 +1018,7 @@
                                     <Image url="@Icons/towerWhite.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="towerGreyIsland6" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+                              <ImageView fx:id="towerGreyIsland6" fitHeight="60.0" fitWidth="75.0" onMouseClicked="#moveToIsland6" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
@@ -1098,7 +1098,7 @@
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="towerBlackIsland10" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                              <ImageView fx:id="towerBlackIsland10" fitHeight="60.0" fitWidth="75.0" onMouseClicked="#moveToIsland10" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>

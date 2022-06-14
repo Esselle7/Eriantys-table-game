@@ -1380,8 +1380,13 @@ public class GuiPlaygroundController {
     }
     public void chooseRed(MouseEvent mouseEvent)
     {
+        System.out.println("Si però non va bene");
         if(Gui.getGamePhase().equals("Character"))
+        {
+            System.out.println("Figa ottima scelta, Rosso");
             GuiMain.getQueue().add(0);
+        }
+
     }
     public void chooseGreen(MouseEvent mouseEvent)
     {

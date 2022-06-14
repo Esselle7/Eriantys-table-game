@@ -19,7 +19,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="chooseBlueStudent" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="chooseBlueStudent" contentDisplay="GRAPHIC_ONLY" onMouseClicked="#chooseBlue" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="150.0" onMouseClicked="#chooseBlue" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -28,36 +28,36 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="chooseGreenStudent" contentDisplay="GRAPHIC_ONLY" layoutX="25.0" layoutY="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="chooseGreenStudent" contentDisplay="GRAPHIC_ONLY" layoutX="25.0" onMouseClicked="#chooseGreen" layoutY="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="100.0" fitWidth="150.0" onMouseClicked="#chooseGreen" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="green" fitHeight="100.0" fitWidth="150.0" onMouseClicked="#chooseGreen" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Icons/studentGreen.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="choosePinkStudent" contentDisplay="GRAPHIC_ONLY" layoutX="25.0" layoutY="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="choosePinkStudent" contentDisplay="GRAPHIC_ONLY" layoutX="25.0" onMouseClicked="#choosePink" layoutY="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="100.0" fitWidth="150.0" onMouseClicked="#choosePink" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="pink" fitHeight="100.0" fitWidth="150.0" onMouseClicked="#choosePink" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Icons/studentPink.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="chooseRedStudent" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="chooseRedStudent" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" onMouseClicked="#chooseRed" layoutY="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="100.0" fitWidth="150.0" onMouseClicked="#chooseRed" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="red" fitHeight="100.0" fitWidth="150.0" onMouseClicked="#chooseRed" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Icons/studentRed.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="chooseYellowStudent" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" layoutY="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="chooseYellowStudent" contentDisplay="GRAPHIC_ONLY" layoutX="10.0" onMouseClicked="#chooseYellow" layoutY="56.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Button" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="100.0" fitWidth="150.0" onMouseClicked="#chooseYellow" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="yellow" fitHeight="100.0" fitWidth="150.0" onMouseClicked="#chooseYellow" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Icons/studentYellow.png" />
                      </image>

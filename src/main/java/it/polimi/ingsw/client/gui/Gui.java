@@ -239,11 +239,9 @@ public class Gui implements View {
     @Override
     public int chooseStudentColour() {
         resetGuiQueue();
-        Platform.runLater(() -> new GuiLoadScene("ChoseStudent").run());
+        Platform.runLater(() -> new GuiLoadScene("ChooseStudent").run());
         try {
-            int toReturn = (int) GuiMain.getQueue().take();
-            GuiMain.getNewWindow().close();
-            return toReturn;
+            return (int) GuiMain.getQueue().take();
         } catch (InterruptedException e) {
             e.printStackTrace();
             return -1;

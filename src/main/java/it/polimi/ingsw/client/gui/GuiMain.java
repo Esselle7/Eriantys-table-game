@@ -33,6 +33,7 @@ public class GuiMain extends Application {
         return newWindow;
     }
 
+
     /**
      * Entry point of JavaFX
      *
@@ -42,6 +43,7 @@ public class GuiMain extends Application {
     public void start(Stage primaryStage) {
         newWindow = new Stage();
         initStage = primaryStage;
+
         getStage().setResizable(false);
         getStage().setTitle("ERIANTIS");
         getQueue().add(new Object());
@@ -82,7 +84,7 @@ public class GuiMain extends Application {
         getStage().setAlwaysOnTop(false);
     }
 
-    static public  void updateNewWindow(Parent root, String title,int h, int w)
+    static public void updateNewWindow(Parent root, String title,int h, int w)
     {
         Scene newScene = new Scene(root,h,w);
         getNewWindow().setScene(newScene);
@@ -93,5 +95,7 @@ public class GuiMain extends Application {
         getNewWindow().setAlwaysOnTop(true);
         getNewWindow().setAlwaysOnTop(false);
     }
+
+
 
 }
