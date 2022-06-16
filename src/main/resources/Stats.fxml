@@ -173,8 +173,8 @@
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <Button fx:id="nickname1" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;" text="None" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                                                <Button fx:id="nickname2" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;" text="None" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                <Button fx:id="nickname1" mnemonicParsing="false" onAction="#switchToBoardPlayerOne" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;" text="None" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                <Button fx:id="nickname2" mnemonicParsing="false" onAction="#switchToBoardPlayerTwo" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;" text="None" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                                              </children>
                                           </GridPane>
                                           <Label layoutX="154.0" layoutY="17.0" text="Other players' board" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="10.0">
@@ -280,7 +280,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;" onAction="#switchToCharacter">
+                        <Button mnemonicParsing="false" onAction="#switchToCharacter" style="-fx-background-radius: 100; -fx-background-color: #e7bd8d#e7bd8d;">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="35.0" nodeOrientation="INHERIT" onMouseClicked="#switchToCharacter" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                                  <image>

@@ -47,17 +47,15 @@ public class GuiLoadScene implements Runnable{
                 break;
             }
             case "BoardOtherPlayerOne":{
-                GuiMain.updateSceneBoard(root,xml,440,850);
+                GuiMain.updateSceneBoard(root,xml,300,850);
                 GuiPlaygroundController controller = loader.getController();
-                controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
-                ///controller.updateBoard(); qui fai aggiornamento board player uno
+                controller.updateBoardPlayerOne();
                 break;
             }
             case "BoardOtherPlayerTwo":{
-                GuiMain.updateSceneBoard(root,xml,440,850);
+                GuiMain.updateSceneBoard(root,xml,300,850);
                 GuiPlaygroundController controller = loader.getController();
-                controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
-                ///controller.updateBoard(); qui fai aggiornamento board player due
+                controller.updateBoardPlayerTwo();
                 break;
             }
             case "CloudTilesPlayers":{

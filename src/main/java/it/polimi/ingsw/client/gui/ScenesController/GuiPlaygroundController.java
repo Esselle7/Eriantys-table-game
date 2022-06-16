@@ -29,6 +29,9 @@ public class GuiPlaygroundController {
     private static Card myCurrentCard = null;
     private static int expert;
     private static String notification;
+    private String nicknamePlayerOne;
+    private String nicknamePlayerTwo;
+
 
     // Game fx id references
     public Label notificationLabel;
@@ -780,6 +783,9 @@ public class GuiPlaygroundController {
         elements.add(elementCharacterSix);
         elements.add(elementCharacterNine);
 
+        nicknamePlayerOne = "None";
+        nicknamePlayerTwo = "None";
+
 
 
 
@@ -924,10 +930,15 @@ public class GuiPlaygroundController {
         {
             if(!p.getNickname().equals(getMyNickname()))
             {
-                if(nickname1.getText().equals("None"))
+                if(nickname1.getText().equals("None")) {
                     nickname1.setText(p.getNickname());
-                else
+                    nicknamePlayerOne = p.getNickname();
+                    System.out.println(nicknamePlayerOne);
+                }
+                else {
                     nickname2.setText(p.getNickname());
+                    nicknamePlayerTwo = p.getNickname();
+                }
             }
             if(p.getPlayerBoard().getTowerColour().equals(TColour.WHITE))
                 towerWhite.setText(String.valueOf((p.getPlayerBoard().getTowerYard())));
@@ -992,11 +1003,42 @@ public class GuiPlaygroundController {
 
     public void updateBoard()
     {
+        updateBoardGeneral(getMyBoard(),getMyNickname());
+    }
+
+    public void updateBoardPlayerOne()
+    {
+        findPlayer(1);
+        //updateBoardGeneral(getPlayGround().getPlayerByNickname(nicknamePlayerOne).getPlayerBoard(),nicknamePlayerOne);
+    }
+
+    public void updateBoardPlayerTwo()
+    {
+       findPlayer(2);
+    }
+
+    private void findPlayer(int count)
+    {
+        int index = 0;
+        for(Player p : getPlayGround().getPlayersList())
+        {
+            if(!p.getNickname().equals(getMyNickname()))
+            {
+                index++;
+                if(index == count)
+                    updateBoardGeneral(p.getPlayerBoard(),p.getNickname());
+            }
+
+        }
+    }
+
+    public void updateBoardGeneral(Board board,String nickname)
+    {
         // entrance room
         for(int student = 0; student < Colour.colourCount; student++)
         {
-            entranceRoom.get(student).setText(String.valueOf(getMyBoard().getEntranceRoom()[student]));
-            if(getMyBoard().getEntranceRoom()[student] == 0)
+            entranceRoom.get(student).setText(String.valueOf(board.getEntranceRoom()[student]));
+            if(board.getEntranceRoom()[student] == 0)
                 entranceRoom.get(student).setOpacity(0.5);
             else
                 entranceRoom.get(student).setOpacity(1.0);
@@ -1005,7 +1047,7 @@ public class GuiPlaygroundController {
         //dining room
         for(int student = 0; student < Colour.colourCount; student++)
         {
-            for(int index = 0; index < getMyBoard().getDiningRoom()[student]; index++)
+            for(int index = 0; index < board.getDiningRoom()[student]; index++)
             {
                 diningRoom.get(student).get(index).setOpacity(1.0);
             }
@@ -1016,7 +1058,7 @@ public class GuiPlaygroundController {
         {
             if(getPlayGround().getProfessorsControl()[colour] != null)
             {
-                if(getPlayGround().getProfessorsControl()[colour].equals(getMyNickname()))
+                if(getPlayGround().getProfessorsControl()[colour].equals(nickname))
                     professorsRoom.get(colour).setOpacity(1.0);
                 else
                     professorsRoom.get(colour).setOpacity(0.0);
@@ -1027,7 +1069,7 @@ public class GuiPlaygroundController {
 
         //tower yard
         int index=-1;
-        switch (getMyBoard().getTowerColour())
+        switch (board.getTowerColour())
         {
             case WHITE:
                 index = 0;
@@ -1043,8 +1085,7 @@ public class GuiPlaygroundController {
 
         }
         towerYard.get(index).setOpacity(1.0);
-        towerYard.get(index).setText(String.valueOf(getMyBoard().getTowerYard()));
-
+        towerYard.get(index).setText(String.valueOf(board.getTowerYard()));
     }
 
     public void updateCharacter()
@@ -1137,7 +1178,8 @@ public class GuiPlaygroundController {
 
     public void switchToBoardPlayerTwo()
     {
-        Platform.runLater(() -> new GuiLoadScene("BoardOtherPlayerTwo").run());
+        if(!nickname2.getText().equals("None"))
+            Platform.runLater(() -> new GuiLoadScene("BoardOtherPlayerTwo").run());
     }
 
     public void backFromCharacterMenu()
