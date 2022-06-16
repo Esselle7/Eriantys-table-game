@@ -933,7 +933,6 @@ public class GuiPlaygroundController {
                 if(nickname1.getText().equals("None")) {
                     nickname1.setText(p.getNickname());
                     nicknamePlayerOne = p.getNickname();
-                    System.out.println(nicknamePlayerOne);
                 }
                 else {
                     nickname2.setText(p.getNickname());
@@ -1432,10 +1431,8 @@ public class GuiPlaygroundController {
     }
     public void chooseRed(MouseEvent mouseEvent)
     {
-        System.out.println("Si però non va bene");
         if(Gui.getGamePhase().equals("Character"))
         {
-            System.out.println("Figa ottima scelta, Rosso");
             GuiMain.getQueue().add(0);
         }
 
