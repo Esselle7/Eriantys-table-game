@@ -95,6 +95,20 @@ public class GuiPlaygroundController {
     public GridPane island12;
     public List<GridPane> islands;
 
+    public Button island1Image;
+    public Button island2Image;
+    public Button island3Image;
+    public Button island4Image;
+    public Button island5Image;
+    public Button island6Image;
+    public Button island7Image;
+    public Button island8Image;
+    public Button island9Image;
+    public Button island10Image;
+    public Button island11Image;
+    public Button island12Image;
+    public List<Button> islandsImage;
+
     public ImageView towerBlackIsland1;
     public ImageView towerBlackIsland2;
     public ImageView towerBlackIsland3;
@@ -461,6 +475,20 @@ public class GuiPlaygroundController {
         islands.add(island10);
         islands.add(island11);
         islands.add(island12);
+
+        islandsImage = new ArrayList<>();
+        islandsImage.add(island1Image);
+        islandsImage.add(island2Image);
+        islandsImage.add(island3Image);
+        islandsImage.add(island4Image);
+        islandsImage.add(island5Image);
+        islandsImage.add(island6Image);
+        islandsImage.add(island7Image);
+        islandsImage.add(island8Image);
+        islandsImage.add(island9Image);
+        islandsImage.add(island10Image);
+        islandsImage.add(island11Image);
+        islandsImage.add(island12Image);
 
         towers = new ArrayList<>();
         towers.add(towerIsland1);
@@ -911,6 +939,7 @@ public class GuiPlaygroundController {
         for(int index = getPlayGround().getIslands().size(); index <islands.size();index++)
         {
             islands.get(index).setOpacity(0.0); // delete islands that have been unified
+            islandsImage.get(index).setOpacity(0.0);
             for(int colour = 0; colour < Colour.colourCount; colour ++)
             {
                 isl.get(index).get(colour).setOpacity(0.0);
@@ -969,11 +998,8 @@ public class GuiPlaygroundController {
                 }
                 towers.get(index).setOpacity(1.0);
                 towers.get(index).setText(String.valueOf(i.getTowerCount()));
-
             }
         }
-
-
     }
 
     public void updateStats() {
@@ -1038,19 +1064,20 @@ public class GuiPlaygroundController {
 
     }
 
-    public void updateCloudTiles()
+    public void updateCloudTiles() // manca aggiornamento delle cloud tiles già prese
     {
         for(int cloud = 0; cloud<getPlayGround().getCloudTiles().length; cloud++)
         {
             paneCloudTiles.get(cloud).opacityProperty().set(1.0);
-            for(int student=0; student<Colour.colourCount;student++)
-            {
-                cloudTiles.get(cloud).get(student).setText(String.valueOf(getPlayGround().getCloudTiles()[cloud].getStudents()[student]));
-                if(getPlayGround().getCloudTiles()[cloud].getStudents()[student] > 0)
-                    cloudTiles.get(cloud).get(student).setOpacity(1.0);
-                else
-                    cloudTiles.get(cloud).get(student).setOpacity(0.5);
-            }
+            if(!getPlayGround().getCloudTiles()[cloud].isUsed())
+                for(int student=0; student<Colour.colourCount;student++)
+                {
+                    cloudTiles.get(cloud).get(student).setText(String.valueOf(getPlayGround().getCloudTiles()[cloud].getStudents()[student]));
+                    if(getPlayGround().getCloudTiles()[cloud].getStudents()[student] > 0)
+                        cloudTiles.get(cloud).get(student).setOpacity(1.0);
+                    else
+                        cloudTiles.get(cloud).get(student).setOpacity(0.5);
+                }
         }
         if(getPlayGround().getPlayersList().size() == 3)
         {
