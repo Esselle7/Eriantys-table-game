@@ -392,6 +392,7 @@ public class TurnHandler implements Runnable {
             }
 
             getCurrentClient().sendMessage(new NotificationCMI("Waiting for other players to choose assistant card ..."));
+            update();
         }
         newPlayerOrder.sort(Comparator.comparing(player1 -> player1.getCurrentCard().getValue()));
         setPlayerOrder(newPlayerOrder);

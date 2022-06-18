@@ -17,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import javax.management.monitor.MonitorSettingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class GuiPlaygroundController {
@@ -29,8 +30,6 @@ public class GuiPlaygroundController {
     private static Card myCurrentCard = null;
     private static int expert;
     private static String notification;
-    private String nicknamePlayerOne;
-    private String nicknamePlayerTwo;
 
 
     // Game fx id references
@@ -61,6 +60,26 @@ public class GuiPlaygroundController {
     public ImageView assistantNine;
     public ImageView assistantTen;
     public List<ImageView> assistantCards;
+
+    public Label Player1AssistantCard;
+    public Label Player2AssistantCard;
+    public Label Player3AssistantCard;
+    public List<Label> currentAssistantCard;
+
+    public Label towerIsland1;
+    public Label towerIsland2;
+    public Label towerIsland3;
+    public Label towerIsland4;
+    public Label towerIsland5;
+    public Label towerIsland6;
+    public Label towerIsland7;
+    public Label towerIsland8;
+    public Label towerIsland9;
+    public Label towerIsland10;
+    public Label towerIsland11;
+    public Label towerIsland12;
+    public List<Label> towers;
+
 
     public GridPane island1;
     public GridPane island2;
@@ -443,6 +462,21 @@ public class GuiPlaygroundController {
         islands.add(island11);
         islands.add(island12);
 
+        towers = new ArrayList<>();
+        towers.add(towerIsland1);
+        towers.add(towerIsland2);
+        towers.add(towerIsland3);
+        towers.add(towerIsland4);
+        towers.add(towerIsland5);
+        towers.add(towerIsland6);
+        towers.add(towerIsland7);
+        towers.add(towerIsland8);
+        towers.add(towerIsland9);
+        towers.add(towerIsland10);
+        towers.add(towerIsland11);
+        towers.add(towerIsland12);
+
+
         studentIsland1 = new ArrayList<>();
         studentIsland1.add(studentRed1);
         studentIsland1.add(studentGreen1);
@@ -548,6 +582,12 @@ public class GuiPlaygroundController {
         isl.add(studentIsland10);
         isl.add(studentIsland11);
         isl.add(studentIsland12);
+
+        currentAssistantCard = new ArrayList<>();
+        currentAssistantCard.add(Player1AssistantCard);
+        currentAssistantCard.add(Player2AssistantCard);
+        currentAssistantCard.add(Player3AssistantCard);
+
 
         towerGreyIsland = new ArrayList<>();
         towerGreyIsland.add(towerGreyIsland1);
@@ -783,8 +823,6 @@ public class GuiPlaygroundController {
         elements.add(elementCharacterSix);
         elements.add(elementCharacterNine);
 
-        nicknamePlayerOne = "None";
-        nicknamePlayerTwo = "None";
 
 
 
@@ -881,6 +919,18 @@ public class GuiPlaygroundController {
             towerBlackIsland.get(index).setOpacity(0.0);
             towerGreyIsland.get(index).setOpacity(0.0);
         }
+        towerIsland1.setOpacity(0.0);
+        towerIsland2.setOpacity(0.0);
+        towerIsland3.setOpacity(0.0);
+        towerIsland4.setOpacity(0.0);
+        towerIsland5.setOpacity(0.0);
+        towerIsland6.setOpacity(0.0);
+        towerIsland7.setOpacity(0.0);
+        towerIsland8.setOpacity(0.0);
+        towerIsland9.setOpacity(0.0);
+        towerIsland10.setOpacity(0.0);
+        towerIsland11.setOpacity(0.0);
+        towerIsland12.setOpacity(0.0);
         int motherNatureIsland = getPlayGround().getIslands().indexOf(getPlayGround().getIslandWithMotherNature());
         for(int index = 0; index < getPlayGround().getIslands().size(); index++)
         {
@@ -917,6 +967,9 @@ public class GuiPlaygroundController {
                         //towerGreyIsland.get(index). QUI FARE SET TEXT
                         break;
                 }
+                towers.get(index).setOpacity(1.0);
+                towers.get(index).setText(String.valueOf(i.getTowerCount()));
+
             }
         }
 
@@ -925,6 +978,17 @@ public class GuiPlaygroundController {
 
     public void updateStats() {
         // Update general info in Stats scene
+        for(int index = 0; index < getPlayGround().getPlayersList().size(); index++)
+        {
+            String nickname = getPlayGround().getPlayersList().get(index).getNickname();
+            Card card = getPlayGround().getPlayersList().get(index).getCurrentCard();
+            if(card != null)
+            {
+                currentAssistantCard.get(index).setText(nickname.toUpperCase(Locale.ROOT)+"' assistant card: "+card.getValue());
+            }
+            else
+                currentAssistantCard.get(index).setText("None");
+        }
 
         for(Player p : getPlayGround().getPlayersList())
         {
@@ -932,11 +996,9 @@ public class GuiPlaygroundController {
             {
                 if(nickname1.getText().equals("None")) {
                     nickname1.setText(p.getNickname());
-                    nicknamePlayerOne = p.getNickname();
                 }
                 else {
                     nickname2.setText(p.getNickname());
-                    nicknamePlayerTwo = p.getNickname();
                 }
             }
             if(p.getPlayerBoard().getTowerColour().equals(TColour.WHITE))

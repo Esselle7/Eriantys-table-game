@@ -1111,7 +1111,7 @@
                                     <Image url="@Icons/towerWhite.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="towerIsland10" text="1" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                              <Label fx:id="towerIsland10" text="1" opacity="0.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                               <ImageView fx:id="towerGreyIsland10" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerGrey.png" />
