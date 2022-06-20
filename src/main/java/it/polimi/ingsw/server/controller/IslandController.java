@@ -12,9 +12,8 @@ import java.util.List;
 /**
  * This class allows to verify the influence count on an island as
  * well as updating the islands' asset right after the influence status of an
- * island has been modified
+ * island has been modified.
  */
-
 public class IslandController {
     private int bannedColour;
 
@@ -33,7 +32,9 @@ public class IslandController {
 
     /**
      * This method calculates the influence count for an island
-     * @return the player that has the highest influence
+     * @param inputIsland the island on which influence has to be calculated
+     * @param playGround the playground on which everything resides
+     * @return the player that has the highest influence on it, null if there is a draw
      */
     public Player checkInfluence(Island inputIsland, PlayGround playGround){
         int counter = 0;
@@ -71,6 +72,7 @@ public class IslandController {
      * a new island is created, the 2 islands to unify get removed from the islands array in playground
      * and a new island is added in their place
      * @param island from which the propagation has to start
+     * @param playGround the playground on which everything resides
      * @throws GameWonException in case there are 3 or fewer islands remaining
      */
     public void islandUnification(Island island, PlayGround playGround) throws GameWonException{
@@ -97,6 +99,7 @@ public class IslandController {
      * After the execution, the first element of island.getNearbyIslands() is the island previous/on the left
      * compared to island while the second and last element is the island after/on the right
      * @param island whose nearby islands have to be updated
+     * @param playGround the playground on which everything resides
      */
     public void updateNearbyIslands(Island island, PlayGround playGround){
         List<Island> newIslandsList = playGround.getIslands();

@@ -1,8 +1,7 @@
 package it.polimi.ingsw.server.controller.Exceptions;
 
 /**
- * This exception represent that a player is trying to add a
- * student to a full dining room table
+ * Thrown if something is trying to add a colour in a table already full of students of that colour
  */
 public class FullDiningRoomTable extends Exception{
     public FullDiningRoomTable(){}

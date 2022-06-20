@@ -12,28 +12,18 @@ import java.util.List;
  * a revisiting of singleton pattern
  *
  */
-
 public class Deck implements Serializable {
-    private final Wizard deckName;
     private final List<Card> assistantCards;
 
     /**
-     * Public constructor that create a
-     * single deck with 10 assistant cards
-     * @param deckName the name of the deck
-     *                 choosen between Wizard enum
+     * Public constructor that creates a deck as well as 10 assistant cards
      */
-    public Deck(Wizard deckName){
-        this.deckName = deckName;
+    public Deck(){
         int[] motherNatureSteps = {1,1,2,2,3,3,4,4,5,5};
         assistantCards = new ArrayList<>();
         for (int index = 0; index < motherNatureSteps.length; index++) {
             assistantCards.add(new Card(index+1,motherNatureSteps[index]));
         }
-    }
-
-    public Wizard getDeckName() {
-        return deckName;
     }
 
     public List<Card> getResidualCards()
@@ -42,15 +32,10 @@ public class Deck implements Serializable {
     }
 
     /**
-     * This method will use an assistant card
-     * for a round of game
-     * @param value the value of the card
-     *              to use
-     * @return the card
-     *         with the value in input
-     *         and so we can use it, false
-     *         if there isn't a card with
-     *         value = value in input
+     * This method checks whether the selected card is present in the deck, if yes it removes it from the deck and returns it,
+     * if not it simply returns null
+     * @param value the value of the card to return
+     * @return the returned card, null if there's no card in the deck for the corresponding value
      */
     public Card useCard(int value)
     {

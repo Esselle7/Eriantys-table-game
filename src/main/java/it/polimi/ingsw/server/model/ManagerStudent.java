@@ -4,36 +4,12 @@ import java.io.Serializable;
 import java.util.Random;
 
 /**
- * This abstract class is the student manager
- * that allows class (that extends from that) to
- * perform action in array list of students.
- * It also store the total number of student
- * paws
+ * This abstract class simplifies operating with students for the classes that extend it.
+ * It also stores the total number of students in the game
  */
 
 public abstract class ManagerStudent implements Serializable {
     private int totalStudentPaws = 130;
-    /**
-     * This method make the fusion
-     * of two lists given in input by
-     * adding position per position
-     * each cell value
-     * @param target first list to add,
-     *               it is the basic list (e.g.
-     *               entranceRoom, diningRoom etc.)
-     * @param newStudents second list to add,
-     *                    usually used as the
-     *                    variations to add to the
-     *                    first list
-     * @return return the target list modified
-     */
-    public int[] addStudentsToTarget(int[] target,int[] newStudents) {
-        for(int c = Colour.RED; c < Colour.colourCount; c++ )
-        {
-            target[c] += newStudents[c];
-        }
-        return target;
-    }
 
     public int getTotalStudentPaws() {
         return totalStudentPaws;
@@ -49,6 +25,26 @@ public abstract class ManagerStudent implements Serializable {
     }
 
 
+    /**
+     * This method adds to an array of students another array of the students to add.
+     * It handles all the colour differences.
+     * @param target list to add the students to (e.g. entranceRoom, diningRoom etc.)
+     * @param newStudents list whose students have to be added
+     * @return the list resulting from the fusion of the two lists
+     */
+    public int[] addStudentsToTarget(int[] target,int[] newStudents) {
+        for(int c = Colour.RED; c < Colour.colourCount; c++ )
+        {
+            target[c] += newStudents[c];
+        }
+        return target;
+    }
+
+    /**
+     * This method creates a random array of students to simulate extracting a number of them from the students bag
+     * @param numberToGenerate number of students to generate
+     * @return the students generated
+     */
     public int[] generateStudents(int numberToGenerate)
     {
         setTotalStudentPaws(getTotalStudentPaws()-numberToGenerate);
@@ -63,10 +59,12 @@ public abstract class ManagerStudent implements Serializable {
         return null; // exception to return
     }
 
+    /**
+     * Random colour selected, useful for the previous methods
+     * @return the selected colour
+     */
     private int chooseRandomColour()
     {
         return new Random().nextInt(Colour.colourCount);
     }
-
-
 }

@@ -1,15 +1,13 @@
 package it.polimi.ingsw.server.model;
 
-import it.polimi.ingsw.network.messages.UpdatePlayGroundCMI;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
-
-import java.io.IOException;
 import java.io.Serializable;
 
 /**
- * This class represent a player of
- * the game. Every player has its own
- * board and deck.
+ * This class represent a player, each player has a nickname, a deck, a board, a current card, its client and
+ * the corresponding motherNatureSteps he can do for this turn.
+ * There is also the extraInfluence attribute which stores the extra influence points that
+ * TwoExtraInfluenceCard (CharacterCard) might have added.
  */
 public class Player extends ManagerStudent implements Serializable {
     private final String nickname;
@@ -20,11 +18,13 @@ public class Player extends ManagerStudent implements Serializable {
     private int motherNatureSteps;
     private int extraInfluence;
 
+    /**
+     * Public constructor
+     */
     public Player(String nickname)
     {
         this.nickname = nickname;
         currentCard = new Card();
-        this.Client = Client;
         this.motherNatureSteps = 0;
         this.extraInfluence = 0;
     }
@@ -75,9 +75,6 @@ public class Player extends ManagerStudent implements Serializable {
         this.playerBoard = playerBoard;
     }
 
-    public void setAssistantCards(Deck assistantCards) {
-        this.assistantCards = assistantCards;
-    }
 
     public Card getCurrentCard() {
         return currentCard;
@@ -89,10 +86,10 @@ public class Player extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method allows to use
-     * an assistant card from the deck
-     * and set it as the current card
-     * @param cardNumber number of the card to play
+     * This method sets an assistant card corresponding to the selected value as the current card
+     * @param cardNumber selected value
+     * @return true in case the procedure was successful, false in case it was not (mainly due to the fact
+     * that this method calls Deck.useCard, which returns null in case there's no card corresponding to the selected value
      */
     public boolean useCard(int cardNumber)
     {
@@ -105,18 +102,5 @@ public class Player extends ManagerStudent implements Serializable {
         else
             return false;
 
-    }
-
-
-    /**
-     * This method allows comparing
-     * two player by their current card
-     * value
-     * @param otherPlayer other player to compare
-     * @return an int =0,>0 or <0 by the values
-     *         of the two cards
-     */
-    public int compareTo(Player otherPlayer) {
-        return Integer.compare(getCurrentCard().getValue(),otherPlayer.getCurrentCard().getValue());
     }
 }

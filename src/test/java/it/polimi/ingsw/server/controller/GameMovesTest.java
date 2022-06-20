@@ -91,7 +91,7 @@ class GameMovesTest {
     void moveStudentEntranceToDiningFullDiningRoomTableExceptionTest() {
         int[] entranceRoom = {3,1,1,2,2};
         GC.getCurrentPlayerBoard().setEntranceRoom(entranceRoom);
-        for(int i = 0; i < GC.getCurrentSettings().getDiningRoomLenght(); i++)
+        for(int i = 0; i < GC.getCurrentSettings().getDiningRoomLength(); i++)
         {
             GC.getCurrentPlayerBoard().increaseNumberOfStudent(0);
         }
@@ -288,7 +288,7 @@ class GameMovesTest {
         try{
             assertEquals(GC.findWinnerTower(), player2);
         }
-        catch(noWinnerException e){
+        catch(NoWinnerException e){
             fail();
         }
     }
@@ -306,7 +306,7 @@ class GameMovesTest {
         try{
             assertEquals(GC.findWinnerTower(), player1);
         }
-        catch(noWinnerException e){
+        catch(NoWinnerException e){
             fail();
         }
     }
@@ -325,7 +325,7 @@ class GameMovesTest {
             assertEquals(GC.findWinnerTower(), player1);
             fail();
         }
-        catch(noWinnerException e){
+        catch(NoWinnerException e){
             assertTrue(true);
         }
     }

@@ -4,7 +4,6 @@ import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.connection.ClientMessageImplement;
 import it.polimi.ingsw.client.connection.ConnectionClientSide;
-import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
 
 import java.io.IOException;
 

@@ -6,11 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class that store every
- * instance of the class in order to
- * play a game.
+ * Class that stores everything that's placed on the table in the physical game as well as some useful
+ * information: the list of players, the (sorted) list of islands, the island with mothernature on it,
+ * the professor control array, the cloud tiles array, the drawn cards array and the game mode setting
  */
-
 public class PlayGround implements Serializable {
     private List<Player> playersList;
     private List<Island> islands;
@@ -19,53 +18,13 @@ public class PlayGround implements Serializable {
     private CloudTile[] cloudTiles;
     private List <CharacterCard> drawnCards;
     private int gameMode;
-   // private static PlayGround instance = null;
 
-    /**
-     * Private constructor, applied
-     * singleton pattern
-     */
-    public PlayGround() {
-        professorsControl = new String[Colour.colourCount];
-        drawnCards = new ArrayList<>();
+    public CloudTile[] getCloudTiles() {
+        return cloudTiles;
     }
 
-    public List<CharacterCard> getDrawnCards() {
-        return drawnCards;
-    }
-
-    public void setDrawnCards(List<CharacterCard> drawnCards) {
-        this.drawnCards = drawnCards;
-    }
-
-    /**
-     * Public static class that create
-     * an instance of playground only
-     * if there are no others object that
-     * has been instanced before
-     * @return the playGround instance
-     */
-   /* public static PlayGround createPlayground()
-    {
-        if(instance == null)
-           instance = new PlayGround();
-        return instance;
-    }*/
-
-
-
-    public List<Player> getPlayersList() {
-        return playersList;
-    }
-
-    /**
-     * This method allows to retrieve
-     * a player by it's nickname
-     * @param nickname nickname of player to find
-     * @return the player with nickname in input
-     */
-    public Player getPlayerByNickname(String nickname){
-        return getPlayersList().stream().filter(p -> p.getNickname().equals(nickname)).findFirst().orElse(null);
+    public void setCloudTiles(CloudTile[] cloudTiles) {
+        this.cloudTiles = cloudTiles;
     }
 
     public Island getIslandWithMotherNature() {
@@ -105,33 +64,48 @@ public class PlayGround implements Serializable {
         return professorsControl;
     }
 
-    /**
-     * This method allows to get
-     * the player nickname that have
-     * the control of the professor
-     * given in input
-     * @param professorColour colour of the professor
-     * @return player that own the control of the professor
-     *         given in input
-     */
-    public String getProfessorControlByColour(int professorColour)
-    {
-        return professorsControl[professorColour];
+    public List<CharacterCard> getDrawnCards() {
+        return drawnCards;
+    }
+
+    public void setDrawnCards(List<CharacterCard> drawnCards) { this.drawnCards = drawnCards;    }
+
+    public List<Player> getPlayersList() {
+        return playersList;
     }
 
     /**
-     * This method allows to change
-     * the control of a professor
-     * from one player to another
-     * given in input
-     * @param professorColour colour of the professor to control
-     * @param professorController future professor controller
+     * Public constructor
+     */
+    public PlayGround() {
+        professorsControl = new String[Colour.colourCount];
+        drawnCards = new ArrayList<>();
+    }
+
+    /**
+     * This method allows to retrieve a player by its nickname
+     * @param nickname nickname of the player to find
+     * @return the resulting player
+     */
+    public Player getPlayerByNickname(String nickname){
+        return getPlayersList().stream().filter(p -> p.getNickname().equals(nickname)).findFirst().orElse(null);
+    }
+
+    /**
+     * This method allows to set the control of a professor given in input to a specific player
+     * @param professorColour colour of the professor whose control is bound to change
+     * @param professorController nickname of the player that has to be set as a new professor controller
      */
     public void setProfessorControlByColour(int professorColour, String professorController)
     {
         professorsControl[professorColour] =  professorController;
     }
 
+    /**
+     * This method returns the player whose tower colour is the one passed as argument
+     * @param colour colour of the tower
+     * @return Player that has towers of this same colour in his tower yard
+     */
     public Player getPlayerByTowerColour(TColour colour){
         for(Player player : getPlayersList()){
             if(player.getPlayerBoard().getTowerColour().equals(colour))
@@ -139,13 +113,4 @@ public class PlayGround implements Serializable {
         }
         return null;
     }
-
-    public CloudTile[] getCloudTiles() {
-        return cloudTiles;
-    }
-
-    public void setCloudTiles(CloudTile[] cloudTiles) {
-        this.cloudTiles = cloudTiles;
-    }
-
 }

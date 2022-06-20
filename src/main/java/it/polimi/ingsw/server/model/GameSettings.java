@@ -3,28 +3,19 @@ package it.polimi.ingsw.server.model;
 import java.io.Serializable;
 
 /**
- * This abstract class will contain
- * the main information for two players
- * mode and three players mode
+ * This abstract class contains the information that differentiates each player mode (EG two players mode and three players mode).
+ * This class is made up of only getters and setters plus a method (manageSettings) that uses all the setters depending on
+ * the player mode class that extends this class.
  */
 
 public abstract class GameSettings implements Serializable {
     private int studentsEntranceRoom;
     private int towerYard;
     private int studentsCloudTile;
-    private int diningRoomLenght;
+    private int diningRoomLength;
     private int numberOfIslands;
     private int numberOfPlayers;
     private int studentsToMove;
-
-    /**
-     * This method will be implemented
-     * in the two classes that extends
-     * this abstract class. It allows
-     * to modify the game settings
-     * (the attributes)
-     */
-    public abstract void manageSettings();
 
     public int getNumberOfIslands() {
         return numberOfIslands;
@@ -34,12 +25,12 @@ public abstract class GameSettings implements Serializable {
         this.numberOfIslands = numberOfIslands;
     }
 
-    public int getDiningRoomLenght() {
-        return diningRoomLenght;
+    public int getDiningRoomLength() {
+        return diningRoomLength;
     }
 
-    public void setDiningRoomLenght(int diningRoomLenght) {
-        this.diningRoomLenght = diningRoomLenght;
+    public void setDiningRoomLength(int diningRoomLength) {
+        this.diningRoomLength = diningRoomLength;
     }
 
     public int getStudentsEntranceRoom() {
@@ -77,5 +68,11 @@ public abstract class GameSettings implements Serializable {
     public void setStudentsToMove(int studentsToMove){
         this.studentsToMove = studentsToMove;
     }
+
+    /**
+     * This method will be implemented by the classes that extend this abstract class.
+     * This way all the attributes specific to a player mode will be set.
+     */
+    public abstract void manageSettings();
 
 }

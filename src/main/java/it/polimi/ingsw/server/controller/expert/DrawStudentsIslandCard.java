@@ -4,10 +4,13 @@ import it.polimi.ingsw.network.messages.chooseIslandCMI;
 import it.polimi.ingsw.network.messages.chooseStudentColourCMI;
 import it.polimi.ingsw.server.controller.*;
 import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
-import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
+import it.polimi.ingsw.server.controller.Exceptions.ChooseCharacterCardException;
 
 import java.io.IOException;
 
+/**
+ * Specific Character Card Class, its effect is listed in its description and its methods implement it
+ */
 public class DrawStudentsIslandCard extends CharacterCard {
 
     public DrawStudentsIslandCard(){
@@ -15,13 +18,20 @@ public class DrawStudentsIslandCard extends CharacterCard {
         setDescription("you can choose to move 1 student from this card to an island of your choice");
     }
 
+    /**
+     * The card is initialized by placing 4 students on it
+     */
     @Override
     public void initializeCard(TurnHandler turnHandler) {
         this.students = turnHandler.getGameMoves().generateStudents(4);
     }
 
+    /**
+     * The card first asks the player which colour he wants and then, if the colour is correct, asks him which island
+     * he wants to place it on
+     */
     @Override
-    public void useCardImpl(TurnHandler turnHandler) throws IOException, chooseCharacterCardException, NotEnoughCoins {
+    public void useCardImpl(TurnHandler turnHandler) throws IOException, ChooseCharacterCardException, NotEnoughCoins {
         buyCard(turnHandler);
         int colour=0;
         while(true){
@@ -31,7 +41,7 @@ public class DrawStudentsIslandCard extends CharacterCard {
             {
                 colour = turnHandler.getCurrentClient().receiveChooseInt();
             }
-            catch (chooseCharacterCardException ignored) {
+            catch (ChooseCharacterCardException ignored) {
 
             }
             if(students[colour] > 0){

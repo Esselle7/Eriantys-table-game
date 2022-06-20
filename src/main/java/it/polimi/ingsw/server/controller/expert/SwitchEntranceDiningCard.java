@@ -4,10 +4,13 @@ import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.network.messages.chooseStudentColourCMI;
 import it.polimi.ingsw.network.messages.chooseYesOrNoCMI;
 import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
-import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
+import it.polimi.ingsw.server.controller.Exceptions.ChooseCharacterCardException;
 import it.polimi.ingsw.server.controller.TurnHandler;
 import java.io.IOException;
 
+/**
+ * Specific Character Card Class, its effect is listed in its description and its methods implement it
+ */
 public class SwitchEntranceDiningCard extends CharacterCard{
 
     public SwitchEntranceDiningCard(){
@@ -15,8 +18,13 @@ public class SwitchEntranceDiningCard extends CharacterCard{
         setDescription("you can choose to switch a maximum of two students of your choice from your dining room to the entrance room");
     }
 
+    /**
+     * This card asks up to 3 times the player: 1) Which colour he wants to move from the Dining room 2) Which colour he wants to
+     * move from the Entrance room 3) If he wants to go on
+     * Between 2) and 3) the card notifies the player if the switch was successful or if the colours were wrong
+     */
     @Override
-    public void useCardImpl(TurnHandler turnHandler) throws chooseCharacterCardException, IOException, NotEnoughCoins {
+    public void useCardImpl(TurnHandler turnHandler) throws ChooseCharacterCardException, IOException, NotEnoughCoins {
         buyCard(turnHandler);
         int[] diningRoom = turnHandler.getCurrentPlayer().getPlayerBoard().getDiningRoom();
         int[] entranceRoom = turnHandler.getCurrentPlayer().getPlayerBoard().getEntranceRoom();

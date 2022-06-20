@@ -4,11 +4,13 @@ package it.polimi.ingsw.server.controller.expert;
 import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.network.messages.chooseStudentColourCMI;
 import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
-import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
+import it.polimi.ingsw.server.controller.Exceptions.ChooseCharacterCardException;
 import it.polimi.ingsw.server.controller.TurnHandler;
-
 import java.io.IOException;
 
+/**
+ * Specific Character Card Class, its effect is listed in its description and its methods implement it
+ */
 public class DrawStudentsDiningCard extends CharacterCard {
 
     public DrawStudentsDiningCard(){
@@ -16,8 +18,12 @@ public class DrawStudentsDiningCard extends CharacterCard {
         setDescription("you can pick one student from this card and place it in your dining room");
     }
 
+    /**
+     * This card first asks the player which colour he wants from the card and then, if the colour is present,
+     * it moves it to the player's dining room and generates another student to place on the card
+     */
     @Override
-    public void useCardImpl(TurnHandler turnHandler) throws IOException, chooseCharacterCardException, NotEnoughCoins {
+    public void useCardImpl(TurnHandler turnHandler) throws IOException, ChooseCharacterCardException, NotEnoughCoins {
         buyCard(turnHandler);
         int colour = 0;
         while(true){
@@ -27,7 +33,7 @@ public class DrawStudentsDiningCard extends CharacterCard {
             {
                 colour = turnHandler.getCurrentClient().receiveChooseInt();
             }
-            catch (chooseCharacterCardException ignored) {
+            catch (ChooseCharacterCardException ignored) {
 
             }
             if(students[colour] > 0){
@@ -43,6 +49,9 @@ public class DrawStudentsDiningCard extends CharacterCard {
         turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Student successfully moved"));
     }
 
+    /**
+     * 4 students are drawn from the student bag once the card has been initialized
+     */
     @Override
     public void initializeCard(TurnHandler turnHandler) {
         this.students = turnHandler.getGameMoves().generateStudents(4);

@@ -7,19 +7,21 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * This class allows setting up the game
- * and performing all the possible moves during
- * the game. It stores the "PlayGround" of
- * the game, the game settings and the turn
- * handler.
+ * This class features the aggregated functions of the game, such as all the setup functions, the influence changing
+ * functions and so on. These functions are useful for the TurnHandler class.
+ * It also stores the Game's playground as currentGame, the current settings, the islandController, the currentPlayer and
+ * a priorityPlayer in case EqualProfessorCard is used.
  */
 public class GameMoves extends ManagerStudent implements Serializable {
     private PlayGround currentGame;
     private GameSettings currentSettings;
-    private IslandController islandController;
+    private final IslandController islandController;
     private Player currentPlayer;
     private Player priorityPlayer = null;
 
+    /**
+     * Public Constructor
+     */
     public GameMoves() {
         islandController = new IslandController();
         currentGame = new PlayGround();
@@ -28,11 +30,6 @@ public class GameMoves extends ManagerStudent implements Serializable {
     public void setPriorityPlayer(Player priorityPlayer) {
         this.priorityPlayer = priorityPlayer;
     }
-
-    public Player getPriorityPlayer() {
-        return priorityPlayer;
-    }
-
 
     public PlayGround getCurrentGame() {
         return currentGame;
@@ -46,10 +43,6 @@ public class GameMoves extends ManagerStudent implements Serializable {
         return currentSettings;
     }
 
-    public void setCurrentSettings(GameSettings currentSettings) {
-        this.currentSettings = currentSettings;
-    }
-
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -58,6 +51,20 @@ public class GameMoves extends ManagerStudent implements Serializable {
         this.currentPlayer = currentPlayer;
     }
 
+    public IslandController getIslandController() {
+        return islandController;
+    }
+
+    public Board getCurrentPlayerBoard() //shortcut
+    {
+        return getCurrentPlayer().getPlayerBoard();
+    }
+
+    /**
+     * This method recalls the Player that has the nickname passed as argument
+     * @param nickname selected nickname
+     * @return returned player
+     */
     public Player getPlayerByNickname(String nickname){
         for(Player player : currentGame.getPlayersList()){
             if(Objects.equals(player.getNickname(), nickname))
@@ -66,6 +73,11 @@ public class GameMoves extends ManagerStudent implements Serializable {
         return null;
     }
 
+    /**
+     * This method allows sets up the game by calling all the setup functions of this class
+     * @param numberOfPlayers the number of players in the game
+     * @param gamePlayers List<VirtualViewConnection> useful for setting up the players
+     */
     public void setUpGame(int numberOfPlayers, List<VirtualViewConnection> gamePlayers)
     {
         setUpPlayers(gamePlayers);
@@ -76,9 +88,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
         setUpBoard();
     }
     /**
-     * This method allows to set up
-     * all the correct game settings based
-     * on the number of players
+     * This method sets up the correct game settings depending on the number of players
      * @param numberOfPlayers the number of players in the game
      */
     private void setUpGameSettings(int numberOfPlayers)
@@ -94,10 +104,8 @@ public class GameMoves extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method allows to create
-     * the correct number of players
-     * with their nicknames
-     * @param gamePlayers list of associate client
+     * This method sets up the players
+     * @param gamePlayers clients' connections
      */
     private void setUpPlayers(List<VirtualViewConnection> gamePlayers)
     {
@@ -108,27 +116,10 @@ public class GameMoves extends ManagerStudent implements Serializable {
         getCurrentGame().setPlayersList(playersList);
     }
 
-    public IslandController getIslandController() {
-        return islandController;
-    }
-
-    public void setIslandController(IslandController islandController) {
-        this.islandController = islandController;
-    }
-
-
-    public Board getCurrentPlayerBoard() //shortcut
-    {
-        return getCurrentPlayer().getPlayerBoard();
-    }
-
     /**
-     * This method allows to move
-     * a student from the board (entrance room)
-     * to an island
+     * This method allows to move a student from the board (entrance room) to an island
      * @param studentColour the student colour to move
-     * @param selectedIsland the island where will be
-     *                       placed the student
+     * @param selectedIsland the island where the student will be place
      */
     public void moveStudentsEntranceToIsland(int studentColour, int selectedIsland) throws noStudentForColour
     {
@@ -137,22 +128,20 @@ public class GameMoves extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method allows to move
-     * a student from the entrance
-     * room to the dining room
+     * This method allows to move a student from the entrance room to the dining room
      * @param studentColour the student colour to move
      * @throws FullDiningRoomTable if there are no free
      *                              chairs in the dining
      *                              room
      */
     public void moveStudentEntranceToDining(int studentColour) throws FullDiningRoomTable, noStudentForColour {
-        if(getCurrentPlayerBoard().getDiningRoom()[studentColour] < getCurrentSettings().getDiningRoomLenght() &&
+        if(getCurrentPlayerBoard().getDiningRoom()[studentColour] < getCurrentSettings().getDiningRoomLength() &&
                 getCurrentPlayerBoard().getEntranceRoom()[studentColour] > 0)
         {
             getCurrentPlayerBoard().removeStudentEntrance(studentColour);
             getCurrentPlayerBoard().increaseNumberOfStudent(studentColour);
         }
-        else if(getCurrentPlayerBoard().getDiningRoom()[studentColour] >= getCurrentSettings().getDiningRoomLenght())
+        else if(getCurrentPlayerBoard().getDiningRoom()[studentColour] >= getCurrentSettings().getDiningRoomLength())
             throw new FullDiningRoomTable();
 
     }
@@ -185,12 +174,8 @@ public class GameMoves extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method allows current player
-     * to take students from a cloud tile
-     * and to place them in the entrance
-     * room
-     * @param chosenCloudTile the number of the cloud tile
-     *                        chosen
+     * This method allows current player to take students from a cloud tile and place them in the entrance room
+     * @param chosenCloudTile the cloud tile index
      * @throws CloudTileAlreadyTakenException if the cloud tile
      *                                        chosen is empty (/already taken)
      */
@@ -204,12 +189,11 @@ public class GameMoves extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method allows to use an assistant card
-     * by previously check the validity
+     * This method allows to use an assistant card by previously checking its validity
      * @param cardNumber card number to remove from the deck
      *                   and to set as current card
-     * @throws UnableToUseCardException if the check validity
-     *                                  return false
+     * @throws UnableToUseCardException if the validity check
+     *                                  returns false
      */
     public void useAssistantCard(int cardNumber) throws UnableToUseCardException, CardNotFoundException {
         if(checkCardValidity(cardNumber)) {
@@ -221,9 +205,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method check an assistant card validity
-     * by searching if previous players have used
-     * the same card
+     * This method checks an assistant card validity by searching if previous players have used the same card
      * @param cardNumber card number to check
      * @return true if the card number is valid,
      *          false if not
@@ -240,13 +222,9 @@ public class GameMoves extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method allow to check and set
-     * the new professor controller
-     * @param professorColour colour of the professor
-     *                        of which will be checked the
-     *                        control
-     * @return the nickname of the player that control the
-     *         professor given in input
+     * This method allows to check a selected colour's professor control
+     * @param professorColour selected colour
+     * @return the nickname of the player that controls the professor
      */
     private String checkProfessorsControlByColour(int professorColour)
     {
@@ -273,8 +251,8 @@ public class GameMoves extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method check the control for all professors
-     * by calling the method checkProfessorControlByColour()
+     * This method updates the control of all professor colours stored in GameMoves.currentGame
+     * by calling the method checkProfessorControlByColour() on each colour
      */
     public void checkProfessorsControl()
     {
@@ -286,12 +264,11 @@ public class GameMoves extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method search a winner
-     * by comparing the number of tower
-     * in each player board
-     * @return the nickname of the winner
+     * This method looks for a winner by comparing the number of towers in each player's board and, in case
+     * there's an equal amount of towers, it checks the amount of professors controlled as per the game rules
+     * @return the Player with the least amount of towers
      */
-    public Player findWinnerTower() throws noWinnerException
+    public Player findWinnerTower() throws NoWinnerException
     {
         boolean draw = false;
         int minimum = 10, playerTowerYard;
@@ -318,17 +295,15 @@ public class GameMoves extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method search a winner
-     * by comparing the number of professor controlled
-     * by each player
-     * @return the nickname of the winner
-     * @param equalTowerPlayers
+     * This method looks for the player with the most amount of colours controlled in between a specific list of players
+     * @param equalTowerPlayers the list of players
+     * @return the player with the most amount of colours controlled
      */
-    private Player findWinnerProfessors(List<Player> equalTowerPlayers) throws noWinnerException
+    private Player findWinnerProfessors(List<Player> equalTowerPlayers) throws NoWinnerException
     {
         Player maxPlayer = null;
         boolean draw = false;
-        int maxOccurrences = 0, playerOccurrences = 0;
+        int maxOccurrences = 0, playerOccurrences;
         checkProfessorsControl();
         for(Player player: equalTowerPlayers){
             playerOccurrences = Collections.frequency(Arrays.asList(getCurrentGame().getProfessorsControl()), player.getNickname());
@@ -345,15 +320,13 @@ public class GameMoves extends ManagerStudent implements Serializable {
         if(!draw) {
             return maxPlayer;
         } else {
-            throw new noWinnerException();
+            throw new NoWinnerException();
         }
     }
 
     /**
-     * This method check if there can be a winner
-     * by searching if there is at least one board
-     * with no towers
-     * @return the nickname of the winner
+     * This method checks which player has a board with no towers
+     * @return the winning player
      */
     public Player checkForEmptyTowerYard()
     {
@@ -361,14 +334,13 @@ public class GameMoves extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method allows to move mother
-     * nature from an island to another
+     * This method allows moving mother nature from an island to another island
      * @param islandId the island where mother nature
      *                 will be positioned
      * @throws ExceededMotherNatureStepsException if the islandId refers to an island
-     *                                             far from the current mother nature island
+     *                                             too far from the current mother nature island
      *                                             more than the number of mother nature steps
-     *                                             stored in the current assistant card
+     *                                             stored in the player's steps attribute
      */
     public void moveMotherNature(int islandId) throws ExceededMotherNatureStepsException {
         int indexIslandMotherNature = getCurrentGame().getIslands().indexOf(getCurrentGame().getIslandWithMotherNature());
@@ -386,23 +358,19 @@ public class GameMoves extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method allows to set up
-     * the correct number of decks based on the number
-     * of players in the game
+     * This method allows setting up the correct number of decks based on the number of players in the game
      */
     private void setUpDecks()
     {
-        Wizard[] wizards = {Wizard.WIZARD1, Wizard.WIZARD2, Wizard.WIZARD3, Wizard.WIZARD4};
         List<Deck> decks = new ArrayList<>();
         for(int i = 0; i < getCurrentSettings().getNumberOfPlayers(); i++){
-            decks.add(new Deck(wizards[i]));
+            decks.add(new Deck());
             getCurrentGame().getPlayersList().get(i).setDeck(decks.get(i));
         }
     }
 
     /**
-     * This method allows to set up 12
-     * islands in the playground
+     * This method allows setting up 12 islands in the playground
      */
     private void setUpIslands()
     {
@@ -415,9 +383,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method allows to set up
-     * the boards a nd associate them to
-     * each players in the game
+     * This method allows setting up the boards and link them to the players
      */
     private void setUpBoard(){
         TColour[] colours = {TColour.WHITE, TColour.BLACK, TColour.GRAY};
@@ -429,12 +395,8 @@ public class GameMoves extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method allows to set up
-     * all the elements of the islands
-     * at the start of the game so
-     * students and mother nature in the
-     * correct positions
-
+     * This method allows setting up all the elements of the islands at the start of the game so
+     * students and mother nature are in the correct positions
      */
     private void setUpElementsOnIslands()
     {
@@ -449,8 +411,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
     }
 
     /**
-     * This method allows to set up
-     * the cloud tiles
+     * This method allows setting up the cloud tiles
      */
     private void setUpCloudTile()
     {

@@ -1,8 +1,11 @@
 package it.polimi.ingsw.server.controller.Exceptions;
 
-public class chooseCharacterCardException extends Throwable {
+/**
+ * Thrown if the player wants to choose a character card
+ */
+public class ChooseCharacterCardException extends Throwable {
     private final int characterCard;
-    public chooseCharacterCardException(int characterCard) {
+    public ChooseCharacterCardException(int characterCard) {
         this.characterCard = characterCard;
     }
 

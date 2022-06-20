@@ -5,12 +5,15 @@ import it.polimi.ingsw.network.messages.chooseIslandCMI;
 import it.polimi.ingsw.server.controller.Exceptions.EmptyTowerYard;
 import it.polimi.ingsw.server.controller.Exceptions.GameWonException;
 import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
-import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
+import it.polimi.ingsw.server.controller.Exceptions.ChooseCharacterCardException;
 import it.polimi.ingsw.server.controller.TurnHandler;
 import it.polimi.ingsw.server.model.Island;
 
 import java.io.IOException;
 
+/**
+ * Specific Character Card Class, its effect is listed in its description and its methods implement it
+ */
 public class InfluenceCalculateCard extends CharacterCard{
 
     public InfluenceCalculateCard(){
@@ -18,8 +21,11 @@ public class InfluenceCalculateCard extends CharacterCard{
         setDescription("you can choose an island on which influence can be calculated, however this round mothernature will move normally");
     }
 
+    /**
+     * The player is asked which island he wants to calculate the influence on and influenceUpdate is called on it
+     */
     @Override
-    public void useCardImpl(TurnHandler turnHandler) throws IOException, chooseCharacterCardException, NotEnoughCoins, EmptyTowerYard, GameWonException {
+    public void useCardImpl(TurnHandler turnHandler) throws IOException, ChooseCharacterCardException, NotEnoughCoins, EmptyTowerYard, GameWonException {
         buyCard(turnHandler);
         turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Please choose which Island"));
         turnHandler.getCurrentClient().sendMessage(new chooseIslandCMI());

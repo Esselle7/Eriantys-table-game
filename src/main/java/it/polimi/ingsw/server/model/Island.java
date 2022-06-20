@@ -4,14 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * This class implement an
- * Island where a player can place students
- * and where mother nature pow can jump in to.
- * There can be also a tower that represent the
- * influence of a player in a specific island
- *
+ * The Island Class keeps track of which students, towers (and their colours) are placed on it.
+ * It also keeps track of the Nearby Islands around it as well as the bans on computing towers in influence calculations
+ * (isTowerBanned) or computing influence at all (isBanned)
  */
-
 public class Island extends ManagerStudent implements Serializable {
     private final int[] placedStudent;
     private int towerCount;
@@ -21,10 +17,7 @@ public class Island extends ManagerStudent implements Serializable {
     private boolean isTowerBanned;
 
     /**
-     * Constructor that create an
-     * empty island, only call this method
-     * the first time at the beginning of the
-     * game.
+     * Constructor that create an empty island, only call this method at the beginning of the game.
      */
     public Island()
     {
@@ -35,18 +28,14 @@ public class Island extends ManagerStudent implements Serializable {
     }
 
     /**
-     *Private constructor only to call
-     * in method that unify islands
-     * @param placedStudent students to placed on the island
-     * @param towerCount number of tower on the island (also
-     *                   the number of islands unified together)
+     *Private constructor used when unifying islands (hence a new island will be created)
+     * @param placedStudent students to place on the new island
+     * @param towerCount number of towers on the new island
      */
-
     private Island(int[] placedStudent, int towerCount)
     {
         this.placedStudent = placedStudent;
         this.towerCount = towerCount;
-
     }
 
 
@@ -88,16 +77,8 @@ public class Island extends ManagerStudent implements Serializable {
         this.NearbyIslands = IslandsToSetAsNearby;
     }
 
-    /**
-     * This method set a player
-     * influence to an island by adding a
-     * tower to that island.
-     *
-     */
     public void setInfluence(){
-
         towerCount = 1;
-
     }
 
     public void increasePlacedStudent(int studentColour) {
@@ -108,12 +89,10 @@ public class Island extends ManagerStudent implements Serializable {
         return placedStudent;
     }
 
-
     /**
-     * this method counts the number of
-     * student of a colour given in input
-     * @param studentColour colour of the students to count
-     * @return number of students of colour studentColour
+     * This method counts the number of students of a selected colour present on an island
+     * @param studentColour selected colour
+     * @return counter number
      */
     public int numberOfStudentByColour(int studentColour)
     {
@@ -121,18 +100,13 @@ public class Island extends ManagerStudent implements Serializable {
     }
 
     /**
-     * this method create a new island
-     * just by adding the students and
-     * the tower count of this
-     * and the students of the island given in input
+     * This method creates a new island and adds to it the students and the tower count of this island to the
+     * ones of the island to unify
      * @param islandToUnify island to unify to this
-     * @return a new instance that substitute
-     *         this and islandToUnify
+     * @return the island resulting from the fusion
      */
-    public Island unifyIslands(Island islandToUnify) // ricodati di fare metodo per unificazione ocn tipo statio "island i =...." e richiama la funzione
+    public Island unifyIslands(Island islandToUnify)
     {
         return new Island(addStudentsToTarget(getPlacedStudent(),islandToUnify.getPlacedStudent()), getTowerCount()+ islandToUnify.getTowerCount());
     }
-
-
 }

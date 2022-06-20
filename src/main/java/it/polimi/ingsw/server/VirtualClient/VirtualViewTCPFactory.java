@@ -3,8 +3,7 @@ package it.polimi.ingsw.server.VirtualClient;
 
 import it.polimi.ingsw.network.messages.NotificationCMI;
 import it.polimi.ingsw.network.messages.chooseCreateOrAddGame;
-import it.polimi.ingsw.network.messages.chooseExpertModeCMI;
-import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
+import it.polimi.ingsw.server.controller.Exceptions.ChooseCharacterCardException;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -55,7 +54,7 @@ public class VirtualViewTCPFactory implements Runnable {
                     int leader=-1;
                     try {
                         leader = newConnection.receiveChooseInt();
-                    } catch (chooseCharacterCardException ignored) {
+                    } catch (ChooseCharacterCardException ignored) {
                     }
                     if(leader == 1)
                         virtualLeaderQueue.put(newConnection);

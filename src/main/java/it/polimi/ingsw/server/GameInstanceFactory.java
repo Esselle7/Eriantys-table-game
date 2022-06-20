@@ -1,17 +1,15 @@
 package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.TextColours;
-import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewTCPFactory;
-import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
+import it.polimi.ingsw.server.controller.Exceptions.ChooseCharacterCardException;
 import it.polimi.ingsw.server.controller.TurnHandler;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * This class allows to instance different games lobby
@@ -160,7 +158,7 @@ public class GameInstanceFactory implements Runnable{
                 lobbySize = getGamePlayers().get(0).receiveChooseInt();
                 break;
             }
-            catch (chooseCharacterCardException ignored)
+            catch (ChooseCharacterCardException ignored)
             {}
         }
 
@@ -175,7 +173,7 @@ public class GameInstanceFactory implements Runnable{
                 gameMode = getGamePlayers().get(0).receiveChooseInt();
                 break;
             }
-            catch (chooseCharacterCardException ignored)
+            catch (ChooseCharacterCardException ignored)
             {}
         }
         result.add(gameMode);

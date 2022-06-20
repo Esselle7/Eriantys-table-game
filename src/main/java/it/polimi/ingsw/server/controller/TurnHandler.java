@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.controller;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 import it.polimi.ingsw.TextColours;
@@ -11,6 +12,11 @@ import it.polimi.ingsw.server.controller.expert.*;
 import it.polimi.ingsw.server.model.*;
 import java.util.List;
 
+
+/**
+ * This class is the core of the game, the main method is run(), which contains the game itself while the other methods
+ * implement different game phases by using other aggregated methods from GameMoves
+ */
 public class TurnHandler implements Runnable {
     private VirtualViewConnection currentClient;
 
@@ -27,7 +33,7 @@ public class TurnHandler implements Runnable {
 
     /**
      * This method initializes TurnHandler
-     * @param gamePlayersOut is the array of Players waiting to start playing
+     * @param gamePlayersOut is the array of Players' clients waiting to start playing
      * @param gameMode is the gameMode in which you want to play: 0 if standard, 1 if expert (and 2 for testing)
      */
     public TurnHandler(List<VirtualViewConnection> gamePlayersOut, int gameMode) throws IOException {
@@ -61,8 +67,6 @@ public class TurnHandler implements Runnable {
     private void setGameOn(boolean game){ gameOn = game;}
 
     private boolean getGame(){ return gameOn; }
-
-    private void endGame(){ gameOn = false;}
 
     public boolean getLastTurn(){ return lastTurn;}
 
@@ -98,20 +102,23 @@ public class TurnHandler implements Runnable {
         return currentClient;
     }
 
-
-
+    /**
+     * This method initializes the game by calling GameMoves.setUpGame, setting the player order (by randomizing it)
+     * and setting up the character cards in case the game is in expert mode
+     */
     private void setupGame(){
-        //Setup phase
-        //When storing all the players' names remember to scramble the array in order to choose randomly the order
-        //for the first turn, as per the rules
         getGameMoves().setUpGame(getGamePlayers().size(),getGamePlayers());
-        setPlayerOrder(getGameMoves().getCurrentGame().getPlayersList());
-        setUpCharacterCards();
+        List <Player> list = getGameMoves().getCurrentGame().getPlayersList();
+        Collections.shuffle(list);
+        setPlayerOrder(list);
+        if(getGameMoves().getCurrentGame().getGameMode() == 1)
+            setUpCharacterCards();
         setGameOn(true);
-
     }
 
-
+    /**
+     * This method sets up the different character cards one by one
+     */
     private void setUpCharacterCards(){
         getCharacterDeck().add(new DrawStudentsIslandCard());
         getCharacterDeck().add(new EqualProfessorCard());
@@ -128,6 +135,9 @@ public class TurnHandler implements Runnable {
         drawRandomCharacterCards();
     }
 
+    /**
+     * This method sets the this.DrawnCards attribute to 3 random cards drawn from the 12 character cards
+     */
     private void drawRandomCharacterCards(){
         List<CharacterCard> toCopy = new ArrayList<>();
         for (int i = 0; i < getNumberOfCharacterCards(); i++)
@@ -146,6 +156,7 @@ public class TurnHandler implements Runnable {
      * phase of each turn.
      * At the end of each turn gameMoves.checkWin() is executed and if the game is over, gameOn is set to false and the name of
      * the winner is printed, otherwise "New Turn" is printed and the game goes on.
+     * In case the current turn is deemed as the last turn, the winning player has to be sorted at the end of the turn
      */
     public void run(){
         List<String> users = new ArrayList<>();
@@ -237,7 +248,7 @@ public class TurnHandler implements Runnable {
             try{
                 setWinner(getGameMoves().findWinnerTower().getNickname());
             }
-            catch (noWinnerException f){
+            catch (NoWinnerException f){
                 setWinner("Nobody won: equal amounts of towers and professors");
             }
             setGameOn(false);
@@ -273,15 +284,14 @@ public class TurnHandler implements Runnable {
 
     /**
      * This method refills all the cloud tiles with the appropriate number of students specified in GameSettings only if
-     * there are enough studentPaws to refill all of them, if not set this turn as the last
+     * there are enough studentPaws to refill all of them, if not this turn will be set as the last
      */
     public void refillCloudTiles() {
-        //Check if there are enough studentPaws to refill all the cloud tiles, if not, don't refill them and set this turn as the last
         if (getGameMoves().getTotalStudentPaws() > getGameMoves().getCurrentSettings().getStudentsCloudTile() * getGameMoves().getCurrentGame().getPlayersList().size()){
             for (CloudTile cloudTile : getGameMoves().getCurrentGame().getCloudTiles()) {
                 cloudTile.reFill(getGameMoves().generateStudents(getGameMoves().getCurrentSettings().getStudentsCloudTile()));
             }
-            // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
+            //Sends everyone playground update messages using Virtualviewtcp objects
         } else
             setLastTurn(true);
     }
@@ -290,6 +300,9 @@ public class TurnHandler implements Runnable {
      * This method asks the player which colour is the student that he wants to move, then it asks whether he wants to move
      * it in the dining room or on an island (hence asking which island he wants to move it to). The process is repeated
      * until the player has moved the number of students he has to move as per gameSettings.
+     * @throws IOException in case something goes wrong with the input or in case a character card throws it
+     * @throws GameWonException in case a condition for the game win presents itself or in case a character card throws it
+     * @throws EmptyTowerYard in case the tower yard is empty or in case a character card throws it
      */
     private void moveStudents() throws IOException, GameWonException, EmptyTowerYard{
         int studentColour;
@@ -328,7 +341,7 @@ public class TurnHandler implements Runnable {
                 printConsole("Full dining room exception occurs!");
                 getCurrentClient().sendMessage(new NotificationCMI("You don't have enough space to move that student to the dining room!"));
             }
-            catch (chooseCharacterCardException e2)
+            catch (ChooseCharacterCardException e2)
             {
                 useCharacterCard(e2.getCharacterCard());
             }
@@ -341,6 +354,9 @@ public class TurnHandler implements Runnable {
      * to draw while also checking if the card had already been drawn by another player (using gameMoves.useAssistantCard()).
      * In case the player only has already drawn cards in his hands, an exception is made (as per the rules) and he is
      * allowed to draw an already drawn card of his choice
+     * @throws IOException in case something goes wrong with the input or in case a character card throws it
+     * @throws GameWonException in case a condition for the game win presents itself or in case a character card throws it
+     * @throws EmptyTowerYard in case the tower yard is empty or in case a character card throws it
      */
     private void chooseTurnAssistantCards() throws IOException, GameWonException, EmptyTowerYard
     {
@@ -384,10 +400,10 @@ public class TurnHandler implements Runnable {
                     printConsole("Player fails to choose assistant card");
                     getCurrentClient().sendMessage(new NotificationCMI("Card not found in you deck!!"));
                 }
-                catch( chooseCharacterCardException e)
+                catch(ChooseCharacterCardException e)
                 {
                     useCharacterCard(e.getCharacterCard());
-                    System.out.println("Apposto dai, carta usata!");
+                    System.out.println("Card successfully used!");
                 }
             }
 
@@ -405,6 +421,9 @@ public class TurnHandler implements Runnable {
     /**
      * This method asks the player which island he wants to move mother nature to. In case he asks to move mothernature
      * to an island where he can't move it to, he gets asked again until he asks for a valid number of steps.
+     * @throws IOException in case something goes wrong with the input or in case a character card throws it
+     * @throws GameWonException in case a condition for the game win presents itself or in case a character card throws it
+     * @throws EmptyTowerYard in case the tower yard is empty or in case a character card throws it
      */
     private void moveMotherNature()throws IOException, GameWonException, EmptyTowerYard{
         getCurrentClient().sendMessage(new NotificationCMI("Now you have to move mother nature!"));
@@ -418,7 +437,7 @@ public class TurnHandler implements Runnable {
                 printConsole("Mother nature steps exception");
                 getCurrentClient().sendMessage(new NotificationCMI("You exceeded mother nature steps"));
             }
-            catch (chooseCharacterCardException e1)
+            catch (ChooseCharacterCardException e1)
             {
                 useCharacterCard(e1.getCharacterCard());
             }
@@ -448,11 +467,10 @@ public class TurnHandler implements Runnable {
                     getGameMoves().changeInfluenceToIsland(motherNatureIsland);
                 getGameMoves().getIslandController().islandUnification(motherNatureIsland, getGameMoves().getCurrentGame());
             }
-            // manda a tutti messaggio di aggiornamento playground tramite oggetti virtualviewtcp
-            // manda a current player aggiornamneto tramite oggetti virtualviewtcp
+            // sends everyone playground update message using virtualviewtcp objects
+            // sends to current player an update using virtualviewtcp objects
         } else {
             motherNatureIsland.setBanned(false);
-            //diminuisci bancardnumber
         }
     }
 
@@ -460,6 +478,9 @@ public class TurnHandler implements Runnable {
      * In case this is not the last turn, this method asks the current player which cloudTile he wants to take his new
      * students from, in case the chosen cloudTile has been already taken, CloudTileAlreadyTakenException is handled
      * and the player is asked again.
+     * @throws IOException in case something goes wrong with the input or in case a character card throws it
+     * @throws GameWonException in case a condition for the game win presents itself or in case a character card throws it
+     * @throws EmptyTowerYard in case the tower yard is empty or in case a character card throws it
      */
     private void chooseCloudTiles() throws  IOException, GameWonException, EmptyTowerYard{
         while(!getLastTurn()){
@@ -472,13 +493,21 @@ public class TurnHandler implements Runnable {
                 printConsole("CloudTile already taken exception occurs!");
                 getCurrentClient().sendMessage(new NotificationCMI("The selected CloudTile is empty!"));
             }
-            catch (chooseCharacterCardException e1)
+            catch (ChooseCharacterCardException e1)
             {
                 useCharacterCard(e1.getCharacterCard());
             }
         }
     }
 
+    /**
+     * In case this is not the last turn, this method asks the current player which cloudTile he wants to take his new
+     * students from, in case the chosen cloudTile has been already taken, CloudTileAlreadyTakenException is handled
+     * and the player is asked again.
+     * @throws IOException in case something goes wrong with the input or in case a character card throws it
+     * @throws GameWonException in case a condition for the game win presents itself or in case a character card throws it
+     * @throws EmptyTowerYard in case the tower yard is empty or in case a character card throws it
+     */
     private void useCharacterCard(int characterCard) throws IOException, GameWonException, EmptyTowerYard
     {
         int chosenCard;
@@ -496,16 +525,25 @@ public class TurnHandler implements Runnable {
         }
     }
 
+    /**
+     * This method calls the initialize method on each character card, at the beginning of the game
+     */
     private void initializeCharacterCards(){
         for(CharacterCard drawnCard : getGameMoves().getCurrentGame().getDrawnCards())
             drawnCard.initializeCard(this);
     }
 
+    /**
+     * This method calls the resetCard method on each character card, at the ending of the turn
+     */
     private void resetCards(){
         for(CharacterCard drawnCard : getGameMoves().getCurrentGame().getDrawnCards())
             drawnCard.resetCard(this);
     }
 
+    /**
+     * This method updates the playground for each player
+     */
     private void update() throws IOException {
        for (VirtualViewConnection client: getGamePlayers()) {
                 client.sendMessage(new UpdatePlayGroundCMI(getGameMoves().getCurrentGame()));
@@ -514,7 +552,7 @@ public class TurnHandler implements Runnable {
 
 
     /**
-     * This method print the input in MAGENTA for the server side console
+     * This method prints the input in MAGENTA for the server side console
      * @param textToPrint the text to be printed
      */
     private void printConsole(String textToPrint)

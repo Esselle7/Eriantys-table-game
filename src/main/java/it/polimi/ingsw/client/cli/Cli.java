@@ -4,7 +4,6 @@ import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.client.View;
 import it.polimi.ingsw.client.model.*;
-import it.polimi.ingsw.server.controller.Exceptions.chooseCharacterCardException;
 import it.polimi.ingsw.server.controller.expert.CharacterCard;
 import it.polimi.ingsw.server.model.*;
 
