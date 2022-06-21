@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CharacterCardsTest {
-    CharacterCard card = null;
+    /*CharacterCard card = null;
     TurnHandler turnHandler = null;
     GameMoves GC;
     Player player1, player2, player3;
@@ -115,5 +115,5 @@ public class CharacterCardsTest {
         island1.increasePlacedStudent(0);
         assertEquals(player1, GC.getIslandController().checkInfluence(island1,GC.getCurrentGame()));
         assertEquals(3, player1.getPlayerBoard().getCoins());
-    }
+    }*/
 }
