@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class Server {
     public static void main(String[] args) throws IOException, InterruptedException {
-        VirtualViewTCPFactory clientTCPFactory = new VirtualViewTCPFactory(5000);
+        VirtualViewTCPFactory clientTCPFactory = new VirtualViewTCPFactory(4500);
         GameInstanceFactory gameInstanceFactory = new GameInstanceFactory(clientTCPFactory);
         Thread main = new Thread(gameInstanceFactory);
         main.setName("gamesGenerator");

@@ -65,6 +65,12 @@ public class GuiLoadScene implements Runnable{
                 controller.updateCloudTiles();
                 break;
             }
+            case "ChooseYesNo":{
+                GuiMain.updateNewWindow(root,xml,850,600);
+                GuiPlaygroundController controller = loader.getController();
+                controller.notificationLabel.setText(GuiPlaygroundController.getNotification());
+                break;
+            }
             case "CharacterCard":{
                 GuiMain.updateScene(root,xml);
                 GuiPlaygroundController controller = loader.getController();

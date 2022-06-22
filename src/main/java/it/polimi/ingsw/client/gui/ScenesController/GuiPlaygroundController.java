@@ -121,8 +121,6 @@ public class GuiPlaygroundController {
     public ImageView towerBlackIsland10;
     public ImageView towerBlackIsland11;
     public ImageView towerBlackIsland12;
-
-
     List<ImageView> towerBlackIsland;
 
     public ImageView towerGreyIsland1;
@@ -322,6 +320,12 @@ public class GuiPlaygroundController {
     public GridPane cloudTile3;
     List<GridPane> paneCloudTiles;
 
+    public Button cloudButton1;
+    public Button cloudButton2;
+    public Button cloudButton3;
+    List<Button> cloudButton;
+
+
     public Label studentCloudRed1;
     public Label studentCloudGreen1;
     public Label studentCloudBlue1;
@@ -425,21 +429,10 @@ public class GuiPlaygroundController {
     public Label character9Yellow;
     public Label character9Pink;
     List<Label> elementCharacterNine;
-
     List<List<Label>> elements;
+    public Label coins;
 
-
-
-
-
-
-
-
-
-    public GuiPlaygroundController()
-    {
-
-    }
+    public GuiPlaygroundController() {}
 
     public void initialize()
     {
@@ -779,6 +772,11 @@ public class GuiPlaygroundController {
         paneCloudTiles.add(cloudTile2);
         paneCloudTiles.add(cloudTile3);
 
+        cloudButton = new ArrayList<>();
+        cloudButton.add(cloudButton1);
+        cloudButton.add(cloudButton2);
+        cloudButton.add(cloudButton3);
+
         motherNature = new ArrayList<>();
         motherNature.add(motherNature1);
         motherNature.add(motherNature2);
@@ -1064,11 +1062,12 @@ public class GuiPlaygroundController {
 
     }
 
-    public void updateCloudTiles() // manca aggiornamento delle cloud tiles già prese
+    public void updateCloudTiles()
     {
         for(int cloud = 0; cloud<getPlayGround().getCloudTiles().length; cloud++)
         {
             paneCloudTiles.get(cloud).opacityProperty().set(1.0);
+            cloudButton.get(cloud).opacityProperty().set(1.0);
             if(!getPlayGround().getCloudTiles()[cloud].isUsed())
                 for(int student=0; student<Colour.colourCount;student++)
                 {
@@ -1078,8 +1077,12 @@ public class GuiPlaygroundController {
                     else
                         cloudTiles.get(cloud).get(student).setOpacity(0.5);
                 }
+            else
+            {
+                paneCloudTiles.get(cloud).opacityProperty().set(0.0);
+            }
         }
-        if(getPlayGround().getPlayersList().size() == 3)
+        if(getPlayGround().getPlayersList().size() == 2)
         {
             paneCloudTiles.get(2).opacityProperty().set(0.0);
             for(int student=0; student<Colour.colourCount;student++)
@@ -1178,6 +1181,7 @@ public class GuiPlaygroundController {
 
     public void updateCharacter()
     {
+        coins.setText("Remains coins: "+getMyBoard().getCoins());
         drawnCards = new ArrayList<>();
         for (ImageView characterCard : characterCards) {
             characterCard.setOpacity(0.3);
@@ -1421,6 +1425,7 @@ public class GuiPlaygroundController {
         {
             GuiMain.getQueue().add(cloudTile);
             Gui.setGamePhase("Other");
+            switchToPlayground();
         }
     }
 
@@ -1449,6 +1454,7 @@ public class GuiPlaygroundController {
             GuiMain.getQueue().add(-1);
             setNotification("Not enough coins");
             System.out.println("Not enough coins");
+            switchToCharacter();
         }
 
     }
@@ -1542,5 +1548,16 @@ public class GuiPlaygroundController {
             GuiMain.getQueue().add(4);
     }
 
+    public void chooseYes(MouseEvent mouseEvent)
+    {
+        if(Gui.getGamePhase().equals("Character"))
+            GuiMain.getQueue().add(1);
+    }
+
+    public void chooseNo(MouseEvent mouseEvent)
+    {
+        if(Gui.getGamePhase().equals("Character"))
+            GuiMain.getQueue().add(0);
+    }
 
 }

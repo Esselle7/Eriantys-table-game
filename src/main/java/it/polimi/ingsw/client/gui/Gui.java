@@ -276,7 +276,13 @@ public class Gui implements View {
 
     @Override
     public int chooseYesOrNo() {
-        return 0;
+        Platform.runLater(() -> new GuiLoadScene("ChooseYesNo").run());
+        try {
+            return (int) GuiMain.getQueue().take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     @Override
@@ -285,7 +291,6 @@ public class Gui implements View {
         resetGuiQueue();
         Platform.runLater(() -> new GuiLoadScene("CloudTilesPlayers").run());
         try {
-            //GuiMain.getNewWindow().close();
             return (int) GuiMain.getQueue().take();
         } catch (InterruptedException e) {
             e.printStackTrace();

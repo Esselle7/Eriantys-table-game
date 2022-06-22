@@ -12,7 +12,7 @@ import java.util.*;
  * It also stores the Game's playground as currentGame, the current settings, the islandController, the currentPlayer and
  * a priorityPlayer in case EqualProfessorCard is used.
  */
-public class GameMoves extends IslandController implements Serializable {
+public class GameMoves extends ManagerStudent implements Serializable {
     private PlayGround currentGame;
     private GameSettings currentSettings;
     private final IslandController islandController;
