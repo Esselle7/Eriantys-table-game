@@ -2,7 +2,7 @@ package it.polimi.ingsw.server.model;
 
 import it.polimi.ingsw.server.controller.Exceptions.EmptyTowerYard;
 import it.polimi.ingsw.server.controller.Exceptions.NotEnoughCoins;
-import it.polimi.ingsw.server.controller.Exceptions.noStudentForColour;
+import it.polimi.ingsw.server.controller.Exceptions.NoStudentForColour;
 import it.polimi.ingsw.server.controller.Exceptions.EmptyDiningRoom;
 
 import java.io.Serializable;
@@ -32,10 +32,6 @@ public class Board extends ManagerStudent implements Serializable {
         this.entranceRoom = entranceRoom;
         this.towerYard = towerYard;
         this.towerColour = towerColour;
-        this.addCoin();
-        this.addCoin();
-        this.addCoin();
-        this.addCoin();
         this.addCoin();
         diningRoom = new int[Colour.colourCount];
     }
@@ -109,12 +105,12 @@ public class Board extends ManagerStudent implements Serializable {
      * Removes a SINGLE student of the selected colour from the entrance room
      * @param studentColour the colour of the student to remove
      */
-    public void removeStudentEntrance(int studentColour) throws noStudentForColour
+    public void removeStudentEntrance(int studentColour) throws NoStudentForColour
     {
         if(entranceRoom[studentColour] > 0)
             entranceRoom[studentColour] --;
         else
-            throw new noStudentForColour();
+            throw new NoStudentForColour();
     }
 
     /**

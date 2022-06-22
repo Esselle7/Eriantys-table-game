@@ -12,7 +12,7 @@ import java.util.*;
  * It also stores the Game's playground as currentGame, the current settings, the islandController, the currentPlayer and
  * a priorityPlayer in case EqualProfessorCard is used.
  */
-public class GameMoves extends ManagerStudent implements Serializable {
+public class GameMoves extends IslandController implements Serializable {
     private PlayGround currentGame;
     private GameSettings currentSettings;
     private final IslandController islandController;
@@ -121,7 +121,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
      * @param studentColour the student colour to move
      * @param selectedIsland the island where the student will be place
      */
-    public void moveStudentsEntranceToIsland(int studentColour, int selectedIsland) throws noStudentForColour
+    public void moveStudentsEntranceToIsland(int studentColour, int selectedIsland) throws NoStudentForColour
     {
         getCurrentPlayerBoard().removeStudentEntrance(studentColour);
         getCurrentGame().getIslandByIndex(selectedIsland).increasePlacedStudent(studentColour);
@@ -134,7 +134,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
      *                              chairs in the dining
      *                              room
      */
-    public void moveStudentEntranceToDining(int studentColour) throws FullDiningRoomTable, noStudentForColour {
+    public void moveStudentEntranceToDining(int studentColour) throws FullDiningRoomTable, NoStudentForColour {
         if(getCurrentPlayerBoard().getDiningRoom()[studentColour] < getCurrentSettings().getDiningRoomLength() &&
                 getCurrentPlayerBoard().getEntranceRoom()[studentColour] > 0)
         {
@@ -351,7 +351,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
         else
             steps = islandId-indexIslandMotherNature;
         int motherNatureSteps = getCurrentPlayer().getMotherNatureSteps();
-        if (steps > motherNatureSteps)
+        if (steps > motherNatureSteps || steps < 1)
             throw new ExceededMotherNatureStepsException();
         else
             getCurrentGame().setIslandWithMotherNature(getCurrentGame().getIslandByIndex(islandId));

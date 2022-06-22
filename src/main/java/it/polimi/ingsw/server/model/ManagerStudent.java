@@ -1,5 +1,7 @@
 package it.polimi.ingsw.server.model;
 
+import it.polimi.ingsw.server.controller.Exceptions.NoStudentForColour;
+
 import java.io.Serializable;
 import java.util.Random;
 

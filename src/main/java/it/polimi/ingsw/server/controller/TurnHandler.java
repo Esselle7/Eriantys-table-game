@@ -27,6 +27,7 @@ public class TurnHandler implements Runnable {
     private String winner = null;
     private List <CharacterCard> CharacterDeck;
     private final int numberOfCharacterCards;
+    private boolean usedCharacterCards;
 
     private final List<VirtualViewConnection> gamePlayers;
 
@@ -44,6 +45,7 @@ public class TurnHandler implements Runnable {
         getGameMoves().getCurrentGame().setGameMode(gameMode);
         CharacterDeck = new ArrayList<>();
         numberOfCharacterCards = 3;
+        usedCharacterCards = false;
         if(gameMode != 2){
             for (VirtualViewConnection c: gamePlayers
             ) {
@@ -314,7 +316,7 @@ public class TurnHandler implements Runnable {
                 getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
                 studentColour = getCurrentClient().receiveChooseInt();
                 if(getGameMoves().getCurrentPlayerBoard().getEntranceRoom()[studentColour] == 0)
-                    throw new noStudentForColour();
+                    throw new NoStudentForColour();
                 getCurrentClient().sendMessage(new NotificationCMI("Select where to move the student:"));
                 getCurrentClient().sendMessage(new chooseWhereToMove());
                 whereToMove = getCurrentClient().receiveChooseInt();
@@ -332,7 +334,7 @@ public class TurnHandler implements Runnable {
                 update();
 
             }
-            catch (noStudentForColour e) {
+            catch (NoStudentForColour e) {
                 printConsole("No student for colour entrance exception occurs!");
                 getCurrentClient().sendMessage(new NotificationCMI("You don't have that student in your entrance room!"));
             }
@@ -467,7 +469,7 @@ public class TurnHandler implements Runnable {
                     getGameMoves().changeInfluenceToIsland(motherNatureIsland);
                 getGameMoves().getIslandController().islandUnification(motherNatureIsland, getGameMoves().getCurrentGame());
             }
-            // sends everyone playground update message using virtualviewtcp objects
+            // sends everyone playground update messages using virtualviewtcp objects
             // sends to current player an update using virtualviewtcp objects
         } else {
             motherNatureIsland.setBanned(false);
@@ -512,9 +514,10 @@ public class TurnHandler implements Runnable {
     {
         int chosenCard;
         chosenCard = characterCard;
-        if(chosenCard != -1) {
+        if(chosenCard != -1 && usedCharacterCards == false) {
             try {
                 getGameMoves().getCurrentGame().getDrawnCards().get(chosenCard - 1).useCard(this);
+                usedCharacterCards = true;
             }catch (UnableToUseCardException e) {
                 getCurrentClient().sendMessage(new NotificationCMI("Please select another character card!"));
             } catch (NotEnoughCoins e) {
@@ -537,6 +540,7 @@ public class TurnHandler implements Runnable {
      * This method calls the resetCard method on each character card, at the ending of the turn
      */
     private void resetCards(){
+        usedCharacterCards = false;
         for(CharacterCard drawnCard : getGameMoves().getCurrentGame().getDrawnCards())
             drawnCard.resetCard(this);
     }

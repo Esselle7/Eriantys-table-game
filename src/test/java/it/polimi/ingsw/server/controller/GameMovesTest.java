@@ -103,7 +103,7 @@ class GameMovesTest {
         {
             assertTrue(true);
         }
-        catch (noStudentForColour e)
+        catch (NoStudentForColour e)
         {
             fail();
         }
@@ -120,7 +120,7 @@ class GameMovesTest {
         {
             fail();
         }
-        catch (noStudentForColour e)
+        catch (NoStudentForColour e)
         {
             assertTrue(true);
         }

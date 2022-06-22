@@ -55,7 +55,10 @@ public class DrawStudentsIslandCard extends CharacterCard {
         turnHandler.getCurrentClient().sendMessage(new chooseIslandCMI());
         int islandIndex = turnHandler.getCurrentClient().receiveChooseInt() - 1;
         turnHandler.getGameMoves().getCurrentGame().getIslandByIndex(islandIndex).increasePlacedStudent(colour);
-        turnHandler.getGameMoves().addStudentsToTarget(this.students, turnHandler.getGameMoves().generateStudents(1));
+        if(turnHandler.getGameMoves().getTotalStudentPaws() > 1) {
+            turnHandler.getGameMoves().addStudentsToTarget(this.students, turnHandler.getGameMoves().generateStudents(1));
+        } else
+            turnHandler.setLastTurn(true);
         turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Student successfully moved to the island"));
     }
 }

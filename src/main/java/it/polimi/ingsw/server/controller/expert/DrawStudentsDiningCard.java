@@ -45,7 +45,10 @@ public class DrawStudentsDiningCard extends CharacterCard {
         }
         students[colour]--;
         turnHandler.getCurrentPlayer().getPlayerBoard().getDiningRoom()[colour]++;
-        turnHandler.getGameMoves().addStudentsToTarget(this.students,turnHandler.getGameMoves().generateStudents(1));
+        if(turnHandler.getGameMoves().getTotalStudentPaws() > 1) {
+            turnHandler.getGameMoves().addStudentsToTarget(this.students, turnHandler.getGameMoves().generateStudents(1));
+        } else
+            turnHandler.setLastTurn(true);
         turnHandler.getCurrentClient().sendMessage(new NotificationCMI("Student successfully moved"));
     }
 
