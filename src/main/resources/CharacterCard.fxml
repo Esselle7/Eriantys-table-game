@@ -10,8 +10,8 @@
 <AnchorPane maxHeight="600.0" maxWidth="850.0" minHeight="600.0" minWidth="850.0" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.gui.ScenesController.GuiPlaygroundController">
    <children>
       <SplitPane dividerPositions="0.5" layoutX="89.0" layoutY="81.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="160.0" style="-fx-background-color: skyblue;">
+         <items>
+            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="160.0" style="-fx-background-color: skyblue;">
                <children>
                   <ImageView fitHeight="617.0" fitWidth="1179.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-200.0" AnchorPane.rightAnchor="-231.0">
                      <image>
@@ -19,18 +19,18 @@
                      </image>
                   </ImageView>
                   <GridPane prefHeight="491.0" prefWidth="848.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0">
-                    <columnConstraints>
+                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
                      <children>
                         <ImageView fx:id="character1" fitHeight="175.0" fitWidth="225.0" onMouseClicked="#characterOne" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <image>
@@ -443,15 +443,15 @@
                   </ImageView>
                </children>
             </AnchorPane>
-          <AnchorPane maxHeight="100.0" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="50.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #e7bd8d#e7bd8d;">
+            <AnchorPane maxHeight="100.0" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="50.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #e7bd8d#e7bd8d;">
                <children>
                   <SplitPane dividerPositions="0.29797979797979796" prefHeight="100.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
                               <SplitPane dividerPositions="0.29797979797979796" prefHeight="98.0" prefWidth="293.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <items>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;">
+                                 <items>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;">
                                        <children>
                                           <Button contentDisplay="CENTER" mnemonicParsing="false" mouseTransparent="true" opacity="0.78" prefHeight="96.0" prefWidth="730.0" style="-fx-background-radius: 100; -fx-background-color: #8e7970#8e7970 #8e7970#8e7970;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                              <font>
@@ -470,7 +470,7 @@
                                           </Button>
                                        </children>
                                     </AnchorPane>
-                                  <AnchorPane maxWidth="150.0" minWidth="150.0" prefWidth="100.0" style="-fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;">
+                                    <AnchorPane maxWidth="150.0" minWidth="150.0" prefWidth="100.0" style="-fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;">
                                        <children>
                                           <Label fx:id="coins" alignment="CENTER" prefHeight="96.0" prefWidth="150.0" text="genericStats" textAlignment="CENTER" textFill="RED" wrapText="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                              <font>
@@ -479,11 +479,11 @@
                                           </Label>
                                        </children>
                                     </AnchorPane>
-                                </items>
+                                 </items>
                               </SplitPane>
                            </children>
                         </AnchorPane>
-                      <AnchorPane maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d8e7970;">
+                        <AnchorPane maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d8e7970;">
                            <children>
                               <Button mnemonicParsing="false" style="-fx-background-radius: 100; -fx-background-color: #8e7970#8e7970;" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
                                  <graphic>
@@ -499,11 +499,11 @@
                               </Button>
                            </children>
                         </AnchorPane>
-                    </items>
+                     </items>
                   </SplitPane>
                </children>
             </AnchorPane>
-        </items>
+         </items>
       </SplitPane>
    </children>
 </AnchorPane>
