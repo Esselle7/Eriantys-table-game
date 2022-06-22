@@ -34,7 +34,7 @@
               </rowConstraints>
                <children>
                   <Button fx:id="leader" mnemonicParsing="false" onAction="#returnLeader" prefHeight="62.0" prefWidth="133.0" text="Leader" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                  <Button fx:id="newGame" mnemonicParsing="false" onAction="#returnNewGame" prefHeight="62.0" prefWidth="133.0" text="Add to a Game" GridPane.halignment="CENTER" />
+                  <Button fx:id="newGame" mnemonicParsing="false" onAction="#returnAddToGame" prefHeight="62.0" prefWidth="133.0" text="Add to a Game" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
          </children>

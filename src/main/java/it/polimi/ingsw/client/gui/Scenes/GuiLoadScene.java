@@ -5,9 +5,13 @@ import it.polimi.ingsw.client.gui.GuiMain;
 import it.polimi.ingsw.client.gui.ScenesController.GuiPlaygroundController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-
 import java.io.IOException;
 import java.util.Objects;
+
+/**
+ * This class allows to load a new xml scene. By using the switch
+ * constructor the run method understand how to fit the new window.
+ */
 
 public class GuiLoadScene implements Runnable{
     private final String xml;
