@@ -1240,7 +1240,7 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <SplitPane dividerPositions="0.29797979797979796" prefHeight="98.0" prefWidth="293.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <SplitPane prefHeight="98.0" prefWidth="293.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <items>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;">
                                        <children>
@@ -1259,15 +1259,6 @@
                                                 <Cursor fx:constant="NONE" />
                                              </cursor>
                                           </Button>
-                                       </children>
-                                    </AnchorPane>
-                                  <AnchorPane maxWidth="150.0" minWidth="150.0" prefWidth="100.0" style="-fx-background-color: #e7bd8d#e7bd8d #e7bd8d#e7bd8d;">
-                                       <children>
-                                          <Label fx:id="genericStatsLabel" alignment="CENTER" prefHeight="96.0" prefWidth="150.0" text="genericStats" textAlignment="CENTER" textFill="RED" wrapText="true" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
                                        </children>
                                     </AnchorPane>
                                 </items>
