@@ -1069,6 +1069,7 @@ public class GuiPlaygroundController {
             else
             {
                 paneCloudTiles.get(cloud).opacityProperty().set(0.0);
+                paneCloudTiles.get(cloud).setDisable(true);
             }
         }
         if(getPlayGround().getPlayersList().size() == 2)
@@ -1456,25 +1457,21 @@ public class GuiPlaygroundController {
         if(Gui.getGamePhase().equals("cloudTiles"))
         {
             GuiMain.getQueue().add(cloudTile);
-            Gui.setGamePhase("Other");
-            switchToPlayground();
+            //switchToPlayground();
         }
     }
     // list of methods to handle select cloud tile event
     public void cloudTileOne()
     {
-        if(paneCloudTiles.get(1).opacityProperty().get() != 0.0)
-            chooseCloudTile(1);
+        chooseCloudTile(1);
     }
     public void cloudTileTwo()
     {
-        if(paneCloudTiles.get(2).opacityProperty().get() != 0.0)
-            chooseCloudTile(2);
+        chooseCloudTile(2);
     }
     public void cloudTileThree()
     {
         if(getPlayGround().getPlayersList().size() == 3)
-            if(paneCloudTiles.get(3).opacityProperty().get() != 0.0)
                 chooseCloudTile(3);
     }
 

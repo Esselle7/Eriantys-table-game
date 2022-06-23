@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class CloudTile  implements Serializable {
     private int[] students;
-    private boolean isUsed;
+    private boolean isUsed=false;
 
     /**
      * CloudTile Constructor, it sets the students on the cloud tile and sets the isUsed parameter to false
@@ -22,6 +22,7 @@ public class CloudTile  implements Serializable {
 
     public void setStudents(int[] students) {
         this.students = students;
+        isUsed = false;
     }
 
     public int[] getStudents() {
@@ -44,11 +45,10 @@ public class CloudTile  implements Serializable {
         this.students = students;
         setUsed();
     }
-
     public boolean isUsed() {
         return isUsed;
     }
-    public void setUsed()
+    private void setUsed()
     {
         isUsed = false;
     }
