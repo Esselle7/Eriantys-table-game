@@ -34,11 +34,6 @@ public class GameInstanceFactory implements Runnable{
         Thread connectionsAccepter = new Thread(virtualViewTCPFactory);
         printConsole("THIS IS THE SERVER FOR ERYANTIS GAME");
         printConsole("WELCOME ADMIN.");
-        try {
-            printConsole("Waiting on: "+InetAddress.getLocalHost());
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
         connectionsAccepter.start();
     }
 
