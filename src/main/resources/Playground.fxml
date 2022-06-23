@@ -219,15 +219,15 @@
                                     <Image url="@Icons/towerWhite.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="towerIsland2" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font></Label>
                               <ImageView fx:id="towerBlackIsland2" fitHeight="60.0" fitWidth="75.0" onMouseClicked="#moveToIsland2" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
                               </ImageView>
+                              <Label fx:id="towerIsland2" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font></Label>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island1" layoutX="135.0" layoutY="148.0" onMouseClicked="#moveToIsland1" GridPane.rowIndex="2">
@@ -298,10 +298,6 @@
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="towerIsland1" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font></Label>
                               <ImageView fx:id="towerWhiteIsland1" fitHeight="60.0" fitWidth="75.0" layoutX="41.0" layoutY="38.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerWhite.png" />
@@ -312,6 +308,10 @@
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
                               </ImageView>
+                              <Label fx:id="towerIsland1" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font></Label>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island3" layoutX="115.0" layoutY="119.0" onMouseClicked="#moveToIsland3" GridPane.columnIndex="2">
@@ -383,10 +383,6 @@
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="towerIsland3" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font></Label>
                               <ImageView fx:id="towerWhiteIsland3" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                  <image>
                                     <Image url="@Icons/towerWhite.png" />
@@ -397,6 +393,10 @@
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
                               </ImageView>
+                              <Label fx:id="towerIsland3" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font></Label>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island11" layoutX="220.0" layoutY="10.0" onMouseClicked="#moveToIsland11" GridPane.columnIndex="2" GridPane.rowIndex="4">
@@ -467,10 +467,6 @@
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="towerIsland11" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font></Label>
                               <ImageView fx:id="towerWhiteIsland11" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerWhite.png" />
@@ -481,6 +477,10 @@
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
                               </ImageView>
+                              <Label fx:id="towerIsland11" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font></Label>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island5" layoutX="10.0" layoutY="10.0" onMouseClicked="#moveToIsland5" GridPane.columnIndex="4">
@@ -552,10 +552,6 @@
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="towerIsland5" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font></Label>
                               <ImageView fx:id="towerWhiteIsland5" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                  <image>
                                     <Image url="@Icons/towerWhite.png" />
@@ -566,6 +562,11 @@
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
                               </ImageView>
+                              <Label fx:id="towerIsland5" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island4" layoutX="10.0" layoutY="10.0" onMouseClicked="#moveToIsland4" GridPane.columnIndex="3">
@@ -641,15 +642,15 @@
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="towerIsland4" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font></Label>
                               <ImageView fx:id="towerBlackIsland4" fitHeight="60.0" fitWidth="75.0" onMouseClicked="#moveToIsland4" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
                               </ImageView>
+                              <Label fx:id="towerIsland4" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font></Label>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island9" layoutX="220.0" layoutY="389.0" onMouseClicked="#moveToIsland9" GridPane.columnIndex="4" GridPane.rowIndex="4">
@@ -721,10 +722,6 @@
                                     <Image url="@Icons/towerWhite.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="towerIsland9" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font></Label>
                               <ImageView fx:id="towerGreyIsland9" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerGrey.png" />
@@ -735,6 +732,10 @@
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
                               </ImageView>
+                              <Label fx:id="towerIsland9" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font></Label>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island12" layoutX="467.0" layoutY="389.0" onMouseClicked="#moveToIsland12" GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -805,10 +806,6 @@
                                     <Image url="@Icons/towerWhite.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="towerIsland12" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font></Label>
                               <ImageView fx:id="towerGreyIsland12" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerGrey.png" />
@@ -819,6 +816,10 @@
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
                               </ImageView>
+                              <Label fx:id="towerIsland12" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font></Label>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island8" layoutX="325.0" layoutY="10.0" onMouseClicked="#moveToIsland8" GridPane.columnIndex="5" GridPane.rowIndex="3">
@@ -890,10 +891,6 @@
                                     <Image url="@Icons/towerWhite.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="towerIsland8" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font></Label>
                               <ImageView fx:id="towerBlackIsland8" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerBlack.png" />
@@ -904,6 +901,11 @@
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
                               </ImageView>
+                              <Label fx:id="towerIsland8" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island7" layoutX="572.0" layoutY="298.0" onMouseClicked="#moveToIsland7" GridPane.columnIndex="6" GridPane.rowIndex="2">
@@ -975,10 +977,6 @@
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="towerIsland7" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font></Label>
                               <ImageView fx:id="towerBlackIsland7" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerBlack.png" />
@@ -989,6 +987,10 @@
                                     <Image url="@Icons/towerWhite.png" />
                                  </image>
                               </ImageView>
+                              <Label fx:id="towerIsland7" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font></Label>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island6" layoutX="677.0" layoutY="210.0" onMouseClicked="#moveToIsland6" GridPane.columnIndex="5" GridPane.rowIndex="1">
@@ -1060,10 +1062,6 @@
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="towerIsland6" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font></Label>
                               <ImageView fx:id="towerWhiteIsland6" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerWhite.png" />
@@ -1074,6 +1072,11 @@
                                     <Image url="@Icons/towerGrey.png" />
                                  </image>
                               </ImageView>
+                              <Label fx:id="towerIsland6" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </GridPane>
                         <GridPane fx:id="island10" layoutX="325.0" layoutY="10.0" onMouseClicked="#moveToIsland10" GridPane.columnIndex="3" GridPane.rowIndex="4">
@@ -1144,10 +1147,6 @@
                                     <Image url="@Icons/towerWhite.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="towerIsland10" opacity="0.0" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font></Label>
                               <ImageView fx:id="towerGreyIsland10" fitHeight="60.0" fitWidth="75.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                                  <image>
                                     <Image url="@Icons/towerGrey.png" />
@@ -1158,6 +1157,10 @@
                                     <Image url="@Icons/towerBlack.png" />
                                  </image>
                               </ImageView>
+                              <Label fx:id="towerIsland10" text="1" textFill="#dee41f" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="22.0" />
+                                 </font></Label>
                            </children>
                         </GridPane>
                      </children>
