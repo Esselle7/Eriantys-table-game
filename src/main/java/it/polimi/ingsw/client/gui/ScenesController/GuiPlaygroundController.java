@@ -1463,16 +1463,19 @@ public class GuiPlaygroundController {
     // list of methods to handle select cloud tile event
     public void cloudTileOne()
     {
-        chooseCloudTile(1);
+        if(paneCloudTiles.get(1).opacityProperty().get() != 0.0)
+            chooseCloudTile(1);
     }
     public void cloudTileTwo()
     {
-        chooseCloudTile(2);
+        if(paneCloudTiles.get(2).opacityProperty().get() != 0.0)
+            chooseCloudTile(2);
     }
     public void cloudTileThree()
     {
         if(getPlayGround().getPlayersList().size() == 3)
-            chooseCloudTile(3);
+            if(paneCloudTiles.get(3).opacityProperty().get() != 0.0)
+                chooseCloudTile(3);
     }
 
     /**
