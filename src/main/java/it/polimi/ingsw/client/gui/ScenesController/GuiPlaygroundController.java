@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-
+/**
+ * This class allows to handle every event during tha game
+ */
 public class GuiPlaygroundController {
 
     // Game Model
@@ -61,11 +63,13 @@ public class GuiPlaygroundController {
     public ImageView assistantTen;
     public List<ImageView> assistantCards;
 
+    // current assistant card
     public Label Player1AssistantCard;
     public Label Player2AssistantCard;
     public Label Player3AssistantCard;
     public List<Label> currentAssistantCard;
 
+    //island towers
     public Label towerIsland1;
     public Label towerIsland2;
     public Label towerIsland3;
@@ -80,7 +84,7 @@ public class GuiPlaygroundController {
     public Label towerIsland12;
     public List<Label> towers;
 
-
+    // islands and tower and student on islands
     public GridPane island1;
     public GridPane island2;
     public GridPane island3;
@@ -94,7 +98,6 @@ public class GuiPlaygroundController {
     public GridPane island11;
     public GridPane island12;
     public List<GridPane> islands;
-
     public Button island1Image;
     public Button island2Image;
     public Button island3Image;
@@ -108,7 +111,6 @@ public class GuiPlaygroundController {
     public Button island11Image;
     public Button island12Image;
     public List<Button> islandsImage;
-
     public ImageView towerBlackIsland1;
     public ImageView towerBlackIsland2;
     public ImageView towerBlackIsland3;
@@ -122,7 +124,6 @@ public class GuiPlaygroundController {
     public ImageView towerBlackIsland11;
     public ImageView towerBlackIsland12;
     List<ImageView> towerBlackIsland;
-
     public ImageView towerGreyIsland1;
     public ImageView towerGreyIsland2;
     public ImageView towerGreyIsland3;
@@ -135,9 +136,7 @@ public class GuiPlaygroundController {
     public ImageView towerGreyIsland10;
     public ImageView towerGreyIsland11;
     public ImageView towerGreyIsland12;
-
     List<ImageView> towerGreyIsland;
-
     public ImageView towerWhiteIsland1;
     public ImageView towerWhiteIsland2;
     public ImageView towerWhiteIsland3;
@@ -151,85 +150,72 @@ public class GuiPlaygroundController {
     public ImageView towerWhiteIsland11;
     public ImageView towerWhiteIsland12;
     List<ImageView> towerWhiteIsland;
-
     public Label studentRed1;
     public Label studentGreen1;
     public Label studentBlue1;
     public Label studentYellow1;
     public Label studentPink1;
     public List<Label> studentIsland1;
-
     public Label studentRed2;
     public Label studentGreen2;
     public Label studentBlue2;
     public Label studentYellow2;
     public Label studentPink2;
     public List<Label> studentIsland2;
-
     public Label studentRed3;
     public Label studentGreen3;
     public Label studentBlue3;
     public Label studentYellow3;
     public Label studentPink3;
     public List<Label> studentIsland3;
-
-
     public Label studentRed4;
     public Label studentGreen4;
     public Label studentBlue4;
     public Label studentYellow4;
     public Label studentPink4;
     public List<Label> studentIsland4;
-
     public Label studentRed5;
     public Label studentGreen5;
     public Label studentBlue5;
     public Label studentYellow5;
     public Label studentPink5;
     public List<Label> studentIsland5;
-
     public Label studentRed6;
     public Label studentGreen6;
     public Label studentBlue6;
     public Label studentYellow6;
     public Label studentPink6;
     public List<Label> studentIsland6;
-
     public Label studentRed7;
     public Label studentGreen7;
     public Label studentBlue7;
     public Label studentYellow7;
     public Label studentPink7;
     public List<Label> studentIsland7;
-
     public Label studentRed8;
     public Label studentGreen8;
     public Label studentBlue8;
     public Label studentYellow8;
     public Label studentPink8;
     public List<Label> studentIsland8;
-
     public Label studentRed9;
     public Label studentGreen9;
     public Label studentBlue9;
     public Label studentYellow9;
     public Label studentPink9;
     public List<Label> studentIsland9;
-
     public Label studentRed10;
     public Label studentGreen10;
     public Label studentBlue10;
     public Label studentYellow10;
     public Label studentPink10;
     public List<Label> studentIsland10;
-
     public Label studentRed11;
     public Label studentGreen11;
     public Label studentBlue11;
     public Label studentYellow11;
     public Label studentPink11;
     public List<Label> studentIsland11;
-
     public Label studentRed12;
     public Label studentGreen12;
     public Label studentBlue12;
@@ -311,39 +297,32 @@ public class GuiPlaygroundController {
     public ImageView studentBoardBlue9;
     public ImageView studentBoardBlue10;
     public List<ImageView> diningBlueStudent;
-
-
     List<List<ImageView>> diningRoom;
 
+    // cloud tile
     public GridPane cloudTile1;
     public GridPane cloudTile2;
     public GridPane cloudTile3;
     List<GridPane> paneCloudTiles;
-
     public Button cloudButton1;
     public Button cloudButton2;
     public Button cloudButton3;
     List<Button> cloudButton;
-
-
     public Label studentCloudRed1;
     public Label studentCloudGreen1;
     public Label studentCloudBlue1;
     public Label studentCloudYellow1;
     public Label studentCloudPink1;
-
     public Label studentCloudRed2;
     public Label studentCloudGreen2;
     public Label studentCloudBlue2;
     public Label studentCloudYellow2;
     public Label studentCloudPink2;
-
     public Label studentCloudRed3;
     public Label studentCloudGreen3;
     public Label studentCloudBlue3;
     public Label studentCloudYellow3;
     public Label studentCloudPink3;
-
     List<Label> firstCloudTile;
     List<Label> secondCloudTile;
     List<Label> thirdCloudTile;
@@ -363,6 +342,7 @@ public class GuiPlaygroundController {
     public Label towerBoardGrey;
     List<Label> towerYard;
 
+    // mother nature on island
     public ImageView motherNature1;
     public ImageView motherNature2;
     public ImageView motherNature3;
@@ -377,6 +357,7 @@ public class GuiPlaygroundController {
     public ImageView motherNature12;
     public List<ImageView> motherNature;
 
+    // character cards
     public ImageView character1;
     public ImageView character2;
     public ImageView character3;
@@ -391,7 +372,6 @@ public class GuiPlaygroundController {
     public ImageView character12;
     List<ImageView> characterCards;
     List<ImageView> drawnCards;
-
     public Label character1Coin;
     public Label character2Coin;
     public Label character3Coin;
@@ -405,24 +385,20 @@ public class GuiPlaygroundController {
     public Label character11Coin;
     public Label character12Coin;
     List<Label> characterCoin;
-
     public Label character1Red;
     public Label character1Green;
     public Label character1Blue;
     public Label character1Yellow;
     public Label character1Pink;
     List<Label> elementCharacterOne;
-
     public Label character4NoEntry;
     List<Label> elementCharacterFour;
-
     public Label character6Red;
     public Label character6Green;
     public Label character6Blue;
     public Label character6Yellow;
     public Label character6Pink;
     List<Label> elementCharacterSix;
-
     public Label character9Red;
     public Label character9Green;
     public Label character9Blue;
@@ -848,11 +824,6 @@ public class GuiPlaygroundController {
         elements.add(elementCharacterFour);
         elements.add(elementCharacterSix);
         elements.add(elementCharacterNine);
-
-
-
-
-
     }
 
     public static String getNotification() {
@@ -911,6 +882,10 @@ public class GuiPlaygroundController {
         GuiPlaygroundController.expert = expert;
     }
 
+    /**
+     * Update the model stored in the client
+     * @param playGroundNew the new playground updated
+     */
     public static void update(PlayGround playGroundNew)
     {
         setPlayGround(playGroundNew);
@@ -923,6 +898,13 @@ public class GuiPlaygroundController {
         }
     }
 
+    /**
+     * Update personal model info
+     * @param myBoardNew new board updated
+     * @param myDeckNew new deck updated
+     * @param myCurrentCardNew new current card updated
+     * @param myCoins new number of coins updated
+     */
     private static void update(Board myBoardNew, Deck myDeckNew, Card myCurrentCardNew, int myCoins)
     {
         setMyBoard(myBoardNew);
@@ -931,6 +913,9 @@ public class GuiPlaygroundController {
         getMyBoard().setCoins(myCoins);
     }
 
+    /**
+     * Refresh the playground gui view after model playground update
+     */
     public void updatePlayground()
     {
         //Update Islands
@@ -1000,6 +985,10 @@ public class GuiPlaygroundController {
         }
     }
 
+    /**
+     * Update of stats which include assistant card,
+     * professors control, number of tower of each player
+     */
     public void updateStats() {
         // Update general info in Stats scene
         for(int index = 0; index < getPlayGround().getPlayersList().size(); index++)
@@ -1048,9 +1037,7 @@ public class GuiPlaygroundController {
                 card.setDisable(true);
             }
             found = false;
-
         }
-
         //Update professors control
         for(int colour = 0; colour < Colour.colourCount; colour++)
         {
@@ -1059,9 +1046,11 @@ public class GuiPlaygroundController {
                 professorsControl.get(colour).setText(getPlayGround().getProfessorsControl()[colour]);
             }
         }
-
     }
 
+    /**
+     * Update cloud tiles view with all the available students to pick
+     */
     public void updateCloudTiles()
     {
         for(int cloud = 0; cloud<getPlayGround().getCloudTiles().length; cloud++)
@@ -1092,22 +1081,33 @@ public class GuiPlaygroundController {
         }
     }
 
+    /**
+     * Call update board general with current client personal board
+     */
     public void updateBoard()
     {
         updateBoardGeneral(getMyBoard(),getMyNickname());
     }
 
+    /**
+     *  Call find player with first other player
+     */
     public void updateBoardPlayerOne()
     {
         findPlayer(1);
-        //updateBoardGeneral(getPlayGround().getPlayerByNickname(nicknamePlayerOne).getPlayerBoard(),nicknamePlayerOne);
     }
 
+    /**
+     *  Call find player with second other player
+     */
     public void updateBoardPlayerTwo()
     {
        findPlayer(2);
     }
 
+    /**
+     *  Call update board general with the player found
+     */
     private void findPlayer(int count)
     {
         int index = 0;
@@ -1119,10 +1119,12 @@ public class GuiPlaygroundController {
                 if(index == count)
                     updateBoardGeneral(p.getPlayerBoard(),p.getNickname());
             }
-
         }
     }
 
+    /**
+     * Update a generic board: entrance, dining, professor room and tower yard
+     */
     public void updateBoardGeneral(Board board,String nickname)
     {
         // entrance room
@@ -1134,7 +1136,6 @@ public class GuiPlaygroundController {
             else
                 entranceRoom.get(student).setOpacity(1.0);
         }
-
         //dining room
         for(int student = 0; student < Colour.colourCount; student++)
         {
@@ -1143,7 +1144,6 @@ public class GuiPlaygroundController {
                 diningRoom.get(student).get(index).setOpacity(1.0);
             }
         }
-
         //professors room
         for(int colour = 0; colour < Colour.colourCount; colour++)
         {
@@ -1157,7 +1157,6 @@ public class GuiPlaygroundController {
             else
                 professorsRoom.get(colour).setOpacity(0.0);
         }
-
         //tower yard
         int index=-1;
         switch (board.getTowerColour())
@@ -1173,12 +1172,14 @@ public class GuiPlaygroundController {
                 break;
             default:
                 break;
-
         }
         towerYard.get(index).setOpacity(1.0);
         towerYard.get(index).setText(String.valueOf(board.getTowerYard()));
     }
 
+    /**
+     * Update character card view with current player coins
+     */
     public void updateCharacter()
     {
         coins.setText("Remains coins: "+getMyBoard().getCoins());
@@ -1188,7 +1189,6 @@ public class GuiPlaygroundController {
             characterCoin.get(characterCards.indexOf(characterCard)).setText("0");
             characterCoin.get(characterCards.indexOf(characterCard)).setOpacity(0.5);
         }
-
         for(CharacterCard card : getPlayGround().getDrawnCards())
         {
             characterCards.get(card.getId()-1).setOpacity(1.0);
@@ -1221,17 +1221,19 @@ public class GuiPlaygroundController {
                 }
             }
         }
-
-
     }
 
+    /**
+     * Switch to board view
+     */
     public void switchToBoard()
     {
         Platform.runLater(() ->
                 new GuiLoadScene("Board").run());
-
     }
-
+    /**
+     * Switch to character card view
+     */
     public void switchToCharacter()
     {
         if(getPlayGround().getGameMode() == 1 && !Gui.getGamePhase().equals("Other"))
@@ -1244,48 +1246,62 @@ public class GuiPlaygroundController {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Character Cards not allowed now");
             alert.showAndWait();
         }
-
     }
-
+    /**
+     * Switch to playground view
+     */
     public void switchToPlayground()
     {
         Platform.runLater(() -> new GuiLoadScene("Playground").run());
     }
-
+    /**
+     * Switch to settings view
+     */
     public void switchToSettings()
     {
         Platform.runLater(() -> new GuiLoadScene("Settings").run());
 
     }
-
+    /**
+     * Switch to stats view
+     */
     public void switchToStats()
     {
         Platform.runLater(() -> new GuiLoadScene("Stats").run());
     }
-
+    /**
+     * Switch to board first other player view
+     */
     public void switchToBoardPlayerOne()
     {
         Platform.runLater(() -> new GuiLoadScene("BoardOtherPlayerOne").run());
     }
-
+    /**
+     * Switch to board second other player view
+     */
     public void switchToBoardPlayerTwo()
     {
         if(!nickname2.getText().equals("None"))
             Platform.runLater(() -> new GuiLoadScene("BoardOtherPlayerTwo").run());
     }
-
+    /**
+     * Exit from character card menù
+     */
     public void backFromCharacterMenu()
     {
         //GuiMain.getQueue().add(-1);
         Platform.runLater(() -> new GuiLoadScene("Playground").run());
     }
-
+    /**
+     * Use the selected assistant card
+     */
     private void assistantCardToUse(int card){
         if(Gui.getGamePhase().equals("assistantCard"))
             GuiMain.getQueue().add(card);
         switchToPlayground();
     }
 
+    // list of methods to handle assistant card choose event
     public void cardOne(MouseEvent mouseEvent) {
         assistantCardToUse(1);
     }
@@ -1317,6 +1333,9 @@ public class GuiPlaygroundController {
         assistantCardToUse(10);
     }
 
+    /**
+     * Move a student from entrance to dining
+     */
     public void moveToDining()
     {
         if(Gui.getGamePhase().equals("whereToMove"))
@@ -1324,12 +1343,17 @@ public class GuiPlaygroundController {
         //switchToPlayground();
     }
 
+    /**
+     * Select colour of the student to move
+     * @param colour colour of the student
+     */
     public void moveStudent(int colour)
     {
         if(Gui.getGamePhase().equals("movePhase"))
             GuiMain.getQueue().add(colour);
        // switchToPlayground();
     }
+    // list of methods to handle move student event
     public void moveGreen(MouseEvent mouseEvent)
     {
         moveStudent(Colour.GREEN);
@@ -1355,6 +1379,11 @@ public class GuiPlaygroundController {
         moveStudent(Colour.YELLOW);
     }
 
+    /**
+     * Allows to selecet an island for example to move mother nature on it,
+     * or to move a student on it
+     * @param island index of the island chosen
+     */
     public void moveToIsland(int island)
     {
         if(Gui.getGamePhase().equals("motherNature"))
@@ -1366,10 +1395,9 @@ public class GuiPlaygroundController {
             GuiMain.getQueue().add(1);
             GuiMain.getQueue().add(island);
         }
-
         switchToPlayground();
     }
-
+    // list of methods to handle select island event
     public void moveToIsland1(MouseEvent mouseEvent)
     {
         moveToIsland(1);
@@ -1419,6 +1447,10 @@ public class GuiPlaygroundController {
         moveToIsland(12);
     }
 
+    /**
+     * Allows to choose a cloud tile to pick
+     * @param cloudTile index of the cloud tile to pick
+     */
     public void chooseCloudTile(int cloudTile)
     {
         if(Gui.getGamePhase().equals("cloudTiles"))
@@ -1428,7 +1460,7 @@ public class GuiPlaygroundController {
             switchToPlayground();
         }
     }
-
+    // list of methods to handle select cloud tile event
     public void cloudTileOne()
     {
         chooseCloudTile(1);
@@ -1443,6 +1475,10 @@ public class GuiPlaygroundController {
             chooseCloudTile(3);
     }
 
+    /**
+     * Allows to choose a character card
+     * @param character index of the character card chosen
+     */
     public void chooseCharacter(int character)
     {
         Gui.setGamePhase("Character");
@@ -1456,8 +1492,8 @@ public class GuiPlaygroundController {
             System.out.println("Not enough coins");
             switchToCharacter();
         }
-
     }
+    // list of methods to handle select character card event
     public void characterOne(MouseEvent mouseEvent)
     {
         if(drawnCards.contains(character1))
@@ -1519,6 +1555,7 @@ public class GuiPlaygroundController {
             chooseCharacter(drawnCards.indexOf(character12));
     }
 
+    // list of methods to handle select student placed on character card
     public void chooseBlue(MouseEvent mouseEvent)
     {
         if(Gui.getGamePhase().equals("Character"))
@@ -1547,7 +1584,7 @@ public class GuiPlaygroundController {
         if(Gui.getGamePhase().equals("Character"))
             GuiMain.getQueue().add(4);
     }
-
+    // list of methods to handle select yes or no choose by player
     public void chooseYes(MouseEvent mouseEvent)
     {
         if(Gui.getGamePhase().equals("Character"))
@@ -1560,6 +1597,10 @@ public class GuiPlaygroundController {
             GuiMain.getQueue().add(0);
     }
 
+    /**
+     * Display the winner or lose view
+     * @param winner winner player nickname
+     */
     public static void Winner(String winner)
     {
         if(getMyNickname().equalsIgnoreCase(winner))
@@ -1568,6 +1609,9 @@ public class GuiPlaygroundController {
             Platform.runLater(() -> new GuiLoadScene("Loser").run());
     }
 
+    /**
+     * Kill the game
+     */
     public void close()
     {
         System.exit(0);
