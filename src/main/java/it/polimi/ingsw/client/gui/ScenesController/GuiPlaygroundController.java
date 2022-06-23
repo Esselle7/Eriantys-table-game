@@ -1457,7 +1457,7 @@ public class GuiPlaygroundController {
         if(Gui.getGamePhase().equals("cloudTiles"))
         {
             GuiMain.getQueue().add(cloudTile);
-            //switchToPlayground();
+            switchToPlayground();
         }
     }
     // list of methods to handle select cloud tile event
