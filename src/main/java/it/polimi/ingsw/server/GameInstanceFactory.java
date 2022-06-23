@@ -8,6 +8,8 @@ import it.polimi.ingsw.server.controller.Exceptions.ChooseCharacterCardException
 import it.polimi.ingsw.server.controller.TurnHandler;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,11 @@ public class GameInstanceFactory implements Runnable{
         Thread connectionsAccepter = new Thread(virtualViewTCPFactory);
         printConsole("THIS IS THE SERVER FOR ERYANTIS GAME");
         printConsole("WELCOME ADMIN.");
+        try {
+            printConsole("Waiting on: "+InetAddress.getLocalHost());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
         connectionsAccepter.start();
     }
 
