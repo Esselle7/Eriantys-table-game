@@ -27,7 +27,7 @@ public class VirtualViewTCPFactory implements Runnable {
 
     public VirtualViewTCPFactory(int hostPort) throws IOException {
         String serverIP = "192.168.1.57"; // remember to change this IP with you pc local IP (Host ethernet IP or Host Wireless IP)
-        InetAddress addr = InetAddress.getByName(serverIP);
+        InetAddress addr = InetAddress.getLocalHost();
         int backLog = 50;
         serverSocket = new ServerSocket(hostPort, backLog,addr);
     }
