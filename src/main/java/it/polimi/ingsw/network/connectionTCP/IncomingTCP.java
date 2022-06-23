@@ -103,5 +103,4 @@ public class IncomingTCP implements Runnable {
             throw new IOException();
         }
     }
-
 }

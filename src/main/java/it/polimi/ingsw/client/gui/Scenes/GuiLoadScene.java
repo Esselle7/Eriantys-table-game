@@ -51,13 +51,13 @@ public class GuiLoadScene implements Runnable{
                 break;
             }
             case "BoardOtherPlayerOne":{
-                GuiMain.updateSceneBoard(root,xml,400,850);
+                GuiMain.updateSceneBoard(root,xml,330,850);
                 GuiPlaygroundController controller = loader.getController();
                 controller.updateBoardPlayerOne();
                 break;
             }
             case "BoardOtherPlayerTwo":{
-                GuiMain.updateSceneBoard(root,xml,400,850);
+                GuiMain.updateSceneBoard(root,xml,330,850);
                 GuiPlaygroundController controller = loader.getController();
                 controller.updateBoardPlayerTwo();
                 break;
