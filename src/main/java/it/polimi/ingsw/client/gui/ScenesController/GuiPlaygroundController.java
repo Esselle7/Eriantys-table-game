@@ -1568,4 +1568,9 @@ public class GuiPlaygroundController {
             Platform.runLater(() -> new GuiLoadScene("Loser").run());
     }
 
+    public void close()
+    {
+        System.exit(0);
+    }
+
 }
