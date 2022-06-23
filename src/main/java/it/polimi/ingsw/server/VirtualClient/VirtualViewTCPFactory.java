@@ -26,7 +26,7 @@ public class VirtualViewTCPFactory implements Runnable {
     private final BlockingQueue<VirtualViewConnection> virtualLeaderQueue = new LinkedBlockingQueue<>();
 
     public VirtualViewTCPFactory(int hostPort) throws IOException {
-        String serverIP = "192.168.56.1"; // remember to change this IP with you pc local ip
+        String serverIP = "192.168.1.57"; // remember to change this IP with you pc local IP (Host ethernet IP or Host Wireless IP)
         InetAddress addr = InetAddress.getByName(serverIP);
         int backLog = 50;
         serverSocket = new ServerSocket(hostPort, backLog,addr);
