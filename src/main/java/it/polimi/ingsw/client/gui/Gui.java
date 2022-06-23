@@ -323,21 +323,23 @@ public class Gui implements View {
 
     @Override
     public void update(Board myBoardNew, Deck myDeckNew, Card myCurrentCardNew, int myCoins) {
-
     }
 
     @Override
     public void update(Object playGroundNew) {
         PlayGround playGroundUpdate = (PlayGround) playGroundNew;
         GuiPlaygroundController.update(playGroundUpdate);
-
     }
 
     @Override
     public void displayWinner(String winner) {
-
+        GuiPlaygroundController.Winner(winner);
     }
 
+    /**
+     * This method allows to refresh the queue that stores
+     * the return value of the methods above
+     */
     private void resetGuiQueue()
     {
         while (!GuiMain.getQueue().isEmpty()) {

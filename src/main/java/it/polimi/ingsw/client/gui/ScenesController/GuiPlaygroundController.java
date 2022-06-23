@@ -1560,4 +1560,12 @@ public class GuiPlaygroundController {
             GuiMain.getQueue().add(0);
     }
 
+    public static void Winner(String winner)
+    {
+        if(getMyNickname().equalsIgnoreCase(winner))
+            Platform.runLater(() -> new GuiLoadScene("Winner").run());
+        else
+            Platform.runLater(() -> new GuiLoadScene("Loser").run());
+    }
+
 }

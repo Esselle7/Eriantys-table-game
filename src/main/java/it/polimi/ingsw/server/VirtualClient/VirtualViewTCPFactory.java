@@ -6,6 +6,7 @@ import it.polimi.ingsw.network.messages.chooseCreateOrAddGame;
 import it.polimi.ingsw.server.controller.Exceptions.ChooseCharacterCardException;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.BlockingQueue;
@@ -25,7 +26,10 @@ public class VirtualViewTCPFactory implements Runnable {
     private final BlockingQueue<VirtualViewConnection> virtualLeaderQueue = new LinkedBlockingQueue<>();
 
     public VirtualViewTCPFactory(int hostPort) throws IOException {
-        serverSocket = new ServerSocket(hostPort);
+        String serverIP = "192.168.56.1"; // remember to change this IP with you pc local ip
+        InetAddress addr = InetAddress.getByName(serverIP);
+        int backLog = 50;
+        serverSocket = new ServerSocket(hostPort, backLog,addr);
     }
 
     public BlockingQueue<VirtualViewConnection> getVirtualLeaderQueue() {
