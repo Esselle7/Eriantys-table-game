@@ -16,4 +16,4 @@ To play the game:
 - generate the jar files on Maven's lifecycle by selecting the "package" entry
 - collect the jar files in the target folder of the project: rename "original-PSP60-1.0-SNAPSHOT.jar" to "server.jar" and "PSP60-1.0-SNAPSHOT-shaded.jar" to "client.jar"
 - use _java -jar server.jar_ on the server machine or _-jar client.jar_ on the client machines 
-* Please Note that server will open a socket with the local ethernet ip address
+Please Note that server will open a socket with the local ethernet ip address
