@@ -274,7 +274,7 @@ public class TurnHandler implements Runnable {
                 try
                 {
                     c.sendMessage(new winnerCMI(getWinner()));
-                    c.close();
+                    //c.close();
                 }catch (IOException ignored){}
             }
         }

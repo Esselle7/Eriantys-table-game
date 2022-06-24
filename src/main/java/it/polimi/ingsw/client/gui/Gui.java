@@ -214,7 +214,7 @@ public class Gui implements View {
     public int chooseAssistantCard() {
         Gui.setGamePhase("assistantCard");
         resetGuiQueue();
-        Platform.runLater(() -> new GuiLoadScene("Playground").run());
+        Platform.runLater(() -> new GuiLoadScene("Stats").run());
         try {
             return (int) GuiMain.getQueue().take();
         } catch (InterruptedException e) {

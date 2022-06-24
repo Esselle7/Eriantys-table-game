@@ -33,7 +33,6 @@ public class GuiMain extends Application {
         return newWindow;
     }
 
-
     /**
      * Entry point of JavaFX
      *
@@ -58,8 +57,6 @@ public class GuiMain extends Application {
         getStage().show();
     }
 
-
-
     /**
      * Used by other threads to change the scene of the stage
      */
@@ -73,6 +70,9 @@ public class GuiMain extends Application {
         getStage().setAlwaysOnTop(true);
         getStage().setAlwaysOnTop(false);
     }
+    /**
+     * Used by other threads to change the scene of the board stage
+     */
     static public void updateSceneBoard(Parent root, String title,int h, int w) {
         Scene newScene = new Scene(root,w,h);
         getStage().setScene(newScene);
@@ -84,6 +84,9 @@ public class GuiMain extends Application {
         getStage().setAlwaysOnTop(false);
     }
 
+    /**
+     * Used by other threads to change the scene of the custom (width and height) stage
+     */
     static public void updateNewWindow(Parent root, String title,int h, int w)
     {
         Scene newScene = new Scene(root,h,w);

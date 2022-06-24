@@ -3,6 +3,7 @@ package it.polimi.ingsw.server;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewTCPFactory;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.Scanner;
 
 /**
  * This is the main class of the server. This class create an instace for
@@ -21,6 +22,5 @@ public class Server {
         main.setName("gamesGenerator");
         main.start();
         main.join(); // wait for all the other thread created
-
     }
 }

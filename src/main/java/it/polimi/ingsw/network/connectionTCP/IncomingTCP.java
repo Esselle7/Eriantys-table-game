@@ -90,7 +90,7 @@ public class IncomingTCP implements Runnable {
             Message message;
             do {
                 synchronized (timestampLock) {
-                    int maximumTimeToElapse = 6500;
+                    int maximumTimeToElapse = 4000;
                     if (Duration.between(previousTimestamp, Instant.now()).toMillis() > maximumTimeToElapse)
                         throw new IOException("Out of time!");
                 }
@@ -103,5 +103,4 @@ public class IncomingTCP implements Runnable {
             throw new IOException();
         }
     }
-
 }

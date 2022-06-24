@@ -40,8 +40,6 @@ public abstract class TextColours {
     public static final String CYAN_UNDERLINED = "\033[4;36m";
     public static final String WHITE_UNDERLINED = "\033[4;37m";
 
-
-
     // High Intensity
     public static final String BLACK_BRIGHT = "\033[0;90m";
     public static final String RED_BRIGHT = "\033[0;91m";
