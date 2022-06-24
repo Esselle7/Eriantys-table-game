@@ -105,9 +105,9 @@
             </GridPane>
          </children>
       </AnchorPane>
-      <Label fx:id="waiting" layoutX="411.0" layoutY="530.0" textFill="RED">
+      <Label fx:id="waiting" layoutX="258.0" layoutY="521.0" textFill="RED">
          <font>
-            <Font size="20.0" />
+            <Font name="System Bold" size="30.0" />
          </font>
       </Label>
    </children>
