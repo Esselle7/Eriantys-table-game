@@ -49,7 +49,7 @@ public abstract class ManagerStudent implements Serializable {
      */
     public int[] generateStudents(int numberToGenerate)
     {
-        if(getTotalStudentPaws()>=0)
+        if(getTotalStudentPaws()-numberToGenerate>=0)
         {
             int[] result = new int[Colour.colourCount];
             for(int i = 0; i < numberToGenerate; i++)
