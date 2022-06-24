@@ -1,7 +1,5 @@
 package it.polimi.ingsw.server.model;
 
-import it.polimi.ingsw.server.controller.Exceptions.NoStudentForColour;
-
 import java.io.Serializable;
 import java.util.Random;
 
@@ -49,16 +47,16 @@ public abstract class ManagerStudent implements Serializable {
      */
     public int[] generateStudents(int numberToGenerate)
     {
-        setTotalStudentPaws(getTotalStudentPaws()-numberToGenerate);
-        if(getTotalStudentPaws()>=0)
+        if(getTotalStudentPaws() >= numberToGenerate)
         {
+            setTotalStudentPaws(getTotalStudentPaws()-numberToGenerate);
             int[] result = new int[Colour.colourCount];
             for(int i = 0; i < numberToGenerate; i++)
                 result[chooseRandomColour()]++;
             decreaseStudentPaws(numberToGenerate);
             return result;
-        }
-        return null; // exception to return
+        } else
+            return null;
     }
 
     /**

@@ -233,12 +233,12 @@ public class TurnHandler implements Runnable {
                     getCurrentClient().sendMessage((new InfoForDecisionsCMI()));
                     printConsole("Choosing cloud tile phase");
                     chooseCloudTiles();
+                    if(getGameMoves().getCurrentGame().getGameMode() != 0)
+                        resetCards();
                     printConsole(getCurrentPlayer().getNickname()+ "'s turn finished");
                     getCurrentClient().sendMessage(new NotificationCMI("Your turn is finished, wait for other player to play their turn ..."));
                     update();
                 }
-                if(getGameMoves().getCurrentGame().getGameMode() == 1)
-                    resetCards();
                 //In case there's an empty deck or the student bag is empty, this has to be the last turn
                 if (getLastTurn())
                     throw new GameWonException();
