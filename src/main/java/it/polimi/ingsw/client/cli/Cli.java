@@ -133,7 +133,7 @@ public class Cli implements View {
      */
     private void printAction(String text)
     {
-        printText("> ACTION: "+ text+ " <<");
+        printText("ACTION: "+ text);
     }
 
     @Override
@@ -274,8 +274,9 @@ public class Cli implements View {
 
     public int askGameMode()
     {
-        //ReFreshConsole();
+        ReFreshConsole();
         int numberOfPlayers;
+        printText("Game found and you are the lobby leader!");
         printText("Choose a game mode between:");
         printText("2 players Game Mode");
         printText("3 players Game Mode");
@@ -314,6 +315,7 @@ public class Cli implements View {
 
     public void showInfoForDecisions()
     {
+        ReFreshConsole();
         printText("------------OTHER PLAYERS' INFO------------");
         printPlayersInfo();
         printText("----------------------------------");
@@ -339,6 +341,7 @@ public class Cli implements View {
     }
     public void showMyDeck()
     {
+        ReFreshConsole();
         printText(getMyNickname() + "'s remaining Assistant cards: ");
         for (Card card: getMyDeck().getResidualCards()) {
             printText("Card Value: "+card.getValue()+", Card Mother Nature Steps: "+card.getMotherNatureSteps());
@@ -528,7 +531,6 @@ public class Cli implements View {
     @Override
     public int chooseStudentColourToMove()
     {
-        showMyInfo();
         while(true)
         {
             String studentColour = getInput().nextLine();
@@ -751,14 +753,7 @@ public class Cli implements View {
                 System.out.print("\033\143");
             }
         } catch (IOException | InterruptedException ignored) {}
-
         eryantisFigure();
-        printText("--------------------GAME INFO--------------------------");
-        showInfoForDecisions();
-        printText("--------------------PERSONAL INFO----------------------");
-        showMyInfo();
-
-
     }
 
     @Override

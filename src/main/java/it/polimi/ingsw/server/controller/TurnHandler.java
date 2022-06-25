@@ -235,9 +235,11 @@ public class TurnHandler implements Runnable {
                     chooseCloudTiles();
                     if(getGameMoves().getCurrentGame().getGameMode() != 0)
                         resetCards();
+                    update();
+                    getCurrentClient().sendMessage(new InfoForDecisionsCMI());
                     printConsole(getCurrentPlayer().getNickname()+ "'s turn finished");
                     getCurrentClient().sendMessage(new NotificationCMI("Your turn is finished, wait for other player to play their turn ..."));
-                    update();
+
                 }
                 //In case there's an empty deck or the student bag is empty, this has to be the last turn
                 if (getLastTurn())
@@ -332,6 +334,7 @@ public class TurnHandler implements Runnable {
                 i++;
                 printConsole("Correct student move!");
                 update();
+                getCurrentClient().sendMessage(new InfoForDecisionsCMI());
 
             }
             catch (NoStudentForColour e) {
@@ -447,6 +450,7 @@ public class TurnHandler implements Runnable {
         }
         getCurrentPlayer().setMotherNatureSteps(0);
         update();
+        getCurrentClient().sendMessage(new InfoForDecisionsCMI());
     }
 
     /**
