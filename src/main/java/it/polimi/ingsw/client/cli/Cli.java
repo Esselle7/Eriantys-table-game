@@ -190,7 +190,12 @@ public class Cli implements View {
         {
             input = getInput().nextLine();
             if(input.equalsIgnoreCase("LEADER"))
+            {
+                printText("With a Great Power Comes A Great Responsibility");
+                printText("Before you get those powers, you may be request to wait in Leader queue");
+                printText("Because there may be another Leader with higher priority!");
                 return 1;
+            }
             if(input.equalsIgnoreCase("ADD TO EXISTING"))
                 return 0;
             printText("Please follow the instruction above!!");
@@ -269,7 +274,7 @@ public class Cli implements View {
 
     public int askGameMode()
     {
-       // ReFreshConsole();
+        //ReFreshConsole();
         int numberOfPlayers;
         printText("Choose a game mode between:");
         printText("2 players Game Mode");

@@ -64,7 +64,7 @@ public class Client{
     }
 
     public static int getDefaultPort() {
-        return 5000;
+        return 4500;
     }
 
     public static String getDefaultAddress() {

@@ -90,12 +90,10 @@ public class IncomingTCP implements Runnable {
             Message message;
             do {
                 synchronized (timestampLock) {
-                    int maximumTimeToElapse = 4000;
-                    if (Duration.between(previousTimestamp, Instant.now()).toMillis() > maximumTimeToElapse)
-                        throw new IOException("Out of time!");
+                    if (Duration.between(previousTimestamp, Instant.now()).toMillis() > 1100)
+                        throw new IOException();
                 }
-                int timeOut = 150;
-                message = inputQueue.poll(timeOut, TimeUnit.MILLISECONDS);
+                message = inputQueue.poll(150, TimeUnit.MILLISECONDS);
             } while (message == null);
             return message;
         } catch (InterruptedException e) {

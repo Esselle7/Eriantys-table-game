@@ -27,7 +27,7 @@ public class VirtualViewTCPFactory implements Runnable {
 
     public VirtualViewTCPFactory(int hostPort) throws IOException {
         InetAddress addr = InetAddress.getLocalHost();
-        int backLog = 50;
+        int backLog = 100;
         serverSocket = new ServerSocket(hostPort, backLog,addr);
     }
 
