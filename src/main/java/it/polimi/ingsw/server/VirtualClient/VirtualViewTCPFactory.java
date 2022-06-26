@@ -68,7 +68,7 @@ public class VirtualViewTCPFactory implements Runnable {
                     }
 
                 } catch (InterruptedException | IOException e) {
-                    System.out.println("Bad connection... Discarded");
+                    System.out.println("Bad connection... Discarded because the Client has lost the connection before 'Leader' or 'New Game' choice !");
                 }
             } catch (IOException ignored) {}
 
