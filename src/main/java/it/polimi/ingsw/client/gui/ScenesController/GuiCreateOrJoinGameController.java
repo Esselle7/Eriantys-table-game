@@ -21,6 +21,7 @@ public class GuiCreateOrJoinGameController {
     {
         GuiMain.getQueue().add(1);
         System.out.println("You will be a lobby leader");
+        notificationLabel.setText("Wait for priority leader...");
     }
     /**
      * Button event handler for added to a game

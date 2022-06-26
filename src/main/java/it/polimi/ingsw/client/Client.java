@@ -6,7 +6,9 @@ import it.polimi.ingsw.client.connection.TCPClientSideConnection;
 import it.polimi.ingsw.client.gui.Gui;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -67,8 +69,13 @@ public class Client{
         return 4500;
     }
 
-    public static String getDefaultAddress() {
-        return "127.0.0.1";
+    public static InetAddress getDefaultAddress() {
+        try {
+            return InetAddress.getLocalHost();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static int getNotAllowedInt() {
