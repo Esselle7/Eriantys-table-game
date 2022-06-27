@@ -117,6 +117,17 @@ public class Cli implements View {
     }
 
     /**
+     * This method allows to print the text given in input
+     * in the preliminary phase
+     * @param text the text to print
+     */
+    private void printCli(String text)
+    {
+        System.out.println( "[CLIENT: "+ text + " ]");
+
+    }
+
+    /**
      * This method allows to print in the cli
      * the text given in input in PURPLE colour
      * @param text the text to print
@@ -138,7 +149,7 @@ public class Cli implements View {
 
     @Override
     public boolean isDefaultServer() {
-        printText("Please type 'NEW' to insert a new Server IP/PORT otherwise, if you want to go with the default settings, type 'DEF'");
+        printCli("Please type 'NEW' to insert a new Server IP/PORT otherwise, if you want to go with the default settings, type 'DEF'");
         String chose;
         while(true)
         {
@@ -169,7 +180,7 @@ public class Cli implements View {
      * @return The IP of the server to connect to
      */
     private String getServerAddress() {
-        printText("Please insert a remote Server IP:");
+        printCli("Please insert a remote Server IP:");
         return getInput().nextLine();
     }
     /**
@@ -178,27 +189,27 @@ public class Cli implements View {
      * @return The port of the server to connect to
      */
     private int getServerPort(){
-        printText("Please insert a remote Server port:");
+        printCli("Please insert a remote Server port:");
         return Integer.parseInt(getInput().nextLine());
     }
 
     public int wantToBeLeader()
     {
-        printAction("You want to create a new game or you want to be added to an existing one? (please type LEADER or ADD TO EXISTING)");
+        printCli("You want to create a new game or you want to be added to an existing one? (please type LEADER or ADD TO EXISTING)");
         String input;
         while(true)
         {
             input = getInput().nextLine();
             if(input.equalsIgnoreCase("LEADER"))
             {
-                printText("With a Great Power Comes A Great Responsibility");
-                printText("Before you get those powers, you may be request to wait in Leader queue");
-                printText("Because there may be another Leader with higher priority!");
+                printCli("With a Great Power Comes A Great Responsibility");
+                printCli("Before you get those powers, you may be request to wait in Leader queue");
+                printCli("Because there may be another Leader with higher priority!");
                 return 1;
             }
             if(input.equalsIgnoreCase("ADD TO EXISTING"))
                 return 0;
-            printText("Please follow the instruction above!!");
+            printCli("Please follow the instruction above!!");
         }
     }
 
@@ -216,9 +227,9 @@ public class Cli implements View {
      */
     public void connectionOutcome(boolean isConnected) {
         if (isConnected)
-            printText("Connection established. Waiting...\n");
+            printCli("Connection established. Waiting...");
         else
-            printText("Error: Server unreachable, please try again lather\n");
+            printCli("Error: Server unreachable, please try again lather");
     }
 
     @Override
@@ -236,9 +247,9 @@ public class Cli implements View {
 
         String start;
         eryantisFigure();
-        printText("\nWELCOME! WE ARE GLAD TO SEE YOU. ");
+        printCli("WELCOME! WE ARE GLAD TO SEE YOU. ");
         do {
-            printText("-- please type START to play --");
+            printCli("-- please type START to play --");
             start = getInput().nextLine().toUpperCase();
         } while (!start.equals("START"));
 
@@ -266,8 +277,8 @@ public class Cli implements View {
      */
     public void nicknameFormatError()
     {
-        printText("Invalid Nickname:");
-        printText("you must insert a nickname from 2 to 8 characters long");
+        printCli("Invalid Nickname:");
+        printCli("you must insert a nickname from 2 to 8 characters long");
     }
 
 

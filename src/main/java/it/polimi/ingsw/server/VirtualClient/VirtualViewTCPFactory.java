@@ -26,9 +26,8 @@ public class VirtualViewTCPFactory implements Runnable {
     private final BlockingQueue<VirtualViewConnection> virtualLeaderQueue = new LinkedBlockingQueue<>();
 
     public VirtualViewTCPFactory(int hostPort) throws IOException {
-        InetAddress addr = InetAddress.getLocalHost();
         int backLog = 100;
-        serverSocket = new ServerSocket(hostPort, backLog,addr);
+        serverSocket = new ServerSocket(hostPort, backLog);
     }
 
     public BlockingQueue<VirtualViewConnection> getVirtualLeaderQueue() {

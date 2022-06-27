@@ -208,6 +208,6 @@ public class GameInstanceFactory implements Runnable{
      */
     private void printConsole(String textToPrint)
     {
-        System.out.println(TextColours.PURPLE_BRIGHT + "> "+ textToPrint);
+        System.out.println( "[SERVER: "+ textToPrint + " ]");
     }
 }
