@@ -66,6 +66,9 @@ public class GuiAskGameModeController{
         if(firstPass && secondPass) {
             ReFreshConsole();
             waiting.setText("Wait for other players...");
+            System.out.println("Wait for other players ...");
+            ReFreshConsole();
+            System.out.println("Wait for other players ...");
         }
     }
     /**
@@ -74,24 +77,32 @@ public class GuiAskGameModeController{
     public void choseTwoGameMode() {
 
         chosePlayersMode(2);
+        twoPlayers.setDisable(true);
+        threePlayers.setDisable(true);
     }
     /**
      * Button event handler method
      */
     public void choseThreeGameMode() {
         chosePlayersMode(3);
+        twoPlayers.setDisable(true);
+        threePlayers.setDisable(true);
     }
     /**
      * Button event handler method
      */
     public void choseExpertMode(){
         choseGameMode(1);
+        easyMode.setDisable(true);
+        advanceMode.setDisable(true);
     }
     /**
      * Button event handler method
      */
     public void choseNormalMode(){
         choseGameMode(0);
+        easyMode.setDisable(true);
+        advanceMode.setDisable(true);
     }
 
     private void ReFreshConsole()
