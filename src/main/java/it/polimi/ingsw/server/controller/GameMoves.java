@@ -345,9 +345,8 @@ public class GameMoves extends ManagerStudent implements Serializable {
     public void moveMotherNature(int islandId) throws ExceededMotherNatureStepsException {
         int indexIslandMotherNature = getCurrentGame().getIslands().indexOf(getCurrentGame().getIslandWithMotherNature());
         int steps;
-        islandId = islandId-1;
-        if(islandId<indexIslandMotherNature)
-            steps = (getCurrentSettings().getNumberOfIslands()-1)-indexIslandMotherNature+islandId;
+        if(islandId <= indexIslandMotherNature)
+            steps = getCurrentSettings().getNumberOfIslands()-indexIslandMotherNature+islandId;
         else
             steps = islandId-indexIslandMotherNature;
         int motherNatureSteps = getCurrentPlayer().getMotherNatureSteps();
