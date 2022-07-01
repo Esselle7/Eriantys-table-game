@@ -6,6 +6,9 @@ import it.polimi.ingsw.client.gui.Scenes.GuiLoadScene;
 import javafx.application.Platform;
 import javafx.scene.control.*;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 /**
  * This class allows retrieving ip and port to open a socket
  */
@@ -19,7 +22,11 @@ public class GuiGetServerInfoController {
      */
     public void initialize()
     {
-        ipLabel.setText("127.0.0.1");
+        try {
+            ipLabel.setText(InetAddress.getLocalHost().getHostAddress());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
         portLabel.setText("4500");
     }
 

@@ -54,6 +54,7 @@ public class GameInstanceFactory implements Runnable{
      */
     @Override
     public void run() {
+
         while(true) {
             try {
                 instancingGameLoop();
@@ -122,19 +123,16 @@ public class GameInstanceFactory implements Runnable{
      * @throws InterruptedException  if something in taking a connection from the blocking queue fails (disconnection)
      * @throws IOException If something in send or receiving messages fails
      */
-
     private int setUpLobby() throws InterruptedException, IOException
     {
         List<Integer> result=findLeader();
         int lobbySize;
         lobbySize = result.get(0);
-
         for(int countPlayer = 2; countPlayer <= lobbySize; countPlayer++) {
             findPlayer(countPlayer,lobbySize);
             if(countPlayer < lobbySize)
                 getGamePlayers().get(countPlayer-1).sendMessage(new NotificationCMI("Waiting for remaining player ..."));
         }
-
         return result.get(1);
     }
 
@@ -199,6 +197,8 @@ public class GameInstanceFactory implements Runnable{
         printConsole("Waiting for "+player+" player ...");
         getGamePlayers().add(getVirtualViewTCPFactory().getVirtualClientConnection());
         printConsole("Player "+player+" found!");
+        for(int index = 0; index < player;index++)
+            getGamePlayers().get(index).sendMessage(new Ping());
         getGamePlayers().get(player-1).sendMessage(new NotificationCMI("You have been assigned to a game of "+lobbySize+" players"));
     }
 
@@ -208,6 +208,6 @@ public class GameInstanceFactory implements Runnable{
      */
     private void printConsole(String textToPrint)
     {
-        System.out.println(TextColours.PURPLE_BRIGHT + "> "+ textToPrint);
+        System.out.println( "[SERVER: "+ textToPrint + " ]");
     }
 }

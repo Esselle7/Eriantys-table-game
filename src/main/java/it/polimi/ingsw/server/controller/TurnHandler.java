@@ -3,8 +3,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-
-import it.polimi.ingsw.TextColours;
 import it.polimi.ingsw.network.messages.*;
 import it.polimi.ingsw.server.VirtualClient.VirtualViewConnection;
 import it.polimi.ingsw.server.controller.Exceptions.*;
@@ -27,7 +25,6 @@ public class TurnHandler implements Runnable {
     private String winner = null;
     private List <CharacterCard> CharacterDeck;
     private final int numberOfCharacterCards;
-    private boolean usedCharacterCards;
 
     private final List<VirtualViewConnection> gamePlayers;
 
@@ -45,7 +42,6 @@ public class TurnHandler implements Runnable {
         getGameMoves().getCurrentGame().setGameMode(gameMode);
         CharacterDeck = new ArrayList<>();
         numberOfCharacterCards = 3;
-        usedCharacterCards = false;
         if(gameMode != 2){
             for (VirtualViewConnection c: gamePlayers
             ) {
@@ -235,9 +231,11 @@ public class TurnHandler implements Runnable {
                     chooseCloudTiles();
                     if(getGameMoves().getCurrentGame().getGameMode() != 0)
                         resetCards();
+                    update();
+                    getCurrentClient().sendMessage(new InfoForDecisionsCMI());
                     printConsole(getCurrentPlayer().getNickname()+ "'s turn finished");
                     getCurrentClient().sendMessage(new NotificationCMI("Your turn is finished, wait for other player to play their turn ..."));
-                    update();
+
                 }
                 //In case there's an empty deck or the student bag is empty, this has to be the last turn
                 if (getLastTurn())
@@ -293,7 +291,7 @@ public class TurnHandler implements Runnable {
             for (CloudTile cloudTile : getGameMoves().getCurrentGame().getCloudTiles()) {
                 cloudTile.reFill(getGameMoves().generateStudents(getGameMoves().getCurrentSettings().getStudentsCloudTile()));
             }
-            //Sends everyone playground update messages using Virtualviewtcp objects
+            //Sends everyone playground update messages using virtualviewtcp objects
         } else
             setLastTurn(true);
     }
@@ -332,6 +330,7 @@ public class TurnHandler implements Runnable {
                 i++;
                 printConsole("Correct student move!");
                 update();
+                getCurrentClient().sendMessage(new InfoForDecisionsCMI());
 
             }
             catch (NoStudentForColour e) {
@@ -421,7 +420,7 @@ public class TurnHandler implements Runnable {
     }
 
     /**
-     * This method asks the player which island he wants to move mother nature to. In case he asks to move mothernature
+     * This method asks the player which island he wants to move mother nature to. In case he asks to move mother nature
      * to an island where he can't move it to, he gets asked again until he asks for a valid number of steps.
      * @throws IOException in case something goes wrong with the input or in case a character card throws it
      * @throws GameWonException in case a condition for the game win presents itself or in case a character card throws it
@@ -447,6 +446,7 @@ public class TurnHandler implements Runnable {
         }
         getCurrentPlayer().setMotherNatureSteps(0);
         update();
+        getCurrentClient().sendMessage(new InfoForDecisionsCMI());
     }
 
     /**
@@ -514,10 +514,9 @@ public class TurnHandler implements Runnable {
     {
         int chosenCard;
         chosenCard = characterCard;
-        if(chosenCard != -1 && usedCharacterCards == false) {
+        if(chosenCard != -1) {
             try {
                 getGameMoves().getCurrentGame().getDrawnCards().get(chosenCard - 1).useCard(this);
-                usedCharacterCards = true;
             }catch (UnableToUseCardException e) {
                 getCurrentClient().sendMessage(new NotificationCMI("Please select another character card!"));
             } catch (NotEnoughCoins e) {
@@ -540,7 +539,6 @@ public class TurnHandler implements Runnable {
      * This method calls the resetCard method on each character card, at the ending of the turn
      */
     private void resetCards(){
-        usedCharacterCards = false;
         for(CharacterCard drawnCard : getGameMoves().getCurrentGame().getDrawnCards())
             drawnCard.resetCard(this);
     }
@@ -561,6 +559,6 @@ public class TurnHandler implements Runnable {
      */
     private void printConsole(String textToPrint)
     {
-        System.out.println(TextColours.PURPLE_BRIGHT + "> "+ textToPrint);
+        System.out.println( "[SERVER: "+ textToPrint + " ]");
     }
 }

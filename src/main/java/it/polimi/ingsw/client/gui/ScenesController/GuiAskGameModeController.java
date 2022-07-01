@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
+
 /**
  * This class control the game settings set by the game leader
  * (e.g. easy ora advance mode, two or three players)
@@ -61,8 +63,13 @@ public class GuiAskGameModeController{
      */
     private void waiting()
     {
-        if(firstPass && secondPass)
+        if(firstPass && secondPass) {
+            ReFreshConsole();
             waiting.setText("Wait for other players...");
+            System.out.println("Wait for other players ...");
+            ReFreshConsole();
+            System.out.println("Wait for other players ...");
+        }
     }
     /**
      * Button event handler method
@@ -70,23 +77,43 @@ public class GuiAskGameModeController{
     public void choseTwoGameMode() {
 
         chosePlayersMode(2);
+        twoPlayers.setDisable(true);
+        threePlayers.setDisable(true);
     }
     /**
      * Button event handler method
      */
     public void choseThreeGameMode() {
         chosePlayersMode(3);
+        twoPlayers.setDisable(true);
+        threePlayers.setDisable(true);
     }
     /**
      * Button event handler method
      */
     public void choseExpertMode(){
         choseGameMode(1);
+        easyMode.setDisable(true);
+        advanceMode.setDisable(true);
     }
     /**
      * Button event handler method
      */
     public void choseNormalMode(){
         choseGameMode(0);
+        easyMode.setDisable(true);
+        advanceMode.setDisable(true);
+    }
+
+    private void ReFreshConsole()
+    {
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            }
+            else {
+                System.out.print("\033\143");
+            }
+        } catch (IOException | InterruptedException ignored) {}
     }
 }

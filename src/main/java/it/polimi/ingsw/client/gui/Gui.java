@@ -250,7 +250,7 @@ public class Gui implements View {
 
     @Override
     public int chooseIsland() {
-        if(Gui.getGamePhase().equals("characterCard"))
+        if(Gui.getGamePhase().equals("Character"))
             resetGuiQueue();
         try {
             return (int) GuiMain.getQueue().take();
@@ -314,7 +314,7 @@ public class Gui implements View {
     @Override
     public int chooseCharacterCard() {
         try {
-            return (int) GuiMain.getQueue().take(); // prima di ritornare verifica se la carta te la puoi permettere con i coins che hai
+            return (int) GuiMain.getQueue().take();
         } catch (InterruptedException e) {
             e.printStackTrace();
             return -1;

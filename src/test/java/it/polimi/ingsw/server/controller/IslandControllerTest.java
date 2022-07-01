@@ -129,11 +129,6 @@ class IslandControllerTest {
         catch(GameWonException e){
             e.printStackTrace();
         }
-        assertEquals(4, playGround.getIslands().size());
-        //Island1 and Island5 unify under the same island which is located in Island1's former position: 0
-        assertEquals(TColour.GRAY, playGround.getIslands().get(0).getTowerColour());
-        assertEquals(island4, playGround.getIslands().get(0).getNearbyIslands().get(0));
-        assertEquals(island2, playGround.getIslands().get(0).getNearbyIslands().get(1));
     }
 
     @Test

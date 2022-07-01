@@ -517,9 +517,9 @@ public class GuiPlaygroundController {
         studentIsland6.add(studentYellow6);
 
         studentIsland7 = new ArrayList<>();
+        studentIsland7.add(studentRed7);
         studentIsland7.add(studentGreen7);
         studentIsland7.add(studentBlue7);
-        studentIsland7.add(studentRed7);
         studentIsland7.add(studentPink7);
         studentIsland7.add(studentYellow7);
 
@@ -529,9 +529,6 @@ public class GuiPlaygroundController {
         studentIsland8.add(studentBlue8);
         studentIsland8.add(studentPink8);
         studentIsland8.add(studentYellow8);
-
-
-
 
         studentIsland9 = new ArrayList<>();
         studentIsland9.add(studentRed9);
@@ -554,17 +551,12 @@ public class GuiPlaygroundController {
         studentIsland11.add(studentPink11);
         studentIsland11.add(studentYellow11);
 
-
-
         studentIsland12 = new ArrayList<>();
         studentIsland12.add(studentRed12);
         studentIsland12.add(studentGreen12);
         studentIsland12.add(studentBlue12);
         studentIsland12.add(studentPink12);
         studentIsland12.add(studentYellow12);
-
-
-
 
         isl = new ArrayList<>();
         isl.add(studentIsland1);
@@ -951,6 +943,10 @@ public class GuiPlaygroundController {
                 motherNature.get(index).setOpacity(0.0);
             else
                 motherNature.get(index).setOpacity(1.0);
+            if(i.isBanned())
+                islands.get(index).setStyle("-fx-background-color: red;");
+            else
+                islands.get(index).setStyle("-fx-background-color: transparent;");
             for(int student=0; student<i.getPlacedStudent().length;student++)
             {
                 isl.get(index).get(student).setText(String.valueOf(i.getPlacedStudent()[student]));

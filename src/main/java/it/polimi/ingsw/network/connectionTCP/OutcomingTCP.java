@@ -50,6 +50,7 @@ public class OutcomingTCP implements Runnable {
                 Thread.sleep(sleepTime);
             } catch (IOException | InterruptedException e) {
                setNotAlive();
+               System.out.println("Warning: there is a Client unreachable by Ping message... We fix it!");
                return;
             }
         }

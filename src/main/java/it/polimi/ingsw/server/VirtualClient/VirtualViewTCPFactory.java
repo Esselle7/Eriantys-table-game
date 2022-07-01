@@ -26,9 +26,8 @@ public class VirtualViewTCPFactory implements Runnable {
     private final BlockingQueue<VirtualViewConnection> virtualLeaderQueue = new LinkedBlockingQueue<>();
 
     public VirtualViewTCPFactory(int hostPort) throws IOException {
-        InetAddress addr = InetAddress.getLocalHost();
-        int backLog = 50;
-        serverSocket = new ServerSocket(hostPort, backLog,addr);
+        int backLog = 100;
+        serverSocket = new ServerSocket(hostPort, backLog);
     }
 
     public BlockingQueue<VirtualViewConnection> getVirtualLeaderQueue() {
@@ -68,7 +67,7 @@ public class VirtualViewTCPFactory implements Runnable {
                     }
 
                 } catch (InterruptedException | IOException e) {
-                    System.out.println("Bad connection... Discarded");
+                    System.out.println("Bad connection... Discarded because the Client has lost the connection before 'Leader' or 'New Game' choice !");
                 }
             } catch (IOException ignored) {}
 
