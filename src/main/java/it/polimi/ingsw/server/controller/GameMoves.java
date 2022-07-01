@@ -347,7 +347,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
         int steps;
         islandId = islandId-1;
         if(islandId<indexIslandMotherNature)
-            steps = (getCurrentSettings().getNumberOfIslands()-1)-indexIslandMotherNature+islandId;
+            steps = (getCurrentGame().getIslands().size())-indexIslandMotherNature+islandId;
         else
             steps = islandId-indexIslandMotherNature;
         int motherNatureSteps = getCurrentPlayer().getMotherNatureSteps();
