@@ -275,6 +275,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
         Player minPlayer = null;
         List <Player> equalTowerPlayers = new ArrayList<>();
         for (Player player: getCurrentGame().getPlayersList()) {
+            //Searching for the minimum tower yard number of towers
             playerTowerYard = player.getPlayerBoard().getTowerYard();
             if(playerTowerYard < minimum)
             {
@@ -289,6 +290,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
             }
         }
         if(draw)
+            //Calling findWinnerProfessors in case of a draw
             return findWinnerProfessors(equalTowerPlayers);
         else
             return minPlayer;
@@ -305,6 +307,7 @@ public class GameMoves extends ManagerStudent implements Serializable {
         boolean draw = false;
         int maxOccurrences = 0, playerOccurrences;
         checkProfessorsControl();
+        //For loop to check for the player with the more colours controlled
         for(Player player: equalTowerPlayers){
             playerOccurrences = Collections.frequency(Arrays.asList(getCurrentGame().getProfessorsControl()), player.getNickname());
             if(playerOccurrences > maxOccurrences)
@@ -345,15 +348,19 @@ public class GameMoves extends ManagerStudent implements Serializable {
     public void moveMotherNature(int islandId) throws ExceededMotherNatureStepsException {
         int indexIslandMotherNature = getCurrentGame().getIslands().indexOf(getCurrentGame().getIslandWithMotherNature());
         int steps;
+        //Input to index conversion
         islandId = islandId-1;
         if(islandId<indexIslandMotherNature)
+            //in case a loop has to be made, the steps have to be counted properly
             steps = (getCurrentGame().getIslands().size())-indexIslandMotherNature+islandId;
         else
+            //normal subtraction
             steps = islandId-indexIslandMotherNature;
         int motherNatureSteps = getCurrentPlayer().getMotherNatureSteps();
         if (steps > motherNatureSteps || steps < 1)
             throw new ExceededMotherNatureStepsException();
         else
+            //Decreased islandId
             getCurrentGame().setIslandWithMotherNature(getCurrentGame().getIslandByIndex(islandId));
     }
 

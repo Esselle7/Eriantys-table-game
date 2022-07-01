@@ -42,14 +42,18 @@ public class IslandController {
         boolean draw = false;
         Player maxPlayer = null;
         for (Player player : playGround.getPlayersList()){
+            //counting the students
             for(int index = 0; index < playGround.getProfessorsControl().length; index++){
                 if(player.getNickname().equals(playGround.getProfessorsControl()[index]) && index != getBannedColour())
                     counter = counter + inputIsland.getPlacedStudent()[index];
             }
+            //counting the towers (while checking whether towers are banned)
             if(player.getPlayerBoard().getTowerColour().equals(inputIsland.getTowerColour()) && !inputIsland.isTowersBanned()) {
                 counter = counter + inputIsland.getTowerCount();
             }
+            //computing extra influence points
             counter = counter + player.getExtraInfluence();
+            //checking for draws
             if (counter > maxCounter){
                 maxPlayer = player;
                 maxCounter = counter;
@@ -77,9 +81,11 @@ public class IslandController {
      */
     public void islandUnification(Island island, PlayGround playGround) throws GameWonException{
         this.updateNearbyIslands(island,playGround);
+        //for each of the nearby islands these instructions are repeated
         for(Island nearbyIsland: island.getNearbyIslands()) {
             if (nearbyIsland.getTowerColour() == island.getTowerColour()) {
                 Island newIsland = island.unifyIslands(nearbyIsland);
+                //Updating the islands list
                 List<Island> newIslandsList = playGround.getIslands();
                 newIslandsList.set(playGround.getIslands().indexOf(island), newIsland);
                 newIslandsList.remove(nearbyIsland);
@@ -90,6 +96,7 @@ public class IslandController {
                 playGround.setIslandWithMotherNature(newIsland);
             }
         }
+        //In case there are 3 or less islands left, the game is over
         if(playGround.getIslands().size() <= 3)
             throw new GameWonException();
     }
@@ -104,12 +111,15 @@ public class IslandController {
     public void updateNearbyIslands(Island island, PlayGround playGround){
         List<Island> newIslandsList = playGround.getIslands();
         List<Island> newNearbyIslands = new ArrayList<>();
+        //In case the island is the first one, one of its neighbours is the last one
         if(newIslandsList.indexOf(island) == 0){
             newNearbyIslands.add(newIslandsList.get(newIslandsList.size() - 1));
             newNearbyIslands.add(newIslandsList.get(newIslandsList.indexOf(island) + 1));
+        //In case the island is the last one, one of its neighbours is the first one
         } else if(newIslandsList.indexOf(island) == newIslandsList.size()-1){
             newNearbyIslands.add(newIslandsList.get(newIslandsList.indexOf(island) - 1));
             newNearbyIslands.add(newIslandsList.get(0));
+        //In all the other cases the island close to the selected one in the array are the neighbours
         } else {
             newNearbyIslands.add(newIslandsList.get(newIslandsList.indexOf(island) - 1));
             newNearbyIslands.add(newIslandsList.get(newIslandsList.indexOf(island) + 1));

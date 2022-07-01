@@ -118,6 +118,8 @@ public class TurnHandler implements Runnable {
      * This method sets up the different character cards one by one
      */
     private void setUpCharacterCards(){
+        //Creating the cards without calling the initialize method on them (because it instantiates things like
+        //the cards)
         getCharacterDeck().add(new DrawStudentsIslandCard());
         getCharacterDeck().add(new EqualProfessorCard());
         getCharacterDeck().add(new InfluenceCalculateCard());
@@ -137,6 +139,7 @@ public class TurnHandler implements Runnable {
      * This method sets the this.DrawnCards attribute to 3 random cards drawn from the 12 character cards
      */
     private void drawRandomCharacterCards(){
+        //accessing the character card in a randomized position of the character cards deck
         List<CharacterCard> toCopy = new ArrayList<>();
         for (int i = 0; i < getNumberOfCharacterCards(); i++)
         {
@@ -160,6 +163,7 @@ public class TurnHandler implements Runnable {
         List<String> users = new ArrayList<>();
         printConsole("Setting up the game ...");
 
+        //Game Setup and pre-game dynamics
         try {
             for(VirtualViewConnection clients : getGamePlayers())
                 clients.sendMessage(new NotificationCMI("Starting game ..."));
@@ -185,7 +189,11 @@ public class TurnHandler implements Runnable {
             if(getGameMoves().getCurrentGame().getGameMode() != 0)
                 initializeCharacterCards();
             update();
+
+            //Gameplay (in the while loop)
             while (getGame()) {
+
+                //Planning phase
                 printConsole("------------------NEW TURN----------------------");
                 //Planning phase
                 printConsole("------------planning phase--------------");
@@ -207,6 +215,7 @@ public class TurnHandler implements Runnable {
                     c.sendMessage(new NotificationCMI("Please wait for your turn ..."));
                 }
 
+                //Action phase
                 printConsole("------------action phase--------------");
                 for (Player player : getPlayerOrder()) {
                     setCurrentPlayer(player);
@@ -235,12 +244,12 @@ public class TurnHandler implements Runnable {
                     getCurrentClient().sendMessage(new InfoForDecisionsCMI());
                     printConsole(getCurrentPlayer().getNickname()+ "'s turn finished");
                     getCurrentClient().sendMessage(new NotificationCMI("Your turn is finished, wait for other player to play their turn ..."));
-
                 }
                 //In case there's an empty deck or the student bag is empty, this has to be the last turn
                 if (getLastTurn())
                     throw new GameWonException();
             }
+        //Different methods for retrieving the winner depending on the cause of the game end
         } catch (EmptyTowerYard e){
             setWinner(getGameMoves().checkForEmptyTowerYard().getNickname());
             setGameOn(false);
@@ -287,6 +296,7 @@ public class TurnHandler implements Runnable {
      * there are enough studentPaws to refill all of them, if not this turn will be set as the last
      */
     public void refillCloudTiles() {
+        //In case there are enough paws the cloud tiles are refilled
         if (getGameMoves().getTotalStudentPaws() > getGameMoves().getCurrentSettings().getStudentsCloudTile() * getGameMoves().getCurrentGame().getPlayersList().size()){
             for (CloudTile cloudTile : getGameMoves().getCurrentGame().getCloudTiles()) {
                 cloudTile.reFill(getGameMoves().generateStudents(getGameMoves().getCurrentSettings().getStudentsCloudTile()));
@@ -310,18 +320,22 @@ public class TurnHandler implements Runnable {
         int i = 0;
         while(i < getGameMoves().getCurrentSettings().getStudentsToMove()) {
             try{
+                //Selecting the colour of the student to move
                 getCurrentClient().sendMessage(new NotificationCMI("Please select a student from your entrance room to move"));
                 getCurrentClient().sendMessage(new chooseStudentColourToMoveCMI());
                 studentColour = getCurrentClient().receiveChooseInt();
                 if(getGameMoves().getCurrentPlayerBoard().getEntranceRoom()[studentColour] == 0)
                     throw new NoStudentForColour();
+                //Selecting where to move the student
                 getCurrentClient().sendMessage(new NotificationCMI("Select where to move the student:"));
                 getCurrentClient().sendMessage(new chooseWhereToMove());
                 whereToMove = getCurrentClient().receiveChooseInt();
                 if (whereToMove == 0) {
+                    //Dining choice
                     getGameMoves().moveStudentEntranceToDining(studentColour);
                     getCurrentClient().sendMessage(new NotificationCMI("Correct student move, Dining"));
                 } else{
+                    //Island choice
                     getCurrentClient().sendMessage(new chooseIslandCMI());
                     int island = getCurrentClient().receiveChooseInt();
                     getGameMoves().moveStudentsEntranceToIsland(studentColour, island-1);
@@ -331,7 +345,6 @@ public class TurnHandler implements Runnable {
                 printConsole("Correct student move!");
                 update();
                 getCurrentClient().sendMessage(new InfoForDecisionsCMI());
-
             }
             catch (NoStudentForColour e) {
                 printConsole("No student for colour entrance exception occurs!");
@@ -344,6 +357,7 @@ public class TurnHandler implements Runnable {
             }
             catch (ChooseCharacterCardException e2)
             {
+                //In case the player wants to choose a character card
                 useCharacterCard(e2.getCharacterCard());
             }
         }
@@ -430,6 +444,7 @@ public class TurnHandler implements Runnable {
         getCurrentClient().sendMessage(new NotificationCMI("Now you have to move mother nature!"));
         while (true) {
             try {
+                //Asking the player how many steps he wants to make
                 getCurrentClient().sendMessage(new NotificationCMI("Move mother nature,max steps:" + getCurrentPlayer().getMotherNatureSteps() + " steps"));
                 getCurrentClient().sendMessage(new chooseMotherNatureCMI());
                 getGameMoves().moveMotherNature(getCurrentClient().receiveChooseInt());
@@ -487,6 +502,7 @@ public class TurnHandler implements Runnable {
     private void chooseCloudTiles() throws  IOException, GameWonException, EmptyTowerYard{
         while(!getLastTurn()){
             try {
+                //asking for the cloud tile id
                 getCurrentClient().sendMessage(new NotificationCMI("Choose a cloud tile to pick"));
                 getCurrentClient().sendMessage(new chooseCloudTileCMI());
                 getGameMoves().takeStudentsFromCloudTile(getCurrentClient().receiveChooseInt());
@@ -531,6 +547,7 @@ public class TurnHandler implements Runnable {
      * This method calls the initialize method on each character card, at the beginning of the game
      */
     private void initializeCharacterCards(){
+        //initializing means placing students, instancing objects in general
         for(CharacterCard drawnCard : getGameMoves().getCurrentGame().getDrawnCards())
             drawnCard.initializeCard(this);
     }
@@ -539,6 +556,7 @@ public class TurnHandler implements Runnable {
      * This method calls the resetCard method on each character card, at the ending of the turn
      */
     private void resetCards(){
+        //resetting the card's effects in case there's a need to
         for(CharacterCard drawnCard : getGameMoves().getCurrentGame().getDrawnCards())
             drawnCard.resetCard(this);
     }
