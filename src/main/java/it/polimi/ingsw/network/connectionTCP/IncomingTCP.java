@@ -90,7 +90,7 @@ public class IncomingTCP implements Runnable {
             Message message;
             do {
                 synchronized (timestampLock) {
-                    if (Duration.between(previousTimestamp, Instant.now()).toMillis() > 1100)
+                    if (Duration.between(previousTimestamp, Instant.now()).toMillis() > 5000)
                         throw new IOException();
                 }
                 message = inputQueue.poll(150, TimeUnit.MILLISECONDS);
